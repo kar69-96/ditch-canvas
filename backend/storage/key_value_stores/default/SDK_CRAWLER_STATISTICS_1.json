@@ -1,0 +1,54 @@
+{
+  "requestsFinished": 163,
+  "requestsFailed": 36,
+  "requestsRetries": 36,
+  "requestsFailedPerMinute": 6,
+  "requestsFinishedPerMinute": 30,
+  "requestMinDurationMillis": 1393,
+  "requestMaxDurationMillis": 18539,
+  "requestTotalFailedDurationMillis": 156094,
+  "requestTotalFinishedDurationMillis": 859674,
+  "crawlerStartedAt": "2025-11-24T18:59:19.906Z",
+  "crawlerFinishedAt": "2025-11-24T19:04:44.282Z",
+  "statsPersistedAt": "2025-11-24T19:04:44.283Z",
+  "crawlerRuntimeMillis": 324814,
+  "crawlerLastStartTimestamp": 1764010759469,
+  "requestRetryHistogram": [
+    163,
+    null,
+    null,
+    36
+  ],
+  "statsId": 1,
+  "requestAvgFailedDurationMillis": 4336,
+  "requestAvgFinishedDurationMillis": 5274,
+  "requestTotalDurationMillis": 1015768,
+  "requestsTotal": 199,
+  "requestsWithStatusCode": {
+    "200": 161,
+    "401": 144,
+    "404": 2
+  },
+  "errors": {
+    "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/node_modules/@crawlee/basic/internals/basic-crawler.js:903:19": {
+      "missing error code": {
+        "Error": {
+          "Request blocked - received 401 status code.": {
+            "count": 36
+          }
+        }
+      }
+    }
+  },
+  "retryErrors": {
+    "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/node_modules/@crawlee/basic/internals/basic-crawler.js:903:19": {
+      "missing error code": {
+        "Error": {
+          "Request blocked - received 401 status code.": {
+            "count": 108
+          }
+        }
+      }
+    }
+  }
+}

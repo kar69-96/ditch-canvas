@@ -1,0 +1,9 @@
+{
+	"id": "2zuNxAjgYcb5HHu",
+	"json": "{\"id\":\"2zuNxAjgYcb5HHu\",\"url\":\"https://canvas.colorado.edu/courses/123236/pages/syllabus?module_item_id=6620535\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236/pages/syllabus?module_item_id=6620535\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236/pages/syllabus?module_item_id=6620535\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:05:31.580Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123236/pages/syllabus?module_item_id=6620535",
+	"url": "https://canvas.colorado.edu/courses/123236/pages/syllabus?module_item_id=6620535"
+}

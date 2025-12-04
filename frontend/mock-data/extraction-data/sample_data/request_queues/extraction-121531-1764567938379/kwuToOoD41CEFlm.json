@@ -1,0 +1,9 @@
+{
+	"id": "kwuToOoD41CEFlm",
+	"json": "{\"id\":\"kwuToOoD41CEFlm\",\"url\":\"https://canvas.colorado.edu/courses/121531/assignments/2422963\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/assignments/2422963\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/assignments/2422963\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":1,\"errorMessages\":[\"Error: requestHandler timed out after 30 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\",\"Error: requestHandler timed out after 30 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\"],\"headers\":{},\"userData\":{\"type\":\"assignment\",\"__crawlee\":{\"state\":5}},\"handledAt\":\"2025-12-01T05:47:04.970Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 1,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/assignments/2422963",
+	"url": "https://canvas.colorado.edu/courses/121531/assignments/2422963"
+}

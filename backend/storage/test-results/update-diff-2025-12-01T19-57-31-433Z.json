@@ -1,0 +1,327 @@
+{
+  "runId": "2025-12-01T19-57-31-433Z",
+  "generatedAt": "2025-12-01T19:58:06.962Z",
+  "dryRun": false,
+  "baselineExtractionFolder": "extraction-2025-12-01T24-01-01",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-12-01T19-57-31-433Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 6,
+  "courses": [
+    {
+      "courseId": "121531",
+      "courseName": "ACCT 3220-004:  Corp 1 (Jeremiah)",
+      "announcements": {
+        "newItems": [
+          {
+            "id": "1764556",
+            "title": "unread,No Office Hours Today - Review Session FRIDAY & Past Exams",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1764556",
+            "postDate": null,
+            "modifiedDate": null,
+            "lastReplyDate": null,
+            "author": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "852989",
+            "title": "Exams",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6572258",
+            "fieldChanges": {
+              "title": {
+                "from": "Administration",
+                "to": "Exams"
+              }
+            }
+          },
+          {
+            "id": "852992",
+            "title": "Weekly Pages",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6642717",
+            "fieldChanges": {
+              "title": {
+                "from": "Administration",
+                "to": "Weekly Pages"
+              }
+            }
+          },
+          {
+            "id": "866456",
+            "title": "MyBusinessCourse",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6750717",
+            "fieldChanges": {
+              "title": {
+                "from": "Administration",
+                "to": "MyBusinessCourse"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123156",
+      "courseName": "ESBM 3700-001:  Entrepreneurial Environs",
+      "announcements": {
+        "newItems": [
+          {
+            "id": "1764432",
+            "title": "unread,FCQs",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1764432",
+            "postDate": null,
+            "modifiedDate": null,
+            "lastReplyDate": null,
+            "author": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123160",
+      "courseName": "ESBM 4570-001:  Entrepreneurial Finance",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2485460",
+            "title": "REFLECTION Case 11 Spin Master",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485460",
+            "dueDate": "2025-12-05T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485471",
+            "title": "PRE QUIZ Case 11 SpinMaster IPO",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485471",
+            "dueDate": "2025-12-04T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485475",
+            "title": "REFLECTION Case 10 Strava",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485475",
+            "dueDate": "2025-12-03T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123236",
+      "courseName": "FNCE 3010 F'25:  Sec 005, 007, 010 - Corp Fin",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2517062",
+            "title": "Wednesday Evening Oct 1 - Exam 1",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2517062",
+            "dueDate": "2025-10-02T03:40:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123249",
+      "courseName": "FNCE 3030-007:  Invstmnt & Prtfolio Mgmt",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2537831",
+            "title": "Final Exam",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2537831",
+            "dueDate": "2025-12-09T15:30:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "124722",
+      "courseName": "PSCI 2223-100:  Intro to IR LECTURE",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2423308",
+            "title": "Final Exam",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2423308",
+            "dueDate": "2025-12-12T19:20:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

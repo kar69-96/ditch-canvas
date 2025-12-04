@@ -1,0 +1,98 @@
+[
+  {
+    "token": "c60d515c993fb58ea7f1e86fdbcf1f9c",
+    "status": "pending",
+    "created_at": "2025-10-30T08:20:48.543Z",
+    "expires_at": "2025-10-30T09:20:48.543Z",
+    "user_id": null,
+    "canvas_cookies": null,
+    "user_info": null,
+    "institution_info": null
+  },
+  {
+    "token": "5385bb42584098689a6de8aa6071c779",
+    "status": "pending",
+    "created_at": "2025-10-30T17:41:34.223Z",
+    "expires_at": "2025-10-30T18:41:34.223Z",
+    "user_id": null,
+    "canvas_cookies": null,
+    "user_info": null,
+    "institution_info": null
+  },
+  {
+    "token": "a0c4d01d00913557e7802f1ac82f67de",
+    "status": "completed",
+    "created_at": "2025-10-31T16:49:45.996Z",
+    "expires_at": "2025-10-31T17:49:45.996Z",
+    "user_id": "176f6eca321ed117cbae6bd7e832433e",
+    "canvas_cookies": "[{\"name\":\"__Host-JSESSIONID\",\"value\":\"B4F15F6AEEA91503C9A19C016201B08C\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"__Host-shib_idp_session\",\"value\":\"b0d47528d135c0bdfa8969bddd0b0efdf106efb6e301163673c315686ec4eb6e\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"log_session_id\",\"value\":\"69c0b6bff1212893aa84adcff56a2ee0\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"canvas_session\",\"value\":\"SIF2ZPXfgwlQYlXV4KCEpQ+1cNGmGOuAG6PydpFrB33hgGeWzzPP8CEadfmptQntBWWC5gA0Nj2NoBNwIuH5LgeG-Mq127RvQpqrzzDHNvjyMX1IaTvH_K9_iqzL6WnNCl37JNCv-xI5ib2Blk9LYrbwxYKNEYR90b7TWRecliZI-EY7Didyok-QyG4FTtfzguWelWO52HpE72z3S7omfj-v-dFz_uhU8NxhbqyVwp7VNyG02bBqwyECyJYwsG1YbxAOf-Ywpdb_pZSJ_2NhToZkcTAY9SqlfSFg5sbdPsYFdVzWGVIe-FZUEZBVLqeS4OD0LGaF2y12BM84pKR2G0Nb6wg8EK7eiK2l-xyD0rnVOyKG28Le6OTKLsK4mQr_gBG11Te2cxDJCZt2SWUkv-zmEDYc67ksHgtonV7xdI_6Xn8Gcyd1dv2PkmG9mdgMsLnaj-oHmBovqI1tBAvE2AKW4holRB6z0CYcPjxKdpt8_MVA2JoyYRD-qmsXh2tgi-WAr8v89Wr_xFOI9k8aFsR1n16v8H71JlqW9yAkYFsppLIyS2iF-oYJrZPSAw69kY2ymdNJqkRfUfaTMq54KK3o4eXR0GmfdQRskE16FZ3HqY8bJLMECyXny9A8V7KKpqFjSLuvuJ-IoV5FrkCUxJkjZJSuQX13q4SW6IYX3h4Nw.a16cwl4JU2Oth6PLtj0OjP98tcs.aQTouQ\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"None\"},{\"name\":\"_ga\",\"value\":\"GA1.2.28602507.1761929403\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1796489403.136973,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"_gid\",\"value\":\"GA1.2.1301828680.1761929403\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1762015803,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"_gat_UA-141765064-1\",\"value\":\"1\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1761929463,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"_csrf_token\",\"value\":\"mMldM5X6%2FWeB%2FP9bntAuNitMo8eXdWtZB8QWZIK%2FAfWsgxBHwbDIMuW3vjrLpmBeYhrQ9P4ePBQso3oJscxulA%3D%3D\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":false,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"_ga_HQE5JXBW8M\",\"value\":\"GS2.2.s1761929403$o1$g0$t1761929403$j60$l0$h0\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1796489403.312512,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"dpUseLegacy\",\"value\":\"false\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":1793465403,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"}]",
+    "user_info": {
+      "canvasId": "canvas-user-459111",
+      "email": "user@colorado.edu",
+      "name": "Canvas User",
+      "institution": "University of Colorado",
+      "canvasUrl": "https://canvas.colorado.edu",
+      "canvasUserId": "459111",
+      "identikey": "kare6625"
+    },
+    "institution_info": null,
+    "completed_at": "2025-10-31T16:51:37.412Z"
+  },
+  {
+    "token": "1b0d06067a4098536789a1b6f1604915",
+    "status": "completed",
+    "created_at": "2025-10-31T17:21:18.868Z",
+    "expires_at": "2025-10-31T18:21:18.868Z",
+    "user_id": "176f6eca321ed117cbae6bd7e832433e",
+    "canvas_cookies": "[{\"name\":\"__Host-JSESSIONID\",\"value\":\"B0DC411C2522E8A67F8A9313C2AC00BB\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"__Host-shib_idp_session\",\"value\":\"f41e0bf59098a05c53a5679b0bfe34f805663094d9d7fea3217d90c27708ac40\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"log_session_id\",\"value\":\"a013919c7fb1e1e118f24aa09b5bfebe\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"canvas_session\",\"value\":\"z20DSjnRYYJ3kaH_NyYEdw+mLdDI0Vl3P24Yr17zu-ODwLfjDnunCfVfufE_afKJbpU8tgjltmNynu-FADtiWuLwtHljULdmfRH8fRH5TfOu_coCEfrwlL4HPFs4WuD132Bj4SUN5IaB1F0xFk-d2fNxEHv5b1Y0YDsjdQyjv6VxGt5iBNvxxBsZ3nYIpZNBtlfNt9UW9LIi4SOkiSjeWiTs7XciHVrf-w9efaeo664eN48y_NNZzHblvb5JzVwLhibTtyNpYmV6kKVD3N3lZR0aCebgRUR5WjAQowd6sKwoqibkUDPShpeoYbLS9zoje71BSNcWuFhtz99L4ikF_ljJRAd1ofHbRbVt3Z1LRRysey8vI79nTPeEOCfvC72dySTuv3Bhiyv-0J4azk1INY_rJPWp0NeX1ySk4dfjHWcMKfBlZvlN53V19RSmnlboRYE5lbkn5jEt1NuYrV_yKLWs6Y8ABUj0zxWIdo_tp8ltuJvwtTGoSzTI4AKPI5DeNpwwIUb_BwmCxHCJBgtXv9tPc14f8akw2HPoOYQ_WOUIQ_MDVpHs1Y4eZEImosXMQeQZekAP3vmOIEcV90eEJlp3R-kAlup4dmlp2CV-BZM4MMd4U8f-fJcZYtouKjuiu0w2WxXNOYfe_41SKTGiCfwdZ6s-CS8uXaW7oXpgtEDOw.1Ktfb30u4tGhMfvboXOBEbjTzCk.aQTwGg\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"None\"},{\"name\":\"_csrf_token\",\"value\":\"pQlGHrOR30pi5nB7BeNvjr%2BdAr%2F57zkyGuHBFbKMlUTROiJS98KrAwyJFT9yjEDolN53%2Fc2sc2hVkLV%2F1b3bDg%3D%3D\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":false,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"_ga\",\"value\":\"GA1.2.1473111733.1761931292\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1796491291.983097,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"_gid\",\"value\":\"GA1.2.663205478.1761931292\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1762017691,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"_gat_UA-141765064-1\",\"value\":\"1\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1761931351,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"_ga_HQE5JXBW8M\",\"value\":\"GS2.2.s1761931292$o1$g0$t1761931292$j60$l0$h0\",\"domain\":\".colorado.edu\",\"path\":\"/\",\"expires\":1796491292.150457,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"},{\"name\":\"dpUseLegacy\",\"value\":\"false\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":1793467292,\"httpOnly\":false,\"secure\":false,\"sameSite\":\"Lax\"}]",
+    "user_info": {
+      "canvasId": "canvas-user-459111",
+      "email": "karthik.reddy@colorado.edu",
+      "name": "Karthik Reddy",
+      "institution": "University of Colorado",
+      "canvasUrl": "https://canvas.colorado.edu",
+      "canvasUserId": "459111",
+      "identikey": "kare6625"
+    },
+    "institution_info": null,
+    "completed_at": "2025-10-31T17:21:35.686Z"
+  },
+  {
+    "token": "40ea13a7b6b1f7aeaf49405f53c390f4",
+    "status": "completed",
+    "created_at": "2025-10-31T17:25:58.191Z",
+    "expires_at": "2025-10-31T18:25:58.191Z",
+    "user_id": "176f6eca321ed117cbae6bd7e832433e",
+    "canvas_cookies": "[{\"name\":\"__Host-JSESSIONID\",\"value\":\"EE1D2DE01A4286F6D1B4A8DCCBA71119\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"__Host-shib_idp_session\",\"value\":\"eb64046b4241dad84a630ac7534103c00c25391781574aac66e08bcf73428edc\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"_csrf_token\",\"value\":\"hH6cq93kb2xIGfiwrA6fwZkknQ8%2BOgpmaDLKbeNPpCG0Vd3O7KY5HzBBqdHtYueI%2B2u2JFFsWQBaV7In0jnwWw%3D%3D\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":false,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"log_session_id\",\"value\":\"67b1ad471161c339a6ac4ed72076522c\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"canvas_session\",\"value\":\"YbTwRdtbnQXSLSVehfGUXQ+RZEYKXH5KYEzEFSH9tCbHil5TWacJIjEScYpVf4nXtR9bOI7pNAOH0qQzXN2vWs5JsG1VkNhmSaT4aJKc_QzFxI2fXJHAa4kYf4G4UUk-Rr0LoMHgu45yfhaDSGT6qEHKzxELwsu86LJReEg31SyBBFtWCx4V8rzX2jyvra3f2nA1sgXXhgwuz5Fq-qgUmLAKkEFmWGdRPaikPxDd0bEo6-nFlUhLm5ovLppmuJFpZQ75IGcCc5RsHWV-1XK291VkoYr1Yd0BKCAfmGjuELJUfrfqQZUt8iqh9GJ4Sjs3h_zdoGaa6nY51oiOkciikWzAXB9DVkXYRbL67U-8KNffkMDrsOcKl4t7EBJPz9ltHmVj28Av5m1n0e_53Iu1UAWYUUA6Q3Qodjfe-Cqe_qbSfy9vfKA8umsryl6GoMkA6B7Yhq8DfcimsXm5034gPcHUpVZu2XHknoWFe-L0auHREIGELkBRCQuCxUc8Zz8pCZCulppXVkxWnZE7usYP8rtjMI2KxNhevOhomM2d21hlJ8n4kguiwkWy6e8h-Mls9VAyoq8K7X2tu-iC9sQMoPCj24r3vL6y5R4AolVlCEluXVDQ22I6-QLlI3EqxBalBz4xvABmgtfNMAltnuBFMHLv3VhAIq5tXiH4-KDh6GUNw.tlB_-7XE-ZiemCjIbabGSE2MnKs.aQTxMQ\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"None\"}]",
+    "user_info": {
+      "canvasId": "canvas-user-459111",
+      "email": "karthik.reddy@colorado.edu",
+      "name": "Karthik Reddy",
+      "institution": "University of Colorado",
+      "canvasUrl": "https://canvas.colorado.edu",
+      "canvasUserId": "459111",
+      "identikey": "kare6625"
+    },
+    "institution_info": null,
+    "completed_at": "2025-10-31T17:26:12.668Z"
+  },
+  {
+    "token": "17fd0a80af97e0460fd8bb7167f29e8f",
+    "status": "completed",
+    "created_at": "2025-10-31T17:44:05.861Z",
+    "expires_at": "2025-10-31T18:44:05.861Z",
+    "user_id": "176f6eca321ed117cbae6bd7e832433e",
+    "canvas_cookies": "[{\"name\":\"__Host-JSESSIONID\",\"value\":\"6487F304E9F2218F4726FE53B8278C9D\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"__Host-shib_idp_session\",\"value\":\"c3ef35a716474a75b733440baee79db6849dacb19d926bab4124b267c5455057\",\"domain\":\"fedauth.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"_csrf_token\",\"value\":\"hzvCM8kGizrRWU2BIQGDf151ZinR%2BQ7iyLlXl247FArieKp2oDL%2FC%2F5oB%2BMSUdsGCiIHQ4jOPIeZgC%2FZCXZHTQ%3D%3D\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":false,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"log_session_id\",\"value\":\"0f1c9d052ca875a0627973e60f691219\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"},{\"name\":\"canvas_session\",\"value\":\"Bw-Lp9dYcc1n9FbiJZb89A+Z3NwxTPRke2-KOy4D4-emb_Q1VQkRoiK3_huAJy3aW55rOnA2k1nynNuVT7CEiwFzGaIJByger8UqZLk_S4I38mtQzIAVKnfAaot4uQO_B_OTQ_nmqUZ5cbCh3DPGiJUPe5Onfs_VEejQ1ktf83xQOrjVyIXIKEKyFO3aGqQAsoZUnfavpy-GNHJ5HwbYmdho9raCLaVH8Jz1dzyHjZCjFt644KfYI9jU-6qKERSm_dnMvCCdPEhVbHJsAWZxHjTjNPRZoYaF1b0PJlIYK_Yo2sIg72_JjAssoYQL5NKxAsPhuQZJQHlXS36EhZd32UJuiA8WgMbe5f4VozK4SeJsHZOYDA5mPxY2jsZNAPtOngRM113MVla6i1vYN068SHBq1Ku7JWyw82ofdW1EwPImS_b-JNDTR9vCEowrfg0Dr9EA41kdTowdwM9eFrJaPVy7rpJme9tHfSCLqINfINIPu8eKBtQyDkE7ApsYGFv5tOYGAgCozfecaf6pyuD4fhsiwBWzuWT58p9IkZD-jAzDV0UwMgOtV9VizkTsN1r5RI1K6Tez0v2wwodI7fufaWNU4kkIJDAKFvHhVlOxJW4Fz-NPntzCDpqmriy3vpHV7nP2haFjaFTjg3fBukI6RSgx-ZbMbHDhUmMLQf8fePWyA.kmSbfj1TTdw9XFQSUdv-n0tKx9o.aQT1cA\",\"domain\":\"canvas.colorado.edu\",\"path\":\"/\",\"expires\":-1,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"None\"}]",
+    "user_info": {
+      "canvasId": "canvas-user-459111",
+      "email": "karthik.reddy@colorado.edu",
+      "name": "Karthik Reddy",
+      "institution": "University of Colorado",
+      "canvasUrl": "https://canvas.colorado.edu",
+      "canvasUserId": "459111",
+      "identikey": "kare6625"
+    },
+    "institution_info": null,
+    "completed_at": "2025-10-31T17:44:20.267Z"
+  }
+]

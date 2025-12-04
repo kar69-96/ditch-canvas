@@ -1,0 +1,62 @@
+{
+  "runId": "2025-11-30T00-04-56-761Z",
+  "generatedAt": "2025-11-30T00:05:34.978Z",
+  "dryRun": true,
+  "baselineExtractionFolder": "testing",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-11-30T00-04-56-761Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 1,
+  "courses": [
+    {
+      "courseId": "121531",
+      "courseName": "ACCT 3220-004:  Corp 1 (Jeremiah)",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [
+          {
+            "id": "852989",
+            "title": "Exams",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6572258",
+            "itemCount": null,
+            "unlockDate": null,
+            "completionStatus": null
+          },
+          {
+            "id": "852992",
+            "title": "Weekly Pages",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6642717",
+            "itemCount": null,
+            "unlockDate": null,
+            "completionStatus": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

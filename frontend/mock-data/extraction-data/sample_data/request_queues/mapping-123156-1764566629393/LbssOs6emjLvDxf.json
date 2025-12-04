@@ -1,0 +1,9 @@
+{
+	"id": "LbssOs6emjLvDxf",
+	"json": "{\"id\":\"LbssOs6emjLvDxf\",\"url\":\"https://canvas.colorado.edu/courses/123156/assignments/2458230\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123156/quizzes/491819\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123156/assignments/2458230\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-01T05:25:01.700Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123156/assignments/2458230",
+	"url": "https://canvas.colorado.edu/courses/123156/assignments/2458230"
+}

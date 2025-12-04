@@ -1,0 +1,9 @@
+{
+	"id": "ul0riKh62zwkIib",
+	"json": "{\"id\":\"ul0riKh62zwkIib\",\"url\":\"https://canvas.colorado.edu/courses/123160/pages/mtv\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/pages/mtv\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/pages/mtv\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-01T05:41:38.311Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123160/pages/mtv",
+	"url": "https://canvas.colorado.edu/courses/123160/pages/mtv"
+}

@@ -1,0 +1,10 @@
+{
+  "runId": "2025-12-02T04-46-08-725Z",
+  "generatedAt": "2025-12-02T04:46:45.056Z",
+  "dryRun": false,
+  "baselineExtractionFolder": "extraction-2025-12-01T20-21-55",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-12-02T04-46-08-725Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 0,
+  "courses": []
+}

@@ -1,0 +1,44 @@
+{
+    "name": "canvas-wrapper",
+    "version": "1.0.0",
+    "description": "Canvas helper with cookie authentication and assignment overrides",
+    "main": "server.js",
+    "scripts": {
+        "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+        "dev:server": "nodemon server.js",
+        "dev:client": "cd client && npm run dev",
+        "start": "node server.js",
+        "build": "cd client && npm run build",
+        "auth:extract-cookies": "node src/core/extract-cookies.js",
+        "auth:server": "node src/core/auth-server.js",
+        "crawl:canvas": "node src/crawler/canvas-crawler.js",
+        "crawl:map": "MAP_ONLY=true node src/crawler/canvas-crawler.js",
+        "crawl:extract": "node src/crawler/canvas-crawler.js",
+        "aws:extract": "node aws/run-aws-extraction.js",
+        "aws:check": "node aws/check-aws-setup.js",
+        "compare:metrics": "node scripts/compare-metrics.js",
+        "update": "node scripts/update.js",
+        "aws:update": "node aws/run-aws-update.js"
+    },
+    "dependencies": {
+        "@aws-sdk/client-cloudwatch": "^3.939.0",
+        "@aws-sdk/client-ec2": "^3.939.0",
+        "cors": "^2.8.5",
+        "crawlee": "^3.15.3",
+        "dotenv": "^16.6.1",
+        "express": "^4.18.2",
+        "p-limit": "^7.2.0",
+        "playwright-core": "^1.47.2"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1",
+        "nodemon": "^3.0.1"
+    },
+    "keywords": [
+        "canvas",
+        "lms",
+        "education"
+    ],
+    "author": "Your Name",
+    "license": "MIT"
+}

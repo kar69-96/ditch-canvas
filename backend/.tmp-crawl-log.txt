@@ -1,0 +1,2355 @@
+
+> canvas-wrapper@1.0.0 crawl:canvas
+> node src/crawler/canvas-crawler.js
+
+📁 Extraction folder: storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/
+   Mapping: storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/mapping/
+   Courses: storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/
+🔐 Validating authentication cookies...
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+✅ Cookies validated successfully
+
+
+🚀 Processing 1 courses (1 in parallel for optimal performance)...
+   Instance: Local
+   Each course uses 40 concurrent requests internally
+   Total concurrent capacity: ~40 requests
+
+============================================================
+📚 Processing Course 1/1: 121531
+============================================================
+📋 Running Phase 1 mapping first (fresh, no cache)...
+
+🗺️  Phase 1: Starting URL Mapping...
+   Course ID: 121531
+   Canvas URL: https://canvas.colorado.edu
+   Mode: ⚡ FAST_MAP (preferred)
+   Max Depth: 3, Max Requests: 200, Concurrency: 40
+   Started at: 2025-11-25T08:47:16.319Z
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   📋 Created fresh RequestQueue for course 121531
+   📤 Adding initial course URL to queue: https://canvas.colorado.edu/courses/121531
+   ✅ Request added to queue: K9nDmPW4fKTE7Br
+   🚀 Starting crawler with maxRequestsPerCrawl: 200, maxConcurrency: 40
+INFO  PlaywrightCrawler: Starting the crawler.
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🔍 [Depth 0] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 0] Processing: https://canvas.colorado.edu/courses/121531
+   🔗 Found 47 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/announcements
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/announcements
+   📄 Page title: Announcements: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments
+   📄 Page title: Assignments: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/quizzes
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/quizzes
+   📄 Page title: Quizzes: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/grades
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/grades
+   📄 Page title: Grades for Karthik Reddy: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/external_tools/52372
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/external_tools/52372
+   📄 Page title: Zoom...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201
+   📄 Page title: Topic: HW #10 - Q14 Issue...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800
+   📄 Page title: Topic: PlayPosit Issues (For a handful of students)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121
+   📄 Page title: Topic: Professor Olson...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323
+   🔗 Found 1 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323
+   📄 Page title: Office Hours: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/external_tools/33321
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/external_tools/33321
+   📄 Page title: CU Book Access...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/final-exam-thur-12-slash-11-1-30p-4-00p?module_item_id=6871726
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/final-exam-thur-12-slash-11-1-30p-4-00p?module_item_id=6871726
+   📄 Page title: Final Exam: Thur 12/11 1:30p - 4:00p: ACCT 3220-004: Corp 1 ...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422961?module_item_id=6572258
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422961?module_item_id=6572258
+   📄 Page title: Canvas LMS...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422960?module_item_id=6572257
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422960?module_item_id=6572257
+   📄 Page title: Midterm Exam #3 (In-Class)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422962?module_item_id=6572259
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422962?module_item_id=6572259
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/81427342?module_item_id=6871753
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/81427342?module_item_id=6871753
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/80795873?module_item_id=6805581
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/80795873?module_item_id=6805581
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2422962?module_item_id=6572259
+   📄 Page title: Midterm Exam #2 (In-Class)...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/80795873?module_item_id=6805581
+   📄 Page title: Syllabus - Fa 2025 - REG - Miah - 2025.09.21.pdf: ACCT 3220-...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/81427342?module_item_id=6871753
+   📄 Page title: Calendar - Fa 2025 - MW - REG - 2025.11.2.pdf: ACCT 3220-004...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422963?module_item_id=6572260
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422963?module_item_id=6572260
+   📄 Page title: Final Exam (In-Class)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873?module_item_id=6883333
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873?module_item_id=6883333
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/81211175?module_item_id=6848130
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/81211175?module_item_id=6848130
+   📄 Page title: Practice Questions for Midterm #3 (not for credit): ACCT 322...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/81211175?module_item_id=6848130
+   📄 Page title: z Practice Exam 2 - Student.pdf: ACCT 3220-004: Corp 1 (Jere...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/81229771?module_item_id=6849762
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/81229771?module_item_id=6849762
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/81229771?module_item_id=6849762
+   📄 Page title: z Practice Exam 2 - KEY.pdf: ACCT 3220-004: Corp 1 (Jeremiah...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/80703311?module_item_id=6796898
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/80703311?module_item_id=6796898
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/80703311?module_item_id=6796898
+   📄 Page title: Accounting Practice Exam 1.docx: ACCT 3220-004: Corp 1 (Jere...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/80703312?module_item_id=6796899
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/files/80703312?module_item_id=6796899
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-16-12-slash-8-12-slash-12-final-exams?module_item_id=6642717
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-16-12-slash-8-12-slash-12-final-exams?module_item_id=6642717
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/80703312?module_item_id=6796899
+   📄 Page title: Accounting Practice Exam 1 - ANSWERS.docx: ACCT 3220-004: Co...
+   📄 Page title: Week 16: 12/8 - 12/12 (Final Exams): ACCT 3220-004: Corp 1 (...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456?module_item_id=6796900
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456?module_item_id=6796900
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/quizzes/503456?module_item_id=6796900
+   📄 Page title: Practice Questions for Exam #1 (not for credit): ACCT 3220-0...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334
+   📄 Page title: Week 15: 11/30 - 12/6 (Final Exam Review - No Class FRIDAY):...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336
+   📄 Page title: Week 14: 11/23 - 11/29 (NO CLASSES - FALL BREAK): ACCT 3220-...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335
+   📄 Page title: Week 13: 11/16 - 11/22 (Debt Part 1 and 2): ACCT 3220-004: C...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338
+   📄 Page title: Week 12: 11/9 - 11/15 (Midterm Exam 3 & Current Liabilities)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339
+   📄 Page title: Week 11: 11/2 - 11/8 (Intangibles 1 & Intangibles 2): ACCT 3...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340
+   📄 Page title: Week 10: 10/26 - 11/1 (PP&E Part 1 and PP&E Part 2): ACCT 32...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343
+   📄 Page title: Week 7: 10/5 - 10/11 (AR 2 & Inventory 1): ACCT 3220-004: Co...
+   🔗 Found 3 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341
+   📄 Page title: Week 9: 10/19 - 10/25 (Review & Midterm Exam 2): ACCT 3220-0...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344
+   📄 Page title: Week 6: 9/28 - 10/4 (Revenue Recognition 2, Cash & AR 1): AC...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342
+   📄 Page title: Week 8: 10/12 - 10/18 (Inventory Part 2 & TVM / Notes Receiv...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345
+   📄 Page title: Week 5: 9/21 - 9/27 (Midterm Review and Midterm Exam 1): ACC...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346
+INFO  PlaywrightCrawler: The number of requests enqueued by the crawler reached the maxRequestsPerCrawl limit of 200 requests and no further requests will be added.
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347
+   📄 Page title: Week 4: 9/14 - 9/20 (Cash Flow Statement 2 and Revenue Recog...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347
+   📄 Page title: Week 3: 9/7 - 9/13 (Balance Sheet & Cash Flow Statement Part...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348
+   📄 Page title: Week 2: 8/31 - 9/6 (No Class & Income Statement): ACCT 3220-...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349
+   📄 Page title: Week 1: Aug 24 - 30 (Introduction, Journal Entries): ACCT 32...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603
+   📄 Page title: No Classes (Aug 17- 23): ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/modules/items/6750717
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/modules/items/6750717
+   🔗 Found 4 additional navigation links from https://canvas.colorado.edu/courses/121531/modules/items/6750717
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422964?module_item_id=6651112
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422964?module_item_id=6651112
+   📄 Page title: Course Link [myBusinessCourse]...
+   📄 Page title: Canvas LMS...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452615?module_item_id=6649414
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452615?module_item_id=6649414
+   📄 Page title: Homework #2 (Accounting Framework and Journal Entries - Ch. ...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452612?module_item_id=6649407
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452612?module_item_id=6649407
+   📄 Page title: Homework #3 (Income Statement and Balance Sheet - Ch. 3 and ...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452614?module_item_id=6649412
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452614?module_item_id=6649412
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452652?module_item_id=6649448
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452652?module_item_id=6649448
+   📄 Page title: Homework #5 (Revenue Recognition 2 - Ch. 7) [myBusinessCours...
+   📄 Page title: Canvas LMS...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452613?module_item_id=6649410
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452613?module_item_id=6649410
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452616?module_item_id=6649417
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452616?module_item_id=6649417
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2452613?module_item_id=6649410
+   📄 Page title: Homework #4 (CFS and Rev Rec 2 - Ch. 5 and 7) [myBusinessCou...
+   📄 Page title: Homework #7 (Inventory and LT NR - Ch. 9 and 10) [myBusiness...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452618?module_item_id=6649420
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452618?module_item_id=6649420
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   📄 Page title: Homework #8 (Property, Plant, and Equipment - Ch. 11 and 12)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452620?module_item_id=6649422
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452620?module_item_id=6649422
+   📄 Page title: Homework #9 (Intangibles - Ch. 13) [myBusinessCourse]...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452623?module_item_id=6649425
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452623?module_item_id=6649425
+   📄 Page title: Homework #10 (Current Liabilities and LT Debt- Ch. 15 and 16...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452625?module_item_id=6649427
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452625?module_item_id=6649427
+   📄 Page title: Homework #11 (Final Review) [myBusinessCourse]...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/api/v1/courses/121531/modules/items/%7B%7B%20id%20%7D%7D/duplicate
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/api/v1/courses/121531/modules/items/%7B%7B%20id%20%7D%7D/duplicate
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/modules/items/%7B%7B%20id%20%7D%7D
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/modules/items/%7B%7B%20id%20%7D%7D
+   📄 Page title: Page Not Found...
+   📄 Page title: Page Not Found...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+   🔗 Found 43 additional navigation links from https://canvas.colorado.edu/courses/121531
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔗 Found 43 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔗 Found 43 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+   🔗 Found 43 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/modules/progressions
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/modules/progressions
+   🔗 Found 1 additional navigation links from https://canvas.colorado.edu/courses/121531/modules/progressions
+   📄 Page title: Module Progression by Student: ACCT 3220-004: Corp 1 (Jeremi...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531?view=notifications
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531?view=notifications
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531?view=feed
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531?view=feed
+   📄 Page title: Canvas LMS...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422963
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422963
+   🔗 Found 8 additional navigation links from https://canvas.colorado.edu/courses/121531?view=feed
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   📄 Page title: Final Exam (In-Class)...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452620
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452620
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452625
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452625
+   📄 Page title: Homework #9 (Intangibles - Ch. 13) [myBusinessCourse]...
+   🔍 [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452618
+INFO  PlaywrightCrawler: [Depth 1] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452618
+   🔗 Found 1 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2452625
+   📄 Page title: Homework #11 (Final Review) [myBusinessCourse]...
+   📄 Page title: Homework #8 (Property, Plant, and Equipment - Ch. 11 and 12)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873
+   📄 Page title: Practice Questions for Midterm #3 (not for credit): ACCT 322...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/quizzes/503456
+   📄 Page title: Practice Questions for Exam #1 (not for credit): ACCT 3220-0...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/grades/459111
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/grades/459111
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416042
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416042
+   📄 Page title: Grades for Karthik Reddy: ACCT 3220-004: Corp 1 (Jeremiah)...
+   📄 Page title: Video Class 02 - Mechanics...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416043
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416043
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416044
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416044
+   📄 Page title: Video Class 03 Income Statement...
+   📄 Page title: Video Class 04 Balance Sheet...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452615
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452615
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452612
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452612
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2452615
+   📄 Page title: Homework #2 (Accounting Framework and Journal Entries - Ch. ...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422964
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422964
+   📄 Page title: Canvas LMS...
+   🔗 Found 1 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2422964
+   📄 Page title: Homework 1: Accounting Foundations (LinkedIn Learning)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416045
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416045
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452613
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452613
+   📄 Page title: Video Class 05 Cash Flow 1...
+   📄 Page title: Canvas LMS...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422961
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422961
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2422961
+   📄 Page title: Midterm Exam #1 (In-Class)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416046
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416046
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416047
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416047
+   📄 Page title: Video Class 06 Cash Flow 2...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416048
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416048
+   📄 Page title: Video Class 07 Revenue Recognition 1...
+   📄 Page title: Video Class 10 Revenue Recognition 2...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416049
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416049
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452614
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452614
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416051
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416051
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452652
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452652
+   📄 Page title: Video Class 11 Cash & AR...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2452614
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416050
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416050
+   📄 Page title: Video Class 13 Inventory 1...
+   📄 Page title: Homework #5 (Revenue Recognition 2 - Ch. 7) [myBusinessCours...
+   📄 Page title: Homework #6 (Cash and Accounts Receivable - Ch. 8) [myBusine...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416052
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416052
+   📄 Page title: Video Class 12 AR 2...
+   📄 Page title: Video Class 14 Inventory 2...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416060
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416060
+   📄 Page title: Video Class 15 TVM...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422962
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422962
+   📄 Page title: Midterm Exam #2 (In-Class)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452616
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452616
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416054
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416054
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2452616
+   📄 Page title: Homework #7 (Inventory and LT NR - Ch. 9 and 10) [myBusiness...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416055
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416055
+   📄 Page title: Video Class 18a PPE 1...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416056
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416056
+   📄 Page title: Video Class 18b PPE 2...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416057
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416057
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422960
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2422960
+   📄 Page title: Video Class 19 PPE 3...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416058
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416058
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2422960
+   📄 Page title: Midterm Exam #3 (In-Class)...
+   📄 Page title: Video Class 20 Intangibles 1...
+   📄 Page title: Video Class 21 Intangibles 2...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416059
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416059
+   📄 Page title: Video Class 23 ST Liabilities...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416061
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416061
+   📄 Page title: Video Class 24 Debt 1...
+INFO  PlaywrightCrawler:Statistics: PlaywrightCrawler request statistics: {"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":2551,"requestsFinishedPerMinute":100,"requestsFailedPerMinute":0,"requestTotalDurationMillis":255083,"requestsTotal":100,"crawlerRuntimeMillis":60092,"retryHistogram":[100]}
+INFO  PlaywrightCrawler:AutoscaledPool: state {"currentConcurrency":7,"desiredConcurrency":8,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":0},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.6,"actualRatio":0.019},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416062
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2416062
+   📄 Page title: Video Class 25 Debt 2...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452623
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2452623
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2528177
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/assignments/2528177
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/assignments/2452623
+   📄 Page title: Homework #10 (Current Liabilities and LT Debt- Ch. 15 and 16...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+   📄 Page title: *PRACTICE* Homework #5 (Rev Rec 2 - Ch. 7) [myBusinessCourse...
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81419357?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81419357?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+   📄 Page title: TA Calendar - November-1.pdf: ACCT 3220-004: Corp 1 (Jeremia...
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80795873
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80795873
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/users/291759
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/users/291759
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/80795873
+   📄 Page title: Syllabus - Fa 2025 - REG - Miah - 2025.09.21.pdf: ACCT 3220-...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111
+   📄 Page title: Jeremiah Contreras: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81427342
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81427342
+   📄 Page title: Practice Questions for Midterm #3 (not for credit): ACCT 322...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/81427342
+   📄 Page title: Calendar - Fa 2025 - MW - REG - 2025.11.2.pdf: ACCT 3220-004...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873/history?version=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/509873/history?version=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/modules/items/6852028
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/modules/items/6852028
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456/history?version=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456/history?version=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456/take?user_id=459111
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/quizzes/503456/take?user_id=459111
+   🔗 Found 4 additional navigation links from https://canvas.colorado.edu/courses/121531/modules/items/6852028
+   📄 Page title: Exam 2 Office Hours - Zoom recording...
+   📄 Page title: Karthik Reddy's Quiz History: Practice Questions for Midterm...
+   📄 Page title: Karthik Reddy's Quiz History: Practice Questions for Exam #1...
+   📄 Page title: Practice Questions for Exam #1 (not for credit): ACCT 3220-0...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80703311
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80703311
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81229771
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81229771
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81211175
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81211175
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80703312
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80703312
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/80703311
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/81229771
+   🔗 Found 1 additional navigation links from https://canvas.colorado.edu/courses/121531/files/81211175
+   📄 Page title: Accounting Practice Exam 1.docx: ACCT 3220-004: Corp 1 (Jere...
+   📄 Page title: z Practice Exam 2 - KEY.pdf: ACCT 3220-004: Corp 1 (Jeremiah...
+   📄 Page title: z Practice Exam 2 - Student.pdf: ACCT 3220-004: Corp 1 (Jere...
+   🔗 Found 2 additional navigation links from https://canvas.colorado.edu/courses/121531/files/80703312
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81649829?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81649829?wrap=1
+   📄 Page title: Accounting Practice Exam 1 - ANSWERS.docx: ACCT 3220-004: Co...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81649641?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81649641?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81689592?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81689592?wrap=1
+   📄 Page title: In-class problems_Bonds (Part 1)-1.docx: ACCT 3220-004: Corp...
+   📄 Page title: Debt 1 - Bonds - Class.pptx: ACCT 3220-004: Corp 1 (Jeremiah...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80155946?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80155946?wrap=1
+   📄 Page title: In-class problems_Bonds (Part 1) - Copy (3).docx: ACCT 3220-...
+   📄 Page title: Debt 1 - Bonds - Video.pptx: ACCT 3220-004: Corp 1 (Jeremiah...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80155950?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80155950?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81689689?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81689689?wrap=1
+   📄 Page title: Debt 2 - Video.pptx: ACCT 3220-004: Corp 1 (Jeremiah)...
+   📄 Page title: Debt 2 - Class-1.pptx: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80150062?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80150062?wrap=1
+   📄 Page title: Slides Current Liabilities - Video.pptx: ACCT 3220-004: Corp...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81583767?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81583767?wrap=1
+   📄 Page title: In-class problems_Curr Liab & Contigencies.docx: ACCT 3220-0...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81689594?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81689594?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81584510?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81584510?wrap=1
+   📄 Page title: In-class problems_Bonds (Part 2).docx: ACCT 3220-004: Corp 1...
+   📄 Page title: Slides Current Liabilities - Slides - OLSON.pptx: ACCT 3220-...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80150048?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80150048?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81427396?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81427396?wrap=1
+   📄 Page title: Class 20 Intangibles Part 1 - Video.pptx: ACCT 3220-004: Cor...
+   📄 Page title: Class 20 Intangibles Part 1 - CLASS.pptx: ACCT 3220-004: Cor...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81427397?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81427397?wrap=1
+   📄 Page title: In-class problems_Intangibles (part 1).docx: ACCT 3220-004: ...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80150049?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80150049?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81478545?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81478545?wrap=1
+   📄 Page title: Class 21 Intangibles Part 2 - Video.pptx: ACCT 3220-004: Cor...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81478542?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81478542?wrap=1
+   📄 Page title: In-class problems_Intangibles (part 1) soln.docx: ACCT 3220-...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81483142?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81483142?wrap=1
+   📄 Page title: In-class problems_Intangibles (Part 2).docx: ACCT 3220-004: ...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147581?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147581?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81320348?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81320348?wrap=1
+   📄 Page title: In-class problems_Intangibles (Part 2) - 2.docx: ACCT 3220-0...
+   📄 Page title: Class 16 PP&E part 2 Deprec - Video.pptx: ACCT 3220-004: Cor...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81478541?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81478541?wrap=1
+   📄 Page title: Class 16 PP&E 1 & 2 Cap Int & Deprec - CLASS.pptx: ACCT 3220...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147579?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147579?wrap=1
+   📄 Page title: Class 21 Intangibles Part 2 - Class.pptx: ACCT 3220-004: Cor...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81320352?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81320352?wrap=1
+   📄 Page title: Class 16 PP&E part 1 Costs - Video.pptx: ACCT 3220-004: Corp...
+   📄 Page title: 15 In-class problems_PPE Cap Int & Deprec.docx: ACCT 3220-00...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147582?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147582?wrap=1
+   📄 Page title: Class 17 PP&E part 3 - Video.pptx: ACCT 3220-004: Corp 1 (Je...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81371691?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81371691?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81371693?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81371693?wrap=1
+   📄 Page title: 15 In-class problems_PPE Cap Int & Deprec - 002.docx: ACCT 3...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81378478?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81378478?wrap=1
+   📄 Page title: In-class problems_PPE (Part 3).docx: ACCT 3220-004: Corp 1 (...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145829?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145829?wrap=1
+   📄 Page title: Class 17 PP&E 3 - Class-1.pptx: ACCT 3220-004: Corp 1 (Jerem...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81431893?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81431893?wrap=1
+   📄 Page title: Class 12 AR 2 - Video.pptx: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80986191?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80986191?wrap=1
+   📄 Page title: In-class problems_PPE (Part 3) - Copy (2).docx: ACCT 3220-00...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80986193?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80986193?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81025401?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81025401?wrap=1
+   📄 Page title: Class 12 AR 2 - Class.pptx: ACCT 3220-004: Corp 1 (Jeremiah)...
+   📄 Page title: In-class problems 12_Receivables (Part 2).docx: ACCT 3220-00...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145831?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145831?wrap=1
+   📄 Page title: In-class problems 12_Receivables (Part 2) - soln.docx: ACCT ...
+   📄 Page title: Class 13 Inventory 1- Video.pptx: ACCT 3220-004: Corp 1 (Jer...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81025394?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81025394?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81025395?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81025395?wrap=1
+   📄 Page title: Class 13 Inventory 1 - CLASS.pptx: ACCT 3220-004: Corp 1 (Je...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81250396?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81250396?wrap=1
+   📄 Page title: In-class problems 13_Inventory 1.docx: ACCT 3220-004: Corp 1...
+   📄 Page title: In-class problems 13_Inventory 1 - Solution.docx: ACCT 3220-...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81250404?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81250404?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81226168?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81226168?wrap=1
+   📄 Page title: In-class problems 13_Inventory 1 - 2.docx: ACCT 3220-004: Co...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81253467?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81253467?wrap=1
+   📄 Page title: 1. Exam 2 - Review Day Problems.docx: ACCT 3220-004: Corp 1 ...
+   📄 Page title: 1. Exam 2 - Review Day Problems - SOLUTIONS-1.docx: ACCT 322...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145756?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145756?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80882796?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80882796?wrap=1
+   📄 Page title: Class 10 Rev Rec 2 - Video.pptx: ACCT 3220-004: Corp 1 (Jere...
+   📄 Page title: Class 10 Rev Rec 2 - CLASS-2.pptx: ACCT 3220-004: Corp 1 (Je...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80866837?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80866837?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80866842?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80866842?wrap=1
+   📄 Page title: In-class 10_Rev Rec Part 2 A.docx: ACCT 3220-004: Corp 1 (Je...
+   📄 Page title: In-class 10_Rev Rec Part 2 B.docx: ACCT 3220-004: Corp 1 (Je...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80891108?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80891108?wrap=1
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   📄 Page title: In-class 10_Rev Rec Part 2 A - Soln.docx: ACCT 3220-004: Cor...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80891111?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80891111?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531#module_852990
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531#module_852990
+   📄 Page title: In-class 10_Rev Rec Part 2 B - soln.docx: ACCT 3220-004: Cor...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145758?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145758?wrap=1
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531#module_852990
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   📄 Page title: Class 11 Cash and AR 1 - Video-1.pptx: ACCT 3220-004: Corp 1...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147310?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147310?wrap=1
+   📄 Page title: Class 14 Inventory 2 - Video.pptx: ACCT 3220-004: Corp 1 (Je...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80915214?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80915214?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81087911?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81087911?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80915216?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80915216?wrap=1
+   📄 Page title: Class 11 Cash and AR 1 - CLASS.pptx: ACCT 3220-004: Corp 1 (...
+   📄 Page title: Class 14 Inventory 2 - Slides.pptx: ACCT 3220-004: Corp 1 (J...
+   📄 Page title: In-class 11_Cash & AR.docx: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/79985955?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/79985955?wrap=1
+   📄 Page title: Page Not Found...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80986201?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80986201?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81125682?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81125682?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81087912?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81087912?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147487?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80147487?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80785262?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80785262?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81125684?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81125684?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145751?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145751?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80763913?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80763913?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81125681?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/81125681?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80763914?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80763914?wrap=1
+   📄 Page title: 15 TVM and Notes Receivable - Video.pptx: ACCT 3220-004: Cor...
+   📄 Page title: In-Class problems_Receivables (Part 2).xlsx: ACCT 3220-004: ...
+   📄 Page title: In-class 11_Cash & AR - soln.docx: ACCT 3220-004: Corp 1 (Je...
+   📄 Page title: 0 All Exam 1 REVIEW Day Problems - 1.docx: ACCT 3220-004: Co...
+   📄 Page title: In-class problems 14_Inventory (Part 2).docx: ACCT 3220-004:...
+   📄 Page title: Class 06 CFS 2 - Video.pptx: ACCT 3220-004: Corp 1 (Jeremiah...
+   📄 Page title: 0 All Exam 1 REVIEW Day Problems.docx: ACCT 3220-004: Corp 1...
+   📄 Page title: Exam 1 Topics.docx: ACCT 3220-004: Corp 1 (Jeremiah)...
+   📄 Page title: In-class problems 14_Inventory (Part 2) - soln.docx: ACCT 32...
+   📄 Page title: 15 TVM and Notes Receivable - Class Final.pptx: ACCT 3220-00...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80635620?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80635620?wrap=1
+   📄 Page title: Class 06 CFS 2 - Class.pptx: ACCT 3220-004: Corp 1 (Jeremiah...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80569003?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80569003?wrap=1
+   📄 Page title: In-class 06_CFS Part 2.docx: ACCT 3220-004: Corp 1 (Jeremiah...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145747?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145747?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80664195?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80664195?wrap=1
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80340742?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80340742?wrap=1
+   📄 Page title: Class 03 Inc Stmt - Video.pptx: ACCT 3220-004: Corp 1 (Jerem...
+   📄 Page title: In-class 06_CFS Part 2 Solution.docx: ACCT 3220-004: Corp 1 ...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145748?wrap=1
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/files/80145748?wrap=1
+   📄 Page title: Class 1 Slides - STUDENT Slides - REG-1.pptx: ACCT 3220-004:...
+   📄 Page title: Class 04 Bal Sheet - Video.pptx: ACCT 3220-004: Corp 1 (Jere...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531
+   📄 Page title: Topic: HW #10 - Q14 Issue...
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1752008
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1752008
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531#module_866456
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531#module_866456
+   📄 Page title: Topic: PlayPosit Issues (For a handful of students)...
+   📄 Page title: Topic: Professor Olson...
+   📄 Page title: Topic: No office hours today...
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531#module_866456
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1750298
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1750298
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1749880
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1749880
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1749359
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1749359
+   📄 Page title: Topic: FYI...Sum of the Year's Digits NOT Tested...
+   📄 Page title: Topic: Practice Exam 3...
+   🔍 [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1745226
+INFO  PlaywrightCrawler: [Depth 2] Processing: https://canvas.colorado.edu/courses/121531/discussion_topics/1745226
+   📄 Page title: Topic: Sign up (Past Exam Review) AND Exam 3 Review...
+   📄 Page title: Topic: Exam Scores Sunday...
+   🔍 [Depth 3] Processing: https://canvas.colorado.edu/courses/121531
+INFO  PlaywrightCrawler: [Depth 3] Processing: https://canvas.colorado.edu/courses/121531
+   🔗 Found 42 additional navigation links from https://canvas.colorado.edu/courses/121531
+   📄 Page title: ACCT 3220-004: Corp 1 (Jeremiah)...
+INFO  PlaywrightCrawler: All requests from the queue have been processed, the crawler will shut down.
+INFO  PlaywrightCrawler: Final request statistics: {"requestsFinished":197,"requestsFailed":0,"retryHistogram":[197],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":2974,"requestsFinishedPerMinute":123,"requestsFailedPerMinute":0,"requestTotalDurationMillis":585784,"requestsTotal":197,"crawlerRuntimeMillis":96391}
+INFO  PlaywrightCrawler: Finished! Total 197 requests: 197 succeeded, 0 failed. {"terminal":true}
+   ✅ Crawler finished for course 121531
+
+✅ Mapping Complete!
+
+📊 Summary:
+   Total URLs discovered: 181
+   - Assignments: 52
+   - Modules: 5
+   - Files: 79
+   - Pages: 19
+   - Announcements: 1
+   - Discussions: 8
+   - Quizzes: 9
+   - Grades: 2
+   - Syllabus: 0
+
+📏 Depth Analysis:
+   Maximum depth reached: 3
+   Average depth: 1.80
+   Depth distribution: { '0': 1, '1': 66, '2': 128, '3': 1 }
+
+⏱️  Performance:
+   Duration: 1.61 minutes (96.40 seconds)
+   Started: 2025-11-25T08:47:16.319Z
+   Finished: 2025-11-25T08:48:52.715Z
+
+💾 Output:
+   Extraction folder: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/
+   Mapping dataset: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/mapping/
+   📊 Mapping result: undefined URLs discovered
+
+📥 Proceeding to Phase 2 extraction (using in-memory mapping data)...
+
+📥 Phase 2: Starting Content Extraction...
+   Course ID: 121531
+   Canvas URL: https://canvas.colorado.edu
+   Started at: 2025-11-25T08:48:52.718Z
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   Found 36 assignments to extract
+   Found 5 module pages to extract
+   Found 79 files to extract
+   Found 19 pages to extract
+   Found 1 announcements to extract
+   Found 8 discussions to extract
+   Found 2 quizzes to extract
+   Found 0 syllabus pages to extract
+   📋 Created fresh RequestQueue for extraction: extraction-121531-1764060532720
+   📤 Processing 151 URLs...
+   🚀 Starting extraction crawler with maxRequestsPerCrawl: 302 (default: 1000), maxConcurrency: 40
+   📥 Adding 151 requests to extraction queue...
+   ✅ All requests added to queue
+INFO  PlaywrightCrawler: Starting the crawler.
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422963 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422963 [assignment]
+   🍪 Context has 12 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2422963...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452620 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452620 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452620...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452618 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452618 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452618...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452625 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452625 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452625...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416042 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416042 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416042...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416044 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416044 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416044...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416043 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416043 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416043...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452615 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452615 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452615...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452612 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452612 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452612...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416045 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416045 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416045...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452613 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452613 [assignment]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452613...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422964 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422964 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2422964...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422961 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422961 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2422961...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416046 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416046 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416046...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416047 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416047 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416047...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416048 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416048 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416048...
+   📊 Progress: 10/151 (6.6%)
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416051 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416051 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416051...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416049 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416049 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416049...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452614 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452614 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452614...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416050 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416050 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416050...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452652 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452652 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452652...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416052 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416052 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416052...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416060 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416060 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416060...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422962 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422962 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2422962...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452616 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452616 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452616...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422963 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422963 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2422963... (retry #1)
+   ⏳ Main response not received yet, continuing...
+INFO  PlaywrightCrawler:Statistics: PlaywrightCrawler request statistics: {"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":9783,"requestsFinishedPerMinute":19,"requestsFailedPerMinute":0,"requestTotalDurationMillis":185880,"requestsTotal":19,"crawlerRuntimeMillis":60180,"retryHistogram":[19]}
+INFO  PlaywrightCrawler:AutoscaledPool: state {"currentConcurrency":7,"desiredConcurrency":8,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":0},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.6,"actualRatio":0},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416054 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416054 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416054...
+   📊 Progress: 20/151 (13.2%)
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416055 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416055 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416055...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416056 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416056 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416056...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422960 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2422960 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2422960...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416057 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416057 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416057...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416058 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416058 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416058...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416059 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416059 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416059...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416061 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416061 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416061...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416062 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2416062 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2416062...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452623 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2452623 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2452623...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/assignments/2528177 [assignment]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/assignments/2528177 [assignment]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/assignments/2528177...
+   🔍 Extracting: https://canvas.colorado.edu/api/v1/courses/121531/modules/items/%7B%7B%20id%20%7D%7D/duplicate [module]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/api/v1/courses/121531/modules/items/%7B%7B%20id%20%7D%7D/duplicate [module]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/api/v1/courses/121531/modules/items/%7B%7B%20id%20%7D%7D/duplicate...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/modules/items/6750717 [module]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/modules/items/6750717 [module]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/modules/items/6750717...
+   📊 Progress: 30/151 (19.9%)
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/modules/items/%7B%7B%20id%20%7D%7D [module]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/modules/items/%7B%7B%20id%20%7D%7D [module]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/modules/items/%7B%7B%20id%20%7D%7D...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/modules/progressions [module]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/modules/progressions [module]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/modules/progressions...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/modules/items/6852028 [module]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/modules/items/6852028 [module]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/modules/items/6852028...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80795873?module_item_id=6805581 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80795873?module_item_id=6805581 [file]
+   🍪 Context has 32 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80795873?module_item_id=6805581...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80795873/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81211175?module_item_id=6848130 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81211175?module_item_id=6848130 [file]
+   🍪 Context has 33 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81211175?module_item_id=6848130...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81229771?module_item_id=6849762 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81229771?module_item_id=6849762 [file]
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81427342?module_item_id=6871753 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81427342?module_item_id=6871753 [file]
+   🍪 Context has 33 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81211175/inline_view
+   🍪 Context has 33 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81229771?module_item_id=6849762...
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81427342?module_item_id=6871753...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80703312?module_item_id=6796899 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80703312?module_item_id=6796899 [file]
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80703311?module_item_id=6796898 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80703311?module_item_id=6796898 [file]
+   🍪 Context has 33 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🍪 Context has 33 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80703312?module_item_id=6796899...
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80703311?module_item_id=6796898...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81419357?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81419357?wrap=1 [file]
+   🍪 Context has 34 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81419357?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81427342/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81229771/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80703312/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80703311/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81419357/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80795873 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80795873 [file]
+   🍪 Context has 37 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80795873...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80795873/inline_view
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 40/151 (26.5%)
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81427342 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81427342 [file]
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80703311 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80703311 [file]
+   🍪 Context has 85 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🍪 Context has 85 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81427342...
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80703311...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81427342/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80703311/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81649829?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81649829?wrap=1 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81649829?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81649641?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81649641?wrap=1 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81649641?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80155946?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80155946?wrap=1 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80155946?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81649829/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81229771 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81229771 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81229771...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81649641/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80155946/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81229771/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80703312 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80703312 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80703312...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81689592?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81689592?wrap=1 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81689592?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81211175 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81211175 [file]
+   🍪 Context has 94 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81689592/inline_view
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81211175...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80703312/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81211175/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 50/151 (33.1%)
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80155950?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80155950?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81689689?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81689689?wrap=1 [file]
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80155950?wrap=1...
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81689689?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80155950/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81689689/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80150062?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80150062?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80150062?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81689594?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81689594?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81689594?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80150048?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80150048?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80150048?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80150062/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81583767?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81583767?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81583767?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81689594/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80150048/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81584510?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81584510?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81584510?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81583767/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81427396?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81427396?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81427396?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81427397?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81427397?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81427397?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81584510/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81427396/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80150049?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80150049?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80150049?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81427397/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81478545?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81478545?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81478545?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80150049/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81478545/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81478542?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81478542?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81478542?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80147581?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80147581?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80147581?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81478542/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81483142?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81483142?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81483142?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80147581/inline_view
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 60/151 (39.7%)
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81483142/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81320348?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81320348?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81320348?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81478541?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81478541?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81478541?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81320348/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80147579?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80147579?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80147579?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81478541/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81320352?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81320352?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81320352?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80147582?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80147582?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80147582?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80147579/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81371691?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81371691?wrap=1 [file]
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81320352/inline_view
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81371691?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81371693?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81371693?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81371693?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81371691/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80147582/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81378478?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81378478?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81378478?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81371693/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81378478/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145829?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145829?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145829?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145829/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81431893?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81431893?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81431893?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 70/151 (46.4%)
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80986191?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80986191?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80986191?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80986193?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80986193?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80986193?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81431893/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80986191/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80986193/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145831?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145831?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145831?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81025401?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81025401?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81025401?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81025395?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81025395?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81025395?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145831/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81025394?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81025394?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81025394?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81025401/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81250396?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81250396?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81250396?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81025395/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81250404?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81250404?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81250404?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81025394/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81250396/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81226168?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81226168?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81226168?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81250404/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81253467?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81253467?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81253467?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81226168/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145756?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145756?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145756?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81253467/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80882796?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80882796?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80882796?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145756/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80882796/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 80/151 (53.0%)
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80866837?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80866837?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80866837?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80866842?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80866842?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80866842?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80866837/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80891108?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80891108?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80891108?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80866842/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80891108/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80891111?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80891111?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80891111?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145758?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145758?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145758?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80147310?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80147310?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80147310?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80891111/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80915214?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80915214?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80915214?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145758/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80147310/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80915214/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81087911?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81087911?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81087911?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81087911/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80915216?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80915216?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80915216?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80915216/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/79985955?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/79985955?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/79985955?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80147487?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80147487?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80147487?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81125682?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81125682?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81125682?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81125682/inline_view
+INFO  PlaywrightCrawler:Statistics: PlaywrightCrawler request statistics: {"requestAvgFailedDurationMillis":30876,"requestAvgFinishedDurationMillis":8384,"requestsFinishedPerMinute":46,"requestsFailedPerMinute":0,"requestTotalDurationMillis":810549,"requestsTotal":94,"crawlerRuntimeMillis":120181,"retryHistogram":[93,1]}
+INFO  PlaywrightCrawler:AutoscaledPool: state {"currentConcurrency":13,"desiredConcurrency":14,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":0},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.6,"actualRatio":0},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80785262?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80785262?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80785262?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80986201?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80986201?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80986201?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80986201/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 90/151 (59.6%)
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81087912?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81087912?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81087912?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81087912/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145751?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145751?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145751?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80763914?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80763914?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80763914?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145751/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80763914/inline_view
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80763913?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80763913?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80763913?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80763913/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81125684?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81125684?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81125684?wrap=1...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/81125681?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/81125681?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/81125681?wrap=1...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 100/151 (66.2%)
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81125684/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80635620?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80635620?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80635620?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/81125681/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80569003?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80569003?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80569003?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80635620/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145747?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145747?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145747?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80569003/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80664195?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80664195?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80664195?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145747/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80340742?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80340742?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80340742?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80340742/inline_view
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80664195/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/files/80145748?wrap=1 [file]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/files/80145748?wrap=1 [file]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/files/80145748?wrap=1...
+   ⚠️  HTTP 422 for https://canvas.colorado.edu/courses/121531/files/80145748/inline_view
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323 [page]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323...
+   ⏳ Main response not received yet, continuing...
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334 [page]
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/final-exam-thur-12-slash-11-1-30p-4-00p?module_item_id=6871726 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/final-exam-thur-12-slash-11-1-30p-4-00p?module_item_id=6871726 [page]
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-16-12-slash-8-12-slash-12-final-exams?module_item_id=6642717 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-16-12-slash-8-12-slash-12-final-exams?module_item_id=6642717 [page]
+   🍪 Context has 12 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🍪 Context has 12 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   🍪 Context has 12 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334...
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/final-exam-thur-12-slash-11-1-30p-4-00p?module_item_id=6871726...
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-16-12-slash-8-12-slash-12-final-exams?module_item_id=6642717...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336 [page]
+   🍪 Context has 12 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 110/151 (72.8%)
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 120/151 (79.5%)
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/announcements [announcements-list]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/announcements [announcements-list]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/announcements...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349 [page]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349 [page]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1760201...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1754800...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1753121...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1752008 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1752008 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1752008...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1749880 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1749880 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1749880...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1750298 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1750298 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1750298...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1749359 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1749359 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1749359...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/quizzes/509873 [quiz]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/quizzes/509873 [quiz]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/quizzes/509873...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/syllabus [syllabus]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/syllabus [syllabus]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/syllabus...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1745226 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1745226 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1745226...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/quizzes/503456 [quiz]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/quizzes/503456 [quiz]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/quizzes/503456...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 130/151 (86.1%)
+INFO  PlaywrightCrawler: Found 26 announcements from list page
+INFO  PlaywrightCrawler: Enqueueing 26 announcement pages for full extraction
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1737640 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1737640 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1737640...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1736606 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1736606 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1736606...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1738604 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1738604 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1738604...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1736269 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1736269 [discussion]
+   🍪 Context has 13 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1736269...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1760201
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1754800
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1734529 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1734529 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1734529...
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1753121
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1752008
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1728259 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1728259 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1728259...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1726264 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1726264 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1726264...
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1749880
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1750298
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1749359
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1724222 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1724222 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1724222...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1719742 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1719742 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1719742...
+   📊 Progress: 140/151 (92.7%)
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1718507 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1718507 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1718507...
+INFO  PlaywrightCrawler: Found announcement in discussions: https://canvas.colorado.edu/courses/121531/discussion_topics/1745226
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1718274 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1718274 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1718274...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1715784 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1715784 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1715784...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1714799 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1714799 [discussion]
+   🍪 Context has 14 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1714799...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1714781 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1714781 [discussion]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1714781...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1707918 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1707918 [discussion]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1707918...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1703303 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1703303 [discussion]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1703303...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1701458 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1701458 [discussion]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1701458...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1667588 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1667588 [discussion]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1667588...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   📊 Progress: 150/151 (99.3%)
+   📊 Progress: 151/151 (100.0%)
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/syllabus [syllabus]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/syllabus [syllabus]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/syllabus... (retry #1)
+   ⏳ Main response not received yet, continuing...
+   🔍 Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1718507 [discussion]
+INFO  PlaywrightCrawler: Extracting: https://canvas.colorado.edu/courses/121531/discussion_topics/1718507 [discussion]
+   🍪 Context has 15 cookies before navigation
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   ✅ Injected 9 cookies for extraction
+   ⏳ Navigating to https://canvas.colorado.edu/courses/121531/discussion_topics/1718507... (retry #1)
+INFO  PlaywrightCrawler:Statistics: PlaywrightCrawler request statistics: {"requestAvgFailedDurationMillis":30876,"requestAvgFinishedDurationMillis":8117,"requestsFinishedPerMinute":55,"requestsFailedPerMinute":0,"requestTotalDurationMillis":1378259,"requestsTotal":167,"crawlerRuntimeMillis":180183,"retryHistogram":[166,1]}
+INFO  PlaywrightCrawler:AutoscaledPool: state {"currentConcurrency":2,"desiredConcurrency":17,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":0},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.6,"actualRatio":0},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+   ⏳ Main response not received yet, continuing...
+INFO  PlaywrightCrawler: All requests from the queue have been processed, the crawler will shut down.
+INFO  PlaywrightCrawler: Final request statistics: {"requestsFinished":166,"requestsFailed":3,"retryHistogram":[166,3],"requestAvgFailedDurationMillis":30814,"requestAvgFinishedDurationMillis":8117,"requestsFinishedPerMinute":47,"requestsFailedPerMinute":0,"requestTotalDurationMillis":1439826,"requestsTotal":169,"crawlerRuntimeMillis":209719}
+INFO  PlaywrightCrawler: Error analysis: {"totalErrors":3,"uniqueErrors":1,"mostCommonErrors":["3x: requestHandler timed out after 30 seconds. (/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)"]}
+INFO  PlaywrightCrawler: Finished! Total 169 requests: 166 succeeded, 3 failed. {"terminal":true}
+   ✅ Extraction crawler finished for course 121531
+
+✅ Phase 2 Extraction Complete!
+
+📊 Extraction Statistics:
+   assignments: 35/36 extracted (97.2%), 2 failed
+   modules: 5/5 extracted (100.0%)
+   files: 73/79 extracted (92.4%), 6 skipped
+   pages: 19/19 extracted (100.0%)
+   announcements: 25/1 extracted (2500.0%), 2 failed
+   discussions: 0/8 extracted (0.0%)
+   quizzes: 2/2 extracted (100.0%)
+   syllabus: 0/0 extracted (0%), 2 failed
+   Total: 159/150 extracted (106.0%), 6 failed, 6 skipped
+
+⏱️  Performance:
+   Duration: 3.50 minutes (209.72 seconds)
+   Started: 2025-11-25T08:48:52.718Z
+   Finished: 2025-11-25T08:52:22.442Z
+
+💾 Output:
+   Extraction folder: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/
+   All datasets: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/
+   Assignments: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/assignments/
+   Modules: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/modules/
+   Files: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/files/
+   Pages: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/pages/
+   Announcements: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/announcements/
+   Discussions: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/discussions/
+   Quizzes: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/quizzes/
+   Syllabus: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/syllabus/
+
+📥 Proceeding to Phase 6 downloads...
+
+📥 Phase 6: Starting File Downloads...
+   Course ID: 121531
+   Canvas URL: https://canvas.colorado.edu
+   Started at: 2025-11-25T08:52:22.442Z
+✅ Loaded 9 valid cookies from /Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/data/auth/canvas-cookies.json
+   Found 94 unique files to download
+   Processing 94 file downloads with 12 concurrent downloads...
+Downloading: Syllabus - Fa 2025 - REG - Miah - 2025.09.21.pdf [files]
+Downloading: z Practice Exam 2 - Student.pdf [files]
+Downloading: z Practice Exam 2 - KEY.pdf [files]
+Downloading: Calendar - Fa 2025 - MW - REG - 2025.11.2.pdf [files]
+Downloading: Accounting Practice Exam 1 - ANSWERS.docx [files]
+Downloading: Accounting Practice Exam 1.docx [files]
+Downloading: TA Calendar - November-1.pdf [files]
+Downloading: In-class problems_Bonds (Part 1)-1.docx [files]
+Downloading: Debt 1 - Bonds - Class.pptx [files]
+Downloading: Debt 1 - Bonds - Video.pptx [files]
+Downloading: In-class problems_Bonds (Part 1) - Copy (3).docx [files]
+Downloading: Debt 2 - Class-1.pptx [files]
+✅ Downloaded: In-class problems_Bonds (Part 1)-1.docx (28.79 KB)
+Downloading: Debt 2 - Video.pptx [files]
+✅ Downloaded: Accounting Practice Exam 1 - ANSWERS.docx (20.02 KB)
+Downloading: Slides Current Liabilities - Video.pptx [files]
+✅ Downloaded: Accounting Practice Exam 1.docx (21.68 KB)
+Downloading: In-class problems_Bonds (Part 2).docx [files]
+✅ Downloaded: z Practice Exam 2 - Student.pdf (296.15 KB)
+Downloading: Class 20 Intangibles Part 1 - Video.pptx [files]
+✅ Downloaded: Calendar - Fa 2025 - MW - REG - 2025.11.2.pdf (169.19 KB)
+Downloading: In-class problems_Curr Liab & Contigencies.docx [files]
+✅ Downloaded: TA Calendar - November-1.pdf (161.96 KB)
+Downloading: Slides Current Liabilities - Slides - OLSON.pptx [files]
+✅ Downloaded: Syllabus - Fa 2025 - REG - Miah - 2025.09.21.pdf (244.10 KB)
+Downloading: Class 20 Intangibles Part 1 - CLASS.pptx [files]
+✅ Downloaded: z Practice Exam 2 - KEY.pdf (306.42 KB)
+Downloading: In-class problems_Intangibles (part 1).docx [files]
+✅ Downloaded: Debt 1 - Bonds - Video.pptx (1350.45 KB)
+Downloading: Class 21 Intangibles Part 2 - Video.pptx [files]
+✅ Downloaded: In-class problems_Bonds (Part 1) - Copy (3).docx (847.43 KB)
+Downloading: In-class problems_Intangibles (part 1) soln.docx [files]
+✅ Downloaded: Debt 1 - Bonds - Class.pptx (1416.16 KB)
+Downloading: In-class problems_Intangibles (Part 2).docx [files]
+✅ Downloaded: Debt 2 - Class-1.pptx (1422.80 KB)
+Downloading: Class 16 PP&E part 2 Deprec - Video.pptx [files]
+✅ Downloaded: In-class problems_Bonds (Part 2).docx (28.49 KB)
+Downloading: In-class problems_Intangibles (Part 2) - 2.docx [files]
+✅ Downloaded: Debt 2 - Video.pptx (1875.48 KB)
+Downloading: Class 16 PP&E 1 & 2 Cap Int & Deprec - CLASS.pptx [files]
+✅ Downloaded: Slides Current Liabilities - Video.pptx (916.96 KB)
+Downloading: Class 21 Intangibles Part 2 - Class.pptx [files]
+✅ Downloaded: In-class problems_Curr Liab & Contigencies.docx (26.81 KB)
+Downloading: Class 16 PP&E part 1 Costs - Video.pptx [files]
+✅ Downloaded: In-class problems_Intangibles (part 1).docx (26.87 KB)
+Downloading: 15 In-class problems_PPE Cap Int & Deprec.docx [files]
+✅ Downloaded: Slides Current Liabilities - Slides - OLSON.pptx (1084.13 KB)
+Downloading: Class 17 PP&E part 3 - Video.pptx [files]
+✅ Downloaded: In-class problems_Intangibles (Part 2).docx (27.58 KB)
+Downloading: 15 In-class problems_PPE Cap Int & Deprec - 002.docx [files]
+✅ Downloaded: Class 20 Intangibles Part 1 - CLASS.pptx (9656.58 KB)
+Downloading: In-class problems_PPE (Part 3).docx [files]
+✅ Downloaded: Class 20 Intangibles Part 1 - Video.pptx (5360.70 KB)
+Downloading: Class 17 PP&E 3 - Class-1.pptx [files]
+✅ Downloaded: In-class problems_Intangibles (Part 2) - 2.docx (482.33 KB)
+Downloading: Class 12 AR 2 - Video.pptx [files]
+✅ Downloaded: In-class problems_Intangibles (part 1) soln.docx (958.88 KB)
+Downloading: In-class problems_PPE (Part 3) - Copy (2).docx [files]
+✅ Downloaded: 15 In-class problems_PPE Cap Int & Deprec - 002.docx (577.93 KB)
+Downloading: Class 12 AR 2 - Class.pptx [files]
+✅ Downloaded: 15 In-class problems_PPE Cap Int & Deprec.docx (25.27 KB)
+Downloading: In-class problems 12_Receivables (Part 2).docx [files]
+✅ Downloaded: Class 16 PP&E 1 & 2 Cap Int & Deprec - CLASS.pptx (2088.81 KB)
+Downloading: Class 13 Inventory 1- Video.pptx [files]
+✅ Downloaded: Class 17 PP&E part 3 - Video.pptx (1127.86 KB)
+Downloading: In-class problems 12_Receivables (Part 2) - soln.docx [files]
+✅ Downloaded: Class 16 PP&E part 1 Costs - Video.pptx (908.99 KB)
+Downloading: In-class problems 13_Inventory 1.docx [files]
+✅ Downloaded: Class 16 PP&E part 2 Deprec - Video.pptx (9121.65 KB)
+Downloading: Class 13 Inventory 1 - CLASS.pptx [files]
+✅ Downloaded: Class 21 Intangibles Part 2 - Class.pptx (5082.07 KB)
+Downloading: In-class problems 13_Inventory 1 - Solution.docx [files]
+✅ Downloaded: Class 12 AR 2 - Video.pptx (1005.37 KB)
+Downloading: In-class problems 13_Inventory 1 - 2.docx [files]
+✅ Downloaded: In-class problems 12_Receivables (Part 2).docx (21.81 KB)
+Downloading: 1. Exam 2 - Review Day Problems.docx [files]
+✅ Downloaded: Class 17 PP&E 3 - Class-1.pptx (3418.16 KB)
+Downloading: 1. Exam 2 - Review Day Problems - SOLUTIONS-1.docx [files]
+✅ Downloaded: Class 21 Intangibles Part 2 - Video.pptx (4256.68 KB)
+Downloading: Class 10 Rev Rec 2 - Video.pptx [files]
+✅ Downloaded: Class 12 AR 2 - Class.pptx (558.99 KB)
+Downloading: Class 10 Rev Rec 2 - CLASS-2.pptx [files]
+✅ Downloaded: In-class problems 13_Inventory 1.docx (49.44 KB)
+Downloading: In-class 10_Rev Rec Part 2 A.docx [files]
+✅ Downloaded: In-class problems_PPE (Part 3) - Copy (2).docx (527.33 KB)
+Downloading: In-class 10_Rev Rec Part 2 B.docx [files]
+✅ Downloaded: In-class problems 13_Inventory 1 - Solution.docx (29.83 KB)
+Downloading: In-class 10_Rev Rec Part 2 A - Soln.docx [files]
+✅ Downloaded: In-class problems_PPE (Part 3).docx (26.80 KB)
+Downloading: In-class 10_Rev Rec Part 2 B - soln.docx [files]
+✅ Downloaded: Class 13 Inventory 1- Video.pptx (480.86 KB)
+Downloading: Class 11 Cash and AR 1 - Video-1.pptx [files]
+✅ Downloaded: Class 13 Inventory 1 - CLASS.pptx (2596.05 KB)
+Downloading: Class 14 Inventory 2 - Video.pptx [files]
+✅ Downloaded: In-class problems 12_Receivables (Part 2) - soln.docx (311.55 KB)
+Downloading: Class 11 Cash and AR 1 - CLASS.pptx [files]
+✅ Downloaded: 1. Exam 2 - Review Day Problems - SOLUTIONS-1.docx (18.72 KB)
+Downloading: Class 14 Inventory 2 - Slides.pptx [files]
+✅ Downloaded: 1. Exam 2 - Review Day Problems.docx (16.41 KB)
+Downloading: In-class 11_Cash & AR.docx [files]
+✅ Downloaded: In-class problems 13_Inventory 1 - 2.docx (635.65 KB)
+Downloading: Page Not Found [files]
+✅ Downloaded: In-class 10_Rev Rec Part 2 A.docx (24.90 KB)
+Downloading: 15 TVM and Notes Receivable - Video.pptx [files]
+✅ Downloaded: Class 10 Rev Rec 2 - Video.pptx (808.98 KB)
+Downloading: In-Class problems_Receivables (Part 2).xlsx [files]
+✅ Downloaded: In-class 10_Rev Rec Part 2 B - soln.docx (29.54 KB)
+Downloading: 0 All Exam 1 REVIEW Day Problems - 1.docx [files]
+✅ Downloaded: In-class 10_Rev Rec Part 2 B.docx (25.36 KB)
+Downloading: In-class 11_Cash & AR - soln.docx [files]
+✅ Downloaded: Class 10 Rev Rec 2 - CLASS-2.pptx (2326.20 KB)
+Downloading: In-class problems 14_Inventory (Part 2).docx [files]
+Downloading: Class 06 CFS 2 - Video.pptx [files]
+✅ Downloaded: Class 14 Inventory 2 - Video.pptx (513.22 KB)
+Downloading: 0 All Exam 1 REVIEW Day Problems.docx [files]
+✅ Downloaded: In-class 10_Rev Rec Part 2 A - Soln.docx (677.22 KB)
+Downloading: Exam 1 Topics.docx [files]
+✅ Downloaded: In-class 11_Cash & AR.docx (27.13 KB)
+Downloading: In-class problems 14_Inventory (Part 2) - soln.docx [files]
+✅ Downloaded: Class 11 Cash and AR 1 - Video-1.pptx (1323.93 KB)
+Downloading: 15 TVM and Notes Receivable - Class Final.pptx [files]
+✅ Downloaded: Class 11 Cash and AR 1 - CLASS.pptx (1750.95 KB)
+Downloading: Class 06 CFS 2 - Class.pptx [files]
+✅ Downloaded: Class 14 Inventory 2 - Slides.pptx (850.34 KB)
+Downloading: In-class 06_CFS Part 2.docx [files]
+✅ Downloaded: In-Class problems_Receivables (Part 2).xlsx (16.17 KB)
+Downloading: Class 03 Inc Stmt - Video.pptx [files]
+✅ Downloaded: In-class problems 14_Inventory (Part 2).docx (36.74 KB)
+Downloading: In-class 06_CFS Part 2 Solution.docx [files]
+✅ Downloaded: In-class 11_Cash & AR - soln.docx (541.97 KB)
+Downloading: Class 1 Slides - STUDENT Slides - REG-1.pptx [files]
+✅ Downloaded: Exam 1 Topics.docx (17.95 KB)
+Downloading: Class 04 Bal Sheet - Video.pptx [files]
+✅ Downloaded: 0 All Exam 1 REVIEW Day Problems.docx (34.65 KB)
+Downloading: Download Video Slides [pages]
+✅ Downloaded: 0 All Exam 1 REVIEW Day Problems - 1.docx (1195.34 KB)
+Downloading: Download CLASS Slides [pages]
+✅ Downloaded: Class 06 CFS 2 - Video.pptx (3089.36 KB)
+Downloading: Download In-Class Problems [pages]
+✅ Downloaded: 15 TVM and Notes Receivable - Video.pptx (3598.30 KB)
+Downloading: Download In-Class Solutions [pages]
+✅ Downloaded: In-class problems 14_Inventory (Part 2) - soln.docx (73.78 KB)
+Downloading: Download CLASS Slides [pages]
+✅ Downloaded: Class 06 CFS 2 - Class.pptx (6102.50 KB)
+Downloading: Download In-Class Problems [pages]
+✅ Downloaded: 15 TVM and Notes Receivable - Class Final.pptx (1970.46 KB)
+Downloading: Download In-Class Solutions [pages]
+✅ Downloaded: In-class 06_CFS Part 2.docx (29.13 KB)
+Downloading: Download Video Slides [pages]
+✅ Downloaded: In-class 06_CFS Part 2 Solution.docx (323.63 KB)
+Downloading: Download CLASS Slides [pages]
+✅ Downloaded: Download In-Class Solutions (34.06 KB)
+Downloading: Download In-Class Problems [pages]
+✅ Downloaded: Class 1 Slides - STUDENT Slides - REG-1.pptx (4073.75 KB)
+Downloading: Download In-Class Solutions [pages]
+✅ Downloaded: Download In-Class Problems (27.68 KB)
+Downloading: Download CLASS Slides [pages]
+✅ Downloaded: Download In-Class Solutions (70.18 KB)
+Downloading: Download In-Class Problems [pages]
+✅ Downloaded: Class 03 Inc Stmt - Video.pptx (2937.29 KB)
+Downloading: Download In-Class Solutions [pages]
+✅ Downloaded: Download CLASS Slides (5210.12 KB)
+Downloading: Download Video Slides [pages]
+✅ Downloaded: Class 04 Bal Sheet - Video.pptx (10995.01 KB)
+Downloading: Download CLASS Slides [pages]
+✅ Downloaded: Download Video Slides (1082.01 KB)
+Downloading: Download Extra Problems (Slides) [pages]
+✅ Downloaded: Download In-Class Problems (25.46 KB)
+Downloading: Download In-Class Problems [pages]
+✅ Downloaded: Download In-Class Problems (20.20 KB)
+Downloading: Download In-Class Solutions [pages]
+✅ Downloaded: Download CLASS Slides (4005.56 KB)
+Downloading: 1. Exam 2 - Review Day Problems - SOLUTIONS [announcements]
+Downloading: Login Instructions - Registration [announcements]
+✅ Downloaded: Download Video Slides (1233.40 KB)
+✅ Downloaded: Download In-Class Solutions (25.28 KB)
+✅ Downloaded: Download CLASS Slides (3903.55 KB)
+✅ Downloaded: Download In-Class Solutions (26.01 KB)
+✅ Downloaded: Download In-Class Problems (25.26 KB)
+✅ Downloaded: Download CLASS Slides (1363.84 KB)
+✅ Downloaded: Download In-Class Solutions (27.88 KB)
+✅ Downloaded: Download CLASS Slides (4141.21 KB)
+✅ Downloaded: 1. Exam 2 - Review Day Problems - SOLUTIONS (18.72 KB)
+✅ Downloaded: Download In-Class Problems (29.55 KB)
+✅ Downloaded: Login Instructions - Registration (170.41 KB)
+✅ Downloaded: Download Extra Problems (Slides) (3029.29 KB)
+
+✅ Phase 6 Downloads Complete!
+
+⏱️  Performance:
+   Duration: 0.17 minutes (10.43 seconds)
+   Started: 2025-11-25T08:52:22.442Z
+   Finished: 2025-11-25T08:52:32.872Z
+
+📊 Download Statistics:
+   Total files: 94
+   Successful: 92
+   Failed: 2
+   Skipped (already exists): 0
+
+📁 Downloads by type:
+   files: 72/73 (0 skipped, 1 failed)
+   pages: 18/19 (0 skipped, 1 failed)
+   announcements: 2/2 (0 skipped, 0 failed)
+
+💾 Output:
+   Extraction folder: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/
+   Downloads: ./storage/datasets/extraction-2025-11-25T01-47-16-enrtn6/courses/121531/downloads/
+
+✅ Course 121531 completed in 5.28 minutes
+
+✅ All extraction tasks completed successfully
+ (20.20 KB)
+Downloading: 1. Exam 2 - Review Day Problems - SOLUTIONS [announcements]
+✅ Downloaded: Download CLASS Slides (4005.56 KB)
+Downloading: Login Instructions - Registration [announcements]
+✅ Downloaded: Class 04 Bal Sheet - Video.pptx (10995.01 KB)
+✅ Downloaded: Download In-Class Problems (25.26 KB)
+✅ Downloaded: Download In-Class Solutions (26.01 KB)
+✅ Downloaded: Download CLASS Slides (3903.55 KB)
+✅ Downloaded: Download CLASS Slides (4141.21 KB)
+✅ Downloaded: Download In-Class Problems (29.55 KB)
+✅ Downloaded: Download CLASS Slides (1363.84 KB)
+✅ Downloaded: 1. Exam 2 - Review Day Problems - SOLUTIONS (18.72 KB)
+✅ Downloaded: Login Instructions - Registration (170.41 KB)
+✅ Downloaded: Download Extra Problems (Slides) (3029.29 KB)
+✅ Downloaded: Download Video Slides (1082.01 KB)
+✅ Downloaded: Download In-Class Solutions (27.88 KB)
+
+✅ Phase 6 Downloads Complete!
+
+⏱️  Performance:
+   Duration: 0.25 minutes (14.96 seconds)
+   Started: 2025-11-25T08:48:11.957Z
+   Finished: 2025-11-25T08:48:26.917Z
+
+📊 Download Statistics:
+   Total files: 94
+   Successful: 92
+   Failed: 2
+   Skipped (already exists): 0
+
+📁 Downloads by type:
+   files: 73/74 (0 skipped, 1 failed)
+   pages: 17/18 (0 skipped, 1 failed)
+   announcements: 2/2 (0 skipped, 0 failed)
+
+💾 Output:
+   Extraction folder: ./storage/datasets/extraction-2025-11-25T01-43-00-8pyfr8/
+   Downloads: ./storage/datasets/extraction-2025-11-25T01-43-00-8pyfr8/courses/121531/downloads/
+
+✅ Course 121531 completed in 5.45 minutes
+
+✅ All extraction tasks completed successfully

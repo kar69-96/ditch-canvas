@@ -1,0 +1,250 @@
+{
+	"quizId": "497952",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497952",
+	"extractedAt": "2025-12-01T05:47:37.738Z",
+	"title": "Homework 7 Ownership and Share Values",
+	"description": "<p>Take your time. Refer to class notes.</p>",
+	"descriptionText": "Take your time. Refer to class notes.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463910",
+			"type": null,
+			"text": "Which of the following is a \"recognized\" Valuation Method for a private company\n(please check all that apply)",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "7879\n\n    \n         \n      \n        Multiples\n        \n      \n    \n    \n      \n    \n    \n      Multiples\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463910\n      7879\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8001\n\n    \n         \n      \n        Scorecard\n        \n      \n    \n    \n      \n    \n    \n      Scorecard\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463910\n      8001\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1719\n\n    \n         \n      \n        Discounted Cashflow (NPV, Enterprise Value)\n        \n      \n    \n    \n      \n    \n    \n      Discounted Cashflow (NPV, Enterprise Value)\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463910\n      1719\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "485\n\n    \n         \n      \n        Make it Up\n        \n      \n    \n    \n      \n    \n    \n      Make it Up\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463910\n      485\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463911",
+			"type": null,
+			"text": "In Year 5 (terminal year), your Free Cash Flows will be $5,000,000\nYour cost of capital (r) is 15%\nYour longterm growth rate is 3%\n \nBased on this, what is the Terminal Value of the company in Year 5?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "7774\n\n    \n         \n      \n        $42,916,667\n        \n      \n    \n    \n      \n    \n    \n      $42,916,667\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463911\n      7774\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "5445\n\n    \n         \n      \n        $21,337,168\n        \n      \n    \n    \n      \n    \n    \n      $21,337,168\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463911\n      5445\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1824\n\n    \n         \n      \n        $5,000,000\n        \n      \n    \n    \n      \n    \n    \n      $5,000,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463911\n      1824\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5261\n\n    \n         \n      \n        $47,916,667\n        \n      \n    \n    \n      \n    \n    \n      $47,916,667\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463911\n      5261\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463912",
+			"type": null,
+			"text": "You determine that the Value of your company in 5 years is $10,000,000.\nYour investor is using a 35% discount rate (r).\nWhat does this IMPLY for the present value of your company?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "5667\n\n    \n         \n      \n        $2,230,135\n        \n      \n    \n    \n      \n    \n    \n      $2,230,135\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463912\n      5667\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8277\n\n    \n         \n      \n        $10,000,000\n        \n      \n    \n    \n      \n    \n    \n      $10,000,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463912\n      8277\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1685\n\n    \n         \n      \n        22%\n        \n      \n    \n    \n      \n    \n    \n      22%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463912\n      1685\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9948\n\n    \n         \n      \n        $7,407,407\n        \n      \n    \n    \n      \n    \n    \n      $7,407,407\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463912\n      9948\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463913",
+			"type": null,
+			"text": "Today. Your Pre Money Valuation is $12,000,000.\nIf you have 1,000,000 shares outstanding, what is the $/share?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "2809\n\n    \n         \n      \n        $12\n        \n      \n    \n    \n      \n    \n    \n      $12\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463913\n      2809\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1613\n\n    \n         \n      \n        $120\n        \n      \n    \n    \n      \n    \n    \n      $120\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463913\n      1613\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8050\n\n    \n         \n      \n        $1.20\n        \n      \n    \n    \n      \n    \n    \n      $1.20\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463913\n      8050\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9981\n\n    \n         \n      \n        Need Post Money Numbers\n        \n      \n    \n    \n      \n    \n    \n      Need Post Money Numbers\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463913\n      9981\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7463914",
+			"type": null,
+			"text": "Take your time. This is multi-step.  3) Indicates the answer for which you are solving. \n \n1) You determine that at EXIT in 5 years, you have EBITDA of $1,000,000. Based on Your comps, you expect a 10x multiple.  Calculate the Value of your firm at exit. \n2) If the investors require a 40% return, what is the Present Value of your company.\n3) NOW.... you have determined that you need $1,000,000  What is the POST MONEY VALUATION OF YOUR COMPANY?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8805\n\n    \n         \n      \n        $2,859,344\n        \n      \n    \n    \n      \n    \n    \n      $2,859,344\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463914\n      8805\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2345\n\n    \n         \n      \n        $11,000,000\n        \n      \n    \n    \n      \n    \n    \n      $11,000,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463914\n      2345\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5203\n\n    \n         \n      \n        $1,859,344\n        \n      \n    \n    \n      \n    \n    \n      $1,859,344\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463914\n      5203\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "689\n\n    \n         \n      \n        $768,912\n        \n      \n    \n    \n      \n    \n    \n      $768,912\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463914\n      689\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 6,
+			"questionId": "question_7463915",
+			"type": null,
+			"text": "Continuing from the previous question. \nBased on your calculations above,\nwhat percentage of your company have you SOLD?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "1191\n\n    \n         \n      \n        35%\n        \n      \n    \n    \n      \n    \n    \n      35%\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463915\n      1191\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "4766\n\n    \n         \n      \n        65%\n        \n      \n    \n    \n      \n    \n    \n      65%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463915\n      4766\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5916\n\n    \n         \n      \n        54%\n        \n      \n    \n    \n      \n    \n    \n      54%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463915\n      5916\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2191\n\n    \n         \n      \n        46%\n        \n      \n    \n    \n      \n    \n    \n      46%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463915\n      2191\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 7,
+			"questionId": "question_7463916",
+			"type": null,
+			"text": "Pre Deal, you have 450,000 shares. If you sell 40% of your company, how many shares do you OWN POST DEAL",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "7857\n\n    \n         \n      \n        450,000\n        \n      \n    \n    \n      \n    \n    \n      450,000\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463916\n      7857\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1255\n\n    \n         \n      \n        300,000\n        \n      \n    \n    \n      \n    \n    \n      300,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463916\n      1255\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "129\n\n    \n         \n      \n        750,000\n        \n      \n    \n    \n      \n    \n    \n      750,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463916\n      129\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4179\n\n    \n         \n      \n        270,000\n        \n      \n    \n    \n      \n    \n    \n      270,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463916\n      4179\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 8,
+			"questionId": "question_7463917",
+			"type": null,
+			"text": "pre Deal you have 800,000 shares.\nYou sell 62% of your company.\nHow many NEW SHARES do you issue? (Issue whole shares, round to nearest whole number)",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "157\n\n    \n         \n      \n        1,305,263\n        \n      \n    \n    \n      \n    \n    \n      1,305,263\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463917\n      157\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "659\n\n    \n         \n      \n        2,105,263\n        \n      \n    \n    \n      \n    \n    \n      2,105,263\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463917\n      659\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "840\n\n    \n         \n      \n        496,000\n        \n      \n    \n    \n      \n    \n    \n      496,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463917\n      840\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "565\n\n    \n         \n      \n        343,021\n        \n      \n    \n    \n      \n    \n    \n      343,021\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463917\n      565\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 9,
+			"questionId": "question_7463918",
+			"type": null,
+			"text": "Pre Deal you have 750,000 shares, and 100% ownership of your company.\nPost Deal, your company has 930,000.\n \nIf your company was worth $1,000,000 Pre Deal, how much did you raise?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "4789\n\n    \n         \n      \n        $240,000\n        \n      \n    \n    \n      \n    \n    \n      $240,000\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463918\n      4789\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7327\n\n    \n         \n      \n        $180,000\n        \n      \n    \n    \n      \n    \n    \n      $180,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463918\n      7327\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7149\n\n    \n         \n      \n        $19,400\n        \n      \n    \n    \n      \n    \n    \n      $19,400\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463918\n      7149\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1258\n\n    \n         \n      \n        $852,000\n        \n      \n    \n    \n      \n    \n    \n      $852,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463918\n      1258\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 9,
+	"attachments": []
+}

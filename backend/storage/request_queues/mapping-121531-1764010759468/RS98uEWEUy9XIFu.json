@@ -1,0 +1,9 @@
+{
+	"id": "RS98uEWEUy9XIFu",
+	"json": "{\"id\":\"RS98uEWEUy9XIFu\",\"url\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552335\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552335\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:00:47.022Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/modules/items/6552335",
+	"url": "https://canvas.colorado.edu/courses/121531/modules/items/6552335"
+}

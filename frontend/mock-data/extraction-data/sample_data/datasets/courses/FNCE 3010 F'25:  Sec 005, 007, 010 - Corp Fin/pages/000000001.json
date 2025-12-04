@@ -1,0 +1,44 @@
+{
+	"courseId": "123236",
+	"pageSlug": "start-here",
+	"url": "https://canvas.colorado.edu/courses/123236/pages/start-here",
+	"extractedAt": "2025-12-01T05:43:10.208Z",
+	"title": "Start Here",
+	"content": "<h1 class=\"page-title screenreader-only\">Start Here</h1>\n  \n  <div id=\"todo-date-mount-point\"></div>\n  \n    <div id=\"kl_wrapper_3\" class=\"kl_box_left variation_2 kl_wrapper\">\n<div id=\"kl_banner\">\n<h2><span id=\"kl_banner_left\"> <img class=\"\" style=\"background-color: #ffffff; color: #000000;\" role=\"presentation\" src=\"https://canvas.colorado.edu/users/341956/files/4375085/preview?verifier=qhObeUNpTUpAWD2Ac75jkHr2DllFtr39bIMSwRS3\" alt=\"\" width=\"60\" height=\"58\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/users/341956/files/4375085\" data-api-returntype=\"File\" loading=\"lazy\"> </span> <span id=\"kl_banner_right\">Welcome Students</span></h2>\n</div>\n</div>\n<div id=\"kl_wrapper_3\" class=\"kl_box_left variation_2 kl_wrapper kl_solid_border\">\n<div style=\"padding: 20px; margin-top: 10px; margin-bottom: 10px; border-width: 1px; border-color: #d3d3d3;\">\n<div id=\"Welcome_Letter\" class=\"\">\n<p>FNCE 3010 - Corporate Finance</p>\n<p>Prof Bob Donchez</p>\n<p>Robert.Donchez@colorado.edu&nbsp; <br>Finance - Leeds School of Business <br>Office Location: Koelbel 461<br>Office Hours: Tuesday &amp; Thursday 9:15 - 10:45 am, and by appointment</p>\n<p><em>303 492-5916</em></p>\n<p><em>Now, please follow the steps below to continue your orientation to this course.</em></p>\n</div>\n<div id=\"Step_1\" class=\"\">\n<h3 class=\"\" style=\"border-top: 1px solid #d3d3d3; border-bottom: 1px solid #d3d3d3; margin-top: 20px;\"><i class=\"far fa-file-alt\" aria-hidden=\"true\"><span class=\"dp-icon-content\" style=\"display: none;\">&nbsp;</span></i>Step 1: Read the course syllabus and course schedule</h3>\n<p>The <a class=\"\" title=\"Syllabus\" href=\"https://canvas.colorado.edu/courses/123236/pages/syllabus\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/123236/pages/syllabus\" data-api-returntype=\"Page\">course syllabus</a> and <a title=\"Schedule\" href=\"https://canvas.colorado.edu/courses/123236/pages/syllabus%20schedule\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/123236/pages/syllabus%2520schedule\" data-api-returntype=\"Page\">course schedule</a> will provide you with a complete course outline, course objectives, explanations of assignments and assessments, grading policies, and instructor contact information. Please read them carefully. You should have a deep familiarity with the schedule and process of the course.<a class=\"\" title=\"\" href=\"#\"></a></p>\n</div>\n<div id=\"Step_2\" class=\"\">\n<h3 class=\"\" style=\"margin-top: 20px;\"><i class=\"fas fa-cog\" aria-hidden=\"true\"><span class=\"dp-icon-content\" style=\"display: none;\">&nbsp;</span></i>Step 2: Read the CU Resources Page</h3>\n<p>The <a title=\"CU Resources\" href=\"https://canvas.colorado.edu/courses/123236/pages/cu-resources\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/123236/pages/cu-resources\" data-api-returntype=\"Page\">CU Resources</a> page will provide you with information about university policies, student's resources, library information&nbsp; and technical requirements.</p>\n</div>\n<div id=\"Step_3\" class=\"\">\n<h3><i class=\"icon-module icon-Solid\" aria-hidden=\"true\"><span class=\"dp-icon-content\" style=\"display: none;\">&nbsp;</span></i>Step 3: Attend all classes!</h3>\n</div>\n<div id=\"Step_4\" class=\"\">\n<h3><i class=\"icon-module icon-Solid\" aria-hidden=\"true\"><span class=\"dp-icon-content\" style=\"display: none;\">&nbsp;</span></i>Step 4: Review Modules</h3>\n<ul>\n<li>Click <a title=\"Modules\" href=\"https://canvas.colorado.edu/courses/123236/modules\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/123236/modules\" data-api-returntype=\"[Module]\">Modules</a> to begin reviewing the course content.</li>\n</ul>\n<div id=\"Step_5\" class=\"\">\n<h3><i class=\"icon-module icon-Solid\" aria-hidden=\"true\"><span class=\"dp-icon-content\" style=\"display: none;\">&nbsp;</span></i>Step 5: Treat this course like a job and prepare!</h3>\n</div>\n</div>\n</div>\n</div>\n  \n  \n<div id=\"assign-to-mount-point\"></div>\n<div id=\"choose-editor-mount-point\"></div>",
+	"contentText": "Start Here\n  \n  \n  \n    \n\n   Welcome Students\n\n\n\n\n\nFNCE 3010 - Corporate Finance\nProf Bob Donchez\nRobert.Donchez@colorado.edu  Finance - Leeds School of Business Office Location: Koelbel 461Office Hours: Tuesday & Thursday 9:15 - 10:45 am, and by appointment\n303 492-5916\nNow, please follow the steps below to continue your orientation to this course.\n\n\n Step 1: Read the course syllabus and course schedule\nThe course syllabus and course schedule will provide you with a complete course outline, course objectives, explanations of assignments and assessments, grading policies, and instructor contact information. Please read them carefully. You should have a deep familiarity with the schedule and process of the course.\n\n\n Step 2: Read the CU Resources Page\nThe CU Resources page will provide you with information about university policies, student's resources, library information  and technical requirements.\n\n\n Step 3: Attend all classes!\n\n\n Step 4: Review Modules\n\nClick Modules to begin reviewing the course content.\n\n\n Step 5: Treat this course like a job and prepare!\n\n\n\n\n  \n  \n\n",
+	"embeddedContent": {
+		"images": [
+			{
+				"src": "https://cuboulder.instructure.com/images/thumbnails/73827477/c3TQqnYJYi9I7wdqgZNgL9V2YYuWY9xi2TpnmNQh",
+				"alt": "Karthik Reddy"
+			},
+			{
+				"src": "https://redshelf-images.s3.amazonaws.com/lms/RSLogo.png",
+				"alt": "RedShelf LTI 1.3 - Production"
+			},
+			{
+				"src": "https://canvas.colorado.edu/users/341956/files/4375085/preview?verifier=qhObeUNpTUpAWD2Ac75jkHr2DllFtr39bIMSwRS3",
+				"alt": ""
+			}
+		],
+		"files": [],
+		"videos": [],
+		"links": []
+	},
+	"metadata": {
+		"lastModified": null,
+		"author": null,
+		"published": true
+	},
+	"location": {
+		"source": "standalone",
+		"moduleName": null,
+		"moduleId": null,
+		"moduleIndex": null,
+		"folder": null,
+		"breadcrumbs": [
+			"My Dashboard",
+			"FNCE 3010-005,007,010"
+		]
+	}
+}

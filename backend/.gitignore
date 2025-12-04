@@ -1,0 +1,43 @@
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Logs
+*.log
+server.log
+
+# Uploads and downloads
+uploads/
+downloads/
+file-downloads/
+temp/
+
+# Debug files
+debug-*.png
+canvas-debug-results.json
+canvas-ui-mapping-results.json
+comprehensive-file-discovery-results.json
+fast-all-courses-mapping-results.json
+file-extraction-test-results.json
+canvas-debug-screenshot.png
+
+# Temp Puppeteer profiles
+puppeteer_map_*
+puppeteer_map_min_*
+puppeteer_map_favs_*
+puppeteer_canvas_data_headless_visible/
+puppeteer_canvas_data_headless/
+puppeteer_canvas_data_mapping/
+puppeteer_canvas_data_mapping_*/
+
+# Process files
+.server.pid
+
+# macOS
+.DS_Store
+mcp-servers/
+puppeteer_canvas_data/
+server.log
+.server.pid

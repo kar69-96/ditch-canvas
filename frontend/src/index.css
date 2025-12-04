@@ -1,0 +1,376 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 86% 97%;
+    --foreground: 240 10% 3.9%;
+    --card: 40 86% 97%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 40 86% 97%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 20% 85%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0;
+    --progress-bg: 240 5.9% 90%;
+    --progress-fill: 240 5.9% 10%;
+  }
+
+  /* Theme: Paper */
+  .theme-paper {
+    --background: 40 30% 96%;
+    --foreground: 30 10% 15%;
+    --card: 40 30% 96%;
+    --card-foreground: 30 10% 15%;
+    --popover: 40 30% 96%;
+    --popover-foreground: 30 10% 15%;
+    --primary: 30 10% 15%;
+    --primary-foreground: 40 30% 96%;
+    --secondary: 40 20% 90%;
+    --secondary-foreground: 30 10% 25%;
+    --muted: 40 15% 92%;
+    --muted-foreground: 30 8% 45%;
+    --accent: 40 25% 88%;
+    --accent-foreground: 30 10% 15%;
+    --border: 40 15% 82%;
+    --input: 40 15% 82%;
+    --ring: 30 10% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    border-radius: 0 !important;
+  }
+  html,
+  body,
+  #root {
+    background-color: hsl(var(--background));
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    min-height: 100vh;
+  }
+  body::before,
+  body::after {
+    display: none !important;
+  }
+  
+  /* Apply fonts globally based on font-style classes on html element */
+  /* Default sans font - applied to body by default */
+  html body,
+  html {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  
+  /* Override with mono font when font-style-mono class is present */
+  html.font-style-mono body,
+  html.font-style-mono,
+  html.font-style-mono * {
+    font-family: 'IBM Plex Mono', monospace !important;
+  }
+  
+  /* Override with serif font when font-style-serif class is present */
+  html.font-style-serif body,
+  html.font-style-serif,
+  html.font-style-serif * {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+  }
+  
+  /* Override with geometric font when font-style-geometric class is present */
+  html.font-style-geometric body,
+  html.font-style-geometric,
+  html.font-style-geometric * {
+    font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  }
+}
+
+/* Glass Card */
+.glass-card {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: none;
+}
+
+/* Disable glass-card hover background when fill-hover is used */
+.glass-card.fill-hover,
+.glass-card.fill-hover-light,
+.glass-card.fill-hover-vertical {
+  background-color: hsl(var(--background)) !important;
+}
+
+.glass-card.fill-hover:hover,
+.glass-card.fill-hover-light:hover,
+.glass-card.fill-hover-vertical:hover {
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Fill Hover Animation */
+.fill-hover,
+.fill-hover-light {
+  position: relative !important;
+  overflow: hidden !important;
+  background-color: hsl(var(--background)) !important;
+}
+
+.fill-hover::before,
+.fill-hover-light::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 100% !important;
+  transition: width 0.17s ease !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  display: block !important;
+  background-color: hsl(var(--foreground)) !important;
+}
+
+.fill-hover:hover::before,
+.fill-hover-light:hover::before {
+  width: 100% !important;
+}
+
+.fill-hover-light:hover *,
+.fill-hover-light:hover svg,
+.fill-hover-light:hover {
+  color: hsl(var(--background)) !important;
+  stroke: hsl(var(--background)) !important;
+}
+
+.fill-hover-light:hover > *,
+.fill-hover-light:hover svg {
+  position: relative;
+  z-index: 1;
+}
+
+.fill-hover:hover *,
+.fill-hover:hover svg,
+.fill-hover:hover {
+  color: hsl(var(--background)) !important;
+  stroke: hsl(var(--background)) !important;
+}
+
+.fill-hover:hover > *,
+.fill-hover:hover svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* Vertical fill hover effect (bottom-up) */
+.fill-hover-vertical {
+  position: relative !important;
+  overflow: hidden !important;
+  background-color: hsl(var(--background)) !important;
+  transition: color 0.2s ease;
+}
+
+.fill-hover-vertical::before {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 0 !important;
+  background-color: hsl(var(--foreground)) !important;
+  transition: height 0.2s ease !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  display: block !important;
+}
+
+.fill-hover-vertical:hover::before,
+.fill-hover-vertical.selected::before {
+  height: 100% !important;
+}
+
+.fill-hover-vertical > * {
+  position: relative;
+  z-index: 1;
+  transition: none;
+}
+
+.fill-hover-vertical:hover > *,
+.fill-hover-vertical.selected > * {
+  color: hsl(var(--background)) !important;
+}
+
+/* Ensure muted text also turns white on hover/selected */
+.fill-hover-vertical:hover .text-muted-foreground,
+.fill-hover-vertical.selected .text-muted-foreground {
+  color: hsl(var(--background) / 0.7) !important;
+}
+
+/* Utilities */
+.exposed-card {
+  @apply border bg-background text-card-foreground;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Page Headers */
+.page-header {
+  @apply text-3xl sm:text-4xl font-medium tracking-tight text-foreground mb-2;
+}
+
+.page-header-subtitle {
+  @apply text-base text-muted-foreground font-light;
+}
+
+/* Slide-in animation for buttons */
+.slide-in-button {
+  position: relative;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: all 0.2s ease;
+}
+
+.slide-in-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(var(--foreground));
+  transition: left 0.17s ease;
+  z-index: 0;
+}
+
+.slide-in-button:hover::before,
+.slide-in-button.active::before {
+  left: 0;
+}
+
+.slide-in-button > * {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+/* Ensure button element itself changes color (affects text nodes) */
+.slide-in-button:hover,
+.slide-in-button.active {
+  color: hsl(var(--background)) !important;
+}
+
+/* Override text-foreground class from Button component with higher specificity */
+button.slide-in-button.active,
+button.slide-in-button:hover,
+button.slide-in-button.active.text-foreground,
+button.slide-in-button:hover.text-foreground {
+  color: hsl(var(--background)) !important;
+}
+
+/* Override any Tailwind text color utilities */
+.slide-in-button.active.text-foreground,
+.slide-in-button:hover.text-foreground {
+  color: hsl(var(--background)) !important;
+}
+
+/* Target all descendants including text nodes */
+.slide-in-button.active *,
+.slide-in-button:hover * {
+  color: hsl(var(--background)) !important;
+}
+
+.slide-in-button:hover > *,
+.slide-in-button.active > *,
+.slide-in-button:hover button,
+.slide-in-button.active button,
+.slide-in-button:hover span,
+.slide-in-button.active span {
+  color: hsl(var(--background)) !important;
+}
+
+/* Ensure SVG stroke is white, but keep fill transparent for stroke-based icons */
+.slide-in-button:hover svg,
+.slide-in-button.active svg {
+  color: hsl(var(--background)) !important;
+  stroke: hsl(var(--background)) !important;
+}
+
+/* Target all SVG path elements - only change stroke, keep fill transparent */
+.slide-in-button:hover svg path,
+.slide-in-button.active svg path,
+.slide-in-button:hover svg line,
+.slide-in-button.active svg line,
+.slide-in-button:hover svg circle,
+.slide-in-button.active svg circle,
+.slide-in-button:hover svg rect,
+.slide-in-button.active svg rect,
+.slide-in-button:hover svg polyline,
+.slide-in-button.active svg polyline,
+.slide-in-button:hover svg polygon,
+.slide-in-button.active svg polygon {
+  stroke: hsl(var(--background)) !important;
+  fill: none !important;
+}
+
+/* Target SVG elements with currentColor attribute - only stroke */
+.slide-in-button:hover svg [stroke="currentColor"],
+.slide-in-button.active svg [stroke="currentColor"] {
+  stroke: hsl(var(--background)) !important;
+}
+
+/* Sidebar Viewer Styles */
+.sidebar-viewer-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.sidebar-viewer-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 150ms ease-out, opacity 150ms ease-out;
+}
+
+.sidebar-viewer-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar-viewer-exit-active {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 150ms ease-in, opacity 150ms ease-in;
+}
+
+/* Sidebar content transitions */
+.sidebar-content-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.sidebar-content-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 100ms ease-out, transform 100ms ease-out;
+}
+
+/* Responsive sidebar - on mobile, show fullscreen */
+@media (max-width: 1023px) {
+  .sidebar-mobile-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 60;
+  }
+}

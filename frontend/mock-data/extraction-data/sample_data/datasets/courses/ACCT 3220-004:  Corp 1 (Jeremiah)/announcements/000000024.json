@@ -1,0 +1,20 @@
+{
+	"announcementId": "1701458",
+	"courseId": "121531",
+	"url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1701458",
+	"extractedAt": "2025-12-01T05:47:33.753Z",
+	"isAnnouncement": true,
+	"title": "Office Hours",
+	"content": "<p>Hi Class,</p>\n<p>My office hours and the TA office hours are now posted.&nbsp;</p>\n<p>Please go to the <a title=\"Office Hours\" href=\"https://canvas.colorado.edu/courses/121531/pages/office-hours\" data-course-type=\"wikiPages\" data-published=\"true\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/121531/pages/office-hours\" data-api-returntype=\"Page\">Office Hours Page HERE</a>.</p>\n<p>-Jeremiah</p>",
+	"contentText": "Hi Class,\nMy office hours and the TA office hours are now posted. \nPlease go to the Office Hours Page HERE.\n-Jeremiah",
+	"author": "Jeremiah Contreras",
+	"postDate": "Posted Aug 29 11:35am",
+	"attachments": [],
+	"comments": [],
+	"commentCount": 0,
+	"visibility": {
+		"isPublished": true,
+		"isPinned": false,
+		"allowComments": true
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"id": "qr6hwppds1L6xGw",
+	"json": "{\"id\":\"qr6hwppds1L6xGw\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/week-6\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/week-6\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/week-6\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-01T05:43:34.093Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/week-6",
+	"url": "https://canvas.colorado.edu/courses/123249/pages/week-6"
+}

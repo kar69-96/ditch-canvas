@@ -1,0 +1,13 @@
+{
+  "stage": "cookies-injected",
+  "status": "pending-validation",
+  "contextId": "a3aaaa84-9c58-4dc9-b254-694903adf698",
+  "sessionId": "23690eae-1918-4231-ae2b-9bb692f4f54b",
+  "requiresManualLogin": false,
+  "details": {
+    "url": "https://canvas.colorado.edu/",
+    "title": "Dashboard",
+    "cookiesInjected": 13
+  },
+  "updatedAt": "2025-11-02T19:31:43.542Z"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "8aNamNCcV9Rb8bo",
+	"json": "{\"id\":\"8aNamNCcV9Rb8bo\",\"url\":\"https://canvas.colorado.edu/courses/124722/pages\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/124722/pages\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/124722/pages\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":3,\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:00:38.459Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/124722/pages",
+	"url": "https://canvas.colorado.edu/courses/124722/pages"
+}

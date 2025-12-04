@@ -1,0 +1,109 @@
+{
+  "runId": "2025-12-01T04-46-34-444Z",
+  "generatedAt": "2025-12-01T04:47:12.090Z",
+  "dryRun": true,
+  "baselineExtractionFolder": "extraction-2025-11-30T17-00-20",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-12-01T04-46-34-444Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 2,
+  "courses": [
+    {
+      "courseId": "121531",
+      "courseName": "ACCT 3220-004:  Corp 1 (Jeremiah)",
+      "announcements": {
+        "newItems": [
+          {
+            "id": "1718507",
+            "title": "Exclusive Event: Paul Munter (Former SEC)",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1718507",
+            "postDate": null,
+            "modifiedDate": null,
+            "lastReplyDate": null,
+            "author": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2422963",
+            "title": "Final Exam (In-Class)",
+            "url": "https://canvas.colorado.edu/courses/121531/assignments/2422963",
+            "dueDate": "2025-12-12T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123236",
+      "courseName": "FNCE 3010 F'25:  Sec 005, 007, 010 - Corp Fin",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2441658",
+            "title": "Due",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441658",
+            "dueDate": null,
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

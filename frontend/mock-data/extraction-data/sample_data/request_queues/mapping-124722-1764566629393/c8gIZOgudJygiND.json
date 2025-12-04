@@ -1,0 +1,9 @@
+{
+	"id": "c8gIZOgudJygiND",
+	"json": "{\"id\":\"c8gIZOgudJygiND\",\"url\":\"https://canvas.colorado.edu/courses/124722/pages/psci-2223-100-intro-to-ir-lecture\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/124722/pages/psci-2223-100-intro-to-ir-lecture\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/124722/pages/psci-2223-100-intro-to-ir-lecture\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-01T05:25:47.264Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/124722/pages/psci-2223-100-intro-to-ir-lecture",
+	"url": "https://canvas.colorado.edu/courses/124722/pages/psci-2223-100-intro-to-ir-lecture"
+}

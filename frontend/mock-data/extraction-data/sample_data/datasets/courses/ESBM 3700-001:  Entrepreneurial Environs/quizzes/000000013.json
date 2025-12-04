@@ -1,0 +1,150 @@
+{
+	"quizId": "491800",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491800",
+	"extractedAt": "2025-12-01T05:29:40.552Z",
+	"title": "\"Intellectual Property\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Intellectual Property\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Intellectual Property\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404772",
+			"type": null,
+			"text": "Which of the following best describes a primary purpose of a patent?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3694\n\n    \n         \n      \n        To give inventors a temporary monopoly as a reward for innovation\n        \n      \n    \n    \n      \n    \n    \n      To give inventors a temporary monopoly as a reward for innovation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404772\n      3694\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "5780\n\n    \n         \n      \n        To allow inventors to keep their innovations secret indefinitely\n        \n      \n    \n    \n      \n    \n    \n      To allow inventors to keep their innovations secret indefinitely\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404772\n      5780\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "145\n\n    \n         \n      \n        To prevent all competitors from entering the market\n        \n      \n    \n    \n      \n    \n    \n      To prevent all competitors from entering the market\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404772\n      145\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9303\n\n    \n         \n      \n        To reduce the costs of manufacturing new products\n        \n      \n    \n    \n      \n    \n    \n      To reduce the costs of manufacturing new products\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404772\n      9303\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404773",
+			"type": null,
+			"text": "Which of the following is typically NOT protected by trademark law?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3297\n\n    \n         \n      \n        Brand names\n        \n      \n    \n    \n      \n    \n    \n      Brand names\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404773\n      3297\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2554\n\n    \n         \n      \n        Slogans associated with a product or service\n        \n      \n    \n    \n      \n    \n    \n      Slogans associated with a product or service\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404773\n      2554\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2418\n\n    \n         \n      \n        Inventions and technological processes\n        \n      \n    \n    \n      \n    \n    \n      Inventions and technological processes\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404773\n      2418\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2958\n\n    \n         \n      \n        Logos and symbols\n        \n      \n    \n    \n      \n    \n    \n      Logos and symbols\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404773\n      2958\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404774",
+			"type": null,
+			"text": "Which government authority is responsible for managing copyright registration in the United States?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "9200\n\n    \n         \n      \n        The Federal Communications Commission (FCC)\n        \n      \n    \n    \n      \n    \n    \n      The Federal Communications Commission (FCC)\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404774\n      9200\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8566\n\n    \n         \n      \n        The Library of Congress\n        \n      \n    \n    \n      \n    \n    \n      The Library of Congress\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404774\n      8566\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "8562\n\n    \n         \n      \n        The Department of Commerce\n        \n      \n    \n    \n      \n    \n    \n      The Department of Commerce\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404774\n      8562\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6307\n\n    \n         \n      \n        The U.S. Patent and Trademark Office (USPTO)\n        \n      \n    \n    \n      \n    \n    \n      The U.S. Patent and Trademark Office (USPTO)\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404774\n      6307\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404775",
+			"type": null,
+			"text": "How long does trade secret protection last?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "1488\n\n    \n         \n      \n        20 years, similar to patent protection\n        \n      \n    \n    \n      \n    \n    \n      20 years, similar to patent protection\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404775\n      1488\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6072\n\n    \n         \n      \n        As long as it is registered with the U.S. Patent and Trademark Office\n        \n      \n    \n    \n      \n    \n    \n      As long as it is registered with the U.S. Patent and Trademark Office\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404775\n      6072\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2936\n\n    \n         \n      \n        As long as the information remains secret\n        \n      \n    \n    \n      \n    \n    \n      As long as the information remains secret\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404775\n      2936\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7454\n\n    \n         \n      \n        10 years from the date of creation\n        \n      \n    \n    \n      \n    \n    \n      10 years from the date of creation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404775\n      7454\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404776",
+			"type": null,
+			"text": "Which of the following best describes a key factor in forming an IP strategy for innovation?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "1448\n\n    \n         \n      \n        Balancing control of intellectual property with opportunities for collaboration to maximize value\n        \n      \n    \n    \n      \n    \n    \n      Balancing control of intellectual property with opportunities for collaboration to maximize value\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404776\n      1448\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "6981\n\n    \n         \n      \n        Focusing on patenting all innovations for competitive advantage\n        \n      \n    \n    \n      \n    \n    \n      Focusing on patenting all innovations for competitive advantage\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404776\n      6981\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3593\n\n    \n         \n      \n        Prioritizing complete ownership and secrecy to avoid collaboration\n        \n      \n    \n    \n      \n    \n    \n      Prioritizing complete ownership and secrecy to avoid collaboration\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404776\n      3593\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3581\n\n    \n         \n      \n        Relying on trademarks as the sole method of protecting collaborative innovations\n        \n      \n    \n    \n      \n    \n    \n      Relying on trademarks as the sole method of protecting collaborative innovations\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404776\n      3581\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

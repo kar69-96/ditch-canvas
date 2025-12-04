@@ -1,0 +1,9 @@
+{
+	"id": "zTK4sDysFffsXSD",
+	"json": "{\"id\":\"zTK4sDysFffsXSD\",\"url\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552334\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552334\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:00:47.017Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/modules/items/6552334",
+	"url": "https://canvas.colorado.edu/courses/121531/modules/items/6552334"
+}

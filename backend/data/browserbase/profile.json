@@ -1,0 +1,8 @@
+{
+  "contextId": "a3aaaa84-9c58-4dc9-b254-694903adf698",
+  "projectId": "6fbcfdbe-fc4e-40a5-b1ae-023be1c6ce01",
+  "canvasUrl": "https://canvas.colorado.edu/login",
+  "createdAt": "2025-10-25T02:06:47.972Z",
+  "updatedAt": "2025-11-02T19:31:34.401Z",
+  "notes": "Persistent context for Canvas authentication. Do not delete unless reauth is required."
+}

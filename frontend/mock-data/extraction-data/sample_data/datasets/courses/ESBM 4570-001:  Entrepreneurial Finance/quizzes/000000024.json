@@ -1,0 +1,98 @@
+{
+	"quizId": "497949",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497949",
+	"extractedAt": "2025-12-01T05:47:55.543Z",
+	"title": "Homework 2  Financial Statements",
+	"description": "<p>Please use the spreadsheet provided her to answer the questions.</p>\n<p>&nbsp;</p>",
+	"descriptionText": "Please use the spreadsheet provided her to answer the questions.\n ",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463898",
+			"type": null,
+			"text": "What is the %Gross Profits in 2024? (show as a decimal, to two digits)",
+			"points": 0.25,
+			"answers": [
+				{
+					"text": "3750\n\n    \n      \n        answer_text\n        \n      \n    \n    \n      \n    \n    \n      answer_text\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463898\n      3750\n      \n    \n      \n        0.35 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      0.35\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463899",
+			"type": null,
+			"text": "What is the Equity Multiplier?\nShow answer with a decimal to 2 digits",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "7176\n\n    \n      \n        answer_text\n        \n      \n    \n    \n      \n    \n    \n      answer_text\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463899\n      7176\n      \n    \n      \n        1.52 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      1.52\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463900",
+			"type": null,
+			"text": "If the cost of equity is 11%, the cost of debt is 8%, what is the WACC? \n \nShow answer as a % to two digits --\nNOTE --Show your answer as a percent to 2 decimals (you will not use a % IN the answer, it is implied)\nThat is your answer should be in a format of  12.34",
+			"points": 1,
+			"answers": [
+				{
+					"text": "7448\n\n    \n      \n        answer_text\n        \n      \n    \n    \n      \n    \n    \n      answer_text\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463900\n      7448\n      \n    \n      \n        9.28 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      9.28\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463901",
+			"type": null,
+			"text": "When does the ROA=ROE?",
+			"points": 0.25,
+			"answers": []
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7463902",
+			"type": null,
+			"text": "NEXT YEAR (2025), you expect revenue to grow by 25%.\nYour COGS ratio will stay the same.\nYour fixed costs (OPEX) do not change\nDepreciation increases to $1200\nWhat is your %net profitability in 2025?\nShow your answer as a percent to 2 decimals (you will not use a % IN the answer, it is implied)\nThat is your answer should be in a format of  12.34",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8905\n\n    \n      \n        answer_text\n        \n      \n    \n    \n      \n    \n    \n      answer_text\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463902\n      8905\n      \n    \n      \n        7.15 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      7.15\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 6,
+			"questionId": "question_7463903",
+			"type": null,
+			"text": "What is your NOPAT in 2025? ($, NO decimals)",
+			"points": 1,
+			"answers": [
+				{
+					"text": "1797\n\n    \n      \n        answer_text\n        \n      \n    \n    \n      \n    \n    \n      answer_text\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463903\n      1797\n      \n    \n      \n        11,100 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      11,100\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 6,
+	"attachments": []
+}

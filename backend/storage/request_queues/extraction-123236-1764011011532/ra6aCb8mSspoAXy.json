@@ -1,0 +1,9 @@
+{
+	"id": "ra6aCb8mSspoAXy",
+	"json": "{\"id\":\"ra6aCb8mSspoAXy\",\"url\":\"https://canvas.colorado.edu/courses/123236/pages/cu-resources\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236/pages/cu-resources\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236/pages/cu-resources\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:05:31.199Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123236/pages/cu-resources",
+	"url": "https://canvas.colorado.edu/courses/123236/pages/cu-resources"
+}

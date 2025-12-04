@@ -1,0 +1,9 @@
+{
+	"id": "MgjgRgM94S7yNlJ",
+	"json": "{\"id\":\"MgjgRgM94S7yNlJ\",\"url\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552340\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552340\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:00:57.764Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/modules/items/6552340",
+	"url": "https://canvas.colorado.edu/courses/121531/modules/items/6552340"
+}

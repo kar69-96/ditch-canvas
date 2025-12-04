@@ -1,0 +1,20 @@
+{
+	"announcementId": "1710547",
+	"courseId": "123249",
+	"url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1710547",
+	"extractedAt": "2025-12-01T05:46:06.353Z",
+	"isAnnouncement": true,
+	"title": "Interactive Brokers Paper Trading Account",
+	"content": "<p>I set up a Trading Lab for the class that simulates closely what professional traders do on a daily basis. You will have to open an account by following the link below. Once set up, your account will have $1,000,000 in paper money and full trading capability. In particular, you will be able to buy/sell domestic and internationals stocks, ETFs, and bonds, as well as currencies, futures, and options. You will also be allowed to buy securities on margin and to short-sell.</p>\n<p>&nbsp;</p>\n<p>To open your account, please click on this link:</p>\n<p><a class=\"inline_disabled external\" href=\"https://ndcdyn.interactivebrokers.com/Universal/Application?type=DEMO&amp;code=TRADING_LAB_DIN671877\" target=\"_blank\" rel=\"noreferrer noopener\"><span>https://ndcdyn.interactivebrokers.com/Universal/Application?type=DEMO&amp;code=TRADING_LAB_DIN671877</span><span class=\"external_link_icon\" style=\"margin-inline-start: 5px; display: inline-block; text-indent: initial; \" role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"M1226.667 267c88.213 0 160 71.787 160 160v426.667H1280v-160H106.667v800C106.667 1523 130.56 1547 160 1547h1066.667c29.44 0 53.333-24 53.333-53.333v-213.334h106.667v213.334c0 88.213-71.787 160-160 160H160c-88.213 0-160-71.787-160-160V427c0-88.213 71.787-160 160-160Zm357.706 442.293 320 320c20.8 20.8 20.8 54.614 0 75.414l-320 320-75.413-75.414 228.907-228.906H906.613V1013.72h831.254L1508.96 784.707l75.413-75.414Zm-357.706-335.626H160c-29.44 0-53.333 24-53.333 53.333v160H1280V427c0-29.333-23.893-53.333-53.333-53.333Z\" fill-rule=\"evenodd\"></path>\n</svg>\n<span class=\"screenreader-only\">Links to an external site.</span></span></a></p>\n<p>&nbsp;</p>\n<p>Please let me know if you have questions,</p>\n<p>iulian</p>",
+	"contentText": "I set up a Trading Lab for the class that simulates closely what professional traders do on a daily basis. You will have to open an account by following the link below. Once set up, your account will have $1,000,000 in paper money and full trading capability. In particular, you will be able to buy/sell domestic and internationals stocks, ETFs, and bonds, as well as currencies, futures, and options. You will also be allowed to buy securities on margin and to short-sell.\n \nTo open your account, please click on this link:\nhttps://ndcdyn.interactivebrokers.com/Universal/Application?type=DEMO&code=TRADING_LAB_DIN671877\n    \n\nLinks to an external site.\n \nPlease let me know if you have questions,\niulian",
+	"author": "Iulian Obreja",
+	"postDate": "Posted Sep 11 9:37am",
+	"attachments": [],
+	"comments": [],
+	"commentCount": 0,
+	"visibility": {
+		"isPublished": true,
+		"isPinned": false,
+		"allowComments": true
+	}
+}

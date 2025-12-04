@@ -1,0 +1,73 @@
+{
+	"quizId": "497932",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497932",
+	"extractedAt": "2025-12-01T05:47:45.367Z",
+	"title": "REFLECTION Case 6 Viscotech",
+	"description": "<p>Please respond to each of the prompts</p>",
+	"descriptionText": "Please respond to each of the prompts",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463771",
+			"type": null,
+			"text": "What are 2 takeaways that you have from this case?",
+			"points": 1,
+			"answers": []
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463772",
+			"type": null,
+			"text": "What is a question that you still have regarding this case?",
+			"points": 1,
+			"answers": []
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463773",
+			"type": "essay",
+			"text": "Identify a colleague (by name), who made a notable contribution - share their contribution as well.",
+			"points": 0.5,
+			"answers": []
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_6530931",
+			"type": null,
+			"text": "Identify a colleague (by name), who made a notable contribution - share their contribution as well.",
+			"points": null,
+			"answers": []
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7463774",
+			"type": "essay",
+			"text": "Identify a second colleague (by name), who made a notable contribution - share their contribution as well.",
+			"points": 0.5,
+			"answers": []
+		},
+		{
+			"questionNumber": 6,
+			"questionId": "question_6530931",
+			"type": null,
+			"text": "Identify a second colleague (by name), who made a notable contribution - share their contribution as well.",
+			"points": null,
+			"answers": []
+		}
+	],
+	"questionCount": 6,
+	"attachments": []
+}

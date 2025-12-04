@@ -1,0 +1,9 @@
+{
+	"id": "kLtGNUnxbrTOiIr",
+	"json": "{\"id\":\"kLtGNUnxbrTOiIr\",\"url\":\"https://canvas.colorado.edu/courses/123236\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":0,\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-01T05:23:56.089Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123236",
+	"url": "https://canvas.colorado.edu/courses/123236"
+}

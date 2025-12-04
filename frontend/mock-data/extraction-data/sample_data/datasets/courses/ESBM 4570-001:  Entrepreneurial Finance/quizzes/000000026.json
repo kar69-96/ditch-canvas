@@ -1,0 +1,136 @@
+{
+	"quizId": "497934",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497934",
+	"extractedAt": "2025-12-01T05:47:59.088Z",
+	"title": "Homework 1 Screening Criteria",
+	"description": "<p>Please use the information on the spreadsheet attached as you work through the questions.</p>\n<p>You may use online and course resources to answer the questions.&nbsp;</p>\n<p><span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"Homework 1.xlsx\" href=\"https://canvas.colorado.edu/courses/123160/files/80295675?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\">Homework 1.xlsx</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/123160/files/80295675/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download Homework 1.xlsx</span></a></span></p>",
+	"descriptionText": "Please use the information on the spreadsheet attached as you work through the questions.\nYou may use online and course resources to answer the questions. \nHomework 1.xlsx\n    \n\nDownload Homework 1.xlsx",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463779",
+			"type": null,
+			"text": "You are on the Deal Team for a Venture Capitalist firm and are tasked with evaluating comps for the valuation of a digital health company.  Which of the following sets of comps would you recommend.",
+			"points": 1,
+			"answers": [
+				{
+					"text": "1111\n\n    \n         \n      \n        UC Health, Podimetrics, Starling\n        \n      \n    \n    \n      \n    \n    \n      UC Health, Podimetrics, Starling\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463779\n      1111\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "348\n\n    \n         \n      \n        UC Health, Good Samaritan, Boulder Medical Center\n        \n      \n    \n    \n      \n    \n    \n      UC Health, Good Samaritan, Boulder Medical Center\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463779\n      348\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1625\n\n    \n         \n      \n        UC Health, Electronic Health Record Inc, Hu\n        \n      \n    \n    \n      \n    \n    \n      UC Health, Electronic Health Record Inc, Hu\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463779\n      1625\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2743\n\n    \n         \n      \n        UC Health, Dimer, OrthoNow\n        \n      \n    \n    \n      \n    \n    \n      UC Health, Dimer, OrthoNow\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463779\n      2743\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463780",
+			"type": null,
+			"text": "Please see the spreadsheet provided, Comps tab. \nBased on EBITDA, and the multiples provided, what is the implied valuation of Comparable Three?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "2667\n\n    \n         \n      \n        $48M\n        \n      \n    \n    \n      \n    \n    \n      $48M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463780\n      2667\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "79\n\n    \n         \n      \n        $48\n        \n      \n    \n    \n      \n    \n    \n      $48\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463780\n      79\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5515\n\n    \n         \n      \n        $100M\n        \n      \n    \n    \n      \n    \n    \n      $100M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463780\n      5515\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3086\n\n    \n         \n      \n        $108M\n        \n      \n    \n    \n      \n    \n    \n      $108M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463780\n      3086\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463781",
+			"type": null,
+			"text": "Consider the Scorecard approach to valuation.  In particular, please see the Scorecard worksheet on the spreadsheet provided. \nReflect on the questions with the VCs and the \"buckets\" provided in class.\nIf you are PE investor, which of the following categories might you want to add to the scorecard?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "105\n\n    \n         \n      \n        time to exit\n        \n      \n    \n    \n      \n    \n    \n      time to exit\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463781\n      105\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "209\n\n    \n         \n      \n        Burn Rate\n        \n      \n    \n    \n      \n    \n    \n      Burn Rate\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463781\n      209\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "529\n\n    \n         \n      \n        pro forma\n        \n      \n    \n    \n      \n    \n    \n      pro forma\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463781\n      529\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9315\n\n    \n         \n      \n        time to IPO\n        \n      \n    \n    \n      \n    \n    \n      time to IPO\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463781\n      9315\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463782",
+			"type": null,
+			"text": "Please see the Scorecard2 worksheet in the spreadsheet provided.\nWhat is the Scorecard Adjusted Valuation for the company presented (round to 2 decimals)",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8944\n\n    \n         \n      \n        $134.23M\n        \n      \n    \n    \n      \n    \n    \n      $134.23M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463782\n      8944\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7135\n\n    \n         \n      \n        $130M\n        \n      \n    \n    \n      \n    \n    \n      $130M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463782\n      7135\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2735\n\n    \n         \n      \n        $122.53M\n        \n      \n    \n    \n      \n    \n    \n      $122.53M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463782\n      2735\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6864\n\n    \n         \n      \n        $936M\n        \n      \n    \n    \n      \n    \n    \n      $936M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463782\n      6864\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 4,
+	"attachments": [
+		{
+			"name": "Homework 1.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80295675?wrap=1",
+			"type": null
+		},
+		{
+			"name": "Download Homework 1.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80295675/download?download_frd=1",
+			"type": null
+		}
+	]
+}

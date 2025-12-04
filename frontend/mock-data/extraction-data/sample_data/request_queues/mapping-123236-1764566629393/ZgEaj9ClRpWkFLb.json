@@ -1,0 +1,9 @@
+{
+	"id": "ZgEaj9ClRpWkFLb",
+	"json": "{\"id\":\"ZgEaj9ClRpWkFLb\",\"url\":\"https://canvas.colorado.edu/courses/123236/modules/items/6620614\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236/files/80124859?module_item_id=6620614\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236/modules/items/6620614\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":3,\"errorMessages\":[\"Error: requestHandler timed out after 20 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\",\"Error: requestHandler timed out after 20 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\",\"Error: requestHandler timed out after 20 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\",\"Error: requestHandler timed out after 20 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\"],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":5}},\"handledAt\":\"2025-12-01T05:32:28.516Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 3,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123236/modules/items/6620614",
+	"url": "https://canvas.colorado.edu/courses/123236/modules/items/6620614"
+}

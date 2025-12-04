@@ -1,0 +1,9 @@
+{
+	"id": "iY6UU9YQwtXEJk6",
+	"json": "{\"id\":\"iY6UU9YQwtXEJk6\",\"url\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552342\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552342\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:01:04.613Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/modules/items/6552342",
+	"url": "https://canvas.colorado.edu/courses/121531/modules/items/6552342"
+}

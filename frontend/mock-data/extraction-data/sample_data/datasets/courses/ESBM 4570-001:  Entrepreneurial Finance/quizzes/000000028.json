@@ -1,0 +1,125 @@
+{
+	"quizId": "497939",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497939",
+	"extractedAt": "2025-12-01T05:47:59.814Z",
+	"title": "PRE QUIZ  Case 1  How VCs Evaluate Venture Opportunities",
+	"description": "<p>These questions are based on the case, How Venture Capitalists Evaluate Potential Venture Opportunities.</p>\n<p>This is open note/open case.</p>\n<p>You have 15 minutes to complete this quiz.&nbsp;</p>",
+	"descriptionText": "These questions are based on the case, How Venture Capitalists Evaluate Potential Venture Opportunities.\nThis is open note/open case.\nYou have 15 minutes to complete this quiz. ",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463793",
+			"type": null,
+			"text": "Which of the VCs was most clear in not addressing IPOs as an Exit",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3156\n\n    \n         \n      \n        Robert Simon\n        \n      \n    \n    \n      \n    \n    \n      Robert Simon\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463793\n      3156\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "4927\n\n    \n         \n      \n        Sonja Hoel\n        \n      \n    \n    \n      \n    \n    \n      Sonja Hoel\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463793\n      4927\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3556\n\n    \n         \n      \n        Russell Siegelman\n        \n      \n    \n    \n      \n    \n    \n      Russell Siegelman\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463793\n      3556\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3971\n\n    \n         \n      \n        Fred Wang\n        \n      \n    \n    \n      \n    \n    \n      Fred Wang\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463793\n      3971\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463794",
+			"type": null,
+			"text": "Who MOST clearly prioritizes REVENUE vs market share or market size  in their potential venture opportunity evaluation?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4851\n\n    \n         \n      \n        Robert Simon\n        \n      \n    \n    \n      \n    \n    \n      Robert Simon\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463794\n      4851\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "5933\n\n    \n         \n      \n        Sonja Hoel\n        \n      \n    \n    \n      \n    \n    \n      Sonja Hoel\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463794\n      5933\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2095\n\n    \n         \n      \n        Fred Wang\n        \n      \n    \n    \n      \n    \n    \n      Fred Wang\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463794\n      2095\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7983\n\n    \n         \n      \n        Russell Siegelman\n        \n      \n    \n    \n      \n    \n    \n      Russell Siegelman\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463794\n      7983\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463795",
+			"type": null,
+			"text": "Which of the 4 companies invested in Amazon, according to the interviews?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "2082\n\n    \n         \n      \n        KPCB\n        \n      \n    \n    \n      \n    \n    \n      KPCB\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463795\n      2082\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "4520\n\n    \n         \n      \n        Alta Partners\n        \n      \n    \n    \n      \n    \n    \n      Alta Partners\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463795\n      4520\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7269\n\n    \n         \n      \n        Menlo Ventures\n        \n      \n    \n    \n      \n    \n    \n      Menlo Ventures\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463795\n      7269\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8427\n\n    \n         \n      \n        Trinity Ventures\n        \n      \n    \n    \n      \n    \n    \n      Trinity Ventures\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463795\n      8427\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463796",
+			"type": null,
+			"text": "Which VC company explicitly considers the venture CEO as a key success driver?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "8806\n\n    \n         \n      \n        Trinity Ventures\n        \n      \n    \n    \n      \n    \n    \n      Trinity Ventures\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463796\n      8806\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "144\n\n    \n         \n      \n        Alta Partners\n        \n      \n    \n    \n      \n    \n    \n      Alta Partners\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463796\n      144\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7176\n\n    \n         \n      \n        KPCB\n        \n      \n    \n    \n      \n    \n    \n      KPCB\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463796\n      7176\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1986\n\n    \n         \n      \n        Menlo Ventures\n        \n      \n    \n    \n      \n    \n    \n      Menlo Ventures\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463796\n      1986\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 4,
+	"attachments": []
+}

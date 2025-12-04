@@ -1,0 +1,252 @@
+{
+	"quizId": "497963",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497963",
+	"extractedAt": "2025-12-01T05:47:41.832Z",
+	"title": "Homework 5 Pro Formas_2.0",
+	"description": "<p>This is a heavily spreadsheet driven assignment.</p>\n<p>Take your time. Work with the Class notes.</p>\n<p>Work with a friend.</p>\n<p>Look at the pre-loaded tips that I have provided. Please note on IS Pro Forma 2, for the Other Overhead on the Depreciation line, you need to LOCK the reference to Dep Growth when you develop the Pro Forma.</p>\n<p><span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"Homework 5.xlsx\" href=\"https://canvas.colorado.edu/courses/123160/files/80307584?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\">Homework 5.xlsx</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/123160/files/80307584/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download Homework 5.xlsx</span></a></span></p>",
+	"descriptionText": "This is a heavily spreadsheet driven assignment.\nTake your time. Work with the Class notes.\nWork with a friend.\nLook at the pre-loaded tips that I have provided. Please note on IS Pro Forma 2, for the Other Overhead on the Depreciation line, you need to LOCK the reference to Dep Growth when you develop the Pro Forma.\nHomework 5.xlsx\n    \n\nDownload Homework 5.xlsx",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7464008",
+			"type": null,
+			"text": "Using the base framework provided on Pro Forma 1\nDevelop a 5 year Pro Forma with a company with the following expectations:\nYour capital structure is 100% Equity\nNote, $ are given in $000s.\nYear 1 Revenue = 185\nRevenue Growth = 20%\nAs a % of Revenue:\nCOGS = .4\nMktng = .3\nOther Costs\nOther Overhead - $60\nDepreciation, years 1 -5\n13, 13, 43, 38, 38\nTaxes = .25\nBASED on this Pro Forma\nWhat is your Net Income at the end of Year 3?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "1098\n\n    \n         \n      \n        $266\n        \n      \n    \n    \n      \n    \n    \n      $266\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464008\n      1098\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9694\n\n    \n         \n      \n        -$23\n        \n      \n    \n    \n      \n    \n    \n      -$23\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464008\n      9694\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "433\n\n    \n         \n      \n        -$49\n        \n      \n    \n    \n      \n    \n    \n      -$49\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464008\n      433\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9510\n\n    \n         \n      \n        $13\n        \n      \n    \n    \n      \n    \n    \n      $13\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464008\n      9510\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7464009",
+			"type": null,
+			"text": "Use Pro Forma 1 to answer the following question.\nWhat is your % EBITDA (as a function of revenue) in year 5?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "4140\n\n    \n         \n      \n        3.34%\n        \n      \n    \n    \n      \n    \n    \n      3.34%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464009\n      4140\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6104\n\n    \n         \n      \n        -7.81%\n        \n      \n    \n    \n      \n    \n    \n      -7.81%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464009\n      6104\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9283\n\n    \n         \n      \n        384%\n        \n      \n    \n    \n      \n    \n    \n      384%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464009\n      9283\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7246\n\n    \n         \n      \n        14.36%\n        \n      \n    \n    \n      \n    \n    \n      14.36%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464009\n      7246\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7464010",
+			"type": null,
+			"text": "This is a Big Stretch Question.\nWe have done alot of work on the Cash Conversion Cycle.\nASSUME... 100% of your Revenue is received in CASH at the time of purchase (AR =0)\nYou pay CASH for your inputs at the time you receive them (AP = 0)\nYou instantaneously make and sell your goods.\nThis means, your Income Statement reflects your Operating CASH...\nexcept... You tell me....\nWhat is the CASH outcome in year 2",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "5481\n\n    \n         \n      \n        $13\n        \n      \n    \n    \n      \n    \n    \n      $13\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464010\n      5481\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4765\n\n    \n         \n      \n        -$15\n        \n      \n    \n    \n      \n    \n    \n      -$15\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464010\n      4765\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "741\n\n    \n         \n      \n        $7\n        \n      \n    \n    \n      \n    \n    \n      $7\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464010\n      741\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8097\n\n    \n         \n      \n        -$28\n        \n      \n    \n    \n      \n    \n    \n      -$28\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464010\n      8097\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7464011",
+			"type": null,
+			"text": "Continue using IS Pro Forma 1\nyou want to be ready for investor conversations, and you know that alot can happen when you are evaluating a pro forma.\nYou decide to look at growth expectations from 10%-40%, and COGS expectations of 60% to 30%.\nI put this basic framework on IS Pro Forma 1.\nAt the end of Year 5, what is your expected Net Income if you have 10% growth and COGS are 50%?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "746\n\n    \n         \n      \n        $8\n        \n      \n    \n    \n      \n    \n    \n      $8\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464011\n      746\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6912\n\n    \n         \n      \n        -$15\n        \n      \n    \n    \n      \n    \n    \n      -$15\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464011\n      6912\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3568\n\n    \n         \n      \n        -$68\n        \n      \n    \n    \n      \n    \n    \n      -$68\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464011\n      3568\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5203\n\n    \n         \n      \n        -$53\n        \n      \n    \n    \n      \n    \n    \n      -$53\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464011\n      5203\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7464012",
+			"type": null,
+			"text": "Please copy and paste your Data Table showing the scenarios you evaluated in the question with the provided Growth and COGS scenarios.",
+			"points": 0.5,
+			"answers": []
+		},
+		{
+			"questionNumber": 6,
+			"questionId": "question_7464013",
+			"type": null,
+			"text": "Now we are going to get a little bit more challenging.\nPlease refer to IS Pro Forma 2. \nIn this Pro Forma, we have figured out that overhead will need to grow at 8% of Revenue (we will need to hire additional people, rent additional space, provide extra coffee at the office)\nDepreciation will grow at 2.5% of revenue.  We are going to BUY additional equipment as we grow.\nI have filled in the assumptions. The first year revenue is $125 ($000s).\nNOTE: I have coded the Overhead and Depreciation to reflect the growth assumptions.\nALSO -- take a look at the Taxes Code. Helpful!\nPractice this.\nBuild your IS Pro Forma 2.\nWhat is Depreciation as a % of Revenue in year 4?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "6760\n\n    \n         \n      \n        22.05%\n        \n      \n    \n    \n      \n    \n    \n      22.05%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464013\n      6760\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2828\n\n    \n         \n      \n        11.9%\n        \n      \n    \n    \n      \n    \n    \n      11.9%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464013\n      2828\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4907\n\n    \n         \n      \n        -2.37%\n        \n      \n    \n    \n      \n    \n    \n      -2.37%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464013\n      4907\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5016\n\n    \n         \n      \n        8%\n        \n      \n    \n    \n      \n    \n    \n      8%\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464013\n      5016\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 7,
+			"questionId": "question_7464014",
+			"type": null,
+			"text": "Use IS Pro Forma 2\nWith the new room for assumptions on overhead growth and depreciation growth, let's create a Data Table with scenarios on these factors. \nLet's have Overhead grow from 6% to 11% in increments of .01\nLet's have depreciation grow in increments from 2% to 4.5% in increments of .5%\n \nWhat is the EBIT in year 3 under the assumptions of 7% overhead growth, and 3.5% depreciation growth?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "4666\n\n    \n         \n      \n        -$17.3\n        \n      \n    \n    \n      \n    \n    \n      -$17.3\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464014\n      4666\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4800\n\n    \n         \n      \n        -$17.9\n        \n      \n    \n    \n      \n    \n    \n      -$17.9\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464014\n      4800\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "6114\n\n    \n         \n      \n        $9\n        \n      \n    \n    \n      \n    \n    \n      $9\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464014\n      6114\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3202\n\n    \n         \n      \n        $7\n        \n      \n    \n    \n      \n    \n    \n      $7\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464014\n      3202\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 8,
+			"questionId": "question_7464015",
+			"type": null,
+			"text": "What Operations, Cash flow decision are we making when we are evaluating Overhead growth (OPEX) vs Depreciation Growth (CAPEX)...",
+			"points": 0.5,
+			"answers": []
+		},
+		{
+			"questionNumber": 9,
+			"questionId": "question_7464016",
+			"type": null,
+			"text": "Look at BS Pro Forma 1.\nBased on BS 1, how much Equity did the founders put in for Year 1? ($000s)",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "7793\n\n    \n         \n      \n        69\n        \n      \n    \n    \n      \n    \n    \n      69\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464016\n      7793\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2308\n\n    \n         \n      \n        67\n        \n      \n    \n    \n      \n    \n    \n      67\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464016\n      2308\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6742\n\n    \n         \n      \n        82\n        \n      \n    \n    \n      \n    \n    \n      82\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464016\n      6742\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9302\n\n    \n         \n      \n        109\n        \n      \n    \n    \n      \n    \n    \n      109\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464016\n      9302\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 10,
+			"questionId": "question_7464017",
+			"type": null,
+			"text": "Now, apply the operational assumptions provided in Column C, Along with the PP&E and Depreciation provided on IS Pro Forma 1, to determine the BS Pro Forma 1, for Year 2.\nRecall: the forecasts in Column C apply to Year 2 REVENUE.\nWhat (if any) are the Additional Funds Needed (AFN) in Year 2?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "4117\n\n    \n         \n      \n        18\n        \n      \n    \n    \n      \n    \n    \n      18\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464017\n      4117\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9981\n\n    \n         \n      \n        120\n        \n      \n    \n    \n      \n    \n    \n      120\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464017\n      9981\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2399\n\n    \n         \n      \n        22\n        \n      \n    \n    \n      \n    \n    \n      22\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464017\n      2399\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7163\n\n    \n         \n      \n        111\n        \n      \n    \n    \n      \n    \n    \n      111\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7464017\n      7163\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 10,
+	"attachments": [
+		{
+			"name": "Homework 5.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80307584?wrap=1",
+			"type": null
+		},
+		{
+			"name": "Download Homework 5.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80307584/download?download_frd=1",
+			"type": null
+		}
+	]
+}

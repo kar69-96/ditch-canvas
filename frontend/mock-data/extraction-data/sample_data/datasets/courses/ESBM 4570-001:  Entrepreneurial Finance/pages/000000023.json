@@ -1,0 +1,45 @@
+{
+	"courseId": "123160",
+	"pageSlug": "whoop",
+	"url": "https://canvas.colorado.edu/courses/123160/pages/whoop",
+	"extractedAt": "2025-12-01T05:47:20.019Z",
+	"title": "Whoop",
+	"content": "<h1 class=\"page-title\">Whoop</h1>\n  \n  <div id=\"todo-date-mount-point\"></div>\n  \n    <p>Here is the Product website: <a class=\"inline_disabled external\" href=\"https://www.whoop.com/\" target=\"_blank\" rel=\"noreferrer noopener\"><span>Whoop</span><span class=\"external_link_icon\" style=\"margin-inline-start: 5px; display: inline-block; text-indent: initial; \" role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"M1226.667 267c88.213 0 160 71.787 160 160v426.667H1280v-160H106.667v800C106.667 1523 130.56 1547 160 1547h1066.667c29.44 0 53.333-24 53.333-53.333v-213.334h106.667v213.334c0 88.213-71.787 160-160 160H160c-88.213 0-160-71.787-160-160V427c0-88.213 71.787-160 160-160Zm357.706 442.293 320 320c20.8 20.8 20.8 54.614 0 75.414l-320 320-75.413-75.414 228.907-228.906H906.613V1013.72h831.254L1508.96 784.707l75.413-75.414Zm-357.706-335.626H160c-29.44 0-53.333 24-53.333 53.333v160H1280V427c0-29.333-23.893-53.333-53.333-53.333Z\" fill-rule=\"evenodd\"></path>\n</svg>\n<span class=\"screenreader-only\">Links to an external site.</span></span></a></p>\n<p>I have one, and I know several students do as well.</p>\n<p>I found out about Whoop through Dr Stacy Sims. It might be worth learning how others heard about Whoop.</p>\n<p>They also have a podcast.&nbsp;&nbsp;</p>\n<p>Their LinkedIn page is excellent (note the acquisitions!)</p>\n  \n  \n<div id=\"assign-to-mount-point\"></div>\n<div id=\"choose-editor-mount-point\"></div>",
+	"contentText": "Whoop\n  \n  \n  \n    Here is the Product website: Whoop\n    \n\nLinks to an external site.\nI have one, and I know several students do as well.\nI found out about Whoop through Dr Stacy Sims. It might be worth learning how others heard about Whoop.\nThey also have a podcast.  \nTheir LinkedIn page is excellent (note the acquisitions!)\n  \n  \n\n",
+	"embeddedContent": {
+		"images": [
+			{
+				"src": "https://cuboulder.instructure.com/images/thumbnails/73827477/c3TQqnYJYi9I7wdqgZNgL9V2YYuWY9xi2TpnmNQh",
+				"alt": "Karthik Reddy"
+			},
+			{
+				"src": "https://redshelf-images.s3.amazonaws.com/lms/RSLogo.png",
+				"alt": "RedShelf LTI 1.3 - Production"
+			}
+		],
+		"files": [],
+		"videos": [],
+		"links": [
+			{
+				"url": "https://www.whoop.com/",
+				"text": "Whoop\n    \n\nLinks to an external site."
+			}
+		]
+	},
+	"metadata": {
+		"lastModified": null,
+		"author": null,
+		"published": true
+	},
+	"location": {
+		"source": "standalone",
+		"moduleName": null,
+		"moduleId": null,
+		"moduleIndex": null,
+		"folder": null,
+		"breadcrumbs": [
+			"My Dashboard",
+			"ESBM 4570-001"
+		]
+	}
+}

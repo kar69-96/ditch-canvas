@@ -1,0 +1,14 @@
+{
+	"type": "files-list-discovery",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/files/folder/unfiled?sort=created_at&order=desc",
+	"depth": 3,
+	"discoveredAt": "2025-12-01T05:26:11.005Z",
+	"breadcrumbs": [],
+	"subfoldersDiscovered": [],
+	"totalFoldersOnPage": 0,
+	"totalFilesVisible": 2,
+	"pageTitle": "Files",
+	"apiFolderSample": [],
+	"apiFolderTotal": 4
+}

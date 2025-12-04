@@ -1,0 +1,617 @@
+You are a Browserbase autonomous agent with a valid Canvas session.
+Goal: For each course listed below, capture comprehensive data across assignments, modules, files, announcements, pages, quizzes, discussions, and any additional navigation targets discovered. After top-level harvesting, perform deep content discovery by following internal Canvas links up to depth 2 within each course.
+
+General instructions:
+- Work course by course, finishing one before moving to the next.
+- For each section (assignments/modules/files/etc.) visit the relevant navigation link, scroll to load lazy content, and extract structured data.
+- After processing each section, follow internal Canvas links found on the page (same course domain) up to depth 2. Avoid loops by tracking visited URLs.
+- Prefer machine-readable output: return a JSON array of records with fields `courseId`, `courseName`, `section`, `itemType`, `title`, `url`, `parentUrl`, `depth`, `dueDate` (if present), `points`, `status`, `updatedAt`, and `metadata` for additional details (attachments, submission types, etc.).
+- When capturing text, trim whitespace. Resolve relative URLs to absolute Canvas URLs.
+- If a section or deep traversal branch is empty, record an entry `{ courseId, section, empty: true }` or `{ courseId, section, parentUrl, depth, empty: true }`.
+- If navigation requires loading more (pagination, “Load more”), continue until all entries are visible.
+- Maintain a visited URL set per course to avoid duplicate crawling. Only include Canvas URLs under the current course unless explicitly instructed.
+- Use consistent JSON at the end of the run. Do not include commentary outside the JSON payload.
+
+Courses to process:
+1. FNCE 3010 F'25: Sec 005, 007, 010 - Corp Fin (ID 123236)
+   Base URL: https://canvas.colorado.edu/courses/123236
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123236
+   - [modules] Modules → https://canvas.colorado.edu/courses/123236/modules
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123236/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123236/grades
+   -  People → https://canvas.colorado.edu/courses/123236/users
+   -  NameCoach → https://canvas.colorado.edu/courses/123236/external_tools/1681
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/123236/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/123236/external_tools/33321
+   - [discussions] Discussions → https://canvas.colorado.edu/courses/123236/discussion_topics
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123236/external_tools/45220
+   -  Zoom → https://canvas.colorado.edu/courses/123236/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+2. Assignment Quiz 6: Chapter 7 - Stocks, due Friday, October 24, 2025 4:00 PM.Quiz 6: Chapter 7 - Stocks (ID 123236)
+   Base URL: https://canvas.colorado.edu/courses/123236/assignments/2441688/submissions/459111
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123236
+   - [modules] Modules → https://canvas.colorado.edu/courses/123236/modules
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123236/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123236/grades
+   -  People → https://canvas.colorado.edu/courses/123236/users
+   -  NameCoach → https://canvas.colorado.edu/courses/123236/external_tools/1681
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/123236/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/123236/external_tools/33321
+   - [discussions] Discussions → https://canvas.colorado.edu/courses/123236/discussion_topics
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123236/external_tools/45220
+   -  Zoom → https://canvas.colorado.edu/courses/123236/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+3. ACCT 3220-004: Corp 1 (Jeremiah) (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+4. Assignment Video Class 18a PPE 1, due Sunday, October 26, 2025 11:59 PM.Video Class 18a PPE 1 (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2416054
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Video Class 18a PPE 1 → https://canvas.colorado.edu/courses/121531/assignments/2416054
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+5. Assignment Video Class 18b PPE 2, due Sunday, October 26, 2025 11:59 PM.Video Class 18b PPE 2 (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2416055
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Video Class 18b PPE 2 → https://canvas.colorado.edu/courses/121531/assignments/2416055
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+6. ESBM 4570-001: Entrepreneurial Finance (ID 123160)
+   Base URL: https://canvas.colorado.edu/courses/123160
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123160
+   - [modules] Modules → https://canvas.colorado.edu/courses/123160/modules
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123160/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123160/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123160/grades
+   -  People → https://canvas.colorado.edu/courses/123160/users
+   -  Pages → https://canvas.colorado.edu/courses/123160/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/123160/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123160/quizzes
+   -  BigBlueButton → https://canvas.colorado.edu/courses/123160/conferences
+   -  Collaborations → https://canvas.colorado.edu/courses/123160/lti_collaborations
+   -  Chat → https://canvas.colorado.edu/courses/123160/external_tools/2
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+7. Quiz MT 2 (Remotely Proctored), due Monday, October 27, 2025 1:45 PM.MT 2 (Remotely Proctored) (ID 123160)
+   Base URL: https://canvas.colorado.edu/courses/123160/quizzes/497940
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123160
+   - [modules] Modules → https://canvas.colorado.edu/courses/123160/modules
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123160/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123160/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123160/grades
+   -  People → https://canvas.colorado.edu/courses/123160/users
+   -  Pages → https://canvas.colorado.edu/courses/123160/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/123160/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123160/quizzes
+   -  BigBlueButton → https://canvas.colorado.edu/courses/123160/conferences
+   -  Collaborations → https://canvas.colorado.edu/courses/123160/lti_collaborations
+   -  Chat → https://canvas.colorado.edu/courses/123160/external_tools/2
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+8. Assignment Video Class 19 PPE 3, due Tuesday, October 28, 2025 11:59 PM.Video Class 19 PPE 3 (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2416056
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades6 → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Video Class 19 PPE 3 → https://canvas.colorado.edu/courses/121531/assignments/2416056
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+9. ESBM 3700-001: Entrepreneurial Environs (ID 123156)
+   Base URL: https://canvas.colorado.edu/courses/123156
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123156
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123156/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123156/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123156/grades
+   -  People → https://canvas.colorado.edu/courses/123156/users
+   -  Syllabus → https://canvas.colorado.edu/courses/123156/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123156/quizzes
+   - [files] Files → https://canvas.colorado.edu/courses/123156/files
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123156/external_tools/45220
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+10. Quiz "Intellectual Property" Assignment, due Tuesday, October 28, 2025 12:30 PM."Intellectual Property" Assignment (ID 123156)
+   Base URL: https://canvas.colorado.edu/courses/123156/quizzes/491800
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123156
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123156/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123156/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123156/grades
+   -  People → https://canvas.colorado.edu/courses/123156/users
+   -  Syllabus → https://canvas.colorado.edu/courses/123156/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123156/quizzes
+   - [files] Files → https://canvas.colorado.edu/courses/123156/files
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123156/external_tools/45220
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  "Intellectual Property" Assignment → https://canvas.colorado.edu/courses/123156/quizzes/491800
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+11. Assignment Excel Online Activity 7A: Ch 9 - WACC, due Tuesday, October 28, 2025 8:00 PM.Excel Online Activity 7A: Ch 9 - WACC (ID 123236)
+   Base URL: https://canvas.colorado.edu/courses/123236/assignments/2441679
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123236
+   - [modules] Modules → https://canvas.colorado.edu/courses/123236/modules
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123236/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123236/grades
+   -  People → https://canvas.colorado.edu/courses/123236/users
+   -  NameCoach → https://canvas.colorado.edu/courses/123236/external_tools/1681
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/123236/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/123236/external_tools/33321
+   - [discussions] Discussions → https://canvas.colorado.edu/courses/123236/discussion_topics
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123236/external_tools/45220
+   -  Zoom → https://canvas.colorado.edu/courses/123236/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+12. Assignment Excel Online Activity 7B: Ch 9 - WACC Estimation, due Tuesday, October 28, 2025 8:00 PM.Excel Online Activity 7B: Ch 9 - WACC Estimation (ID 123236)
+   Base URL: https://canvas.colorado.edu/courses/123236/assignments/2441680
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123236
+   - [modules] Modules → https://canvas.colorado.edu/courses/123236/modules
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123236/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123236/grades
+   -  People → https://canvas.colorado.edu/courses/123236/users
+   -  NameCoach → https://canvas.colorado.edu/courses/123236/external_tools/1681
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/123236/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/123236/external_tools/33321
+   - [discussions] Discussions → https://canvas.colorado.edu/courses/123236/discussion_topics
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123236/external_tools/45220
+   -  Zoom → https://canvas.colorado.edu/courses/123236/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+13. Quiz "Value Chain" Assignment, due Thursday, October 30, 2025 12:30 PM."Value Chain" Assignment (ID 123156)
+   Base URL: https://canvas.colorado.edu/courses/123156/quizzes/491809
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123156
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123156/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123156/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123156/grades
+   -  People → https://canvas.colorado.edu/courses/123156/users
+   -  Syllabus → https://canvas.colorado.edu/courses/123156/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123156/quizzes
+   - [files] Files → https://canvas.colorado.edu/courses/123156/files
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123156/external_tools/45220
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  "Value Chain" Assignment → https://canvas.colorado.edu/courses/123156/quizzes/491809
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+14. Assignment Quiz 7: Chapter 9 - Cost of Capital, due Friday, October 31, 2025 4:00 PM.Quiz 7: Chapter 9 - Cost of Capital (ID 123236)
+   Base URL: https://canvas.colorado.edu/courses/123236/assignments/2441689
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123236
+   - [modules] Modules → https://canvas.colorado.edu/courses/123236/modules
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123236/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123236/grades
+   -  People → https://canvas.colorado.edu/courses/123236/users
+   -  NameCoach → https://canvas.colorado.edu/courses/123236/external_tools/1681
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/123236/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/123236/external_tools/33321
+   - [discussions] Discussions → https://canvas.colorado.edu/courses/123236/discussion_topics
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123236/external_tools/45220
+   -  Zoom → https://canvas.colorado.edu/courses/123236/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+15. PSCI 2223-100: Intro to IR LECTURE (ID 124722)
+   Base URL: https://canvas.colorado.edu/courses/124722
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/124722
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/124722/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/124722/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/124722/grades
+   -  Pages → https://canvas.colorado.edu/courses/124722/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/124722/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/124722/quizzes
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/124722/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/124722/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/124722/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+16. Assignment Research Report Article Approval #2, due Friday, October 31, 2025 5:00 PM.Research Report Article Approval #2 (ID 124722)
+   Base URL: https://canvas.colorado.edu/courses/124722/assignments/2424477
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/124722
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/124722/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/124722/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/124722/grades
+   -  Pages → https://canvas.colorado.edu/courses/124722/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/124722/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/124722/quizzes
+   -  CU Boulder Libraries → https://canvas.colorado.edu/courses/124722/external_tools/3759
+   -  CU Book Access → https://canvas.colorado.edu/courses/124722/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/124722/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Research Report Article Approval #2 → https://canvas.colorado.edu/courses/124722/assignments/2424477
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+17. Assignment Homework #8 (Property, Plant, and Equipment - Ch. 11 and 12) [myBusinessCourse], due Saturday, November 1, 2025 11:59 PM.Homework #8 (Property, Plant, and Equipment - Ch. 11 and 12) [myBusinessCourse] (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2452618
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades6 → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Homework #8 (Property, Plant, and Equipment - Ch. 11 and 12) [myBusinessCourse] → https://canvas.colorado.edu/courses/121531/assignments/2452618
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+18. Assignment Video Class 20 Intangibles 1, due Sunday, November 2, 2025 11:59 PM.Video Class 20 Intangibles 1 (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2416057
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Video Class 20 Intangibles 1 → https://canvas.colorado.edu/courses/121531/assignments/2416057
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+19. Quiz Homework 5 Pro Formas_2.0, due Sunday, November 2, 2025 11:59 PM.Homework 5 Pro Formas_2.0 (ID 123160)
+   Base URL: https://canvas.colorado.edu/courses/123160/quizzes/497963
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123160
+   - [modules] Modules → https://canvas.colorado.edu/courses/123160/modules
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123160/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123160/assignments
+   - [grades] Grades2 → https://canvas.colorado.edu/courses/123160/grades
+   -  People → https://canvas.colorado.edu/courses/123160/users
+   -  Pages → https://canvas.colorado.edu/courses/123160/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/123160/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123160/quizzes
+   -  BigBlueButton → https://canvas.colorado.edu/courses/123160/conferences
+   -  Collaborations → https://canvas.colorado.edu/courses/123160/lti_collaborations
+   -  Chat → https://canvas.colorado.edu/courses/123160/external_tools/2
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+20. Assignment Bubble & Bee Questions, due Monday, November 3, 2025 12:00 PM.Bubble & Bee Questions (ID 123160)
+   Base URL: https://canvas.colorado.edu/courses/123160/assignments/2482776
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123160
+   - [modules] Modules → https://canvas.colorado.edu/courses/123160/modules
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123160/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123160/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123160/grades
+   -  People → https://canvas.colorado.edu/courses/123160/users
+   -  Pages → https://canvas.colorado.edu/courses/123160/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/123160/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123160/quizzes
+   -  BigBlueButton → https://canvas.colorado.edu/courses/123160/conferences
+   -  Collaborations → https://canvas.colorado.edu/courses/123160/lti_collaborations
+   -  Chat → https://canvas.colorado.edu/courses/123160/external_tools/2
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+21. Quiz PRE QUIZ Case 7 Bubble & Bee, due Monday, November 3, 2025 12:00 PM.PRE QUIZ Case 7 Bubble & Bee (ID 123160)
+   Base URL: https://canvas.colorado.edu/courses/123160/quizzes/497923
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123160
+   - [modules] Modules → https://canvas.colorado.edu/courses/123160/modules
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123160/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123160/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123160/grades
+   -  People → https://canvas.colorado.edu/courses/123160/users
+   -  Pages → https://canvas.colorado.edu/courses/123160/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/123160/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123160/quizzes
+   -  BigBlueButton → https://canvas.colorado.edu/courses/123160/conferences
+   -  Collaborations → https://canvas.colorado.edu/courses/123160/lti_collaborations
+   -  Chat → https://canvas.colorado.edu/courses/123160/external_tools/2
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+22. Assignment Video Class 21 Intangibles 2, due Tuesday, November 4, 2025 11:59 PM.Video Class 21 Intangibles 2 (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2416058
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Video Class 21 Intangibles 2 → https://canvas.colorado.edu/courses/121531/assignments/2416058
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+23. Quiz REFLECTION Case 7 Bubble & Bee , due Tuesday, November 4, 2025 11:59 PM.REFLECTION Case 7 Bubble & Bee (ID 123160)
+   Base URL: https://canvas.colorado.edu/courses/123160/quizzes/497933
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123160
+   - [modules] Modules → https://canvas.colorado.edu/courses/123160/modules
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123160/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123160/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123160/grades
+   -  People → https://canvas.colorado.edu/courses/123160/users
+   -  Pages → https://canvas.colorado.edu/courses/123160/wiki
+   -  Syllabus → https://canvas.colorado.edu/courses/123160/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123160/quizzes
+   -  BigBlueButton → https://canvas.colorado.edu/courses/123160/conferences
+   -  Collaborations → https://canvas.colorado.edu/courses/123160/lti_collaborations
+   -  Chat → https://canvas.colorado.edu/courses/123160/external_tools/2
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+24. Quiz "Architectural" Assignment, due Thursday, November 6, 2025 12:30 PM."Architectural" Assignment (ID 123156)
+   Base URL: https://canvas.colorado.edu/courses/123156/quizzes/491807
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/123156
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/123156/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/123156/assignments
+   - [grades] Grades → https://canvas.colorado.edu/courses/123156/grades
+   -  People → https://canvas.colorado.edu/courses/123156/users
+   -  Syllabus → https://canvas.colorado.edu/courses/123156/assignments/syllabus
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/123156/quizzes
+   - [files] Files → https://canvas.colorado.edu/courses/123156/files
+   -  Secure Exam Proctor → https://canvas.colorado.edu/courses/123156/external_tools/45220
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  "Architectural" Assignment → https://canvas.colorado.edu/courses/123156/quizzes/491807
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+25. Assignment Homework #9 (Intangibles - Ch. 13) [myBusinessCourse], due Saturday, November 8, 2025 11:59 PM.Homework #9 (Intangibles - Ch. 13) [myBusinessCourse] (ID 121531)
+   Base URL: https://canvas.colorado.edu/courses/121531/assignments/2452620
+   Navigation:
+   -  Home → https://canvas.colorado.edu/courses/121531
+   - [announcements] Announcements → https://canvas.colorado.edu/courses/121531/announcements
+   - [assignments] Assignments → https://canvas.colorado.edu/courses/121531/assignments
+   - [quizzes] Quizzes → https://canvas.colorado.edu/courses/121531/quizzes
+   - [grades] Grades → https://canvas.colorado.edu/courses/121531/grades
+   -  CU Book Access → https://canvas.colorado.edu/courses/121531/external_tools/33321
+   -  Zoom → https://canvas.colorado.edu/courses/121531/external_tools/52372
+   -  My Dashboard → https://canvas.colorado.edu/
+   -  Homework #9 (Intangibles - Ch. 13) [myBusinessCourse] → https://canvas.colorado.edu/courses/121531/assignments/2452620
+   Extraction checklist:
+   - Assignments (list, metadata, statuses)
+   - Modules (module structure and nested items)
+   - Files (file name, type, size, modified date, URL)
+   - Pages (title, URL, last updated)
+   - Announcements (title, author, posted date, URL)
+   - Quizzes/Discussions/People (if present)
+   - Capture other tabs discovered during navigation
+
+Output specification:
+- Return a single JSON array string. Example:
+```json
+[
+  {
+    "courseId": "12345",
+    "courseName": "Intro to AI",
+    "section": "assignments",
+    "itemType": "assignment",
+    "title": "Homework 1",
+    "url": "https://canvas.../assignments/1",
+    "parentUrl": "https://canvas.../assignments",
+    "depth": 0,
+    "dueDate": "2025-02-12T23:59:00Z",
+    "points": "50",
+    "status": "published",
+    "updatedAt": "2025-01-15T18:00:00Z",
+    "metadata": { "submissionType": "online_upload" }
+  },
+  {
+    "courseId": "12345",
+    "courseName": "Intro to AI",
+    "section": "deep-content",
+    "itemType": "page",
+    "title": "Week 1 Overview",
+    "url": "https://canvas.../pages/week-1-overview",
+    "parentUrl": "https://canvas.../modules",
+    "depth": 1,
+    "metadata": { "snippet": "In this week..." }
+  }
+]
+```
+- Ensure the JSON is valid. No trailing comments or prose after the JSON.

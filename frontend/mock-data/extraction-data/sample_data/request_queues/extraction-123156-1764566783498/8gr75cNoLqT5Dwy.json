@@ -1,0 +1,9 @@
+{
+	"id": "8gr75cNoLqT5Dwy",
+	"json": "{\"id\":\"8gr75cNoLqT5Dwy\",\"url\":\"https://canvas.colorado.edu/courses/123156/syllabus\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123156/syllabus\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123156/syllabus\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":1,\"errorMessages\":[\"Error: requestHandler timed out after 30 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\",\"Error: requestHandler timed out after 30 seconds.\\n    at Timeout._onTimeout (/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68)\\n    at listOnTimeout (node:internal/timers:581:17)\\n    at process.processTimers (node:internal/timers:519:7)\"],\"headers\":{},\"userData\":{\"type\":\"syllabus\",\"__crawlee\":{\"state\":5}},\"handledAt\":\"2025-12-01T05:30:45.656Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 1,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123156/syllabus",
+	"url": "https://canvas.colorado.edu/courses/123156/syllabus"
+}

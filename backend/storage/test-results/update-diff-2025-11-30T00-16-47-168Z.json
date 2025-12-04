@@ -1,0 +1,57 @@
+{
+  "runId": "2025-11-30T00-16-47-168Z",
+  "generatedAt": "2025-11-30T00:17:23.270Z",
+  "dryRun": true,
+  "baselineExtractionFolder": "testing",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-11-30T00-16-47-168Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 1,
+  "courses": [
+    {
+      "courseId": "123160",
+      "courseName": "ESBM 4570-001:  Entrepreneurial Finance",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "2482793",
+            "title": "SpinMaster Write Up",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482793",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2026-01-03T19:00:00.000Z",
+                "to": "2025-12-04T07:59:00.000Z"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

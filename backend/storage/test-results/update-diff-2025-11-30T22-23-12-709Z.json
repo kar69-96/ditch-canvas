@@ -1,0 +1,209 @@
+{
+  "runId": "2025-11-30T22-23-12-709Z",
+  "generatedAt": "2025-11-30T22:23:50.208Z",
+  "dryRun": true,
+  "baselineExtractionFolder": "testing",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-11-30T22-23-12-709Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 4,
+  "courses": [
+    {
+      "courseId": "121531",
+      "courseName": "ACCT 3220-004:  Corp 1 (Jeremiah)",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "2452620",
+            "title": "Homework #9 (Intangibles - Ch. 13) [myBusinessCourse]",
+            "url": "https://canvas.colorado.edu/courses/121531/assignments/2452620",
+            "fieldChanges": {
+              "title": {
+                "from": "Homework #9 (Intangibles - Ch. 13) [UPDATED]",
+                "to": "Homework #9 (Intangibles - Ch. 13) [myBusinessCourse]"
+              },
+              "dueDate": {
+                "from": "2025-12-15T23:59:00.000Z",
+                "to": "2025-11-09T07:59:00.000Z"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123156",
+      "courseName": "ESBM 3700-001:  Entrepreneurial Environs",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "1759769",
+            "title": "Presentation feedback",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1759769",
+            "fieldChanges": {
+              "title": {
+                "from": "IMPORTANT: Updated Course Information",
+                "to": "Presentation feedback"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123160",
+      "courseName": "ESBM 4570-001:  Entrepreneurial Finance",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "2482793",
+            "title": "SpinMaster Write Up",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482793",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2026-01-03T19:00:00.000Z",
+                "to": "2025-12-04T07:59:00.000Z"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    },
+    {
+      "courseId": "123236",
+      "courseName": "FNCE 3010 F'25:  Sec 005, 007, 010 - Corp Fin",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2441675",
+            "title": "Excel Online Activity #9A: Ch. 11 - Replacement Analysis",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441675",
+            "dueDate": "2025-11-14T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [
+          {
+            "id": "2441674",
+            "title": "Excel Online Activity #8B: Ch 10 - NPV profiles",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441674",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2026-01-10T15:00:00.000Z",
+                "to": "2025-11-07T07:59:00.000Z"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

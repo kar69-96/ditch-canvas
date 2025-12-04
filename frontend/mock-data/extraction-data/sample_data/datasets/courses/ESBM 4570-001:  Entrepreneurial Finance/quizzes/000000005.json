@@ -1,0 +1,100 @@
+{
+	"quizId": "497922",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497922",
+	"extractedAt": "2025-12-01T05:47:37.585Z",
+	"title": "PRE QUIZ Case 8 Lady M Cakes",
+	"description": "<p>This is an open book/open case quiz.</p>\n<p>You have 15 minutes to complete this quiz.&nbsp;</p>",
+	"descriptionText": "This is an open book/open case quiz.\nYou have 15 minutes to complete this quiz. ",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463721",
+			"type": null,
+			"text": "Which of the following is true about Lady M Cakes",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8247\n\n    \n         \n      \n        It Blends French and Japanese Technique\n        \n      \n    \n    \n      \n    \n    \n      It Blends French and Japanese Technique\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463721\n      8247\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "246\n\n    \n         \n      \n        It has no competitors\n        \n      \n    \n    \n      \n    \n    \n      It has no competitors\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463721\n      246\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5375\n\n    \n         \n      \n        It could only be found in New York\n        \n      \n    \n    \n      \n    \n    \n      It could only be found in New York\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463721\n      5375\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8111\n\n    \n         \n      \n        Martha Stewart never tried it\n        \n      \n    \n    \n      \n    \n    \n      Martha Stewart never tried it\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463721\n      8111\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463722",
+			"type": null,
+			"text": "One of the biggest concerns of the WTC location was",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4206\n\n    \n         \n      \n        The Set Up Costs\n        \n      \n    \n    \n      \n    \n    \n      The Set Up Costs\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463722\n      4206\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "3530\n\n    \n         \n      \n        Cannibalizing the Bryant Park location\n        \n      \n    \n    \n      \n    \n    \n      Cannibalizing the Bryant Park location\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463722\n      3530\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5658\n\n    \n         \n      \n        Finding Employees\n        \n      \n    \n    \n      \n    \n    \n      Finding Employees\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463722\n      5658\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2028\n\n    \n         \n      \n        Taxes\n        \n      \n    \n    \n      \n    \n    \n      Taxes\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463722\n      2028\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463723",
+			"type": null,
+			"text": "Why might the Chinese investor offer make sense?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4626\n\n    \n         \n      \n        support development of World Trade Center Location\n        \n      \n    \n    \n      \n    \n    \n      support development of World Trade Center Location\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463723\n      4626\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7961\n\n    \n         \n      \n        New Product Development\n        \n      \n    \n    \n      \n    \n    \n      New Product Development\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463723\n      7961\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1389\n\n    \n         \n      \n        Ken was ready to exit\n        \n      \n    \n    \n      \n    \n    \n      Ken was ready to exit\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463723\n      1389\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4853\n\n    \n         \n      \n        They only had an 8 month runway\n        \n      \n    \n    \n      \n    \n    \n      They only had an 8 month runway\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463723\n      4853\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 3,
+	"attachments": []
+}

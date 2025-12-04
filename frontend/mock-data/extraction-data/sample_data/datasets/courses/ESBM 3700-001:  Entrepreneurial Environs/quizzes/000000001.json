@@ -1,0 +1,150 @@
+{
+	"quizId": "491803",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491803",
+	"extractedAt": "2025-12-01T05:29:09.927Z",
+	"title": "\"Entrepreneurial Mindset\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Entrepreneurial Mindset\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Entrepreneurial Mindset\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404787",
+			"type": null,
+			"text": "Hustling is an attribute of the ———— aspect of the entrepreneurial mindset.",
+			"points": 1,
+			"answers": [
+				{
+					"text": "7112\n\n    \n         \n      \n        Cognitive\n        \n      \n    \n    \n      \n    \n    \n      Cognitive\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404787\n      7112\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7555\n\n    \n         \n      \n        Mental\n        \n      \n    \n    \n      \n    \n    \n      Mental\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404787\n      7555\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3173\n\n    \n         \n      \n        Emotional\n        \n      \n    \n    \n      \n    \n    \n      Emotional\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404787\n      3173\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3676\n\n    \n         \n      \n        Behavioral\n        \n      \n    \n    \n      \n    \n    \n      Behavioral\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404787\n      3676\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404788",
+			"type": null,
+			"text": "The \"freedom to operate\" may refer to:",
+			"points": 1,
+			"answers": [
+				{
+					"text": "7314\n\n    \n         \n      \n        Not using the characters copyrighted by others.\n        \n      \n    \n    \n      \n    \n    \n      Not using the characters copyrighted by others.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404788\n      7314\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "9372\n\n    \n         \n      \n        Protecting the innovation through patent rights.\n        \n      \n    \n    \n      \n    \n    \n      Protecting the innovation through patent rights.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404788\n      9372\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1402\n\n    \n         \n      \n        Keeping the innovation as a trade secret.\n        \n      \n    \n    \n      \n    \n    \n      Keeping the innovation as a trade secret.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404788\n      1402\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1010\n\n    \n         \n      \n        Operating in a free, democratic business world.\n        \n      \n    \n    \n      \n    \n    \n      Operating in a free, democratic business world.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404788\n      1010\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404789",
+			"type": null,
+			"text": "Which of the following is NOT an attribute of the entrepreneurial mindset?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3298\n\n    \n         \n      \n        Narrow focus\n        \n      \n    \n    \n      \n    \n    \n      Narrow focus\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404789\n      3298\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "5455\n\n    \n         \n      \n        Cognitive adaptability\n        \n      \n    \n    \n      \n    \n    \n      Cognitive adaptability\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404789\n      5455\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7923\n\n    \n         \n      \n        Overconfidence\n        \n      \n    \n    \n      \n    \n    \n      Overconfidence\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404789\n      7923\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3361\n\n    \n         \n      \n        Optimism\n        \n      \n    \n    \n      \n    \n    \n      Optimism\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404789\n      3361\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404790",
+			"type": null,
+			"text": "According to the BRISK framework, which question is NOT necessarily part of the entrepreneurial Strategy questions?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8906\n\n    \n         \n      \n        Can the entrepreneur commercialize the product?\n        \n      \n    \n    \n      \n    \n    \n      Can the entrepreneur commercialize the product?\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404790\n      8906\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "97\n\n    \n         \n      \n        Is licensing the technology more profitable than entering the market?\n        \n      \n    \n    \n      \n    \n    \n      Is licensing the technology more profitable than entering the market?\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404790\n      97\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6678\n\n    \n         \n      \n        Is there an opportunity register around?\n        \n      \n    \n    \n      \n    \n    \n      Is there an opportunity register around?\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404790\n      6678\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "6240\n\n    \n         \n      \n        Is the idea scalable?\n        \n      \n    \n    \n      \n    \n    \n      Is the idea scalable?\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404790\n      6240\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404791",
+			"type": null,
+			"text": "Which of the following is the subject of the cognitive aspect of the entrepreneurial mindset?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "5631\n\n    \n         \n      \n        How entrepreneurs act\n        \n      \n    \n    \n      \n    \n    \n      How entrepreneurs act\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404791\n      5631\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9067\n\n    \n         \n      \n        How entrepreneurs feel\n        \n      \n    \n    \n      \n    \n    \n      How entrepreneurs feel\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404791\n      9067\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4592\n\n    \n         \n      \n        How entrepreneurs plan\n        \n      \n    \n    \n      \n    \n    \n      How entrepreneurs plan\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404791\n      4592\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1999\n\n    \n         \n      \n        How entrepreneurs think\n        \n      \n    \n    \n      \n    \n    \n      How entrepreneurs think\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404791\n      1999\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

@@ -1,0 +1,150 @@
+{
+	"quizId": "491810",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491810",
+	"extractedAt": "2025-12-01T05:29:41.147Z",
+	"title": "\"Competition\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Competition\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Competition\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7563525",
+			"type": null,
+			"text": "Creative destruction refers to:",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3915\n\n    \n         \n      \n        The cyclical process through which innovations replace outdated systems and drive economic transformation.\n        \n      \n    \n    \n      \n    \n    \n      The cyclical process through which innovations replace outdated systems and drive economic transformation.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563525\n      3915\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7483\n\n    \n         \n      \n        The tendency of established firms to dominate markets through incremental improvement.\n        \n      \n    \n    \n      \n    \n    \n      The tendency of established firms to dominate markets through incremental improvement.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563525\n      7483\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7487\n\n    \n         \n      \n        The process of product imitation leading to lower prices in established markets.\n        \n      \n    \n    \n      \n    \n    \n      The process of product imitation leading to lower prices in established markets.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563525\n      7487\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "619\n\n    \n         \n      \n        The deliberate destruction of old technologies by government intervention.\n        \n      \n    \n    \n      \n    \n    \n      The deliberate destruction of old technologies by government intervention.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563525\n      619\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7563526",
+			"type": null,
+			"text": "Which of the following best characterizes the disruption strategy?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3074\n\n    \n         \n      \n        It depends entirely on cooperation with established firms to gain legitimacy.\n        \n      \n    \n    \n      \n    \n    \n      It depends entirely on cooperation with established firms to gain legitimacy.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563526\n      3074\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9481\n\n    \n         \n      \n        It necessarily leads to the complete replacement of incumbent firms.\n        \n      \n    \n    \n      \n    \n    \n      It necessarily leads to the complete replacement of incumbent firms.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563526\n      9481\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "99\n\n    \n         \n      \n        It aims primarily to imitate existing technologies more efficiently.\n        \n      \n    \n    \n      \n    \n    \n      It aims primarily to imitate existing technologies more efficiently.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563526\n      99\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3366\n\n    \n         \n      \n        It may not fully replace incumbents but can erode their market share and force adaptation.\n        \n      \n    \n    \n      \n    \n    \n      It may not fully replace incumbents but can erode their market share and force adaptation.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563526\n      3366\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7563527",
+			"type": null,
+			"text": "The cooperation strategy for entrepreneurial commercialization primarily relies on:",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8270\n\n    \n         \n      \n        Forming partnerships with incumbents to leverage distribution, R&D, and market access.\n        \n      \n    \n    \n      \n    \n    \n      Forming partnerships with incumbents to leverage distribution, R&D, and market access.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563527\n      8270\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "5446\n\n    \n         \n      \n        Avoiding established firms to retain full control over market entry.\n        \n      \n    \n    \n      \n    \n    \n      Avoiding established firms to retain full control over market entry.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563527\n      5446\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2868\n\n    \n         \n      \n        Copying the product design of larger competitors to accelerate scaling.\n        \n      \n    \n    \n      \n    \n    \n      Copying the product design of larger competitors to accelerate scaling.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563527\n      2868\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6516\n\n    \n         \n      \n        Gaining technological dominance through patent litigation.\n        \n      \n    \n    \n      \n    \n    \n      Gaining technological dominance through patent litigation.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563527\n      6516\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7563528",
+			"type": null,
+			"text": "Why is technology control considered essential for startups pursuing a cooperation strategy?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "1566\n\n    \n         \n      \n        It allows startups to imitate incumbents without legal consequences.\n        \n      \n    \n    \n      \n    \n    \n      It allows startups to imitate incumbents without legal consequences.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563528\n      1566\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9246\n\n    \n         \n      \n        It helps ensure startups can negotiate from strength and safeguard their intellectual property.\n        \n      \n    \n    \n      \n    \n    \n      It helps ensure startups can negotiate from strength and safeguard their intellectual property.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563528\n      9246\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "3907\n\n    \n         \n      \n        It guarantees faster time-to-market regardless of resources.\n        \n      \n    \n    \n      \n    \n    \n      It guarantees faster time-to-market regardless of resources.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563528\n      3907\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8669\n\n    \n         \n      \n        It prevents large firms from discovering the startup’s business model.\n        \n      \n    \n    \n      \n    \n    \n      It prevents large firms from discovering the startup’s business model.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563528\n      8669\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7563532",
+			"type": null,
+			"text": "The framework distinguishing Control vs. Execution and Competition vs. Collaboration suggests that:",
+			"points": 1,
+			"answers": [
+				{
+					"text": "5839\n\n    \n         \n      \n        Firms that pursue competition and collaboration simultaneously tend to underperform.\n        \n      \n    \n    \n      \n    \n    \n      Firms that pursue competition and collaboration simultaneously tend to underperform.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563532\n      5839\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9833\n\n    \n         \n      \n        Control and competition always yield the fastest commercialization outcomes.\n        \n      \n    \n    \n      \n    \n    \n      Control and competition always yield the fastest commercialization outcomes.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563532\n      9833\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4053\n\n    \n         \n      \n        Entrepreneurs must decide both how to compete (control vs. execution) and with whom to compete (competition vs. collaboration).\n        \n      \n    \n    \n      \n    \n    \n      Entrepreneurs must decide both how to compete (control vs. execution) and with whom to compete (competition vs. collaboration).\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563532\n      4053\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9182\n\n    \n         \n      \n        Execution and collaboration are mutually exclusive approaches.\n        \n      \n    \n    \n      \n    \n    \n      Execution and collaboration are mutually exclusive approaches.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7563532\n      9182\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

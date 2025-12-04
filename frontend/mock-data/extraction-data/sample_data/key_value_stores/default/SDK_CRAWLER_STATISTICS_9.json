@@ -1,0 +1,51 @@
+{
+  "requestsFinished": 52,
+  "requestsFailed": 3,
+  "requestsRetries": 3,
+  "requestsFailedPerMinute": 0,
+  "requestsFinishedPerMinute": 15,
+  "requestMinDurationMillis": 7392,
+  "requestMaxDurationMillis": 21490,
+  "requestTotalFailedDurationMillis": 95162,
+  "requestTotalFinishedDurationMillis": 655427,
+  "crawlerStartedAt": "2025-12-01T05:41:02.997Z",
+  "crawlerFinishedAt": "2025-12-01T05:44:35.175Z",
+  "statsPersistedAt": "2025-12-01T05:44:35.175Z",
+  "crawlerRuntimeMillis": 212412,
+  "crawlerLastStartTimestamp": 1764567662763,
+  "requestRetryHistogram": [
+    52,
+    3
+  ],
+  "statsId": 9,
+  "requestAvgFailedDurationMillis": 31721,
+  "requestAvgFinishedDurationMillis": 12604,
+  "requestTotalDurationMillis": 750589,
+  "requestsTotal": 55,
+  "requestsWithStatusCode": {
+    "200": 54,
+    "404": 4
+  },
+  "errors": {
+    "/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68": {
+      "missing error code": {
+        "Error": {
+          "requestHandler timed out after 30 seconds.": {
+            "count": 3
+          }
+        }
+      }
+    }
+  },
+  "retryErrors": {
+    "/home/ec2-user/Canvas-Wrapper/node_modules/@apify/timeout/cjs/index.cjs:64:68": {
+      "missing error code": {
+        "Error": {
+          "requestHandler timed out after 30 seconds.": {
+            "count": 3
+          }
+        }
+      }
+    }
+  }
+}

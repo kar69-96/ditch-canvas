@@ -1,0 +1,55 @@
+{
+  "runId": "2025-12-02T05-41-09-732Z",
+  "generatedAt": "2025-12-02T05:41:47.336Z",
+  "dryRun": false,
+  "baselineExtractionFolder": "extraction-2025-12-01T20-21-55",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-12-02T05-41-09-732Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 1,
+  "courses": [
+    {
+      "courseId": "123249",
+      "courseName": "FNCE 3030-007:  Invstmnt & Prtfolio Mgmt",
+      "announcements": {
+        "newItems": [
+          {
+            "id": "1765516",
+            "title": "unread,Assignment A7 now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1765516",
+            "postDate": null,
+            "modifiedDate": null,
+            "lastReplyDate": null,
+            "author": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

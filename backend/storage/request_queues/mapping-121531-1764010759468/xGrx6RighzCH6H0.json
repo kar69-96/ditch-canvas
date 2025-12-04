@@ -1,0 +1,9 @@
+{
+	"id": "xGrx6RighzCH6H0",
+	"json": "{\"id\":\"xGrx6RighzCH6H0\",\"url\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552338\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/modules/items/6552338\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:00:55.907Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/modules/items/6552338",
+	"url": "https://canvas.colorado.edu/courses/121531/modules/items/6552338"
+}

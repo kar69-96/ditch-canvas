@@ -1,0 +1,9 @@
+{
+	"id": "dGtjAFPy9BjzYab",
+	"json": "{\"id\":\"dGtjAFPy9BjzYab\",\"url\":\"https://canvas.colorado.edu/courses/124722/assignments/2423307\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/124722/quizzes/483588\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/124722/assignments/2423307\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":2,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T18:59:59.071Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/124722/assignments/2423307",
+	"url": "https://canvas.colorado.edu/courses/124722/assignments/2423307"
+}

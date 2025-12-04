@@ -1,0 +1,133 @@
+{
+	"type": "mapping_summary",
+	"courseId": "123156",
+	"courseInfo": {
+		"courseName": "ESBM 3700-001",
+		"courseCode": "Entrepreneurial Environs"
+	},
+	"courseFolderName": "ESBM 3700-001:  Entrepreneurial Environs",
+	"mappedAt": "2025-12-01T05:26:23.045Z",
+	"canvasUrl": "https://canvas.colorado.edu",
+	"urls": {
+		"assignments": [
+			"https://canvas.colorado.edu/courses/123156/assignments/syllabus",
+			"https://canvas.colorado.edu/courses/123156/assignments",
+			"https://canvas.colorado.edu/courses/123156/assignments/2458238"
+		],
+		"modules": [],
+		"files": [
+			"https://canvas.colorado.edu/courses/123156/files",
+			"https://canvas.colorado.edu/courses/123156/files/folder/course_image",
+			"https://canvas.colorado.edu/courses/123156/files/folder/Slides",
+			"https://canvas.colorado.edu/courses/123156/files/folder/unfiled",
+			"https://canvas.colorado.edu/courses/123156/files?sort=name&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=created_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=user&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=modified_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=size&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/course_image?sort=created_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/course_image?sort=name&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/course_image?sort=modified_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/course_image?sort=size&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/course_image?sort=user&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/unfiled?sort=name&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/unfiled?sort=created_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/unfiled?sort=user&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/unfiled?sort=size&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/unfiled?sort=modified_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/Slides?sort=created_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/Slides?sort=name&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/Slides?sort=modified_at&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/Slides?sort=user&order=desc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=modified_at&order=asc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=name&order=asc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=size&order=asc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=user&order=asc",
+			"https://canvas.colorado.edu/courses/123156/files?sort=created_at&order=asc",
+			"https://canvas.colorado.edu/courses/123156/files/folder/Slides?sort=size&order=desc"
+		],
+		"pages": [
+			"https://canvas.colorado.edu/courses/123156/pages/course-info"
+		],
+		"announcements": [
+			"https://canvas.colorado.edu/courses/123156/announcements"
+		],
+		"discussions": [
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1759769",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1755234",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1750212",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1748920",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1723217",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1732195",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1744307",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1713614",
+			"https://canvas.colorado.edu/courses/123156/discussion_topics/1685316"
+		],
+		"quizzes": [
+			"https://canvas.colorado.edu/courses/123156/quizzes",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491803",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491812",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491817",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491804",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491802",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491819",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491807",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491811",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491809",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491806",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491808",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491800",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491816",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491810",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491805",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491813",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491815",
+			"https://canvas.colorado.edu/courses/123156/quizzes/491801"
+		],
+		"grades": [],
+		"syllabus": [
+			"https://canvas.colorado.edu/courses/123156/syllabus"
+		],
+		"course": [
+			"https://canvas.colorado.edu/courses/123156",
+			"https://canvas.colorado.edu/courses/123156/users",
+			"https://canvas.colorado.edu/courses/123156/external_tools/45220",
+			"https://canvas.colorado.edu/courses/123156?view=feed",
+			"https://canvas.colorado.edu/courses/123156?view=notifications",
+			"https://canvas.colorado.edu/courses/123156/groups#",
+			"https://canvas.colorado.edu/courses/123156/user_services",
+			"https://canvas.colorado.edu/courses/123156/users/364600"
+		],
+		"other": []
+	},
+	"statistics": {
+		"totalUrls": 71,
+		"assignments": 3,
+		"modules": 0,
+		"files": 29,
+		"pages": 1,
+		"announcements": 1,
+		"discussions": 9,
+		"quizzes": 19,
+		"grades": 0,
+		"syllabus": 1,
+		"course": 8,
+		"other": 0
+	},
+	"totalUniqueUrls": 71,
+	"depthAnalysis": {
+		"maxDepth": 3,
+		"depthDistribution": {
+			"0": 1,
+			"1": 17,
+			"2": 57,
+			"3": 20
+		},
+		"averageDepth": 2.6901408450704225
+	},
+	"crawlDuration": {
+		"seconds": 153.65,
+		"minutes": 2.56,
+		"formatted": "2.56 minutes (153.65 seconds)"
+	}
+}

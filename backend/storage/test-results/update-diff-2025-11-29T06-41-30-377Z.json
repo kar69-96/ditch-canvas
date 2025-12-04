@@ -1,0 +1,4045 @@
+{
+  "runId": "2025-11-29T06-41-30-377Z",
+  "generatedAt": "2025-11-29T06:42:03.260Z",
+  "dryRun": true,
+  "baselineExtractionFolder": "testing",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-11-29T06-41-30-377Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 6,
+  "courses": [
+    {
+      "courseId": "121531",
+      "courseName": "ACCT 3220-004:  Corp 1 (Jeremiah)",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "1667588",
+            "title": "Welcome to ACCT 3220: Corporate Financial Reporting",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1667588",
+            "courseId": "121531",
+            "postDate": null,
+            "modifiedDate": null
+          },
+          {
+            "id": "1701458",
+            "title": "Office Hours",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1701458",
+            "courseId": "121531",
+            "postDate": "Posted Aug 29 11:35am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1703303",
+            "title": "My Business Course - Registration",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1703303",
+            "courseId": "121531",
+            "postDate": "Posted Sep 1 7:26pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1707918",
+            "title": "Homework #3 Hints",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1707918",
+            "courseId": "121531",
+            "postDate": "Posted Sep 8 12:03pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1714781",
+            "title": "Exam 1 — Announcement",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1714781",
+            "courseId": "121531",
+            "postDate": "Posted Sep 16 6:22pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1714799",
+            "title": "Wed 9/17 Class Info",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1714799",
+            "courseId": "121531",
+            "postDate": "Posted Sep 16 6:36pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1715784",
+            "title": "Practice Exam 1 Materials",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1715784",
+            "courseId": "121531",
+            "postDate": "Posted Sep 18 3:43am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1718274",
+            "title": "Jeremiah Office Hours - Today (Mon, 9/22)",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1718274",
+            "courseId": "121531",
+            "postDate": "Posted Sep 22 11:09am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1719742",
+            "title": "Exam 1 - Last Reminder",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1719742",
+            "courseId": "121531",
+            "postDate": "Posted Sep 23 5:28pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1724222",
+            "title": "PlayPosit Grades in Canvas",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1724222",
+            "courseId": "121531",
+            "postDate": "Posted Sep 30 8:19pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1726264",
+            "title": "Midterm Exam 1 Scores",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1726264",
+            "courseId": "121531",
+            "postDate": "Posted Oct 3 4:47pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1728259",
+            "title": "Exam Review Opportunity - Thursday, October 9",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1728259",
+            "courseId": "121531",
+            "postDate": "Posted Oct 7 12:44pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1734529",
+            "title": "Homework #7 - Hints",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1734529",
+            "courseId": "121531",
+            "postDate": "Posted Oct 15 5:45pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1736269",
+            "title": "Practice Exam 2",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1736269",
+            "courseId": "121531",
+            "postDate": "Posted Oct 18 7:57am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1736606",
+            "title": "Practice Exam Update & Exam 2 Info",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1736606",
+            "courseId": "121531",
+            "postDate": "Posted Oct 18 6:23pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1737640",
+            "title": "Two PlayPosits Before Monday",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1737640",
+            "courseId": "121531",
+            "postDate": "Posted Oct 21 8:13am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1738604",
+            "title": "Review Day Problems - Solution Updated",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1738604",
+            "courseId": "121531",
+            "postDate": "Posted Oct 21 9:25pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1745226",
+            "title": "Exam Scores Sunday",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1745226",
+            "courseId": "121531",
+            "postDate": "Posted Oct 30 5:23pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1749359",
+            "title": "Sign up (Past Exam Review) AND Exam 3 Review",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1749359",
+            "courseId": "121531",
+            "postDate": "Posted Nov 6 9:39am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1749880",
+            "title": "Practice Exam 3",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1749880",
+            "courseId": "121531",
+            "postDate": "Posted Nov 6 6:07pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1750298",
+            "title": "FYI...Sum of the Year's Digits NOT Tested",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1750298",
+            "courseId": "121531",
+            "postDate": "Posted Nov 7 12:43pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1752008",
+            "title": "No office hours today",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1752008",
+            "courseId": "121531",
+            "postDate": "Posted Nov 10 3:57pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1753121",
+            "title": "Professor Olson",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1753121",
+            "courseId": "121531",
+            "postDate": "Posted Nov 12 1:27pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1754800",
+            "title": "PlayPosit Issues (For a handful of students)",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1754800",
+            "courseId": "121531",
+            "postDate": "Posted Nov 14 5:40am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1760201",
+            "title": "HW #10 - Q14 Issue",
+            "url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1760201",
+            "courseId": "121531",
+            "postDate": "Posted Nov 20 4:35pm",
+            "modifiedDate": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2422963",
+            "title": "Final Exam (In-Class)",
+            "url": "https://canvas.colorado.edu/courses/121531/assignments/2422963",
+            "dueDate": "2025-12-12T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [
+          {
+            "id": "2422960",
+            "title": "Midterm Exam #3 (In-Class)",
+            "url": "https://canvas.colorado.edu/courses/121531/assignments/2422960",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-10T15:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2422961",
+            "title": "Midterm Exam #1 (In-Class)",
+            "url": "https://canvas.colorado.edu/courses/121531/assignments/2422961",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-24T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2422962",
+            "title": "Midterm Exam #2 (In-Class)",
+            "url": "https://canvas.colorado.edu/courses/121531/assignments/2422962",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-22T21:10:00.000Z",
+                "to": "Closed"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "80703311",
+            "title": "Accounting Practice Exam 1.docx",
+            "url": "",
+            "courseId": "121531",
+            "name": "Accounting Practice Exam 1.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80703312",
+            "title": "Accounting Practice Exam 1 - ANSWERS.docx",
+            "url": "",
+            "courseId": "121531",
+            "name": "Accounting Practice Exam 1 - ANSWERS.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80795873",
+            "title": "Syllabus - Fa 2025 - REG - Miah - 2025.09.21.pdf",
+            "url": "",
+            "courseId": "121531",
+            "name": "Syllabus - Fa 2025 - REG - Miah - 2025.09.21.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81211175",
+            "title": "z Practice Exam 2 - Student.pdf",
+            "url": "",
+            "courseId": "121531",
+            "name": "z Practice Exam 2 - Student.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81229771",
+            "title": "z Practice Exam 2 - KEY.pdf",
+            "url": "",
+            "courseId": "121531",
+            "name": "z Practice Exam 2 - KEY.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81427342",
+            "title": "Calendar - Fa 2025 - MW - REG - 2025.11.2.pdf",
+            "url": "",
+            "courseId": "121531",
+            "name": "Calendar - Fa 2025 - MW - REG - 2025.11.2.pdf",
+            "modifiedDate": null,
+            "size": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "modules": {
+        "newItems": [
+          {
+            "id": "852989",
+            "title": "Exams",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6572258",
+            "itemCount": null,
+            "unlockDate": null,
+            "completionStatus": null
+          },
+          {
+            "id": "852992",
+            "title": "Weekly Pages",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6642717",
+            "itemCount": null,
+            "unlockDate": null,
+            "completionStatus": null
+          },
+          {
+            "id": "866456",
+            "title": "MyBusinessCourse",
+            "url": "https://canvas.colorado.edu/courses/121531/modules/items/6750717",
+            "itemCount": null,
+            "unlockDate": null,
+            "completionStatus": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "office-hours",
+            "title": "Office Hours",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/office-hours?module_item_id=6552323",
+            "courseId": "121531",
+            "slug": "office-hours"
+          },
+          {
+            "id": "final-exam-thur-12-slash-11-1-30p-4-00p",
+            "title": "Final Exam: Thur 12/11 1:30p - 4:00p",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/final-exam-thur-12-slash-11-1-30p-4-00p?module_item_id=6871726",
+            "courseId": "121531",
+            "slug": "final-exam-thur-12-slash-11-1-30p-4-00p"
+          },
+          {
+            "id": "week-16-12-slash-8-12-slash-12-final-exams",
+            "title": "Week 16: 12/8 - 12/12 (Final Exams)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-16-12-slash-8-12-slash-12-final-exams?module_item_id=6642717",
+            "courseId": "121531",
+            "slug": "week-16-12-slash-8-12-slash-12-final-exams"
+          },
+          {
+            "id": "week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday",
+            "title": "Week 15: 11/30 - 12/6 (Final Exam Review - No Class FRIDAY)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday?module_item_id=6552334",
+            "courseId": "121531",
+            "slug": "week-15-11-slash-30-12-slash-6-final-exam-review-no-class-friday"
+          },
+          {
+            "id": "week-14-11-slash-23-11-slash-29-no-classes-fall-break",
+            "title": "Week 14: 11/23 - 11/29 (NO CLASSES - FALL BREAK)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-14-11-slash-23-11-slash-29-no-classes-fall-break?module_item_id=6552336",
+            "courseId": "121531",
+            "slug": "week-14-11-slash-23-11-slash-29-no-classes-fall-break"
+          },
+          {
+            "id": "week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities",
+            "title": "Week 12: 11/9 - 11/15 (Midterm Exam 3 & Current Liabilities)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities?module_item_id=6552338",
+            "courseId": "121531",
+            "slug": "week-12-11-slash-9-11-slash-15-midterm-exam-3-and-current-liabilities"
+          },
+          {
+            "id": "week-13-11-slash-16-11-slash-22-debt-part-1-and-2",
+            "title": "Week 13: 11/16 - 11/22 (Debt Part 1 and 2)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-13-11-slash-16-11-slash-22-debt-part-1-and-2?module_item_id=6552335",
+            "courseId": "121531",
+            "slug": "week-13-11-slash-16-11-slash-22-debt-part-1-and-2"
+          },
+          {
+            "id": "week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2",
+            "title": "Week 11: 11/2 - 11/8 (Intangibles 1 & Intangibles 2)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2?module_item_id=6552339",
+            "courseId": "121531",
+            "slug": "week-11-11-slash-2-11-slash-8-intangibles-1-and-intangibles-2"
+          },
+          {
+            "id": "week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2",
+            "title": "Week 9: 10/19 - 10/25 (Review & Midterm Exam 2)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2?module_item_id=6552341",
+            "courseId": "121531",
+            "slug": "week-9-10-slash-19-10-slash-25-review-and-midterm-exam-2"
+          },
+          {
+            "id": "week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2",
+            "title": "Week 10: 10/26 - 11/1 (PP&E Part 1 and PP&E Part 2)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2?module_item_id=6552340",
+            "courseId": "121531",
+            "slug": "week-10-10-slash-26-11-slash-1-pp-and-e-part-1-and-pp-and-e-part-2"
+          },
+          {
+            "id": "week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable",
+            "title": "Week 8: 10/12 - 10/18 (Inventory Part 2 & TVM / Notes Receivable)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable?module_item_id=6552342",
+            "courseId": "121531",
+            "slug": "week-8-10-slash-12-10-slash-18-inventory-part-2-and-tvm-slash-notes-receivable"
+          },
+          {
+            "id": "week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1",
+            "title": "Week 7: 10/5 - 10/11 (AR 2 & Inventory 1)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1?module_item_id=6552343",
+            "courseId": "121531",
+            "slug": "week-7-10-slash-5-10-slash-11-ar-2-and-inventory-1"
+          },
+          {
+            "id": "week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1",
+            "title": "Week 6: 9/28 - 10/4 (Revenue Recognition 2, Cash & AR 1)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1?module_item_id=6552344",
+            "courseId": "121531",
+            "slug": "week-6-9-slash-28-10-slash-4-revenue-recognition-2-cash-and-ar-1"
+          },
+          {
+            "id": "week-2-8-slash-31-9-slash-6-no-class-and-income-statement",
+            "title": "Week 2: 8/31 - 9/6 (No Class & Income Statement)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-2-8-slash-31-9-slash-6-no-class-and-income-statement?module_item_id=6552348",
+            "courseId": "121531",
+            "slug": "week-2-8-slash-31-9-slash-6-no-class-and-income-statement"
+          },
+          {
+            "id": "week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1",
+            "title": "Week 5: 9/21 - 9/27 (Midterm Review and Midterm Exam 1)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1?module_item_id=6552345",
+            "courseId": "121531",
+            "slug": "week-5-9-slash-21-9-slash-27-midterm-review-and-midterm-exam-1"
+          },
+          {
+            "id": "week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1",
+            "title": "Week 4: 9/14 - 9/20 (Cash Flow Statement 2 and Revenue Recognition 1)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1?module_item_id=6552346",
+            "courseId": "121531",
+            "slug": "week-4-9-slash-14-9-slash-20-cash-flow-statement-2-and-revenue-recognition-1"
+          },
+          {
+            "id": "no-classes-aug-17-23",
+            "title": "No Classes (Aug 17- 23)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/no-classes-aug-17-23?module_item_id=6583603",
+            "courseId": "121531",
+            "slug": "no-classes-aug-17-23"
+          },
+          {
+            "id": "week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1",
+            "title": "Week 3: 9/7 - 9/13 (Balance Sheet & Cash Flow Statement Part 1)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1?module_item_id=6552347",
+            "courseId": "121531",
+            "slug": "week-3-9-slash-7-9-slash-13-balance-sheet-and-cash-flow-statement-part-1"
+          },
+          {
+            "id": "week-1-aug-24-30-introduction-journal-entries",
+            "title": "Week 1: Aug 24 - 30 (Introduction, Journal Entries)",
+            "url": "https://canvas.colorado.edu/courses/121531/pages/week-1-aug-24-30-introduction-journal-entries?module_item_id=6552349",
+            "courseId": "121531",
+            "slug": "week-1-aug-24-30-introduction-journal-entries"
+          }
+        ],
+        "hasUpdates": true
+      }
+    },
+    {
+      "courseId": "123156",
+      "courseName": "ESBM 3700-001:  Entrepreneurial Environs",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "1685316",
+            "title": "Welcome to ESBM3700",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1685316",
+            "courseId": "123156",
+            "postDate": "Posted Aug 19 9:57am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1713614",
+            "title": "Guest speaker — Scott King",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1713614",
+            "courseId": "123156",
+            "postDate": "Posted Sep 15 12:51pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1723217",
+            "title": "TA opportunity for BCOR2304",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1723217",
+            "courseId": "123156",
+            "postDate": "Posted Sep 29 1:58pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1732195",
+            "title": "A few reminders about the midterm",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1732195",
+            "courseId": "123156",
+            "postDate": "Posted Oct 13 3:23pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1744307",
+            "title": "Brent's presentation",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1744307",
+            "courseId": "123156",
+            "postDate": "Posted Oct 29 11:29pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1748920",
+            "title": "Teamwork session",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1748920",
+            "courseId": "123156",
+            "postDate": "Posted Nov 5 3:35pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1750212",
+            "title": "Presentation dates",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1750212",
+            "courseId": "123156",
+            "postDate": "Posted Nov 7 11:11am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1755234",
+            "title": "PhD in strategy and entrepreneurship",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1755234",
+            "courseId": "123156",
+            "postDate": "Posted Nov 14 2:51pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1759769",
+            "title": "Presentation feedback",
+            "url": "https://canvas.colorado.edu/courses/123156/discussion_topics/1759769",
+            "courseId": "123156",
+            "postDate": "Posted Nov 20 12:31pm",
+            "modifiedDate": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2458212",
+            "title": "\"Intellectual Property\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458212",
+            "dueDate": "2025-10-29T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458213",
+            "title": "\"Identity\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458213",
+            "dueDate": "2025-10-08T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458214",
+            "title": "\"Sources of Funding\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458214",
+            "dueDate": "2025-09-10T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458215",
+            "title": "\"Entrepreneurial Mindset\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458215",
+            "dueDate": "2025-08-29T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458216",
+            "title": "\"Business Models\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458216",
+            "dueDate": "2025-09-05T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458217",
+            "title": "\"Customer\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458217",
+            "dueDate": "2025-09-26T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458218",
+            "title": "\"Venture Pitching\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458218",
+            "dueDate": "2025-09-24T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458219",
+            "title": "\"Architectural\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458219",
+            "dueDate": "2025-11-07T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458220",
+            "title": "\"The Founder\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458220",
+            "dueDate": "2025-09-17T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458221",
+            "title": "\"Value Chain\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458221",
+            "dueDate": "2025-10-31T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458222",
+            "title": "\"Competition\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458222",
+            "dueDate": "2025-10-17T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458223",
+            "title": "\"Lean Startup\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458223",
+            "dueDate": "2025-09-12T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458224",
+            "title": "\"Flash of Genius\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458224",
+            "dueDate": "2025-11-19T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458225",
+            "title": "\"Technology\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458225",
+            "dueDate": "2025-10-01T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458226",
+            "title": "Quiz (Remotely Proctored)",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458226",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458227",
+            "title": "\"Disruption\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458227",
+            "dueDate": "2025-10-22T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458228",
+            "title": "\"From Ideas to Opportunities\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458228",
+            "dueDate": "2025-09-03T06:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2458230",
+            "title": "\"Startup Failure\" Assignment",
+            "url": "https://canvas.colorado.edu/courses/123156/assignments/2458230",
+            "dueDate": "2025-11-14T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "80199685",
+            "title": "announcements-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "announcements-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "25.77 KB"
+          },
+          {
+            "id": "80199687",
+            "title": "preview_2012_cu_aerial2ga.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "preview_2012_cu_aerial2ga.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "181.78 KB"
+          },
+          {
+            "id": "80199689",
+            "title": "discussions-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "discussions-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "31.16 KB"
+          },
+          {
+            "id": "80199692",
+            "title": "discussions.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "discussions.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "31.16 KB"
+          },
+          {
+            "id": "80199693",
+            "title": "exams.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "exams.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "30.45 KB"
+          },
+          {
+            "id": "80199695",
+            "title": "course info.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "course info.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.85 KB"
+          },
+          {
+            "id": "80199697",
+            "title": "course info-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "course info-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.85 KB"
+          },
+          {
+            "id": "80199700",
+            "title": "assignments.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "assignments.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.53 KB"
+          },
+          {
+            "id": "80199702",
+            "title": "announcements.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "announcements.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "25.77 KB"
+          },
+          {
+            "id": "80199704",
+            "title": "announcements-2.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "announcements-2.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "25.77 KB"
+          },
+          {
+            "id": "80199706",
+            "title": "assignments-2.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "assignments-2.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.53 KB"
+          },
+          {
+            "id": "80199708",
+            "title": "discussions-2.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "discussions-2.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "31.16 KB"
+          },
+          {
+            "id": "80199710",
+            "title": "announcements-1-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "announcements-1-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "25.77 KB"
+          },
+          {
+            "id": "80199712",
+            "title": "discussions-1-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "discussions-1-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "31.16 KB"
+          },
+          {
+            "id": "80199713",
+            "title": "assignments-1-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "assignments-1-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.53 KB"
+          },
+          {
+            "id": "80199715",
+            "title": "course info-1-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "course info-1-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.85 KB"
+          },
+          {
+            "id": "80199717",
+            "title": "leeds-1.JPG",
+            "url": "",
+            "courseId": "123156",
+            "name": "leeds-1.JPG",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "344.35 KB"
+          },
+          {
+            "id": "80199719",
+            "title": "exams-2.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "exams-2.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "30.45 KB"
+          },
+          {
+            "id": "80199721",
+            "title": "preview_2012_cu_aerial2ga-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "preview_2012_cu_aerial2ga-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "181.78 KB"
+          },
+          {
+            "id": "80199723",
+            "title": "course info-2.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "course info-2.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.85 KB"
+          },
+          {
+            "id": "80199752",
+            "title": "exams-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "exams-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "30.45 KB"
+          },
+          {
+            "id": "80199754",
+            "title": "assignments-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "assignments-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "47.53 KB"
+          },
+          {
+            "id": "80199755",
+            "title": "leeds.JPG",
+            "url": "",
+            "courseId": "123156",
+            "name": "leeds.JPG",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "344.35 KB"
+          },
+          {
+            "id": "80199760",
+            "title": "exams-1-1.jpg",
+            "url": "",
+            "courseId": "123156",
+            "name": "exams-1-1.jpg",
+            "modifiedDate": "2025-08-19T04:18:28Z",
+            "size": "30.45 KB"
+          },
+          {
+            "id": "80287634",
+            "title": "Lecture_1.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_1.pdf",
+            "modifiedDate": "2025-08-21T18:26:45Z",
+            "size": "1013.53 KB"
+          },
+          {
+            "id": "80354465",
+            "title": "Lecture_2.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_2.pdf",
+            "modifiedDate": "2025-08-26T18:07:03Z",
+            "size": "2.99 MB"
+          },
+          {
+            "id": "80391619",
+            "title": "Lecture_3.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_3.pdf",
+            "modifiedDate": "2025-08-28T17:07:15Z",
+            "size": "1.17 MB"
+          },
+          {
+            "id": "80445616",
+            "title": "Lecture_4.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_4.pdf",
+            "modifiedDate": "2025-09-02T18:25:43Z",
+            "size": "977.24 KB"
+          },
+          {
+            "id": "80480820",
+            "title": "Lecture_5.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_5.pdf",
+            "modifiedDate": "2025-09-04T18:27:30Z",
+            "size": "1.45 MB"
+          },
+          {
+            "id": "80548069",
+            "title": "Lecture_6.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_6.pdf",
+            "modifiedDate": "2025-09-09T05:28:21Z",
+            "size": "1.49 MB"
+          },
+          {
+            "id": "80585876",
+            "title": "Lecture_7.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_7.pdf",
+            "modifiedDate": "2025-09-11T04:51:55Z",
+            "size": "797.79 KB"
+          },
+          {
+            "id": "80699894",
+            "title": "Lecture_8.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_8.pdf",
+            "modifiedDate": "2025-09-18T18:22:25Z",
+            "size": "1.87 MB"
+          },
+          {
+            "id": "80783692",
+            "title": "Lecture_9.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_9.pdf",
+            "modifiedDate": "2025-09-23T18:25:48Z",
+            "size": "1.37 MB"
+          },
+          {
+            "id": "80818235",
+            "title": "Lecture_10.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_10.pdf",
+            "modifiedDate": "2025-09-25T18:25:46Z",
+            "size": "1.27 MB"
+          },
+          {
+            "id": "80941263",
+            "title": "Lecture_11.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_11.pdf",
+            "modifiedDate": "2025-10-02T18:23:32Z",
+            "size": "1.52 MB"
+          },
+          {
+            "id": "81004858",
+            "title": "Lecture_12.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_12.pdf",
+            "modifiedDate": "2025-10-07T05:08:04Z",
+            "size": "1.09 MB"
+          },
+          {
+            "id": "81170968",
+            "title": "Lecture_13.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_13.pdf",
+            "modifiedDate": "2025-10-16T15:00:52Z",
+            "size": "1.28 MB"
+          },
+          {
+            "id": "81276210",
+            "title": "Lecture_14.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_14.pdf",
+            "modifiedDate": "2025-10-23T18:21:59Z",
+            "size": "1.48 MB"
+          },
+          {
+            "id": "81351462",
+            "title": "Lecture_15.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_15.pdf",
+            "modifiedDate": "2025-10-28T16:14:20Z",
+            "size": "1.75 MB"
+          },
+          {
+            "id": "81459250",
+            "title": "Lecture_16.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_16.pdf",
+            "modifiedDate": "2025-11-04T17:43:09Z",
+            "size": "1.11 MB"
+          },
+          {
+            "id": "81563096",
+            "title": "Lecture_17.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "Lecture_17.pdf",
+            "modifiedDate": "2025-11-11T19:28:54Z",
+            "size": "1.36 MB"
+          },
+          {
+            "id": "81624612",
+            "title": "PHD-SE-Flyer Email Attachment Format.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "PHD-SE-Flyer Email Attachment Format.pdf",
+            "modifiedDate": "2025-11-14T21:50:12Z",
+            "size": "10.26 MB"
+          },
+          {
+            "id": "81624637",
+            "title": "PHD-SE-Flyer.pdf",
+            "url": "",
+            "courseId": "123156",
+            "name": "PHD-SE-Flyer.pdf",
+            "modifiedDate": "2025-11-14T22:03:39Z",
+            "size": "10.26 MB"
+          }
+        ],
+        "hasUpdates": true
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "course-info",
+            "title": "Course Info",
+            "url": "https://canvas.colorado.edu/courses/123156/pages/course-info",
+            "fieldChanges": {
+              "title": {
+                "from": "Course Info",
+                "to": ""
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      }
+    },
+    {
+      "courseId": "123160",
+      "courseName": "ESBM 4570-001:  Entrepreneurial Finance",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "1700522",
+            "title": "First CASE ATTACHED HERE!!",
+            "url": "https://canvas.colorado.edu/courses/123160/discussion_topics/1700522",
+            "courseId": "123160",
+            "postDate": "Posted Aug 28 11:55am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1711033",
+            "title": "Spreadsheet for HW2",
+            "url": "https://canvas.colorado.edu/courses/123160/discussion_topics/1711033",
+            "courseId": "123160",
+            "postDate": "Posted Sep 11 3:58pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1739595",
+            "title": "OFFICE HOURS FOR MT2",
+            "url": "https://canvas.colorado.edu/courses/123160/discussion_topics/1739595",
+            "courseId": "123160",
+            "postDate": "Posted Oct 23 10:18am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1741177",
+            "title": "room location for students with accommodations",
+            "url": "https://canvas.colorado.edu/courses/123160/discussion_topics/1741177",
+            "courseId": "123160",
+            "postDate": "Posted Oct 25 12:28pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1748237",
+            "title": "NO Office hours on 11/5",
+            "url": "https://canvas.colorado.edu/courses/123160/discussion_topics/1748237",
+            "courseId": "123160",
+            "postDate": "Posted Nov 4 5:24pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1753139",
+            "title": "11/12 No Office Hours - Join Me for industry lead AI and Networking",
+            "url": "https://canvas.colorado.edu/courses/123160/discussion_topics/1753139",
+            "courseId": "123160",
+            "postDate": "Posted Nov 12 7:32am",
+            "modifiedDate": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2485451",
+            "title": "PRE QUIZ Case 6 Viscotech",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485451",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485452",
+            "title": "PRE QUIZ Case 2 Bob's Baloney",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485452",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485453",
+            "title": "Homework 3 Evaluating Financial Performance - Cash Lens",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485453",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485455",
+            "title": "PRE QUIZ Case 5 Bizzy Coffee",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485455",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485456",
+            "title": "Homework 4 Forecasting and CASH Management",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485456",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485457",
+            "title": "PRE QUIZ Case 8 Lady M Cakes",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485457",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485458",
+            "title": "PRE QUIZ Case 7 Bubble & Bee",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485458",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485459",
+            "title": "PRE QUIZ Case 10 Strava",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485459",
+            "dueDate": "2025-12-01T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485460",
+            "title": "REFLECTION Case 11 Spin Master",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485460",
+            "dueDate": "2025-12-04T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485463",
+            "title": "REFLECTION Case 5 Bizzy Coffee",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485463",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485464",
+            "title": "REFLECTION Case 4 Tesla",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485464",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485466",
+            "title": "REFLECTION Case 9 Nanogene",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485466",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485467",
+            "title": "REFLECTION Case 6 Viscotech",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485467",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485468",
+            "title": "REFLECTION Case 7 Bubble & Bee",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485468",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485469",
+            "title": "Homework 1 Screening Criteria",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485469",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485470",
+            "title": "REFLECTION Case 2 Bob's Baloney",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485470",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485471",
+            "title": "PRE QUIZ Case 11 SpinMaster IPO",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485471",
+            "dueDate": "2025-12-03T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485472",
+            "title": "PRE QUIZ Case 9 Nanogene",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485472",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485473",
+            "title": "PRE QUIZ  Case 1  How VCs Evaluate Venture Opportunities",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485473",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485474",
+            "title": "MT 2 (Remotely Proctored)",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485474",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485475",
+            "title": "REFLECTION Case 10 Strava",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485475",
+            "dueDate": "2025-12-02T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485476",
+            "title": "PRE QUIZ Case 3 Financing Operations and Growth",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485476",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485477",
+            "title": "REFLECTION  Case 3 Financing Operations and Growth",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485477",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485479",
+            "title": "MT 1 (Remotely Proctored)",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485479",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485480",
+            "title": "PRE QUIZ Case 4 Tesla",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485480",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485481",
+            "title": "REFLECTIONS Case 1 How VCs Evaluate Venture Opportunities",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485481",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485482",
+            "title": "REFLECTION Case 8 Lady M Cakes",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485482",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485487",
+            "title": "Homework 2  Financial Statements",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485487",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485490",
+            "title": "Homework 7 Ownership and Share Values",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485490",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485502",
+            "title": "Homework 5 Pro Formas_2.0",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485502",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2485908",
+            "title": "Homework 6 NPV and Valuation",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2485908",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [
+          {
+            "id": "2482772",
+            "title": "Bizzy Coffee Presentation",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482772",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-13T18:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2482773",
+            "title": "Bizzy Coffee Questions",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482773",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-13T18:00:00.000Z",
+                "to": "2025-12-09T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2482774",
+            "title": "Bizzy Coffee Write Up",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482774",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-13T18:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2482776",
+            "title": "Bubble & Bee Questions",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482776",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-03T19:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2482779",
+            "title": "Group Formation",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482779",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-16T05:59:59.000Z",
+                "to": "2025-12-19T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2482781",
+            "title": "Lady M Questions",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482781",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-10T19:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2482790",
+            "title": "Self Intro",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482790",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-01T05:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2482793",
+            "title": "SpinMaster Write Up",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482793",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2026-01-03T19:00:00.000Z",
+                "to": "2025-12-04T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2482797",
+            "title": "TESLA QUESTIONS",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482797",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-06T18:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2482801",
+            "title": "Viscotech Questions",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2482801",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-20T18:00:00.000Z",
+                "to": "2025-12-16T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2501713",
+            "title": "Project 1: VC Conversations (Based on Case)",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2501713",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-04T05:59:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2512936",
+            "title": "Project 2:  Company Formation, Operations and Growth",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2512936",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-22T20:45:00.000Z",
+                "to": "2025-09-23T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2523379",
+            "title": "Bizzy Write and Present",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2523379",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-20T05:59:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2524595",
+            "title": "Bubble and Bee Response",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2524595",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-10T06:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2524596",
+            "title": "Lady M Cakes Response",
+            "url": "https://canvas.colorado.edu/courses/123160/assignments/2524596",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-17T06:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "80295674",
+            "title": "Foundry-Term-Sheet-2017.docx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Foundry-Term-Sheet-2017.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295676",
+            "title": "CapTable_RVC.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "CapTable_RVC.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295697",
+            "title": "DDR_Example.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "DDR_Example.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295699",
+            "title": "Viscotech_Questions.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Viscotech_Questions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295700",
+            "title": "Viscotech_Questions.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Viscotech_Questions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295703",
+            "title": "TESLA.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "TESLA.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295712",
+            "title": "Nanogene.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Nanogene.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295717",
+            "title": "ESBM4570_Week5.1.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_Week5.1.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295718",
+            "title": "Fin Statement Ratio Guide_Burnes.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Fin Statement Ratio Guide_Burnes.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295728",
+            "title": "Securities Act of 1933.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Securities Act of 1933.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295740",
+            "title": "Bizzy Coffee.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Bizzy Coffee.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295744",
+            "title": "Bubble and Bee_HBS provided.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Bubble and Bee_HBS provided.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295749",
+            "title": "Bubble and Bee Questions.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Bubble and Bee Questions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295751",
+            "title": "RVC Valuation Modeler 2021.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "RVC Valuation Modeler 2021.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295754",
+            "title": "Bumble&Bee_eib.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Bumble&Bee_eib.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295756",
+            "title": "Strava Case Questions.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "Strava Case Questions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295757",
+            "title": "SpinMaster Questions.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "SpinMaster Questions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295763",
+            "title": "Homework 3.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Homework 3.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80295790",
+            "title": "ESBM4570_Syllabus_F2025.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_Syllabus_F2025.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80334287",
+            "title": "ESBM4570_2.1.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_2.1.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80440798",
+            "title": "ESBM4570_3.2.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_3.2.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80527085",
+            "title": "ESBM4570_4.1.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_4.1.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80527093",
+            "title": "ESBM4570_4.1.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_4.1.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80559886",
+            "title": "ESBM_4570 4.2A.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM_4570 4.2A.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80559900",
+            "title": "ESBM4570_ 4.2B.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_ 4.2B.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80571919",
+            "title": "ESBM4570_Week4.2.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_Week4.2.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80647127",
+            "title": "ESBM4570_ 5.1_Bob.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_ 5.1_Bob.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80647138",
+            "title": "ESBM4570_5.1_Bobs.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_5.1_Bobs.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80688335",
+            "title": "ESBM4570_5.2.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_5.2.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80766775",
+            "title": "ESBM4570_6.1.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_6.1.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80766783",
+            "title": "ESBM4570_6.1A.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_6.1A.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80775832",
+            "title": "Rubric for Report and Presentation.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Rubric for Report and Presentation.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80775852",
+            "title": "LadyM_Case Questions.pdf",
+            "url": "",
+            "courseId": "123160",
+            "name": "LadyM_Case Questions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80807023",
+            "title": "ESBM4570_6.2.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_6.2.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80807030",
+            "title": "ESBM4570_6.2.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_6.2.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80912020",
+            "title": "ESBM4570_7.2_Cash.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_7.2_Cash.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80912022",
+            "title": "ESBM4570_Week7.2.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_Week7.2.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80978218",
+            "title": "Review of Group Form.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Review of Group Form.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81027974",
+            "title": "Tesla.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Tesla.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81027991",
+            "title": "ESBM4570_8.2.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_8.2.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81028000",
+            "title": "ESBM4570_8.2_Ops_Cash Cycles.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_8.2_Ops_Cash Cycles.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81028623",
+            "title": "ESBM4570_MT1_ans.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_MT1_ans.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81091600",
+            "title": "ESBM4570__9.1_Bizzy Coffee.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570__9.1_Bizzy Coffee.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81131795",
+            "title": "ESBM4570_9.2_Securities Law and Governance.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_9.2_Securities Law and Governance.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81252911",
+            "title": "ESBM4570_10.1_Viscotech.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_10.1_Viscotech.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81262681",
+            "title": "ESBM 4570_Week10.2_Prep MT 2_inclass.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM 4570_Week10.2_Prep MT 2_inclass.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81375831",
+            "title": "ESBM4570_11.2 Pro Formas.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_11.2 Pro Formas.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81482866",
+            "title": "ESBM 4570_12.2.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM 4570_12.2.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81482871",
+            "title": "ESBM4570_12.2.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_12.2.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81484046",
+            "title": "ESBM4570_12.2_eib.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_12.2_eib.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81550823",
+            "title": "ESBM4570_13.1_LadyM.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_13.1_LadyM.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81579645",
+            "title": "ESBM4570_13.2.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM4570_13.2.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81643398",
+            "title": "13.2_CapTable Answers.xlsx",
+            "url": "",
+            "courseId": "123160",
+            "name": "13.2_CapTable Answers.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81693399",
+            "title": "Jack T Supplemental Slides_Ent Finance_11.17.25.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "Jack T Supplemental Slides_Ent Finance_11.17.25.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81693423",
+            "title": "ESBM 4570_14.1.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM 4570_14.1.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81693429",
+            "title": "ESBM 4570_14.2.pptx",
+            "url": "",
+            "courseId": "123160",
+            "name": "ESBM 4570_14.2.pptx",
+            "modifiedDate": null,
+            "size": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "about-professor-burnes",
+            "title": "About Professor Burnes",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/about-professor-burnes?module_item_id=6721306",
+            "courseId": "123160",
+            "slug": "about-professor-burnes"
+          },
+          {
+            "id": "link-to-fist-case-vc-discussions",
+            "title": "Link to Fist Case, VC Discussions",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/link-to-fist-case-vc-discussions?module_item_id=6761715",
+            "courseId": "123160",
+            "slug": "link-to-fist-case-vc-discussions"
+          },
+          {
+            "id": "data-for-bobs-baloney",
+            "title": "Data for Bobs Baloney",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/data-for-bobs-baloney?module_item_id=6782491",
+            "courseId": "123160",
+            "slug": "data-for-bobs-baloney"
+          },
+          {
+            "id": "group-worksheets",
+            "title": "Group Worksheets",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/group-worksheets?module_item_id=6791159",
+            "courseId": "123160",
+            "slug": "group-worksheets"
+          },
+          {
+            "id": "mt-review-recording",
+            "title": "MT Review Recording",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/mt-review-recording?module_item_id=6807572",
+            "courseId": "123160",
+            "slug": "mt-review-recording"
+          },
+          {
+            "id": "chewys",
+            "title": "Chewy's",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/chewys",
+            "courseId": "123160",
+            "slug": "chewys"
+          },
+          {
+            "id": "bill-gross-video-start-up-success",
+            "title": "Bill Gross Video: Start-Up Success",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/bill-gross-video-start-up-success",
+            "courseId": "123160",
+            "slug": "bill-gross-video-start-up-success"
+          },
+          {
+            "id": "business-model-canvas-video",
+            "title": "Business Model Canvas Video",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/business-model-canvas-video",
+            "courseId": "123160",
+            "slug": "business-model-canvas-video"
+          },
+          {
+            "id": "dell",
+            "title": "Dell",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/dell",
+            "courseId": "123160",
+            "slug": "dell"
+          },
+          {
+            "id": "esbm-4570",
+            "title": "ESBM 4570",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/esbm-4570",
+            "courseId": "123160",
+            "slug": "esbm-4570"
+          },
+          {
+            "id": "heather-evans-case",
+            "title": "Heather Evans Case",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/heather-evans-case",
+            "courseId": "123160",
+            "slug": "heather-evans-case"
+          },
+          {
+            "id": "groups-projects-dates",
+            "title": "Groups_Projects_Dates",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/groups-projects-dates",
+            "courseId": "123160",
+            "slug": "groups-projects-dates"
+          },
+          {
+            "id": "final-review-recordings",
+            "title": "Final Review_Recordings",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/final-review-recordings",
+            "courseId": "123160",
+            "slug": "final-review-recordings"
+          },
+          {
+            "id": "lilys",
+            "title": "Lilys",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/lilys",
+            "courseId": "123160",
+            "slug": "lilys"
+          },
+          {
+            "id": "link-to-coursepack",
+            "title": "Link to Coursepack",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/link-to-coursepack",
+            "courseId": "123160",
+            "slug": "link-to-coursepack"
+          },
+          {
+            "id": "mt2-review-recording",
+            "title": "MT2 Review Recording",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/mt2-review-recording",
+            "courseId": "123160",
+            "slug": "mt2-review-recording"
+          },
+          {
+            "id": "mtv",
+            "title": "MTV",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/mtv",
+            "courseId": "123160",
+            "slug": "mtv"
+          },
+          {
+            "id": "nflx",
+            "title": "NFLX",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/nflx",
+            "courseId": "123160",
+            "slug": "nflx"
+          },
+          {
+            "id": "pela",
+            "title": "Pela",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/pela",
+            "courseId": "123160",
+            "slug": "pela"
+          },
+          {
+            "id": "real-venture-example-convertible-debt-to-shares",
+            "title": "Real Venture Example_Convertible Debt to Shares",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/real-venture-example-convertible-debt-to-shares",
+            "courseId": "123160",
+            "slug": "real-venture-example-convertible-debt-to-shares"
+          },
+          {
+            "id": "rent-the-runway",
+            "title": "Rent the Runway",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/rent-the-runway",
+            "courseId": "123160",
+            "slug": "rent-the-runway"
+          },
+          {
+            "id": "whoop",
+            "title": "Whoop",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/whoop",
+            "courseId": "123160",
+            "slug": "whoop"
+          },
+          {
+            "id": "stripe",
+            "title": "Stripe",
+            "url": "https://canvas.colorado.edu/courses/123160/pages/stripe",
+            "courseId": "123160",
+            "slug": "stripe"
+          }
+        ],
+        "hasUpdates": true
+      }
+    },
+    {
+      "courseId": "123236",
+      "courseName": "FNCE 3010 F'25:  Sec 005, 007, 010 - Corp Fin",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2441658",
+            "title": "Due",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441658",
+            "dueDate": null,
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2517062",
+            "title": "Wednesday Evening Oct 1 - Exam 1",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2517062",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2533372",
+            "title": "Wednesday Evening Oct 29 - Exam 2 (Remotely Proctored)",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2533372",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [
+          {
+            "id": "2441656",
+            "title": "Business Expectations: Meetings / Email /  Conduct / Honor Code",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441656",
+            "fieldChanges": {
+              "dueDate": {
+                "from": null,
+                "to": "-/6 pts\n            \n          \n\n      \n    \n  \n\n\n\n  \n    \n      \n\n        \n            No submission for this assignment. 6 points possible."
+              }
+            }
+          },
+          {
+            "id": "2441657",
+            "title": "Due  10/8 @ 5 pm: Review /Correction of Exam 1",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441657",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-08T23:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441659",
+            "title": "Excel Online Activity #1A: Ch 2 - Income and Cash Flow Analysis",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441659",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-04T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441660",
+            "title": "Excel Online Activity #1B: Ch 2 - Free Cash Flows",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441660",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-04T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441661",
+            "title": "Excel Online Activity #2A: Ch 3 - Balance Sheet Analysis",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441661",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-11T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441662",
+            "title": "Excel Online Activity #2B: Ch 3 - TIE ratio",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441662",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-11T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441663",
+            "title": "Excel Online Activity #4A: Ch 4 -Required Annuity Payments 2",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441663",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-30T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441664",
+            "title": "Excel Online Activity #4B: Ch 4 -Loan Amortization",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441664",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-30T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441666",
+            "title": "Excel Online Activity #5A: Ch 5 - Interest Rate Premiums",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441666",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-10T14:00:00.000Z",
+                "to": "2025-10-11T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441667",
+            "title": "Excel Online Activity #5B: Ch 5 - Interest Rate Sensitivity",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441667",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-10T14:00:00.000Z",
+                "to": "2025-10-11T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441668",
+            "title": "Excel Online Activity #5C: Ch. 5 - Bond Valuation 1",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441668",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-10T14:00:00.000Z",
+                "to": "2025-10-11T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441669",
+            "title": "Excel Online Activity #5D: Ch 5 - Bond Valuation 2",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441669",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-10T14:00:00.000Z",
+                "to": "2025-10-11T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441670",
+            "title": "Excel Online Activity #6A: Ch 7 - Constant growth",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441670",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-23T14:00:00.000Z",
+                "to": "2025-10-24T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441671",
+            "title": "Excel Online Activity #6B: Ch 7 - Nonconstant growth",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441671",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-23T14:00:00.000Z",
+                "to": "2025-10-24T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441672",
+            "title": "Excel Online Activity #6C: CH. 7 -Corporate valuation",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441672",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-23T14:00:00.000Z",
+                "to": "2025-10-24T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441673",
+            "title": "Excel Online Activity #8A: Ch 10 - Capital Budgeting Criteria",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441673",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-06T15:00:00.000Z",
+                "to": "2025-11-07T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441674",
+            "title": "Excel Online Activity #8B: Ch 10 - NPV profiles",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441674",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-06T15:00:00.000Z",
+                "to": "2025-11-07T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441675",
+            "title": "Excel Online Activity #9A: Ch. 11 - Replacement Analysis",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441675",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-13T15:00:00.000Z",
+                "to": "2025-11-14T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441676",
+            "title": "Excel Online Activity #9B: Ch 11 - Project Risk Analysis",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441676",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-13T15:00:00.000Z",
+                "to": "2025-11-14T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441677",
+            "title": "Excel Online Activity 3A: Ch 12 - Sales Increase",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441677",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-19T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441678",
+            "title": "Excel Online Activity 3B: Ch 12 - Long-Term Financing Needed",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441678",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-19T14:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441683",
+            "title": "Quiz 1: Chapter 2 - Financial Statements",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441683",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-05T22:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441684",
+            "title": "Quiz 2: Chapter 3 - Analysis of Fin Stmts",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441684",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-12T22:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441685",
+            "title": "Quiz 3: Chapter 12 - Fin Forecasting & Planning",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441685",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-19T22:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441686",
+            "title": "Quiz 4: Chapter 6 - Risk & Return",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441686",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-26T22:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2441687",
+            "title": "Quiz 5: Chapter 5 - Bonds",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441687",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-10T22:00:00.000Z",
+                "to": "2025-10-11T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441688",
+            "title": "Quiz 6: Chapter 7 - Stocks",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441688",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-24T22:00:00.000Z",
+                "to": "2025-10-25T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441689",
+            "title": "Quiz 7: Chapter 9 - Cost of Capital",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441689",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-31T22:00:00.000Z",
+                "to": "2025-11-01T06:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441690",
+            "title": "Quiz 8: Chapter 11 - CF Estimation",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441690",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-14T23:00:00.000Z",
+                "to": "2025-11-15T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441691",
+            "title": "Quiz 9: Chapter 15 - Capital Structure",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441691",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-21T23:00:00.000Z",
+                "to": "2025-11-22T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2441692",
+            "title": "Resume",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441692",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-19T18:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2537304",
+            "title": "Due  11/5 @ 5 pm: Review /Correction of Exam 2",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2537304",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-06T00:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "80124777",
+            "title": "Ch  9- Cost Of Capital (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch  9- Cost Of Capital (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124797",
+            "title": "Ch 09 Probset Solutions (2).pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 09 Probset Solutions (2).pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124798",
+            "title": "Ch1-Overview of Fin Mgmt (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch1-Overview of Fin Mgmt (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124799",
+            "title": "Ch 07 Probset - Equities.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 07 Probset - Equities.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124801",
+            "title": "Ch 03 Probset - Analysis of Fin Stmts,CFs 17ed.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 03 Probset - Analysis of Fin Stmts,CFs 17ed.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124802",
+            "title": "Ch 06 Probset -Risk & Return.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 06 Probset -Risk & Return.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124803",
+            "title": "Ch 03 Probset - Answers.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 03 Probset - Answers.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124804",
+            "title": "Ch 02 Probset - FinsStmts,CFs.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 02 Probset - FinsStmts,CFs.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124805",
+            "title": "Ch 12 Probset Answers Fin Planning.docm",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 12 Probset Answers Fin Planning.docm",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124807",
+            "title": "Ch 12 Probset - Fin Planning & Forecasting.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 12 Probset - Fin Planning & Forecasting.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124809",
+            "title": "Ch  6- Risk + Return (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch  6- Risk + Return (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124810",
+            "title": "Ch 04 Probset - TVM.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 04 Probset - TVM.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124811",
+            "title": "3010 Pexam1 mc answers S01.doc",
+            "url": "",
+            "courseId": "123236",
+            "name": "3010 Pexam1 mc answers S01.doc",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124812",
+            "title": "3010 Pexam1 mcS01.doc",
+            "url": "",
+            "courseId": "123236",
+            "name": "3010 Pexam1 mcS01.doc",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124813",
+            "title": "Ch 04 Probset - TVM #7 Solution.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 04 Probset - TVM #7 Solution.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124814",
+            "title": "Ch4-TimeValueOfMoney.pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch4-TimeValueOfMoney.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124815",
+            "title": "Ch  7- Valuation - Stock + Corporations (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch  7- Valuation - Stock + Corporations (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124818",
+            "title": "Ch 09 Probset Cost of Capital.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 09 Probset Cost of Capital.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124819",
+            "title": "Ch 07 Probset - Answers Equities.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 07 Probset - Answers Equities.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124820",
+            "title": "Ch 11  - CF Estimation Allied Lemon Blank.xlsx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 11  - CF Estimation Allied Lemon Blank.xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124821",
+            "title": "Ch 11 Probset - CF Est..docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 11 Probset - CF Est..docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124825",
+            "title": "Ch 11 Probset - CF Est. - Answers.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 11 Probset - CF Est. - Answers.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124830",
+            "title": "Ch 12 - AFN Problem - multi pass UnSolved.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 12 - AFN Problem - multi pass UnSolved.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124831",
+            "title": "Ch 10 Probset - CapBudgeting  -Master.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 10 Probset - CapBudgeting  -Master.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124832",
+            "title": "Ch 09 Probset Cost of Cap - Answers.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 09 Probset Cost of Cap - Answers.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124833",
+            "title": "Ch11-CF_Estimations.pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch11-CF_Estimations.pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124834",
+            "title": "Ch 11 CF Est. Allied Lemon Problem.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 11 CF Est. Allied Lemon Problem.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124844",
+            "title": "Ch2-FinStmts, CFs, Taxes (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch2-FinStmts, CFs, Taxes (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124848",
+            "title": "Ch  5- Bonds + InterestRates (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch  5- Bonds + InterestRates (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124851",
+            "title": "Ch 12-Fin.Planning + CorpValuation (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 12-Fin.Planning + CorpValuation (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124853",
+            "title": "Ch  4 - Time Value of Money - Mini Case Unsolved1 15(14).xlsx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch  4 - Time Value of Money - Mini Case Unsolved1 15(14).xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124858",
+            "title": "Ch 04 Probset - TVM #4 Solution.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 04 Probset - TVM #4 Solution.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124859",
+            "title": "Ch 04 Probset - TVM #6 Solution.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 04 Probset - TVM #6 Solution.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124862",
+            "title": "Ch 05 Probset Bonds  Answers.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 05 Probset Bonds  Answers.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124863",
+            "title": "Ch 05 Probset Bonds+Interest Answers.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 05 Probset Bonds+Interest Answers.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124864",
+            "title": "Ch 5 Probset Solutions.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 5 Probset Solutions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124866",
+            "title": "Ch3- Analysis of Fin Stmts (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch3- Analysis of Fin Stmts (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124867",
+            "title": "Ch 02 Probset  Answers - FinsStmts,CFs.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 02 Probset  Answers - FinsStmts,CFs.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124868",
+            "title": "Ch 04 Probset - Answers -TVM.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 04 Probset - Answers -TVM.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124869",
+            "title": "Ch  4 - Time Value of Money - Mini Case Solution 15(14).xlsx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch  4 - Time Value of Money - Mini Case Solution 15(14).xlsx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124870",
+            "title": "Ch 04 Probset - TVM #5 Solution.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 04 Probset - TVM #5 Solution.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124871",
+            "title": "Corp Fin  P. Exam 1 Solutions.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Corp Fin  P. Exam 1 Solutions.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124872",
+            "title": "Ch 05 Probset Bonds .docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 05 Probset Bonds .docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124873",
+            "title": "Ch 10- Cap Budgeting (A).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 10- Cap Budgeting (A).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124874",
+            "title": "Ch 06 Probset - Answers Risk & Return.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 06 Probset - Answers Risk & Return.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "80124892",
+            "title": "Ch 15 - Cap Structure Class Problem.pdf",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 15 - Cap Structure Class Problem.pdf",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81326073",
+            "title": "3010 practice set exam 2 mc+answers.Sp24.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "3010 practice set exam 2 mc+answers.Sp24.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81482924",
+            "title": "11-5 File.docx",
+            "url": "",
+            "courseId": "123236",
+            "name": "11-5 File.docx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81705012",
+            "title": "Ch 15-Cap Structure Decisions (1725).pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 15-Cap Structure Decisions (1725).pptx",
+            "modifiedDate": null,
+            "size": null
+          },
+          {
+            "id": "81705031",
+            "title": "Ch 14-Stock Divs Repurch 1725.pptx",
+            "url": "",
+            "courseId": "123236",
+            "name": "Ch 14-Stock Divs Repurch 1725.pptx",
+            "modifiedDate": null,
+            "size": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "862943",
+            "moduleId": "862943",
+            "title": "Week 1",
+            "url": "",
+            "courseId": "123236",
+            "itemCount": 0,
+            "unlockDate": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "syllabus-schedule",
+            "title": "Syllabus Schedule",
+            "url": "https://canvas.colorado.edu/courses/123236/pages/syllabus-schedule?module_item_id=6620536",
+            "courseId": "123236",
+            "slug": "syllabus-schedule"
+          }
+        ],
+        "hasUpdates": true
+      }
+    },
+    {
+      "courseId": "123249",
+      "courseName": "FNCE 3030-007:  Invstmnt & Prtfolio Mgmt",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "1688637",
+            "title": "Welcome back!",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1688637",
+            "courseId": "123249",
+            "postDate": "Posted Aug 20 12:58pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1695346",
+            "title": "Aug 21 class recording posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1695346",
+            "courseId": "123249",
+            "postDate": "Posted Aug 23 6:03pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1696869",
+            "title": "Assignment A1 is now posted on accepi",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1696869",
+            "courseId": "123249",
+            "postDate": "Posted Aug 25 1:27pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1698554",
+            "title": "Office hours",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1698554",
+            "courseId": "123249",
+            "postDate": "Posted Aug 26 2:05pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1701191",
+            "title": "Aug 28 class recording and notes now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1701191",
+            "courseId": "123249",
+            "postDate": "Posted Aug 29 8:47am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1707520",
+            "title": "Assignment A2 is now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1707520",
+            "courseId": "123249",
+            "postDate": "Posted Sep 7 8:59pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1710547",
+            "title": "Interactive Brokers Paper Trading Account",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1710547",
+            "courseId": "123249",
+            "postDate": "Posted Sep 11 9:37am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1711730",
+            "title": "Open your Interactive Brokers account by Sep 13 at noon",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1711730",
+            "courseId": "123249",
+            "postDate": "Posted Sep 12 2:19pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1717469",
+            "title": "Quiz and Practice Quiz next week",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1717469",
+            "courseId": "123249",
+            "postDate": "Posted Sep 19 11:40pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1717470",
+            "title": "Practice Quiz PQ1 now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1717470",
+            "courseId": "123249",
+            "postDate": "Posted Sep 19 11:42pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1718401",
+            "title": "Office hours today on Zoom only",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1718401",
+            "courseId": "123249",
+            "postDate": "Posted Sep 22 12:26pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1719779",
+            "title": "Quiz Q1 to be posted later today",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1719779",
+            "courseId": "123249",
+            "postDate": "Posted Sep 23 6:24pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1719815",
+            "title": "Quiz Q1 is now posted on Canvas",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1719815",
+            "courseId": "123249",
+            "postDate": "Posted Sep 23 7:34pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1720154",
+            "title": "Office hours today on zoom",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1720154",
+            "courseId": "123249",
+            "postDate": "Posted Sep 24 11:11am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1722052",
+            "title": "A3 now posted on accepi",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1722052",
+            "courseId": "123249",
+            "postDate": "Posted Sep 26 3:46pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1728960",
+            "title": "Assignment A4 is now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1728960",
+            "courseId": "123249",
+            "postDate": "Posted Oct 8 11:14am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1728975",
+            "title": "Midterm pushed back to the week of Oct 20th",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1728975",
+            "courseId": "123249",
+            "postDate": "Posted Oct 8 11:28am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1731814",
+            "title": "Midterm Exam - Tuesday, Oct 21",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1731814",
+            "courseId": "123249",
+            "postDate": "Posted Oct 13 11:04am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1733006",
+            "title": "Assignment A4 pushed back to Thursday midnight",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1733006",
+            "courseId": "123249",
+            "postDate": "Posted Oct 14 2:06pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1733248",
+            "title": "Oct 14 class recording and materials now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1733248",
+            "courseId": "123249",
+            "postDate": "Posted Oct 14 4:25pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1735262",
+            "title": "Oct 16 class recording and work now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1735262",
+            "courseId": "123249",
+            "postDate": "Posted Oct 16 4:27pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1735264",
+            "title": "Review Session Tomorrow 10/17 at 9AM on zoom",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1735264",
+            "courseId": "123249",
+            "postDate": "Posted Oct 16 4:31pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1735758",
+            "title": "Review session recording now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1735758",
+            "courseId": "123249",
+            "postDate": "Posted Oct 17 12:39pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1736127",
+            "title": "Practice Quiz PQ2 and quiz Q2 now available on accepi",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1736127",
+            "courseId": "123249",
+            "postDate": "Posted Oct 17 5:34pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1736539",
+            "title": "Midterm Exam Formula Sheet format",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1736539",
+            "courseId": "123249",
+            "postDate": "Posted Oct 18 1:40pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1736982",
+            "title": "Q2 points",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1736982",
+            "courseId": "123249",
+            "postDate": "Posted Oct 19 5:52pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1744834",
+            "title": "Office hours today moved to 6-7pm",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1744834",
+            "courseId": "123249",
+            "postDate": "Posted Oct 30 2:05pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1746103",
+            "title": "IB A1 pushed back to Tuesday, Nov 4th",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1746103",
+            "courseId": "123249",
+            "postDate": "Posted Nov 1 2:56pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1746925",
+            "title": "Office hours today 11:30-1:30",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1746925",
+            "courseId": "123249",
+            "postDate": "Posted Nov 3 10:49am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1746935",
+            "title": "IB A1",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1746935",
+            "courseId": "123249",
+            "postDate": "Posted Nov 3 10:55am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1748639",
+            "title": "Final Exam - Dec 9 @7:30AM",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1748639",
+            "courseId": "123249",
+            "postDate": "Posted Nov 5 10:51am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1748896",
+            "title": "Assignment A5 is now posted",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1748896",
+            "courseId": "123249",
+            "postDate": "Posted Nov 5 3:04pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1753764",
+            "title": "A5 pushed back to Nov 13 midnight",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1753764",
+            "courseId": "123249",
+            "postDate": "Posted Nov 12 9:53pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1762957",
+            "title": "Final Exam Conflict",
+            "url": "https://canvas.colorado.edu/courses/123249/discussion_topics/1762957",
+            "courseId": "123249",
+            "postDate": "Posted Nov 28 11:32am",
+            "modifiedDate": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2513793",
+            "title": "Q1",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2513793",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2527715",
+            "title": "Q2",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2527715",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2528247",
+            "title": "Midterm Exam",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2528247",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2537831",
+            "title": "Final Exam",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2537831",
+            "dueDate": "2025-12-10T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [
+          {
+            "id": "2494202",
+            "title": "A1",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2494202",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-03T05:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2505155",
+            "title": "A2",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2505155",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-19T05:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2515944",
+            "title": "A3",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2515944",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-08T05:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2520791",
+            "title": "A4",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2520791",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-18T05:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2528544",
+            "title": "Midterm Exam Work Upload",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2528544",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-21T20:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2532925",
+            "title": "IB A1",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2532925",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-05T06:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2537974",
+            "title": "A5",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2537974",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-14T06:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2544779",
+            "title": "A6",
+            "url": "https://canvas.colorado.edu/courses/123249/assignments/2544779",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-11-22T06:59:59.000Z",
+                "to": "Closed"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "week-1",
+            "title": "Week 1 (Aug 21)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-1",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 1",
+                "to": "Week 1 (Aug 21)"
+              }
+            }
+          },
+          {
+            "id": "week-2",
+            "title": "Week 2 (Aug 26-28)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-2",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 2",
+                "to": "Week 2 (Aug 26-28)"
+              }
+            }
+          },
+          {
+            "id": "week-3-2",
+            "title": "Week 3 (Sep 2-5)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-3-2",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 3",
+                "to": "Week 3 (Sep 2-5)"
+              }
+            }
+          },
+          {
+            "id": "week-4",
+            "title": "Week 4 (Sep 9-11)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-4",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 4",
+                "to": "Week 4 (Sep 9-11)"
+              }
+            }
+          },
+          {
+            "id": "week-5",
+            "title": "Week 5 (Sep 16-18)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-5",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 5",
+                "to": "Week 5 (Sep 16-18)"
+              }
+            }
+          },
+          {
+            "id": "week-6",
+            "title": "Week 6 (Sep 23-25)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-6",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 6",
+                "to": "Week 6 (Sep 23-25)"
+              }
+            }
+          },
+          {
+            "id": "week-7",
+            "title": "Week 7 (Sep 30- Oct 2)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-7",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 7",
+                "to": "Week 7 (Sep 30- Oct 2)"
+              }
+            }
+          },
+          {
+            "id": "week-8",
+            "title": "Week 8 (Oct 7-9)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-8",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 8",
+                "to": "Week 8 (Oct 7-9)"
+              }
+            }
+          },
+          {
+            "id": "week-9-2",
+            "title": "Week 9 (Oct 14-16)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-9-2",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 9",
+                "to": "Week 9 (Oct 14-16)"
+              }
+            }
+          },
+          {
+            "id": "week-10",
+            "title": "Week 10 (Oct 21-23)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-10",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 10",
+                "to": "Week 10 (Oct 21-23)"
+              }
+            }
+          },
+          {
+            "id": "week-11",
+            "title": "Week 11 (Oct 28-30)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-11",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 11",
+                "to": "Week 11 (Oct 28-30)"
+              }
+            }
+          },
+          {
+            "id": "week-12",
+            "title": "Week 12 (Nov 4-6)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-12",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 12",
+                "to": "Week 12 (Nov 4-6)"
+              }
+            }
+          },
+          {
+            "id": "week-13",
+            "title": "Week 13 (Nov 11-13)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-13",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 13",
+                "to": "Week 13 (Nov 11-13)"
+              }
+            }
+          },
+          {
+            "id": "week-14",
+            "title": "Week 14 (Nov 18-20)",
+            "url": "https://canvas.colorado.edu/courses/123249/pages/week-14",
+            "fieldChanges": {
+              "title": {
+                "from": "Week 14",
+                "to": "Week 14 (Nov 18-20)"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      }
+    },
+    {
+      "courseId": "124722",
+      "courseName": "PSCI 2223-100:  Intro to IR LECTURE",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "1670872",
+            "title": "Final exam conflict reporting deadline",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1670872",
+            "courseId": "124722",
+            "postDate": null,
+            "modifiedDate": null
+          },
+          {
+            "id": "1671003",
+            "title": "Assignment for 8/25-9/8",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1671003",
+            "courseId": "124722",
+            "postDate": "Posted Aug 25 10:30am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1717837",
+            "title": "Research Report Discussion Wed 9/24",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1717837",
+            "courseId": "124722",
+            "postDate": "Posted Sep 22 9amUnsubscribedManage Discussion",
+            "modifiedDate": null
+          },
+          {
+            "id": "1718096",
+            "title": "Reminder: Research Report Discussion tomorrow!",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1718096",
+            "courseId": "124722",
+            "postDate": "Posted Sep 23 10amUnsubscribedManage Discussion",
+            "modifiedDate": null
+          },
+          {
+            "id": "1731404",
+            "title": "Midterm Exam!",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1731404",
+            "courseId": "124722",
+            "postDate": "Posted Oct 12 5:30pm",
+            "modifiedDate": null
+          },
+          {
+            "id": "1731413",
+            "title": "Office hours on Zoom today",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1731413",
+            "courseId": "124722",
+            "postDate": "Posted Oct 13 9:30am",
+            "modifiedDate": null
+          },
+          {
+            "id": "1735524",
+            "title": "midterm exam update",
+            "url": "https://canvas.colorado.edu/courses/124722/discussion_topics/1735524",
+            "courseId": "124722",
+            "postDate": "Posted Oct 18 10amUnsubscribedManage Discussion",
+            "modifiedDate": null
+          }
+        ],
+        "hasUpdates": true
+      },
+      "assignments": {
+        "newItems": [
+          {
+            "id": "2423307",
+            "title": "Midterm Exam",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2423307",
+            "dueDate": "Closed",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          },
+          {
+            "id": "2423308",
+            "title": "Final Exam",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2423308",
+            "dueDate": "2025-12-13T07:59:00.000Z",
+            "modifiedDate": null,
+            "points": null,
+            "status": null
+          }
+        ],
+        "changedItems": [
+          {
+            "id": "2423311",
+            "title": "Recitation Grade",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2423311",
+            "fieldChanges": {
+              "dueDate": {
+                "from": null,
+                "to": "-/100 pts\n            \n          \n\n      \n    \n  \n\n\n\n  \n    \n      \n\n        \n            No submission for this assignment. 100 points possible."
+              }
+            }
+          },
+          {
+            "id": "2423312",
+            "title": "Research Report Assignment #1",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2423312",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-20T00:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2423313",
+            "title": "Research Report Assignment #2",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2423313",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-12-04T00:00:00.000Z",
+                "to": "2025-12-11T07:59:00.000Z"
+              }
+            }
+          },
+          {
+            "id": "2424476",
+            "title": "Research Report Article Approval #1",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2424476",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-09-12T23:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2424477",
+            "title": "Research Report Article Approval #2",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2424477",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-10-31T23:00:00.000Z",
+                "to": "Closed"
+              }
+            }
+          },
+          {
+            "id": "2528442",
+            "title": "Midterm Exam Extra Points",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2528442",
+            "fieldChanges": {
+              "dueDate": {
+                "from": null,
+                "to": "-/3 pts\n            \n          \n\n      \n    \n  \n\n\n\n  \n    \n      \n\n        \n            No submission for this assignment. 3 points possible."
+              }
+            }
+          },
+          {
+            "id": "2532060",
+            "title": "Extra Credit Assignment",
+            "url": "https://canvas.colorado.edu/courses/124722/assignments/2532060",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2025-12-02T00:00:00.000Z",
+                "to": "2025-12-06T07:59:00.000Z"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [
+          {
+            "id": "assigned-readings-and-schedule",
+            "title": "Assigned Readings and Schedule",
+            "url": "https://canvas.colorado.edu/courses/124722/pages/assigned-readings-and-schedule",
+            "courseId": "124722",
+            "slug": "assigned-readings-and-schedule"
+          },
+          {
+            "id": "psci-2223-100-intro-to-ir-lecture",
+            "title": "PSCI 2223-100: Intro to IR LECTURE",
+            "url": "https://canvas.colorado.edu/courses/124722/pages/psci-2223-100-intro-to-ir-lecture",
+            "courseId": "124722",
+            "slug": "psci-2223-100-intro-to-ir-lecture"
+          }
+        ],
+        "hasUpdates": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "runDate": "2025-12-01T05:53:14.303Z",
+  "instanceId": "i-02e3289c96e66905c",
+  "instanceType": "r7i.2xlarge",
+  "optimizedSettings": {
+    "maxConcurrency": 100,
+    "parallelLimit": 20,
+    "maxRequestsPerCrawl": 2000,
+    "maxDepth": 3
+  },
+  "courses": "all",
+  "outputDir": "storage/datasets",
+  "metrics": {
+    "timings": {
+      "instanceStartDuration": "1.92s",
+      "sshReadyDuration": "1.92s",
+      "cookieValidationDuration": "1.46s",
+      "mappingDuration": "0ms",
+      "extractionDuration": "0ms",
+      "downloadDuration": "0ms",
+      "instanceStopDuration": "3.67m",
+      "totalDuration": "25.98m"
+    },
+    "concurrency": {
+      "maxConcurrent": 0,
+      "averageConcurrent": 0,
+      "sampleCount": 0
+    },
+    "errors": {
+      "authentication": 2,
+      "network": 0,
+      "timeout": 74,
+      "other": 0,
+      "total": 76
+    },
+    "rateLimiting": {
+      "rateLimitHits": 0,
+      "retries": 0,
+      "backoffEvents": 0
+    },
+    "requests": {
+      "total": 600,
+      "successful": 0,
+      "failed": 0,
+      "retried": 0
+    },
+    "cloudWatch": {
+      "cpu": {
+        "average": "64.86%",
+        "maximum": "96.82%",
+        "minimum": "26.10%",
+        "samples": 5
+      },
+      "memory": {
+        "available": false,
+        "average": null,
+        "maximum": null,
+        "minimum": null,
+        "samples": 0
+      },
+      "network": {
+        "networkIn": {
+          "total": "3716.42 MB",
+          "average": "743.28 MB/min",
+          "samples": 5
+        },
+        "networkOut": {
+          "total": "284.01 MB",
+          "average": "56.80 MB/min",
+          "samples": 5
+        }
+      },
+      "collectionTime": "2025-12-01T05:49:34.154Z",
+      "timeRange": {
+        "start": "2025-12-01T05:23:35.455Z",
+        "end": "2025-12-01T05:50:28.489Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "runId": "2025-11-30T23-01-14-028Z",
+  "generatedAt": "2025-11-30T23:01:53.762Z",
+  "dryRun": false,
+  "baselineExtractionFolder": "testing",
+  "surfaceSummaryFile": "/Users/karthikreddy/Downloads/GitHub/Canvas/Canvas-Wrapper/storage/test-results/update-summary-2025-11-30T23-01-14-028Z.json",
+  "totalCoursesScanned": 6,
+  "coursesWithUpdates": 1,
+  "courses": [
+    {
+      "courseId": "123236",
+      "courseName": "FNCE 3010 F'25:  Sec 005, 007, 010 - Corp Fin",
+      "announcements": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "assignments": {
+        "newItems": [],
+        "changedItems": [
+          {
+            "id": "2441674",
+            "title": "Excel Online Activity #8B: Ch 10 - NPV profiles",
+            "url": "https://canvas.colorado.edu/courses/123236/assignments/2441674",
+            "fieldChanges": {
+              "dueDate": {
+                "from": "2026-12-25T23:59:00.000Z",
+                "to": "2025-11-07T07:59:00.000Z"
+              }
+            }
+          }
+        ],
+        "removedItems": [],
+        "hasUpdates": true
+      },
+      "files": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "modules": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      },
+      "pages": {
+        "newItems": [],
+        "changedItems": [],
+        "removedItems": [],
+        "hasUpdates": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+	"type": "files-list-discovery",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/files?sort=name&order=desc",
+	"depth": 2,
+	"discoveredAt": "2025-12-01T05:24:49.143Z",
+	"breadcrumbs": [],
+	"subfoldersDiscovered": [],
+	"totalFoldersOnPage": 3,
+	"totalFilesVisible": 0,
+	"pageTitle": "Files",
+	"apiFolderSample": [
+		"https://canvas.colorado.edu/courses/123156/files/folder/Slides",
+		"https://canvas.colorado.edu/courses/123156/files/folder/course_image",
+		"https://canvas.colorado.edu/courses/123156/files/folder/unfiled"
+	],
+	"apiFolderTotal": 4
+}

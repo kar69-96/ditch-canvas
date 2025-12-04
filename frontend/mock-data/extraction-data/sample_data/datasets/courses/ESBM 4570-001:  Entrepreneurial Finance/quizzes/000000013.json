@@ -1,0 +1,24 @@
+{
+	"quizId": "497916",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497916",
+	"extractedAt": "2025-12-01T05:47:46.252Z",
+	"title": "PRE QUIZ Case 6 Viscotech",
+	"description": "<p>This is an open book/open case quiz</p>\n<p>You have 15 minutes to complete this quiz.</p>",
+	"descriptionText": "This is an open book/open case quiz\nYou have 15 minutes to complete this quiz.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [],
+	"questionCount": 0,
+	"attachments": []
+}
