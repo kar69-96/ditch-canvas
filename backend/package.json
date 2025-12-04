@@ -4,11 +4,9 @@
     "description": "Canvas helper with cookie authentication and assignment overrides",
     "main": "server.js",
     "scripts": {
-        "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+        "dev": "npm run dev:server",
         "dev:server": "nodemon server.js",
-        "dev:client": "cd client && npm run dev",
         "start": "node server.js",
-        "build": "cd client && npm run build",
         "auth:extract-cookies": "node src/core/extract-cookies.js",
         "auth:server": "node src/core/auth-server.js",
         "crawl:canvas": "node src/crawler/canvas-crawler.js",

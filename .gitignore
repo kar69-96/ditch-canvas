@@ -1,0 +1,73 @@
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+.env.backend
+.env.frontend
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+server.log
+
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+dist-ssr
+*.local
+
+# Uploads and downloads
+uploads/
+downloads/
+file-downloads/
+temp/
+
+# Debug files
+debug-*.png
+canvas-debug-results.json
+canvas-ui-mapping-results.json
+comprehensive-file-discovery-results.json
+fast-all-courses-mapping-results.json
+file-extraction-test-results.json
+canvas-debug-screenshot.png
+
+# Temp Puppeteer profiles
+puppeteer_map_*
+puppeteer_map_min_*
+puppeteer_map_favs_*
+puppeteer_canvas_data_headless_visible/
+puppeteer_canvas_data_headless/
+puppeteer_canvas_data_mapping/
+puppeteer_canvas_data_mapping_*/
+
+# Process files
+.server.pid
+
+# macOS
+.DS_Store
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Supabase
+.supabase
+
+# Other
+mcp-servers/
+puppeteer_canvas_data/
+

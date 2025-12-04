@@ -1,0 +1,47 @@
+{
+  "name": "yay-final",
+  "version": "1.0.0",
+  "description": "Canvas LMS data extraction and management system",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev:server",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start": "cd backend && npm start",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "backend:auth:extract-cookies": "cd backend && npm run auth:extract-cookies",
+    "backend:auth:server": "cd backend && npm run auth:server",
+    "backend:crawl:canvas": "cd backend && npm run crawl:canvas",
+    "backend:crawl:map": "cd backend && npm run crawl:map",
+    "backend:crawl:extract": "cd backend && npm run crawl:extract",
+    "backend:aws:extract": "cd backend && npm run aws:extract",
+    "backend:aws:check": "cd backend && npm run aws:check",
+    "backend:aws:update": "cd backend && npm run aws:update",
+    "backend:compare:metrics": "cd backend && npm run compare:metrics",
+    "backend:update": "cd backend && npm run update",
+    "frontend:supabase:show": "cd frontend && npm run supabase:show",
+    "frontend:supabase:sync": "cd frontend && npm run supabase:sync",
+    "frontend:supabase:migrate": "cd frontend && npm run supabase:migrate",
+    "frontend:supabase:upload-data": "cd frontend && npm run supabase:upload-data",
+    "frontend:supabase:push": "cd frontend && npm run supabase:push",
+    "frontend:supabase:status": "cd frontend && npm run supabase:status",
+    "frontend:supabase:link": "cd frontend && npm run supabase:link",
+    "frontend:supabase:setup": "cd frontend && npm run supabase:setup",
+    "frontend:lint": "cd frontend && npm run lint",
+    "frontend:preview": "cd frontend && npm run preview"
+  },
+  "keywords": [
+    "canvas",
+    "lms",
+    "education",
+    "data-extraction"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
+
