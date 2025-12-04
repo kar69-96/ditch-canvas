@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "Canvas LMS data extraction and management system",
   "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd backend && npm run dev:server",
-    "dev:frontend": "cd frontend && npm run dev",
-    "start": "cd backend && npm start",
+    "dev:backend": "npm run dev:server --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "start": "npm start --workspace=backend",
     "build": "npm run build:frontend",
-    "build:frontend": "cd frontend && npm run build",
-    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build:frontend": "npm run build --workspace=frontend",
+    "install:all": "npm install",
     "backend:auth:extract-cookies": "cd backend && npm run auth:extract-cookies",
     "backend:auth:server": "cd backend && npm run auth:server",
     "backend:crawl:canvas": "cd backend && npm run crawl:canvas",
