@@ -81,6 +81,7 @@ const ClassDetail = () => {
   const [hoveredUpcomingIndex, setHoveredUpcomingIndex] = useState<number | null>(null);
   const [hoveredTopicIndex, setHoveredTopicIndex] = useState<{ moduleIndex: number; topicIndex: number } | null>(null);
   
+  
   // Sync completed assignments with localStorage
   const [completedAssignments, setCompletedAssignments] = useState<Set<number>>(() => {
     const stored = localStorage.getItem('completedAssignments');
@@ -643,10 +644,11 @@ const ClassDetail = () => {
         .sort((a, b) => a.position - b.position)
     : [];
 
-  const modules = courseModules.length > 0
+  const allModules = courseModules.length > 0
     ? courseModules.map((module, index) => ({
         week: `Module ${module.position || index + 1}`,
         title: module.name,
+        position: module.position || index + 1,
         topics: module.items.length > 0
           ? module.items.map((item) => ({
               name: item.title || item.name || 'Untitled Item',
@@ -675,6 +677,7 @@ const ClassDetail = () => {
         {
           week: "No modules available",
           title: "Course content will appear here",
+          position: 0,
           topics: [
             {
               name: 'Modules will be displayed here when available',
@@ -685,6 +688,9 @@ const ClassDetail = () => {
           ],
         },
       ];
+
+  // Display all modules directly
+  const modules = allModules;
 
   const coursePages = mockCanvasData?.pages
     ? mockCanvasData.pages
@@ -921,10 +927,7 @@ const ClassDetail = () => {
                             <span className="text-xs text-muted-foreground w-6">
                               {String(index + 1).padStart(2, "0")}
                             </span>
-                            <div>
-                              <p className="text-xs text-foreground/60">{module.week}</p>
-                              <p className="text-sm font-medium text-foreground/90">{module.title}</p>
-                            </div>
+                            <p className="text-sm font-medium text-foreground/90">{module.title}</p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4">

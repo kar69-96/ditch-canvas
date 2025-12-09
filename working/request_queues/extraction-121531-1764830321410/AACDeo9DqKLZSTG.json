@@ -1,0 +1,9 @@
+{
+	"id": "AACDeo9DqKLZSTG",
+	"json": "{\"id\":\"AACDeo9DqKLZSTG\",\"url\":\"https://canvas.colorado.edu/courses/121531/announcements\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/announcements\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/announcements\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"announcements-list\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:40:19.235Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/121531/announcements",
+	"url": "https://canvas.colorado.edu/courses/121531/announcements"
+}

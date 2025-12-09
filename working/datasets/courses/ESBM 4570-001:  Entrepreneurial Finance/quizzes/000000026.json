@@ -1,0 +1,541 @@
+{
+	"quizId": "497945",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497945",
+	"extractedAt": "2025-12-04T06:37:00.177Z",
+	"title": "MT 1 (Remotely Proctored)",
+	"description": "<div class=\"proctorio-oembed\">\n<p>You have 70 minutes to complete this exam.</p>\n<p>You may ONLY use the spreadsheet provided for this exam, and 1, single-sided 8.5\"x11\" study sheet.</p>\n<p>The spreadsheet is available in a separate prompt.&nbsp; You must upload your spreadsheet.&nbsp;<strong>File Name = First.Last_MT1.xlsx</strong></p>\n<p>Your spreadsheet is worth 3 points.</p>\n<p>Any other assistance, (other than asking Professor Burnes a clarifying question) is NOT ALLOWED. The use of other assistance is a violation of the CU Boulder Honor Code.&nbsp; Offering assistance to another student is a violation of the CU Boulder Honor Code.</p>\n<p><span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"ESBM4570_MT1.xlsx\" href=\"https://canvas.colorado.edu/courses/123160/files/80873298?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\">ESBM4570_MT1.xlsx</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/123160/files/80873298/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download ESBM4570_MT1.xlsx</span></a></span></p>\n</div>\n<p><span class=\"proctorioexam\" style=\"display: none;\">055c16d9a75d4b88fede3087520ce3ea</span><span class=\"proctoriocourse\" style=\"display: none;\">123160</span></p>\n\n<p><a id=\"proctorio-embed-a\" class=\"proctorio-embed\" style=\"display: flex; flex-direction: column; align-items: center; max-width: 100%; width: auto; height: auto;\" href=\"https://getproctorio.com\" target=\"_blank\"><img id=\"proctorio-embed-img\" style=\"margin-bottom: 10px; max-width: 100%; height: auto;\" src=\"https://gbl.proctorauth.com/embed/lti\" alt=\"Embed\" loading=\"lazy\"><img id=\"proctorio-embed-gif\" style=\"max-width: 100%; height: auto;\" src=\"https://cdn.proctorauth.com/embed/lti/enable\" alt=\"Embed Animated Gif\" loading=\"lazy\"><img id=\"proctorio-embed-empty\" style=\"height: 1000px; max-width: 100%;\" src=\"https://cdn.proctorauth.com/embed/pixel.gif\" alt=\"Empty space gif\" loading=\"lazy\"></a></p>",
+	"descriptionText": "\nYou have 70 minutes to complete this exam.\nYou may ONLY use the spreadsheet provided for this exam, and 1, single-sided 8.5\"x11\" study sheet.\nThe spreadsheet is available in a separate prompt.  You must upload your spreadsheet. File Name = First.Last_MT1.xlsx\nYour spreadsheet is worth 3 points.\nAny other assistance, (other than asking Professor Burnes a clarifying question) is NOT ALLOWED. The use of other assistance is a violation of the CU Boulder Honor Code.  Offering assistance to another student is a violation of the CU Boulder Honor Code.\nESBM4570_MT1.xlsx\n    \n\nDownload ESBM4570_MT1.xlsx\n\n055c16d9a75d4b88fede3087520ce3ea123160\n\n",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463862",
+			"type": null,
+			"text": "I understand that I may ONLY use the excel sheet provided as part of this exam and the single sided 8.5\"x11\" study sheet that I developed.\nI understand that no other assistance of ANY kind is permitted, other than to ask Professor Burnes clarifying questions.\nI understand that violation of this policy is a  violation of the CU Boulder Honor Code.",
+			"points": 0,
+			"answers": [
+				{
+					"text": "2840\n\n    \n         \n      \n        True\n        \n      \n    \n    \n      \n    \n    \n      True\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463862\n      2840\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1029\n\n    \n         \n      \n        False\n        \n      \n    \n    \n      \n    \n    \n      False\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463862\n      1029\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463867",
+			"type": null,
+			"text": "Please see the Financial Statements on the Fin Statement 2024 sheet in the Excel Workbook provided.\nBased on these, what were the Retained Earnings at the End of 2023, if there were no dividends paid.?\n \nPlease give your answer to 2 decimals",
+			"points": 5,
+			"answers": [
+				{
+					"text": "6429\n\n    \n      \n        \n        \n      \n    \n    \n      \n    \n    \n      \n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463867\n      6429\n      \n    \n      \n        128.75 (with margin: 0.05)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      128.75\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463866",
+			"type": null,
+			"text": "How much revenue must a firm at least have in order to register as a C Corp",
+			"points": 5,
+			"answers": [
+				{
+					"text": "8241\n\n    \n         \n      \n        $1.5M\n        \n      \n    \n    \n      \n    \n    \n      $1.5M\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463866\n      8241\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2878\n\n    \n         \n      \n        $100,000\n        \n      \n    \n    \n      \n    \n    \n      $100,000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463866\n      2878\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4795\n\n    \n         \n      \n        $0\n        \n      \n    \n    \n      \n    \n    \n      $0\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463866\n      4795\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "4468\n\n    \n         \n      \n        $1000000\n        \n      \n    \n    \n      \n    \n    \n      $1000000\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463866\n      4468\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463864",
+			"type": null,
+			"text": "You are working with a mature company with 75% market share with your current business.  You are looking to launch a new product in a totally new market (for you).   The project will require capital investment, as well as higher Operating Expenses as you hire new people to develop this product. \nWhich of the following might increase on your Income Statement as a result of this endeavor.",
+			"points": 5,
+			"answers": [
+				{
+					"text": "4116\n\n    \n         \n      \n        Capital Expenditure\n        \n      \n    \n    \n      \n    \n    \n      Capital Expenditure\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463864\n      4116\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1204\n\n    \n         \n      \n        Depreciation\n        \n      \n    \n    \n      \n    \n    \n      Depreciation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463864\n      1204\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1829\n\n    \n         \n      \n        Revenue from New Stock Offering\n        \n      \n    \n    \n      \n    \n    \n      Revenue from New Stock Offering\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463864\n      1829\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3218\n\n    \n         \n      \n        Accounts Receivable\n        \n      \n    \n    \n      \n    \n    \n      Accounts Receivable\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463864\n      3218\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7463868",
+			"type": null,
+			"text": "Of the following business structures, which is the riskiest?",
+			"points": 5,
+			"answers": [
+				{
+					"text": "6262\n\n    \n         \n      \n        C Corp\n        \n      \n    \n    \n      \n    \n    \n      C Corp\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463868\n      6262\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6150\n\n    \n         \n      \n        LLC\n        \n      \n    \n    \n      \n    \n    \n      LLC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463868\n      6150\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2745\n\n    \n         \n      \n        Sole Proprietor\n        \n      \n    \n    \n      \n    \n    \n      Sole Proprietor\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463868\n      2745\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9797\n\n    \n         \n      \n        SCorp\n        \n      \n    \n    \n      \n    \n    \n      SCorp\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463868\n      9797\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 6,
+			"questionId": "question_7463865",
+			"type": null,
+			"text": "Which of the following areas would a Venture Capitalist likely address when considering a new investment",
+			"points": 5,
+			"answers": [
+				{
+					"text": "9084\n\n    \n         \n      \n        Movie Rights\n        \n      \n    \n    \n      \n    \n    \n      Movie Rights\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463865\n      9084\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7589\n\n    \n         \n      \n        Car they can get at exit\n        \n      \n    \n    \n      \n    \n    \n      Car they can get at exit\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463865\n      7589\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2651\n\n    \n         \n      \n        Due Diligence\n        \n      \n    \n    \n      \n    \n    \n      Due Diligence\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463865\n      2651\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "4953\n\n    \n         \n      \n        Season\n        \n      \n    \n    \n      \n    \n    \n      Season\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463865\n      4953\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 7,
+			"questionId": "question_7463863",
+			"type": null,
+			"text": "What does EBITDA stand for?",
+			"points": 5,
+			"answers": [
+				{
+					"text": "2124\n\n    \n         \n      \n        Earnings Before Interest Tax Depreciation and Actualization\n        \n      \n    \n    \n      \n    \n    \n      Earnings Before Interest Tax Depreciation and Actualization\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463863\n      2124\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5678\n\n    \n         \n      \n        Earnings Before Interest Tax Depreciation and Amortization\n        \n      \n    \n    \n      \n    \n    \n      Earnings Before Interest Tax Depreciation and Amortization\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463863\n      5678\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "3583\n\n    \n         \n      \n        Earnings Before Interest Tax Denials and Appropriation\n        \n      \n    \n    \n      \n    \n    \n      Earnings Before Interest Tax Denials and Appropriation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463863\n      3583\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4957\n\n    \n         \n      \n        Engagement Before Interest Tax Depreciation and Amortization\n        \n      \n    \n    \n      \n    \n    \n      Engagement Before Interest Tax Depreciation and Amortization\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463863\n      4957\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 8,
+			"questionId": "question_7463869",
+			"type": null,
+			"text": "Please see the Financial Statements on the Fin Statement 2024 sheet in the Excel Workbook provided. Take your time.\nWhat was the QUICK Ratio?\n \nPlease give your answer to 2 decimals",
+			"points": 5,
+			"answers": [
+				{
+					"text": "8349\n\n    \n      \n        \n        \n      \n    \n    \n      \n    \n    \n      \n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463869\n      8349\n      \n    \n      \n        1.48 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      1.48\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 9,
+			"questionId": "question_7548458",
+			"type": null,
+			"text": "Look at IS1.\nBriefly explain the Depreciation assumption for Year 2.\nWhy would this assumption make sense?",
+			"points": 3,
+			"answers": []
+		},
+		{
+			"questionNumber": 10,
+			"questionId": "question_7463871",
+			"type": null,
+			"text": "2 colleagues have an idea for a small business.  They are planning on retiring from successful careers with the \"Big 4 Accounting Firms\", and then doing some consulting to keep market contacts and earn a little money along the way.  They don't plan on needing any additional funding, and will have limited tax liabilities associated with the income from this venture. When they are done with this 'lifestyle', they will just 'close the door' (eg take down their Open sign).\nBased on this, which of the following business structures would you recommend to these colleagues turning small business founders.",
+			"points": 3,
+			"answers": [
+				{
+					"text": "8899\n\n    \n         \n      \n        C Corp\n        \n      \n    \n    \n      \n    \n    \n      C Corp\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463871\n      8899\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3771\n\n    \n         \n      \n        B Corp\n        \n      \n    \n    \n      \n    \n    \n      B Corp\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463871\n      3771\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1172\n\n    \n         \n      \n        LLC\n        \n      \n    \n    \n      \n    \n    \n      LLC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463871\n      1172\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2950\n\n    \n         \n      \n        IPO\n        \n      \n    \n    \n      \n    \n    \n      IPO\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463871\n      2950\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 11,
+			"questionId": "question_7463870",
+			"type": null,
+			"text": "You are coming to the end of the year and expect to show Net Income of -$30,000.\nOf the following options, which should you do FIRST?",
+			"points": 3,
+			"answers": [
+				{
+					"text": "359\n\n    \n         \n      \n        Inform your Shareholders\n        \n      \n    \n    \n      \n    \n    \n      Inform your Shareholders\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463870\n      359\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "255\n\n    \n         \n      \n        Explore a long term loan\n        \n      \n    \n    \n      \n    \n    \n      Explore a long term loan\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463870\n      255\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7079\n\n    \n         \n      \n        File Chapter 11\n        \n      \n    \n    \n      \n    \n    \n      File Chapter 11\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463870\n      7079\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "380\n\n    \n         \n      \n        Check the Balance Sheets for Cash\n        \n      \n    \n    \n      \n    \n    \n      Check the Balance Sheets for Cash\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463870\n      380\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 12,
+			"questionId": "question_7463875",
+			"type": null,
+			"text": "Please see the Scorecard2 worksheet on the excel workbook provided.\nWhat is the scorecard multiplier for this company?\nshow to 2 decimals.",
+			"points": 4,
+			"answers": [
+				{
+					"text": "7366\n\n    \n      \n        .99\n        \n      \n    \n    \n      \n    \n    \n      .99\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463875\n      7366\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 13,
+			"questionId": "question_7463874",
+			"type": null,
+			"text": "Refer to the Worksheet labeled Balance Sheet in the excel spreadsheet provided.\nSolving to 2 Decimals, what is the Debt to Equity Ratio of the firm depicted.\nNote, for Debt, please be sure and consider all forms of Debt.",
+			"points": 4,
+			"answers": [
+				{
+					"text": "962\n\n    \n      \n        1.33\n        \n      \n    \n    \n      \n    \n    \n      1.33\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463874\n      962\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 14,
+			"questionId": "question_7548086",
+			"type": null,
+			"text": "Please see Scorecard2 for this answer.\nYou have done a great job preparing to meet with a potential investor.\nBased on the information provided on the scorecard, why might this investor not be the right fit for you.\nBe clear and specific.",
+			"points": 4,
+			"answers": []
+		},
+		{
+			"questionNumber": 15,
+			"questionId": "question_7463873",
+			"type": null,
+			"text": "Please see the Financial Statement 2 worksheet in the excel workbook provided with this exam.\nWhat is the Firm's NOPAT?",
+			"points": 4,
+			"answers": [
+				{
+					"text": "3414\n\n    \n         \n      \n        $59.25\n        \n      \n    \n    \n      \n    \n    \n      $59.25\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463873\n      3414\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2530\n\n    \n         \n      \n        $78\n        \n      \n    \n    \n      \n    \n    \n      $78\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463873\n      2530\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "5249\n\n    \n         \n      \n        $26\n        \n      \n    \n    \n      \n    \n    \n      $26\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463873\n      5249\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2866\n\n    \n         \n      \n        $100.50\n        \n      \n    \n    \n      \n    \n    \n      $100.50\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463873\n      2866\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 16,
+			"questionId": "question_7463872",
+			"type": null,
+			"text": "Which of the following is a type of Exit",
+			"points": 4,
+			"answers": [
+				{
+					"text": "6796\n\n    \n         \n      \n        LLC\n        \n      \n    \n    \n      \n    \n    \n      LLC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463872\n      6796\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5527\n\n    \n         \n      \n        EBIT\n        \n      \n    \n    \n      \n    \n    \n      EBIT\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463872\n      5527\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7192\n\n    \n         \n      \n        M&A\n        \n      \n    \n    \n      \n    \n    \n      M&A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463872\n      7192\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7746\n\n    \n         \n      \n        SEC\n        \n      \n    \n    \n      \n    \n    \n      SEC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463872\n      7746\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 17,
+			"questionId": "question_7463876",
+			"type": null,
+			"text": "Which of the following indicate ways to raise capital as a C Corp.\nSelect ALL  that apply (you will only receive credit for this question if you correctly select capital raising)",
+			"points": 4,
+			"answers": [
+				{
+					"text": "5030\n\n    \n         \n      \n        Long Term Debt\n        \n      \n    \n    \n      \n    \n    \n      Long Term Debt\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463876\n      5030\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9085\n\n    \n         \n      \n        Venture Capital\n        \n      \n    \n    \n      \n    \n    \n      Venture Capital\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463876\n      9085\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8129\n\n    \n         \n      \n        Cash\n        \n      \n    \n    \n      \n    \n    \n      Cash\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463876\n      8129\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "7458\n\n    \n         \n      \n        Private Equity\n        \n      \n    \n    \n      \n    \n    \n      Private Equity\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463876\n      7458\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 18,
+			"questionId": "question_7463878",
+			"type": null,
+			"text": "Please see the Financial Statements on the Fin Statement 2024 sheet in the Excel Workbook provided.\nWhat was the Equity Multiplier in 2024?\n \nRound your answer to the nearest 2 decimals",
+			"points": 5,
+			"answers": [
+				{
+					"text": "8408\n\n    \n      \n        \n        \n      \n    \n    \n      \n    \n    \n      \n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463878\n      8408\n      \n    \n      \n        1.28 (with margin: 0.05)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      1.28\n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 19,
+			"questionId": "question_7463877",
+			"type": null,
+			"text": "In 2023, Revenue was $7500 and variable costs = $1750\nIn 2024, you expect Revenue to be $10250.\nIf variable costs maintain a constant ratio to Revenue, how much will variable costs be in 2024.\nRound to the nearest dollar",
+			"points": 5,
+			"answers": [
+				{
+					"text": "4749\n\n    \n         \n      \n        Need Tax Rate to Solve\n        \n      \n    \n    \n      \n    \n    \n      Need Tax Rate to Solve\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463877\n      4749\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3342\n\n    \n         \n      \n        $2,392\n        \n      \n    \n    \n      \n    \n    \n      $2,392\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463877\n      3342\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "26\n\n    \n         \n      \n        $1,750\n        \n      \n    \n    \n      \n    \n    \n      $1,750\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463877\n      26\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3571\n\n    \n         \n      \n        $43,929\n        \n      \n    \n    \n      \n    \n    \n      $43,929\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463877\n      3571\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 20,
+			"questionId": "question_7463881",
+			"type": null,
+			"text": "You are going into an investment meeting and have created a basis for evaluation as a multiple of EBITDA. You have done a great job reviewing Market Comps, and created relevance based on the industry, your time in business, your size, the current market dynamics -- and even the kind of investor/purchaser (eg another PE group, M&A...).  \nBased on this, you are considering a valuation for this company based on a multiple of 4 times EBITDA\nYour EBITDA is currently 6\nWhat is the valuation for this company?\nRound to the nearest dollar.",
+			"points": 5,
+			"answers": [
+				{
+					"text": "412\n\n    \n      \n        \n        \n      \n    \n    \n      \n    \n    \n      \n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463881\n      412\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      24\n      \n        margin of error\n        \n          +/-\n        \n        0\n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 21,
+			"questionId": "question_7463882",
+			"type": null,
+			"text": "If needed, refer to the Balance Sheet Worksheet in the excel spreadsheet provided.\nA company's ROE is 45%.\nIt's % Profitability is 15%\nWhat is its Asset Efficiency?\ngive your answer to 2 decimals",
+			"points": 6,
+			"answers": [
+				{
+					"text": "1912\n\n    \n      \n        1.29\n        \n      \n    \n    \n      \n    \n    \n      1.29\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463882\n      1912\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 22,
+			"questionId": "question_7548463",
+			"type": null,
+			"text": "See IS_1.\nBased on the information provided, what were the operating profits in Year Two.\nRound your answer to the nearest dollar (that is, no decimals).\nYour answer should look like 1234",
+			"points": 2,
+			"answers": [
+				{
+					"text": "4477\n\n    \n      \n        5932\n        \n      \n    \n    \n      \n    \n    \n      5932\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548463\n      4477\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 23,
+			"questionId": "question_7548244",
+			"type": null,
+			"text": "What AUM stand for?",
+			"points": 2,
+			"answers": [
+				{
+					"text": "2186\n\n    \n         \n      \n        Additional Undertakings Manageable\n        \n      \n    \n    \n      \n    \n    \n      Additional Undertakings Manageable\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548244\n      2186\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7783\n\n    \n         \n      \n        Assets Undermanaged\n        \n      \n    \n    \n      \n    \n    \n      Assets Undermanaged\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548244\n      7783\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3197\n\n    \n         \n      \n        Add Up Margins\n        \n      \n    \n    \n      \n    \n    \n      Add Up Margins\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548244\n      3197\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9944\n\n    \n         \n      \n        Assets Under Management\n        \n      \n    \n    \n      \n    \n    \n      Assets Under Management\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548244\n      9944\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 24,
+			"questionId": "question_7548358",
+			"type": null,
+			"text": "Please see the spreadsheet labeled BS1\nThe table below shows your Revenue and Net Income for years 1 and 2 respectively. (this is also available on BS1).\n\n\n\n\nYear 1\nYear 2\n\n\nRevenue\n5700\n7125\n\n\nNet Income\n684\n855\n\n\n\nYou think you are doing GREAT, because your Percentage Profits (% net income) have been consistent for the past 2 years.\nYour lead investor comes in and is VERY UPSET.\nWhich of the following could explain why she is so upset using the DuPont Ratio.",
+			"points": 2,
+			"answers": [
+				{
+					"text": "1381\n\n    \n         \n      \n        She wanted dividends\n        \n      \n    \n    \n      \n    \n    \n      She wanted dividends\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548358\n      1381\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2876\n\n    \n         \n      \n        She expected higher profits\n        \n      \n    \n    \n      \n    \n    \n      She expected higher profits\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548358\n      2876\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4364\n\n    \n         \n      \n        The TIE ratio doesn't show enough coverage\n        \n      \n    \n    \n      \n    \n    \n      The TIE ratio doesn't show enough coverage\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548358\n      4364\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "406\n\n    \n         \n      \n        The Equity Multplier has decreased\n        \n      \n    \n    \n      \n    \n    \n      The Equity Multplier has decreased\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548358\n      406\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 25,
+			"questionId": "question_7548434",
+			"type": null,
+			"text": "Which of the following would be an expected/best use of Pitchbook.",
+			"points": 2,
+			"answers": [
+				{
+					"text": "2633\n\n    \n         \n      \n        Looking up a public company's P/E ratio\n        \n      \n    \n    \n      \n    \n    \n      Looking up a public company's P/E ratio\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548434\n      2633\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8601\n\n    \n         \n      \n        Preparing for an interview with a public company\n        \n      \n    \n    \n      \n    \n    \n      Preparing for an interview with a public company\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548434\n      8601\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9147\n\n    \n         \n      \n        Understanding the make up of the DOW Jones Industrial Average\n        \n      \n    \n    \n      \n    \n    \n      Understanding the make up of the DOW Jones Industrial Average\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548434\n      9147\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2869\n\n    \n         \n      \n        Looking up investors in a privately held company\n        \n      \n    \n    \n      \n    \n    \n      Looking up investors in a privately held company\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7548434\n      2869\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 26,
+			"questionId": "question_7548446",
+			"type": null,
+			"text": "Upload your spreadsheet here.\nYour file must be named:\nFirstName.LastName_MT1.xlsx",
+			"points": 3,
+			"answers": [
+				{
+					"text": "Karthik.Reddy_MT1.xlsx",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 26,
+	"attachments": [
+		{
+			"name": "ESBM4570_MT1.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80873298?wrap=1",
+			"type": null
+		},
+		{
+			"name": "Download ESBM4570_MT1.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80873298/download?download_frd=1",
+			"type": null
+		},
+		{
+			"name": "Karthik.Reddy_MT1.xlsx",
+			"url": "https://canvas.colorado.edu/files/80883942/download",
+			"type": null
+		}
+	]
+}

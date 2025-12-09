@@ -1,9 +1,0 @@
-{
-	"id": "XSX0ym5VESHcJAh",
-	"json": "{\"id\":\"XSX0ym5VESHcJAh\",\"url\":\"https://canvas.colorado.edu/courses/123236/pages/syllabus-schedule\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236/pages/syllabus-schedule\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236/pages/syllabus-schedule\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:05:32.774Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123236/pages/syllabus-schedule",
-	"url": "https://canvas.colorado.edu/courses/123236/pages/syllabus-schedule"
-}

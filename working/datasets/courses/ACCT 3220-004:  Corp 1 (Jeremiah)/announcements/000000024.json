@@ -1,0 +1,31 @@
+{
+	"announcementId": "1703303",
+	"courseId": "121531",
+	"url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1703303",
+	"extractedAt": "2025-12-04T06:40:36.163Z",
+	"isAnnouncement": true,
+	"title": "My Business Course - Registration",
+	"content": "<p>Hello,</p>\n<p>Many of you have been able to start your homework #2 assignment. If you are having any difficulty logging in, use these instructions from the publisher:<br><span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"1 - Student Handout - 004.pdf\" href=\"https://canvas.colorado.edu/courses/121531/files/80443137?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/121531/files/80443137\" data-api-returntype=\"File\">Login Instructions - Registration</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/121531/files/80443137/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download Login Instructions - Registration</span></a></span></p>\n<p>Best,</p>\n<p>Jeremiah</p>",
+	"contentText": "Hello,\nMany of you have been able to start your homework #2 assignment. If you are having any difficulty logging in, use these instructions from the publisher:Login Instructions - Registration\n    \n\nDownload Login Instructions - Registration\nBest,\nJeremiah",
+	"author": "Jeremiah Contreras",
+	"postDate": "Posted Sep 1 7:26pm",
+	"attachments": [
+		{
+			"name": "Login Instructions - Registration",
+			"url": "https://canvas.colorado.edu/courses/121531/files/80443137?wrap=1",
+			"type": null
+		},
+		{
+			"name": "Download Login Instructions - Registration",
+			"url": "https://canvas.colorado.edu/courses/121531/files/80443137/download?download_frd=1",
+			"type": null
+		}
+	],
+	"comments": [],
+	"commentCount": 0,
+	"visibility": {
+		"isPublished": true,
+		"isPinned": false,
+		"allowComments": true
+	}
+}

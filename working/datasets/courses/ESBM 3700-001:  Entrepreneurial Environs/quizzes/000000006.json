@@ -1,0 +1,150 @@
+{
+	"quizId": "491816",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491816",
+	"extractedAt": "2025-12-04T06:16:29.804Z",
+	"title": "\"Disruption\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Disruption\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Disruption\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404873",
+			"type": null,
+			"text": "Which of the following best describes a key characteristic of a disruptive strategy in business?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "6095\n\n    \n         \n      \n        It relies exclusively on offering premium products to attract high-income customers.\n        \n      \n    \n    \n      \n    \n    \n      It relies exclusively on offering premium products to attract high-income customers.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404873\n      6095\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1754\n\n    \n         \n      \n        It seeks to avoid any impact on the original industry to maintain harmony.\n        \n      \n    \n    \n      \n    \n    \n      It seeks to avoid any impact on the original industry to maintain harmony.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404873\n      1754\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7838\n\n    \n         \n      \n        It primarily aims to cooperate with established competitors in the market.\n        \n      \n    \n    \n      \n    \n    \n      It primarily aims to cooperate with established competitors in the market.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404873\n      7838\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1613\n\n    \n         \n      \n        It focuses on replacing or capturing market share from existing industry leaders.\n        \n      \n    \n    \n      \n    \n    \n      It focuses on replacing or capturing market share from existing industry leaders.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404873\n      1613\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404874",
+			"type": null,
+			"text": "Which of the following best describes the approach of a disruptive strategy in a competitive market?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "9974\n\n    \n         \n      \n        Emphasize theoretical planning over practical execution to build a sustainable advantage.\n        \n      \n    \n    \n      \n    \n    \n      Emphasize theoretical planning over practical execution to build a sustainable advantage.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404874\n      9974\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5973\n\n    \n         \n      \n        Target the most prominent market segments to gain attention from industry leaders quickly.\n        \n      \n    \n    \n      \n    \n    \n      Target the most prominent market segments to gain attention from industry leaders quickly.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404874\n      5973\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7778\n\n    \n         \n      \n        Prioritize traditional performance metrics to maintain consistency with established standards.\n        \n      \n    \n    \n      \n    \n    \n      Prioritize traditional performance metrics to maintain consistency with established standards.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404874\n      7778\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2720\n\n    \n         \n      \n        Focus on emerging customer needs, even if they differ from traditional performance measures.\n        \n      \n    \n    \n      \n    \n    \n      Focus on emerging customer needs, even if they differ from traditional performance measures.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404874\n      2720\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404875",
+			"type": null,
+			"text": "Which of the following best represents the positioning of the disruption strategy within the competition landscape?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4438\n\n    \n         \n      \n        Execution—Competition\n        \n      \n    \n    \n      \n    \n    \n      Execution—Competition\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404875\n      4438\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9166\n\n    \n         \n      \n        Control—Collaboration\n        \n      \n    \n    \n      \n    \n    \n      Control—Collaboration\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404875\n      9166\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6646\n\n    \n         \n      \n        Execution—Collaboration\n        \n      \n    \n    \n      \n    \n    \n      Execution—Collaboration\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404875\n      6646\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1916\n\n    \n         \n      \n        Control—Competition\n        \n      \n    \n    \n      \n    \n    \n      Control—Competition\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404875\n      1916\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404876",
+			"type": null,
+			"text": "A startup has developed a new, affordable solar-powered phone charger targeting outdoor enthusiasts and eco-conscious early adopters. What should the startup focus on during the early stages of its market entry, according to disruption strategy principles?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "2064\n\n    \n         \n      \n        Expanding to mainstream retail stores as quickly as possible\n        \n      \n    \n    \n      \n    \n    \n      Expanding to mainstream retail stores as quickly as possible\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404876\n      2064\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8127\n\n    \n         \n      \n        Focusing on early adopters and refining the value proposition based on their feedback\n        \n      \n    \n    \n      \n    \n    \n      Focusing on early adopters and refining the value proposition based on their feedback\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404876\n      8127\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8834\n\n    \n         \n      \n        Running comparison ads against established brands to highlight lower costs\n        \n      \n    \n    \n      \n    \n    \n      Running comparison ads against established brands to highlight lower costs\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404876\n      8834\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "512\n\n    \n         \n      \n        Investing heavily in scaling production to meet potential mainstream demand\n        \n      \n    \n    \n      \n    \n    \n      Investing heavily in scaling production to meet potential mainstream demand\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404876\n      512\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404877",
+			"type": null,
+			"text": "Architectural innovations are often difficult to detect and may lead to disruption. Which of the following is an example of architectural innovation?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8578\n\n    \n         \n      \n        A car manufacturer introduces an electric vehicle with a completely new battery technology.\n        \n      \n    \n    \n      \n    \n    \n      A car manufacturer introduces an electric vehicle with a completely new battery technology.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404877\n      8578\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8992\n\n    \n         \n      \n        A company develops a faster microprocessor chip using improved materials.\n        \n      \n    \n    \n      \n    \n    \n      A company develops a faster microprocessor chip using improved materials.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404877\n      8992\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1807\n\n    \n         \n      \n        A software company creates a new app with unique features that do not exist in current applications.\n        \n      \n    \n    \n      \n    \n    \n      A software company creates a new app with unique features that do not exist in current applications.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404877\n      1807\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5795\n\n    \n         \n      \n        A smartphone manufacturer redesigns its internal components to make the device thinner while retaining existing functionalities.\n        \n      \n    \n    \n      \n    \n    \n      A smartphone manufacturer redesigns its internal components to make the device thinner while retaining existing functionalities.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404877\n      5795\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

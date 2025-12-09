@@ -1,30 +1,29 @@
-import { useState, useMemo, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronLeft, ChevronRight, Eye, Upload, Calendar as CalendarIcon, List, Clock, FileText, Rocket } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, List, Clock, FileText, Rocket } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useCanvasData } from "@/hooks/useCanvasData";
+import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
 
-const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" }) => {
-  const [searchParams] = useSearchParams();
-  const queryView = searchParams.get('view') as "calendar" | "assignments" | null;
-  const [viewMode, setViewMode] = useState<"calendar" | "assignments">(queryView || defaultView || "calendar");
+const Calendar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { data: mockCanvasData, loading } = useCanvasData();
-  
-  // Update view mode when query parameter changes
-  useEffect(() => {
-    if (queryView) {
-      setViewMode(queryView);
-    }
-  }, [queryView]);
+  const { openItem: openSidebarItem, isOpen: isSidebarOpen, sidebarWidth, isFullscreen } = useSidebar();
   const [calendarView, setCalendarView] = useState<"day" | "week" | "month">("month");
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [daysBeforeToday, setDaysBeforeToday] = useState(7); // For infinite scroll loading previous days - start with 7 days
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const loadingPreviousRef = useRef(false);
+  
+  // Determine if we're in list view or grid view based on URL
+  const isListView = location.pathname === '/calendar/list';
+  const isGridView = location.pathname === '/calendar/grid' || location.pathname === '/calendar';
   
   // Sync completed assignments with localStorage
   const [completedAssignments, setCompletedAssignments] = useState<Set<number>>(() => {
@@ -66,6 +65,54 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
       window.removeEventListener('completedAssignmentsUpdated', handleCustomStorage);
     };
   }, []);
+
+  // Automatically mark assignments as completed if submissionStatus === "yes"
+  useEffect(() => {
+    if (!mockCanvasData || !mockCanvasData.assignments) return;
+    
+    setCompletedAssignments(prev => {
+      const newSet = new Set(prev);
+      let hasChanges = false;
+      
+      mockCanvasData.assignments.forEach(assignment => {
+        if (assignment.submissionStatus === "yes" && !newSet.has(assignment.id)) {
+          newSet.add(assignment.id);
+          hasChanges = true;
+        }
+      });
+      
+      return hasChanges ? newSet : prev;
+    });
+  }, [mockCanvasData]);
+
+  // Scroll detection for loading previous days (list view only)
+  useEffect(() => {
+    if (!isListView) return;
+
+    const handleScroll = () => {
+      if (loadingPreviousRef.current) return;
+
+      // If scrolled near the top of the page (within 300px), load more previous days
+      if (window.scrollY < 300) {
+        loadingPreviousRef.current = true;
+        
+        // Load 7 more days before today
+        setDaysBeforeToday(prev => Math.min(prev + 7, 365)); // Cap at 1 year
+        
+        // Reset loading flag after a brief delay
+        setTimeout(() => {
+          loadingPreviousRef.current = false;
+        }, 300);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isListView]);
+
   
   // Navigation handlers
   const handlePrevious = () => {
@@ -144,9 +191,26 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
   // Get assignments from mock data with full details
   const allAssignments = mockCanvasData.assignments.map((assignment) => {
     const course = mockCanvasData.courses.find(c => c.id === assignment.courseId);
-    const dueDate = new Date(assignment.dueAt);
+    let dueDate: Date;
+    let hasValidDate = true;
+    
+    try {
+      dueDate = new Date(assignment.dueAt);
+      // Check if date is valid
+      if (isNaN(dueDate.getTime())) {
+        hasValidDate = false;
+        dueDate = new Date(0); // Invalid date marker
+      }
+    } catch {
+      hasValidDate = false;
+      dueDate = new Date(0); // Invalid date marker
+    }
+    
     const createdDate = new Date(assignment.assignedAt);
-    const isQuiz = assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+    const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+    
+    // Check if assignment is completed (either manually marked or submissionStatus === "yes")
+    const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
     
     return {
       id: assignment.id,
@@ -154,78 +218,176 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
       course: assignment.courseCode,
       courseName: course?.name || assignment.courseName,
       created: createdDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-      due: dueDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      due: hasValidDate ? dueDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "No due date",
       dueDate: dueDate,
-      dueTime: dueDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }),
+      dueTime: hasValidDate ? dueDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }) : "",
       status: assignment.workflowState === "pending" ? "pending" : 
               assignment.workflowState === "submitted" ? "submitted" : "graded",
       color: course?.color || "hsl(220, 45%, 48%)",
       points: assignment.pointsPossible,
       isQuiz,
-      isCompleted: completedAssignments.has(assignment.id),
+      isCompleted,
+      hasValidDate,
+      url: assignment.url,
     };
   });
 
-  // For table view (keep original assignments array)
-  const assignments = allAssignments.map(a => ({
-    id: a.id,
-    title: a.title,
-    course: a.course,
-    courseName: a.courseName,
-    created: a.created,
-    due: a.due,
-    status: a.status,
-    color: a.color,
-  }));
+  // Group assignments by day for list view with infinite scroll support
+  const { assignmentsByDay, unknownDateAssignments } = useMemo(() => {
+    if (!isListView) {
+      return { assignmentsByDay: [], unknownDateAssignments: [] };
+    }
 
-  // Group assignments by day for list view
-  const assignmentsByDay = useMemo(() => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const dayAfterTomorrow = new Date(tomorrow);
-    dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 1);
 
-    const grouped: { [key: string]: typeof allAssignments } = {};
+    // Separate assignments with valid dates and unknown dates
+    const validAssignments: typeof allAssignments = [];
+    const unknownDateAssignments: typeof allAssignments = [];
 
     allAssignments.forEach(assignment => {
+      if (!assignment.hasValidDate || isNaN(assignment.dueDate.getTime())) {
+        unknownDateAssignments.push(assignment);
+      } else {
+        validAssignments.push(assignment);
+      }
+    });
+
+    // Group valid assignments by date
+    const groupedByDate = new Map<number, typeof allAssignments>();
+
+    validAssignments.forEach(assignment => {
       const dueDate = new Date(assignment.dueDate);
       dueDate.setHours(0, 0, 0, 0);
-      
-      let dayLabel: string;
-      if (dueDate.getTime() === today.getTime()) {
-        dayLabel = "Today";
-      } else if (dueDate.getTime() === tomorrow.getTime()) {
-        dayLabel = "Tomorrow";
-      } else {
-        dayLabel = dueDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
-      }
+      const dateKey = dueDate.getTime();
 
-      if (!grouped[dayLabel]) {
-        grouped[dayLabel] = [];
+      if (!groupedByDate.has(dateKey)) {
+        groupedByDate.set(dateKey, []);
       }
-      grouped[dayLabel].push(assignment);
+      groupedByDate.get(dateKey)!.push(assignment);
     });
 
     // Sort assignments within each day by due time
-    Object.keys(grouped).forEach(day => {
-      grouped[day].sort((a, b) => a.dueDate.getTime() - b.dueDate.getTime());
+    groupedByDate.forEach((assignments) => {
+      assignments.sort((a, b) => a.dueDate.getTime() - b.dueDate.getTime());
     });
 
-    // Sort days chronologically
-    const sortedDays = Object.keys(grouped).sort((a, b) => {
-      const dateA = a === "Today" ? today : a === "Tomorrow" ? tomorrow : new Date(grouped[a][0].dueDate);
-      const dateB = b === "Today" ? today : b === "Tomorrow" ? tomorrow : new Date(grouped[b][0].dueDate);
-      return dateA.getTime() - dateB.getTime();
+    // Create day objects for each date
+    const dayObjects: Array<{
+      label: string;
+      date: Date;
+      assignments: typeof allAssignments;
+      dateKey: number;
+    }> = [];
+
+    groupedByDate.forEach((assignments, dateKey) => {
+      const date = new Date(dateKey);
+      let label: string;
+      
+      if (dateKey === today.getTime()) {
+        label = "Today";
+      } else if (dateKey === tomorrow.getTime()) {
+        label = "Tomorrow";
+      } else {
+        label = date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+      }
+
+      dayObjects.push({
+        label,
+        date,
+        assignments,
+        dateKey,
+      });
     });
 
-    return sortedDays.map(day => ({
-      label: day,
-      date: day === "Today" ? today : day === "Tomorrow" ? tomorrow : new Date(grouped[day][0].dueDate),
-      assignments: grouped[day],
-    }));
-  }, [allAssignments, completedAssignments]);
+    // Separate into past, today, and future
+    const todayDay = dayObjects.find(d => d.dateKey === today.getTime());
+    // Sort past days chronologically (oldest first) - earliest assignments at top
+    const allPastDays = dayObjects.filter(d => d.dateKey < today.getTime()).sort((a, b) => a.dateKey - b.dateKey);
+    // Sort future days chronologically (earliest first)
+    const futureDays = dayObjects.filter(d => d.dateKey > today.getTime()).sort((a, b) => a.dateKey - b.dateKey);
+
+    // Build the ordered list: past (oldest to newest), today, future (chronological)
+    // This ensures earliest assignments at top, latest at bottom
+    const result: Array<{
+      label: string;
+      date: Date;
+      assignments: typeof allAssignments;
+    }> = [];
+
+    // Show past days: take the most recent N days (closest to today)
+    // Since allPastDays is sorted oldest first, slice(-N) gets the most recent N days
+    // which will still be in chronological order (oldest of those N days first)
+    const pastDaysToShow = allPastDays.length > 0 
+      ? allPastDays.slice(-Math.min(daysBeforeToday, allPastDays.length))
+      : [];
+    
+    pastDaysToShow.forEach(day => {
+      result.push({
+        label: day.label,
+        date: day.date,
+        assignments: day.assignments,
+      });
+    });
+
+    // Add today
+    if (todayDay) {
+      result.push({
+        label: todayDay.label,
+        date: todayDay.date,
+        assignments: todayDay.assignments,
+      });
+    }
+
+    // Add future days chronologically (earliest first)
+    futureDays.forEach(day => {
+      result.push({
+        label: day.label,
+        date: day.date,
+        assignments: day.assignments,
+      });
+    });
+
+    return {
+      assignmentsByDay: result,
+      unknownDateAssignments,
+    };
+  }, [allAssignments, completedAssignments, daysBeforeToday, isListView]);
+
+  // Scroll to today's assignments on mount (list view only)
+  useEffect(() => {
+    if (!isListView || !scrollContainerRef.current) return;
+    
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(() => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+
+      // Find today's card
+      const todayCard = container.querySelector('[data-day-card="today"]');
+      if (todayCard) {
+        // Get the position of today's card
+        const cardRect = todayCard.getBoundingClientRect();
+        const scrollOffset = window.scrollY + cardRect.top - 150; // Account for sticky header
+        
+        // Scroll to today's assignments (or closest if no today card exists)
+        window.scrollTo({ top: scrollOffset, behavior: 'instant' });
+      } else if (assignmentsByDay.length > 0) {
+        // If no today card, scroll to the first assignment card (closest to today)
+        const firstCard = container.querySelector('[data-day-card]');
+        if (firstCard) {
+          const cardRect = firstCard.getBoundingClientRect();
+          const scrollOffset = window.scrollY + cardRect.top - 150;
+          window.scrollTo({ top: scrollOffset, behavior: 'instant' });
+        }
+      }
+    }, 200);
+    
+    return () => clearTimeout(timeoutId);
+  }, [assignmentsByDay, isListView]);
+
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -242,10 +404,6 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
     }
   };
 
-  const pendingCount = assignments.filter(a => a.status === "pending").length;
-  const submittedCount = assignments.filter(a => a.status === "submitted").length;
-  const gradedCount = assignments.filter(a => a.status === "graded").length;
-
   // Day view: Get assignments for the selected day, sorted by due time
   const dayAssignments = useMemo(() => {
     const selectedDay = new Date(currentDate);
@@ -261,7 +419,7 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
       .map(assignment => {
         const course = mockCanvasData.courses.find(c => c.id === assignment.courseId);
         const dueDate = new Date(assignment.dueAt);
-        const isQuiz = assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+        const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
         return {
           id: assignment.id,
           title: assignment.title,
@@ -345,18 +503,20 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
   }, [currentDate]);
 
   return (
-    <Layout>
-      <div className="px-5 sm:px-8 pb-10">
+    <div className="relative w-full">
+      {/* Main Content Wrapper */}
+      <div 
+        className="transition-all duration-150 ease-out max-lg:pr-0"
+        style={{ paddingRight: isSidebarOpen && !isFullscreen ? sidebarWidth : 0 }}
+      >
+        <Layout>
+          <div className="px-5 sm:px-8 pb-10">
         {/* Header */}
         <header className="py-6 sm:py-8 border-b border-border">
           {/* Header with title and description */}
           <div className="mb-6">
-            <h1 className="page-header">
-              {viewMode === "calendar" ? monthName : "Assignments"}
-            </h1>
-            <p className="page-header-subtitle">
-              {viewMode === "calendar" ? "Plan your academic journey" : "Track and manage your coursework"}
-            </p>
+            <h1 className="page-header">{monthName}</h1>
+            <p className="page-header-subtitle">Plan your academic journey</p>
           </div>
 
           {/* Controls Row */}
@@ -364,8 +524,7 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
             {/* Left side - empty for now */}
             <div className="flex-1"></div>
 
-            {/* Center - Calendar navigation (only in calendar view) */}
-            {viewMode === "calendar" && (
+            {/* Center - Calendar navigation */}
               <div className="flex items-center gap-2">
                 <Button 
                   variant="ghost" 
@@ -394,29 +553,195 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
                   <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
-            )}
 
             {/* Right side - View Toggle (icons only) */}
             <div className="flex-1 flex justify-end">
               <div className="exposed-card glass-card flex items-center gap-2 px-3 py-2">
-                <CalendarIcon 
-                  className={`w-4 h-4  ${viewMode === "calendar" ? "text-primary" : "text-foreground/60"}`}
-                />
+                <CalendarIcon className={`w-4 h-4 ${isGridView ? 'text-primary' : 'text-foreground/60'}`} />
                 <Switch
-                  checked={viewMode === "assignments"}
-                  onCheckedChange={(checked) => setViewMode(checked ? "assignments" : "calendar")}
+                  checked={isListView}
+                  onCheckedChange={(checked) => {
+                    if (checked) {
+                      navigate('/calendar/list');
+                    } else {
+                      navigate('/calendar/grid');
+                    }
+                  }}
                 />
-                <List 
-                  className={`w-4 h-4  ${viewMode === "assignments" ? "text-primary" : "text-foreground/60"}`}
-                />
+                <List className={`w-4 h-4 ${isListView ? 'text-primary' : 'text-foreground/60'}`} />
               </div>
             </div>
           </div>
         </header>
 
-        {viewMode === "calendar" ? (
           <>
-            {calendarView === "day" ? (
+            {isListView ? (
+              // List View
+              <div 
+                ref={scrollContainerRef}
+                className="space-y-6"
+              >
+                {assignmentsByDay.map((dayGroup, index) => {
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  const dayDate = new Date(dayGroup.date);
+                  dayDate.setHours(0, 0, 0, 0);
+                  const isToday = dayDate.getTime() === today.getTime();
+                  
+                  return (
+                    <div key={`${dayGroup.label}-${dayGroup.date.getTime()}`} data-day-card={isToday ? "today" : ""}>
+                      <div className="exposed-card glass-card mb-4">
+                        <div className="px-5 py-4 border-b border-border">
+                          <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                            {dayGroup.label === "Today" 
+                              ? `Today, ${dayGroup.date.toLocaleDateString("en-US", { month: "long", day: "numeric" })}`
+                              : dayGroup.label === "Tomorrow"
+                              ? `Tomorrow, ${dayGroup.date.toLocaleDateString("en-US", { month: "long", day: "numeric" })}`
+                              : dayGroup.label}
+                          </h2>
+                        </div>
+                        <div className="p-5">
+                          <div className="space-y-2">
+                            {dayGroup.assignments.map((assignment) => (
+                              <div
+                                key={assignment.id}
+                                className={`flex items-center gap-4 p-4 border bg-white/5 hover:bg-white/10 cursor-pointer ${
+                                  assignment.isQuiz ? "border-2 border-red-500/80" : "border border-border"
+                                } ${
+                                  assignment.isCompleted ? "opacity-60" : ""
+                                }`}
+                                onClick={() => {
+                                  openSidebarItem({
+                                    id: String(assignment.id),
+                                    type: "assignment",
+                                    title: assignment.title,
+                                    subtitle: `${assignment.isQuiz ? "Quiz" : "Assignment"} • ${assignment.course}`,
+                                    dueDate: assignment.dueTime ? `DUE: ${assignment.dueTime}` : assignment.due,
+                                    points: assignment.points,
+                                    isCompleted: assignment.isCompleted,
+                                    courseCode: assignment.course,
+                                    canvasUrl: assignment.url,
+                                  });
+                                }}
+                              >
+                                {/* Course Code */}
+                                <span className="text-xs text-muted-foreground flex-shrink-0">
+                                  {assignment.course}
+                                </span>
+
+                                {/* Checkbox */}
+                                <Checkbox
+                                  checked={assignment.isCompleted}
+                                  onCheckedChange={() => toggleAssignmentComplete(assignment.id)}
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="flex-shrink-0"
+                                />
+
+                                {/* Icons */}
+                                <div className="flex items-center gap-1 flex-shrink-0">
+                                  {assignment.isQuiz ? (
+                                    <Rocket className="w-4 h-4 text-foreground/60" />
+                                  ) : (
+                                    <FileText className="w-4 h-4 text-foreground/60" />
+                                  )}
+                                </div>
+
+                                {/* Description */}
+                                <div className="flex-1 min-w-0">
+                                  <p className={`font-medium text-sm ${assignment.isCompleted ? "line-through text-foreground/50" : "text-foreground/90"}`}>
+                                    {assignment.course} {assignment.isQuiz ? "QUIZ" : "ASSIGNMENT"} {assignment.title}
+                                  </p>
+                                </div>
+
+                                {/* Points */}
+                                <span className="text-sm text-foreground/70 flex-shrink-0">{assignment.points} PTS</span>
+
+                                {/* Due Time */}
+                                {assignment.dueTime && (
+                                  <div className="flex items-center gap-1 text-sm text-foreground/70 flex-shrink-0">
+                                    <span>DUE: {assignment.dueTime}</span>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Unknown date assignments at the bottom */}
+                {unknownDateAssignments.length > 0 && (
+                  <div className="exposed-card glass-card mb-4">
+                    <div className="px-5 py-4 border-b border-border">
+                      <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                        Unknown Date
+                      </h2>
+                    </div>
+                    <div className="p-5">
+                      <div className="space-y-2">
+                        {unknownDateAssignments.map((assignment) => (
+                          <div
+                            key={assignment.id}
+                            className={`flex items-center gap-4 p-4 border bg-white/5 hover:bg-white/10 cursor-pointer ${
+                              assignment.isQuiz ? "border-2 border-red-500/80" : "border border-border"
+                            } ${
+                              assignment.isCompleted ? "opacity-60" : ""
+                            }`}
+                            onClick={() => {
+                              openSidebarItem({
+                                id: String(assignment.id),
+                                type: "assignment",
+                                title: assignment.title,
+                                subtitle: `${assignment.isQuiz ? "Quiz" : "Assignment"} • ${assignment.course}`,
+                                dueDate: "No due date",
+                                points: assignment.points,
+                                isCompleted: assignment.isCompleted,
+                                courseCode: assignment.course,
+                                canvasUrl: assignment.url,
+                              });
+                            }}
+                          >
+                            {/* Course Code */}
+                            <span className="text-xs text-muted-foreground flex-shrink-0">
+                              {assignment.course}
+                            </span>
+
+                            {/* Checkbox */}
+                            <Checkbox
+                              checked={assignment.isCompleted}
+                              onCheckedChange={() => toggleAssignmentComplete(assignment.id)}
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex-shrink-0"
+                            />
+
+                            {/* Icons */}
+                            <div className="flex items-center gap-1 flex-shrink-0">
+                              {assignment.isQuiz ? (
+                                <Rocket className="w-4 h-4 text-foreground/60" />
+                              ) : (
+                                <FileText className="w-4 h-4 text-foreground/60" />
+                              )}
+                            </div>
+
+                            {/* Description */}
+                            <div className="flex-1 min-w-0">
+                              <p className={`font-medium text-sm ${assignment.isCompleted ? "line-through text-foreground/50" : "text-foreground/90"}`}>
+                                {assignment.course} {assignment.isQuiz ? "QUIZ" : "ASSIGNMENT"} {assignment.title}
+                              </p>
+                            </div>
+
+                            {/* Points */}
+                            <span className="text-sm text-foreground/70 flex-shrink-0">{assignment.points} PTS</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : calendarView === "day" ? (
               <>
                 {/* Metrics */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -454,7 +779,9 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
                       {dayAssignments.map((assignment) => (
                         <div
                           key={assignment.id}
-                          className={`flex items-center gap-4 p-4 border border-border bg-white/5 hover:bg-white/10  ${
+                          className={`flex items-center gap-4 p-4 border bg-white/5 hover:bg-white/10  ${
+                            assignment.isQuiz ? "border-2 border-red-500/80" : "border border-border"
+                          } ${
                             assignment.isCompleted ? "opacity-60" : ""
                           }`}
                         >
@@ -595,98 +922,13 @@ const Calendar = ({ defaultView }: { defaultView?: "calendar" | "assignments" })
               </>
             )}
           </>
-        ) : (
-          <>
-            {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              {[
-                { label: "Pending", count: pendingCount, color: "hsl(34 53% 81%)" },
-                { label: "Submitted", count: submittedCount, color: "hsl(210 50% 79%)" },
-                { label: "Graded", count: gradedCount, color: "hsl(247 63% 85%)" },
-              ].map((stat) => (
-                <div key={stat.label} className="exposed-card glass-card text-center p-5">
-                  <p className="text-xs text-muted-foreground mb-2">{stat.label}</p>
-                  <p
-                    className="text-3xl font-semibold text-foreground"
-                    style={{ color: stat.color }}
-                  >
-                    {stat.count}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Assignments grouped by day */}
-            <div className="space-y-6">
-              {assignmentsByDay.map((dayGroup) => (
-                <div key={dayGroup.label}>
-                  <div className="exposed-card glass-card mb-4">
-                    <div className="px-5 py-4 border-b border-border">
-                      <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                        {dayGroup.label === "Today" 
-                          ? `Today, ${dayGroup.date.toLocaleDateString("en-US", { month: "long", day: "numeric" })}`
-                          : dayGroup.label === "Tomorrow"
-                          ? `Tomorrow, ${dayGroup.date.toLocaleDateString("en-US", { month: "long", day: "numeric" })}`
-                          : dayGroup.label}
-                      </h2>
-                    </div>
-                    <div className="p-5">
-                      <div className="space-y-2">
-                    {dayGroup.assignments.map((assignment) => (
-                      <div
-                        key={assignment.id}
-                        className={`flex items-center gap-4 p-4 border border-border bg-white/5 hover:bg-white/10  cursor-pointer ${
-                          assignment.isCompleted ? "opacity-60" : ""
-                        }`}
-                      >
-                        {/* Course Code */}
-                        <span className="text-xs text-muted-foreground flex-shrink-0">
-                          {assignment.course}
-                        </span>
-
-                        {/* Checkbox */}
-                        <Checkbox
-                          checked={assignment.isCompleted}
-                          onCheckedChange={() => toggleAssignmentComplete(assignment.id)}
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-shrink-0"
-                        />
-
-                        {/* Icons */}
-                        <div className="flex items-center gap-1 flex-shrink-0">
-                          {assignment.isQuiz ? (
-                            <Rocket className="w-4 h-4 text-foreground/60" />
-                          ) : (
-                            <FileText className="w-4 h-4 text-foreground/60" />
-                          )}
-                        </div>
-
-                        {/* Description */}
-                        <div className="flex-1 min-w-0">
-                          <p className={`font-medium text-sm ${assignment.isCompleted ? "line-through text-foreground/50" : "text-foreground/90"}`}>
-                            {assignment.course} {assignment.isQuiz ? "QUIZ" : "ASSIGNMENT"} {assignment.title}
-                          </p>
-                        </div>
-
-                        {/* Points */}
-                        <span className="text-sm text-foreground/70 flex-shrink-0">{assignment.points} PTS</span>
-
-                        {/* Due Time */}
-                        <div className="flex items-center gap-1 text-sm text-foreground/70 flex-shrink-0">
-                          <span>DUE: {assignment.dueTime}</span>
-                        </div>
-                      </div>
-                    ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
+          </div>
+        </Layout>
       </div>
-    </Layout>
+
+      {/* Sidebar Viewer */}
+      <SidebarViewer />
+    </div>
   );
 };
 

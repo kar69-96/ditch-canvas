@@ -1,13 +1,13 @@
 interface WelcomeHeaderProps {
-  userName: string;
+  firstName: string;
   tagline: string;
 }
 
-export function WelcomeHeader({ userName, tagline }: WelcomeHeaderProps) {
+export function WelcomeHeader({ firstName, tagline }: WelcomeHeaderProps) {
   return (
     <div className="">
       <h1 className="page-header">
-        Hello, {userName}
+        Hi, {firstName}
       </h1>
       <p className="page-header-subtitle">
         {tagline}

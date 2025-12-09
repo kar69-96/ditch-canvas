@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Login - Browserless Session</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        .spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message {
+            margin-top: 1rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <div class="message">Opening Canvas login session...</div>
+    </div>
+    <script>
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const baseUrl = window.location.origin;
+            
+            // Navigate to Browserless UI sessions tab
+            const sessionsUrl = `${baseUrl}?token=${token || ''}#/sessions`;
+            window.location.href = sessionsUrl;
+            
+            // After a delay, try to auto-click the first session
+            setTimeout(() => {
+                // This will run in the Browserless UI context
+                const sessionButton = document.querySelector('[data-session-id], .session-item, button[aria-label*="session" i]');
+                if (sessionButton) {
+                    sessionButton.click();
+                }
+            }, 2000);
+        })();
+    </script>
+</body>
+</html>

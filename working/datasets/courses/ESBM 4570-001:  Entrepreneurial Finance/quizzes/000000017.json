@@ -1,0 +1,57 @@
+{
+	"quizId": "497928",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497928",
+	"extractedAt": "2025-12-04T06:36:48.316Z",
+	"title": "REFLECTION Case 5 Bizzy Coffee",
+	"description": "<p>Please respond to each of the prompts.</p>\n<p>REMINDER:</p>\n<p>when you recognize a colleague's input, please note their NAME and what they said that made an impression on you.&nbsp;</p>",
+	"descriptionText": "Please respond to each of the prompts.\nREMINDER:\nwhen you recognize a colleague's input, please note their NAME and what they said that made an impression on you. ",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463749",
+			"type": null,
+			"text": "What were 2 takeaways from this case?",
+			"points": 1,
+			"answers": []
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463750",
+			"type": null,
+			"text": "What is a question that you still have regarding this case?",
+			"points": 1,
+			"answers": []
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463751",
+			"type": null,
+			"text": "Please identify a colleague who made an interesting input to the conversation, and share what the said.",
+			"points": 0.5,
+			"answers": []
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463752",
+			"type": null,
+			"text": "Please identify a second colleague who made an interesting input to the conversation, and share what the said.",
+			"points": 0.5,
+			"answers": []
+		}
+	],
+	"questionCount": 4,
+	"attachments": []
+}

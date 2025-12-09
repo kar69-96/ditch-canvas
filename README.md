@@ -122,3 +122,6 @@ MIT License
 
 **Made for students who want to take control of their Canvas data** 🎓
 
+
+
+

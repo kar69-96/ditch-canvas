@@ -1,9 +1,0 @@
-{
-	"id": "h3E03zcbtv8EGTB",
-	"json": "{\"id\":\"h3E03zcbtv8EGTB\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/week-11\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/week-11\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/week-11\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:05:26.584Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/week-11",
-	"url": "https://canvas.colorado.edu/courses/123249/pages/week-11"
-}

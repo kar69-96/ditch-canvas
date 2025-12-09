@@ -1,0 +1,24 @@
+{
+	"quizId": "507588",
+	"courseId": "123249",
+	"url": "https://canvas.colorado.edu/courses/123249/quizzes/507588",
+	"extractedAt": "2025-12-04T06:32:55.230Z",
+	"title": "PQ2",
+	"description": "<p>Practice Quiz PQ2 covers Lectures 3 and 4. It is based on assignments A3 and A4 and the examples covered in Lecture 4 supplement. To take the practice quiz, please go to accepi.com.</p>\n<p>&nbsp;</p>\n<p>Please note: PQ2 is not graded.</p>",
+	"descriptionText": "Practice Quiz PQ2 covers Lectures 3 and 4. It is based on assignments A3 and A4 and the examples covered in Lecture 4 supplement. To take the practice quiz, please go to accepi.com.\n \nPlease note: PQ2 is not graded.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [],
+	"questionCount": 0,
+	"attachments": []
+}

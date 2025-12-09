@@ -3,7 +3,7 @@
   "cookies": [
     {
       "name": "__Host-JSESSIONID",
-      "value": "0A5EECBB54C934BE2EBCB99E8C37B778",
+      "value": "CA6053A2030D5FB45D064BB0E01CC666",
       "domain": "fedauth.colorado.edu",
       "path": "/",
       "expires": -1,
@@ -13,7 +13,7 @@
     },
     {
       "name": "__Host-shib_idp_session",
-      "value": "42d288d50df103c72d23d51b9cec159aafcbe361bef3bcf4ea54fbc21bdd74e8",
+      "value": "e0ea9046ddbcd6f0f66496e97cfe158195d771d803afbf9698732f1ba21b2b5e",
       "domain": "fedauth.colorado.edu",
       "path": "/",
       "expires": -1,
@@ -26,14 +26,14 @@
       "value": "canvas.colorado.edu",
       "domain": "sso.canvaslms.com",
       "path": "/",
-      "expires": 1796284843.713287,
+      "expires": 1796677070.597436,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "log_session_id",
-      "value": "408d4415b405e8010297ed2bb3c60ba5",
+      "value": "8b71638b95a1805d34bac2e08676b87b",
       "domain": "canvas.colorado.edu",
       "path": "/",
       "expires": -1,
@@ -43,7 +43,7 @@
     },
     {
       "name": "canvas_session",
-      "value": "xtX9a79n0ZoDzu9GD9XC6g+gzWbRdibEcZOAb5cDpPTuep--paR4D5C2fDYSr8gd_opyQJlmJ0HSh-MaLfcJ6G4fAbP498J2b4jRKNF9BSEz2Y7MwueF6hJyL9xRgE3LlFKSBGw3ACuJLt837mt5memcIwEVSsYytWCS9UzJYY6c9DEmo9BflPOI0ZQtVGP1uFbsXA6Q0Skkw6LvGy_1AA57LaurpSW3bNu3DBF_mD-wmkm8GkQXBBADoXUMhxc9BTQfaDCA6E0_sU5mHezeRQHbJNKoyjUjTpEyhwFtgC92rKFApKuQWY_GQgpulWLFq7nVA_L_yGsnwoRFjuArf8a21Xumusf6bhGDB30FxtLJrsJuqLxqN3qtMkWoKW1E_yS6bFLg3pihGkVjaSeQMJDPk3reMNT3FFzoHCJTmoSQHf1dXnjP3CYulXPiQs7xWyB-Th6ZxVRC_-24YkqrHuTLQChkvjnFDhlYubtlYG0VncowOkrrjQQ--lxMjbwUvrovzHRnY8x341_PYnTig0zl6WwJxo1D_kj5l18-UUZYM3zcDjKcdr0iVFmD2gu_3tUYcOPcq7srVcyVbjS_CK0QV8oVGfbTHWjccb0egAnp1iDRGfeTc3-iurXYqwaLu9HiFFn0_nu7VMuIbihCDccn2ex0ZZfgQtqwSxN40BWCQ.2mm7zshnkNxPX5R_qotKyDVXHcw.aS_uLA",
+      "value": "seJUaaTT6SRiMEneVmRGyA+QWLdzGfw5gugHHShyCyOxgB6hZMS4dYWAq99EHepZWo0r7ZPleON3uG_QvEv-5Csnxlmrot-UUmGirzg0MTRBLExFaJMLlqh5NiEn9Eab1zIj2kQEI8BNP7KAPvQqhSi5RPqkjk5PzQlOwu3WMNAAgzmZ1F_qOJ8qniOUE_6hZpL2B6vh55HKM7xjjfVbtlFg_xitHdX-8aQcac2nEktKsVf38JIawPRIibg7hnyI7-aSDPT-oaa7gqVWguehcxZVzhZSPNUwqaZ2ljUFEBK9Morczc8rmv5WUVZnoSAzJHsziyvzQPWaEFvO7F96jJCEwC9WpLDf3hNQsSGUhBj8EUJINPlt3GXzTFop1zSd9YGBKudMmGBm9VV-jgZ8CXH7rW9BVsjKFnq_ekarv49y-4GSQQbdeIeFelvY7Y6QXnJTlpYNdzObIlIoMVtb6UbzvC_7JRMr9ItzZhvIdVPaAuwrRXwyJzum0mQCu1nBT0bpJOYsvpY-XRBT3UhkItBSHyICyE82yXM_vDFix4KAEPE9ZAGgZHp-htvYENe8UN3eJV3l82lbFsUsivqGb34NL2C9pL__G_pn2s0LWvwvMaRlp19Q4h9l4wrxofMyV4CEo9wNdplHzgthKM2BoXPxulEsQugR8iVY-w46lCnVg.GrOlaw0vVjrZitpZ81b1fJkigWE.aTXqTw",
       "domain": "canvas.colorado.edu",
       "path": "/",
       "expires": -1,
@@ -53,20 +53,20 @@
     },
     {
       "name": "_ga",
-      "value": "GA1.2.778954975.1764748846",
+      "value": "GA1.2.1463363282.1765141073",
       "domain": ".colorado.edu",
       "path": "/",
-      "expires": 1799308845.735839,
+      "expires": 1799701072.909428,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "_gid",
-      "value": "GA1.2.1040546271.1764748846",
+      "value": "GA1.2.41130410.1765141073",
       "domain": ".colorado.edu",
       "path": "/",
-      "expires": 1764835245,
+      "expires": 1765227472,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -76,17 +76,17 @@
       "value": "1",
       "domain": ".colorado.edu",
       "path": "/",
-      "expires": 1764748905,
+      "expires": 1765141132,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "_ga_HQE5JXBW8M",
-      "value": "GS2.2.s1764748845$o1$g0$t1764748845$j60$l0$h0",
+      "value": "GS2.2.s1765141073$o1$g0$t1765141073$j60$l0$h0",
       "domain": ".colorado.edu",
       "path": "/",
-      "expires": 1799308845.867624,
+      "expires": 1799701073.05557,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -96,14 +96,14 @@
       "value": "false",
       "domain": "canvas.colorado.edu",
       "path": "/",
-      "expires": 1796284845,
+      "expires": 1796677073,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "_csrf_token",
-      "value": "gJrmgyIwMgm4AEV1FaB48X1Yz2ry36nC89tpO18j%2FS7vyZ%2FnZWVUR%2BtuCDJA2kiGLBKXRZOv%2FpScsDpSNReQFw%3D%3D",
+      "value": "zHqnNKTJuKIx920tuR1gkHh5dyQcgSulHjAth4v4Ii2BOd5%2F4fDA9FyBHBT1VTjAMT09b3%2FlfPRPAkDkzZtRaw%3D%3D",
       "domain": "canvas.colorado.edu",
       "path": "/",
       "expires": -1,
@@ -112,10 +112,11 @@
       "sameSite": "Lax"
     }
   ],
+  "username": "kare6625",
   "metadata": {
-    "extractedAt": "2025-12-03T08:00:48.187Z",
-    "source": "playwright-extraction",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-    "finalUrl": "https://canvas.colorado.edu/"
+    "extractedAt": "2025-12-07T20:57:55.728Z",
+    "source": "playwright-streaming-extraction",
+    "finalUrl": "https://canvas.colorado.edu/",
+    "username": "kare6625"
   }
 }

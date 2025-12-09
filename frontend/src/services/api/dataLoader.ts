@@ -34,6 +34,9 @@ export interface CanvasData {
     workflowState: string;
     submittedAt?: string;
     url?: string;
+    submissionStatus?: "yes" | "no" | null;
+    submissionStatusText?: string | null;
+    isQuiz?: boolean; // Flag to identify quizzes for UI styling
   }>;
   modules: Array<{
     id: number;

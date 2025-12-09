@@ -7,21 +7,64 @@ function getRequiredEnv(name, value) {
   return value;
 }
 
-function getBrowserbaseConfig(overrides = {}) {
-  const apiKey = overrides.apiKey || process.env.BROWSERBASE_API_KEY;
-  const projectId = overrides.projectId || process.env.BROWSERBASE_PROJECT_ID;
+function getBrowserlessConfig(overrides = {}) {
+  // Check if using Browserless Cloud (has BROWSERLESS_API_TOKEN)
+  const cloudToken = overrides.apiToken || process.env.BROWSERLESS_API_TOKEN || '';
+  const useCloud = !!cloudToken;
+  
+  let wsUrl, httpUrl, token;
+  
+  if (useCloud) {
+    // Browserless Cloud endpoint - Playwright native protocol
+    wsUrl = 'wss://production-sfo.browserless.io/chromium/playwright';
+    httpUrl = 'https://production-sfo.browserless.io';
+    token = cloudToken;
+  } else {
+    // Self-hosted Browserless
+    const baseWs = overrides.wsUrl || process.env.BROWSERLESS_WS || process.env.BROWSERLESS_URL || 'ws://localhost:3000';
+    const wsPath = overrides.wsPath || process.env.BROWSERLESS_WS_PATH || '/playwright';
+    const baseWsTrimmed = baseWs.endsWith('/') ? baseWs.slice(0, -1) : baseWs;
+    const pathNormalized = wsPath.startsWith('/') ? wsPath : `/${wsPath}`;
+    
+    if (baseWsTrimmed.includes(pathNormalized)) {
+      wsUrl = baseWsTrimmed;
+    } else {
+      wsUrl = `${baseWsTrimmed}${pathNormalized}`;
+    }
+
+    const derivedHttp = baseWsTrimmed.replace(/^ws/i, 'http').replace(/\/playwright$/i, '');
+    httpUrl = overrides.httpUrl || process.env.BROWSERLESS_HTTP || derivedHttp;
+    token = overrides.token || process.env.BROWSERLESS_TOKEN || '';
+  }
+  
   const canvasUrl =
     overrides.canvasUrl ||
+    process.env.CANVAS_URL ||
     process.env.CANVAS_LOGIN_URL ||
-    'https://canvas.colorado.edu/login';
+    'https://canvas.colorado.edu';
 
   return {
-    apiKey: getRequiredEnv('BROWSERBASE_API_KEY', apiKey),
-    projectId: getRequiredEnv('BROWSERBASE_PROJECT_ID', projectId),
+    wsUrl,
+    httpUrl,
+    token,
     canvasUrl,
+    useCloud,
+  };
+}
+
+function getSupabaseConfig(overrides = {}) {
+  const url = overrides.url || process.env.SUPABASE_URL || process.env.SUPABASE_PROJECT_URL;
+  const serviceKey = overrides.serviceKey || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const bucket = overrides.bucket || process.env.SUPABASE_STORAGE_BUCKET || 'user-data';
+
+  return {
+    url: getRequiredEnv('SUPABASE_URL', url),
+    serviceKey: getRequiredEnv('SUPABASE_SERVICE_KEY', serviceKey),
+    bucket,
   };
 }
 
 module.exports = {
-  getBrowserbaseConfig,
+  getBrowserlessConfig,
+  getSupabaseConfig,
 };

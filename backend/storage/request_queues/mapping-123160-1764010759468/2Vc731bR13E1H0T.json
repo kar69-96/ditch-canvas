@@ -1,9 +1,0 @@
-{
-	"id": "2Vc731bR13E1H0T",
-	"json": "{\"id\":\"2Vc731bR13E1H0T\",\"url\":\"https://canvas.colorado.edu/courses/123160/users\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/users\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/users\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":2,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T18:59:31.015Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123160/users",
-	"url": "https://canvas.colorado.edu/courses/123160/users"
-}

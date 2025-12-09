@@ -1,9 +1,0 @@
-{
-	"id": "bzwe7ixNzwFvahx",
-	"json": "{\"id\":\"bzwe7ixNzwFvahx\",\"url\":\"https://canvas.colorado.edu/courses/121531/discussion_topics/1707918\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/discussion_topics/1707918\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/discussion_topics/1707918\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"discussion\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:06:28.782Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/121531/discussion_topics/1707918",
-	"url": "https://canvas.colorado.edu/courses/121531/discussion_topics/1707918"
-}

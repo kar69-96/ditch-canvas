@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeSelector } from "@/components/onboarding/ThemeSelector";
 import { FontSelector } from "@/components/onboarding/FontSelector";
+import { CanvasSyncButton } from "@/components/onboarding/CanvasSyncButton";
+import { UniversitySelector } from "@/components/onboarding/UniversitySelector";
+import { TermsAndConditions } from "@/components/onboarding/TermsAndConditions";
 import { ThemeOption, FontOption, applyTheme, applyFont, savePreferences, getPreferences } from "@/lib/preferences";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 
@@ -10,6 +13,9 @@ const Onboarding = () => {
   const [step, setStep] = useState(0);
   const [theme, setTheme] = useState<ThemeOption>("light");
   const [font, setFont] = useState<FontOption>("sans");
+  const [canvasSynced, setCanvasSynced] = useState(false);
+  const [university, setUniversity] = useState("");
+  const [email, setEmail] = useState("");
 
   // Load existing preferences if any
   useEffect(() => {
@@ -36,6 +42,8 @@ const Onboarding = () => {
     navigate("/dashboard");
   };
 
+  const totalSteps = 5;
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top line */}
@@ -48,7 +56,7 @@ const Onboarding = () => {
             Setup
           </span>
           <span className="text-xs text-muted-foreground">
-            {step + 1} / 2
+            {step + 1} / {totalSteps}
           </span>
         </div>
       </header>
@@ -57,9 +65,27 @@ const Onboarding = () => {
       <main className="flex-1 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-lg ">
           {step === 0 && (
-            <ThemeSelector selected={theme} onSelect={handleThemeChange} />
+            <UniversitySelector
+              university={university}
+              email={email}
+              onUniversityChange={setUniversity}
+              onEmailChange={setEmail}
+            />
           )}
           {step === 1 && (
+            <TermsAndConditions />
+          )}
+          {step === 2 && (
+            <CanvasSyncButton
+              email={email}
+              onSuccess={() => setCanvasSynced(true)}
+              onError={() => setCanvasSynced(false)}
+            />
+          )}
+          {step === 3 && (
+            <ThemeSelector selected={theme} onSelect={handleThemeChange} />
+          )}
+          {step === 4 && (
             <FontSelector selected={font} onSelect={handleFontChange} />
           )}
         </div>
@@ -80,10 +106,14 @@ const Onboarding = () => {
             <div />
           )}
 
-          {step < 1 ? (
+          {step < totalSteps - 1 ? (
             <button
               onClick={() => setStep(step + 1)}
               className="flex items-center gap-2 px-5 py-2.5 bg-background border-2 border-foreground/20 text-foreground text-sm font-medium hover:bg-background/80 "
+              disabled={
+                (step === 0 && (!university || !email)) ||
+                (step === 2 && !canvasSynced)
+              }
             >
               Continue
               <ArrowRight className="w-4 h-4" />
@@ -104,7 +134,7 @@ const Onboarding = () => {
       <div className="h-1 bg-border">
         <div
           className="h-full bg-foreground "
-          style={{ width: `${((step + 1) / 2) * 100}%` }}
+          style={{ width: `${((step + 1) / totalSteps) * 100}%` }}
         />
       </div>
     </div>

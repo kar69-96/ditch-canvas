@@ -1,0 +1,150 @@
+{
+	"quizId": "491819",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491819",
+	"extractedAt": "2025-12-04T06:16:18.537Z",
+	"title": "\"Startup Failure\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Startup Failure\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Startup Failure\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404924",
+			"type": null,
+			"text": "Which of the following is NOT considered a startup failure?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4222\n\n    \n         \n      \n        A bootstrapped startup where the founders cannot expect to recoup more cash than the value of their capital and sweat equity.\n        \n      \n    \n    \n      \n    \n    \n      A bootstrapped startup where the founders cannot expect to recoup more cash than the value of their capital and sweat equity.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404924\n      4222\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5815\n\n    \n         \n      \n        A startup exits via a merger, and the proceeds from the exit exceed the total equity capital contributed by investors.\n        \n      \n    \n    \n      \n    \n    \n      A startup exits via a merger, and the proceeds from the exit exceed the total equity capital contributed by investors.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404924\n      5815\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9582\n\n    \n         \n      \n        A startup exits via an IPO, but the proceeds are less than the total amount of equity capital contributed by investors.\n        \n      \n    \n    \n      \n    \n    \n      A startup exits via an IPO, but the proceeds are less than the total amount of equity capital contributed by investors.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404924\n      9582\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "510\n\n    \n         \n      \n        A startup is still operating, but early investors would incur a loss if they sold their equity.\n        \n      \n    \n    \n      \n    \n    \n      A startup is still operating, but early investors would incur a loss if they sold their equity.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404924\n      510\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404925",
+			"type": null,
+			"text": "Which of the following best describes the \"Good Idea, Bad Bedfellows\" failure pattern?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "173\n\n    \n         \n      \n        The startup fails because of external factors, such as regulatory changes or economic downturns, that are beyond the founders' control.\n        \n      \n    \n    \n      \n    \n    \n      The startup fails because of external factors, such as regulatory changes or economic downturns, that are beyond the founders' control.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404925\n      173\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5508\n\n    \n         \n      \n        The startup fails due to a lack of product-market fit, where the product does not address a significant customer need or demand.\n        \n      \n    \n    \n      \n    \n    \n      The startup fails due to a lack of product-market fit, where the product does not address a significant customer need or demand.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404925\n      5508\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9549\n\n    \n         \n      \n        The startup's core idea is promising, but the failure arises from problems with the team, partners, or investors, such as misalignment of goals or lack of capability.\n        \n      \n    \n    \n      \n    \n    \n      The startup's core idea is promising, but the failure arises from problems with the team, partners, or investors, such as misalignment of goals or lack of capability.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404925\n      9549\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2607\n\n    \n         \n      \n        The startup has a viable idea, but failure occurs due to poor execution, including issues with product development and marketing strategies.\n        \n      \n    \n    \n      \n    \n    \n      The startup has a viable idea, but failure occurs due to poor execution, including issues with product development and marketing strategies.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404925\n      2607\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404926",
+			"type": null,
+			"text": "Which of the following scenarios does NOT represent a \"False Positive\" failure pattern?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "6414\n\n    \n         \n      \n        A startup develops a product with no market traction and fails to secure funding, preventing it from launching at all.\n        \n      \n    \n    \n      \n    \n    \n      A startup develops a product with no market traction and fails to secure funding, preventing it from launching at all.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404926\n      6414\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8439\n\n    \n         \n      \n        A startup achieves early traction due to aggressive marketing, but the product fails to retain customers, revealing a lack of real demand.\n        \n      \n    \n    \n      \n    \n    \n      A startup achieves early traction due to aggressive marketing, but the product fails to retain customers, revealing a lack of real demand.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404926\n      8439\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3998\n\n    \n         \n      \n        A startup experiences rapid early growth, but it fails to identify and resolve underlying product issues that prevent long-term scalability.\n        \n      \n    \n    \n      \n    \n    \n      A startup experiences rapid early growth, but it fails to identify and resolve underlying product issues that prevent long-term scalability.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404926\n      3998\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "621\n\n    \n         \n      \n        A startup secures initial funding based on promising projections, but later fails because the addressable market is much smaller than anticipated.\n        \n      \n    \n    \n      \n    \n    \n      A startup secures initial funding based on promising projections, but later fails because the addressable market is much smaller than anticipated.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404926\n      621\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404927",
+			"type": null,
+			"text": "Which of the following scenarios best represents the \"Help Wanted\" failure pattern?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3533\n\n    \n         \n      \n        A startup attracts funding from investors, but disagreements over financial priorities lead to a breakdown in collaboration.\n        \n      \n    \n    \n      \n    \n    \n      A startup attracts funding from investors, but disagreements over financial priorities lead to a breakdown in collaboration.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404927\n      3533\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6540\n\n    \n         \n      \n        A startup with a viable idea fails to secure sufficient funding to hire the specialized talent needed to develop its product or scale operations.\n        \n      \n    \n    \n      \n    \n    \n      A startup with a viable idea fails to secure sufficient funding to hire the specialized talent needed to develop its product or scale operations.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404927\n      6540\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2929\n\n    \n         \n      \n        A startup raises ample funding but fails to allocate it effectively, resulting in wasted resources and financial strain.\n        \n      \n    \n    \n      \n    \n    \n      A startup raises ample funding but fails to allocate it effectively, resulting in wasted resources and financial strain.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404927\n      2929\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1612\n\n    \n         \n      \n        A startup burns through its initial funding too quickly due to high fixed costs, leaving no resources for critical hiring or expansion.\n        \n      \n    \n    \n      \n    \n    \n      A startup burns through its initial funding too quickly due to high fixed costs, leaving no resources for critical hiring or expansion.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404927\n      1612\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404928",
+			"type": null,
+			"text": "Which of the following scenarios best illustrates a \"Cascading Miracles\" failure pattern for a moonshot venture?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "5026\n\n    \n         \n      \n        A startup introduces a groundbreaking technology but underestimates customer resistance to radical changes, leading to poor demand.\n        \n      \n    \n    \n      \n    \n    \n      A startup introduces a groundbreaking technology but underestimates customer resistance to radical changes, leading to poor demand.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404928\n      5026\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "9593\n\n    \n         \n      \n        A startup's charismatic founder drives innovation but alienates the team with micromanagement and unchecked ego.\n        \n      \n    \n    \n      \n    \n    \n      A startup's charismatic founder drives innovation but alienates the team with micromanagement and unchecked ego.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404928\n      9593\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2991\n\n    \n         \n      \n        A startup launches an innovative product, but customer adoption lags due to a lack of marketing efforts.\n        \n      \n    \n    \n      \n    \n    \n      A startup launches an innovative product, but customer adoption lags due to a lack of marketing efforts.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404928\n      2991\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "358\n\n    \n         \n      \n        A startup faces delays in product development, allowing competitors to launch superior alternatives using newer technologies.\n        \n      \n    \n    \n      \n    \n    \n      A startup faces delays in product development, allowing competitors to launch superior alternatives using newer technologies.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404928\n      358\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

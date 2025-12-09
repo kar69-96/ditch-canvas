@@ -1,0 +1,35 @@
+{
+	"quizId": "497940",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497940",
+	"extractedAt": "2025-12-04T06:36:47.478Z",
+	"title": "MT 2 (Remotely Proctored)",
+	"description": "<div class=\"proctorio-oembed\">\n<p>You have 70 minutes to complete this exam.</p>\n<p>You may have a 1-sided, 8.5\"x11\" study sheet.</p>\n<p>All work must be solely your own.</p>\n<p>You will need the attached spreadsheet.</p>\n<p>you need to turn it in.&nbsp;<strong>Name your file:&nbsp; First.Last_MT2.xlsx</strong></p>\n<p>If you use any assistance in addition to your study sheet, and asking me questions, you will earn a failing grade for this exam.</p>\n<p><span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"MT2_ss_post.xlsx\" href=\"https://canvas.colorado.edu/courses/123160/files/80295748?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\">MT2_ss_post.xlsx</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/123160/files/80295748/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download MT2_ss_post.xlsx</span></a></span></p>\n</div>\n<p><span class=\"proctorioexam\" style=\"display: none;\">f1bbf8a7fde32685731d923f7563f586</span><span class=\"proctoriocourse\" style=\"display: none;\">123160</span></p>\n\n<p><a id=\"proctorio-embed-a\" class=\"proctorio-embed\" style=\"display: flex; flex-direction: column; align-items: center; max-width: 100%; width: auto; height: auto;\" href=\"https://getproctorio.com\" target=\"_blank\"><img id=\"proctorio-embed-img\" style=\"margin-bottom: 10px; max-width: 100%; height: auto;\" src=\"https://gbl.proctorauth.com/embed/lti\" alt=\"Embed\" loading=\"lazy\"><img id=\"proctorio-embed-gif\" style=\"max-width: 100%; height: auto;\" src=\"https://cdn.proctorauth.com/embed/lti/enable\" alt=\"Embed Animated Gif\" loading=\"lazy\"><img id=\"proctorio-embed-empty\" style=\"height: 1000px; max-width: 100%;\" src=\"https://cdn.proctorauth.com/embed/pixel.gif\" alt=\"Empty space gif\" loading=\"lazy\"></a></p>",
+	"descriptionText": "\nYou have 70 minutes to complete this exam.\nYou may have a 1-sided, 8.5\"x11\" study sheet.\nAll work must be solely your own.\nYou will need the attached spreadsheet.\nyou need to turn it in. Name your file:  First.Last_MT2.xlsx\nIf you use any assistance in addition to your study sheet, and asking me questions, you will earn a failing grade for this exam.\nMT2_ss_post.xlsx\n    \n\nDownload MT2_ss_post.xlsx\n\nf1bbf8a7fde32685731d923f7563f586123160\n\n",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [],
+	"questionCount": 0,
+	"attachments": [
+		{
+			"name": "MT2_ss_post.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80295748?wrap=1",
+			"type": null
+		},
+		{
+			"name": "Download MT2_ss_post.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123160/files/80295748/download?download_frd=1",
+			"type": null
+		}
+	]
+}

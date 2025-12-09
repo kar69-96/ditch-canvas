@@ -36,6 +36,25 @@ const Dashboard = () => {
     localStorage.setItem('completedAssignments', JSON.stringify(Array.from(completedAssignments)));
   }, [completedAssignments]);
 
+  // Automatically mark assignments as completed if submissionStatus === "yes"
+  useEffect(() => {
+    if (!canvasData || !canvasData.assignments) return;
+    
+    setCompletedAssignments(prev => {
+      const newSet = new Set(prev);
+      let hasChanges = false;
+      
+      canvasData.assignments.forEach(assignment => {
+        if (assignment.submissionStatus === "yes" && !newSet.has(assignment.id)) {
+          newSet.add(assignment.id);
+          hasChanges = true;
+        }
+      });
+      
+      return hasChanges ? newSet : prev;
+    });
+  }, [canvasData]);
+
   // Listen for completion changes
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
@@ -122,7 +141,10 @@ const Dashboard = () => {
         const currentUser = await userStorage.getUser(session.userId);
         if (currentUser) {
           setUser(currentUser);
-          setUserName(currentUser.profileData?.preferredName || currentUser.name || "Student");
+          // Get firstName from profileData.firstName, or extract from name field
+          const firstName = currentUser.profileData?.firstName || 
+                           (currentUser.name ? currentUser.name.split(' ')[0] : 'Student');
+          setUserName(firstName);
         } else {
           navigate('/login');
         }
@@ -210,9 +232,9 @@ const Dashboard = () => {
     const endDay = endOfWeek.getDate();
     
     if (startMonth === endMonth) {
-      return `${startMonth} ${startDay} – ${endDay}`;
+      return `${startMonth} ${startDay} ? ${endDay}`;
     }
-    return `${startMonth} ${startDay} – ${endMonth} ${endDay}`;
+    return `${startMonth} ${startDay} ? ${endMonth} ${endDay}`;
   };
 
   // Generate active classes
@@ -273,7 +295,10 @@ const Dashboard = () => {
     .map(assignment => {
       const course = canvasData.courses.find(c => c.id === assignment.courseId);
       const dueDate = new Date(assignment.dueAt);
-      const isQuiz = assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+      const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+      // Check if assignment is completed (either manually marked or submissionStatus === "yes")
+      const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
+      
       return {
         id: assignment.id,
         title: assignment.title,
@@ -290,8 +315,9 @@ const Dashboard = () => {
         points: assignment.pointsPossible,
         workflowState: assignment.workflowState,
         url: assignment.url,
-        isCompleted: completedAssignments.has(assignment.id),
+        isCompleted: isCompleted,
         isMidterm: assignment.title.toLowerCase().includes("midterm"),
+        isQuiz: isQuiz, // Include isQuiz flag for styling
       };
     })
     .sort((a, b) => {
@@ -306,178 +332,214 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
-      <div className="px-5 sm:px-8 pb-10">
-        {/* Header */}
-        <header className="py-6 sm:py-8 border-b border-border flex items-start justify-between">
-          <WelcomeHeader 
-            userName={userName} 
-            tagline="Let's make today productive" 
-          />
-        </header>
-
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-160px)]">
-          {/* Left Column */}
-          <div className="lg:col-span-8 border-r border-border">
-            <div className="p-5 sm:p-8">
-              {/* Weekly Calendar with navigation */}
-              <div className="exposed-card glass-card  ">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-                  <button
-                    onClick={() => setCurrentWeek(currentWeek - 1)}
-                    disabled={currentWeek === 0}
-                    className={cn(
-                      "fill-hover fill-hover-light h-8 w-8 border border-border flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
-                      currentWeek === 0 && "opacity-50 cursor-not-allowed"
-                    )}
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                      Weekly View
-                    </h2>
-                    <span className="text-xs font-mono text-muted-foreground">{getMonthString()}</span>
-                  </div>
-                  <button
-                    onClick={() => setCurrentWeek(currentWeek + 1)}
-                    className="fill-hover fill-hover-light h-8 w-8 border border-border flex items-center justify-center"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-                
-                <WeeklyCalendar 
-                  days={weekData} 
-                  month={getMonthString()} 
-                  onDayClick={(day) => {
-                    if (selectedDay && day && selectedDay.fullDate.getTime() === day.fullDate.getTime()) {
-                      setSelectedDay(null);
-                    } else {
-                      setSelectedDay(day);
-                    }
-                  }}
-                  selectedDay={selectedDay}
+    <div className="relative w-full">
+      {/* Main Content Wrapper */}
+      <div 
+        className="transition-all duration-150 ease-out max-lg:pr-0"
+        style={{ paddingRight: isSidebarOpen && !isFullscreen ? sidebarWidth : 0 }}
+      >
+        <Layout>
+            <div className="px-5 sm:px-8 pb-10">
+              {/* Header */}
+              <header className="py-6 sm:py-8 border-b border-border flex items-start justify-between">
+                <WelcomeHeader 
+                  firstName={userName} 
+                  tagline="Let's make today productive" 
                 />
+              </header>
 
-                {/* Selected Day Assignments Section - Inside the same card for seamless look */}
-                <AnimatePresence>
-                  {selectedDay && selectedDay.assignments.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0, y: -20 }}
-                      animate={{ opacity: 1, height: "auto", y: 0 }}
-                      exit={{ opacity: 0, height: 0, y: -20 }}
-                      transition={{
-                        duration: 0.3,
-                        ease: [0.4, 0, 0.2, 1],
-                      }}
-                      className="overflow-hidden"
-                    >
+              {/* Main Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-160px)]">
+                {/* Left Column */}
+                <div className="lg:col-span-8 border-r border-border">
+                  <div className="p-5 sm:p-8">
+                    {/* Weekly Calendar with navigation */}
+                    <div className="exposed-card glass-card  ">
                       <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-                        <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                          {selectedDay.day}, {getMonthString().split(' – ')[0]} {selectedDay.date}
-                        </h2>
                         <button
-                          onClick={() => setSelectedDay(null)}
-                          className="text-xs text-muted-foreground hover:text-foreground "
+                          onClick={() => setCurrentWeek(currentWeek - 1)}
+                          disabled={currentWeek === 0}
+                          className={cn(
+                            "fill-hover fill-hover-light h-8 w-8 border border-border flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
+                            currentWeek === 0 && "opacity-50 cursor-not-allowed"
+                          )}
                         >
-                          Close
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <div className="flex items-center gap-2">
+                          <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                            Weekly View
+                          </h2>
+                          <span className="text-xs font-mono text-muted-foreground">{getMonthString()}</span>
+                        </div>
+                        <button
+                          onClick={() => setCurrentWeek(currentWeek + 1)}
+                          className="fill-hover fill-hover-light h-8 w-8 border border-border flex items-center justify-center"
+                        >
+                          <ChevronRight className="w-4 h-4" />
                         </button>
                       </div>
-                      <div className="p-5 space-y-3">
-                        {selectedDay.assignments.map((assignment) => {
-                          const formatTime = (dateString: string) => {
-                            const date = new Date(dateString);
-                            return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-                          };
-                          
-                          const isCompleted = assignment.workflowState !== "pending";
-                          
-                          return (
-                            <div
-                              key={assignment.id}
-                              className={cn(
-                                "p-4 border border-border hover:bg-white/5 cursor-pointer",
-                                isCompleted && "opacity-60"
-                              )}
-                              onClick={() => navigate('/assignments')}
-                            >
-                              <div className="flex items-start justify-between gap-2 mb-2">
-                                <p className={cn(
-                                  "text-sm font-medium text-foreground/90 flex-1",
-                                  isCompleted && "line-through"
-                                )}>
-                                  {assignment.title}
-                                </p>
-                                {assignment.pointsPossible && (
-                                  <span className="text-xs text-muted-foreground flex-shrink-0">
-                                    {assignment.pointsPossible} pts
-                                  </span>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                                <span className="font-mono">{assignment.courseCode}</span>
-                                <div className="flex items-center gap-1">
-                                  <Clock className="w-3 h-3" />
-                                  <span>{formatTime(assignment.dueAt)}</span>
-                                </div>
-                                {isCompleted && (
-                                  <span className="text-xs text-muted-foreground/70">
-                                    {assignment.workflowState === "submitted" ? "Submitted" : 
-                                     assignment.workflowState === "graded" ? "Graded" : 
-                                     "Completed"}
-                                  </span>
-                                )}
-                              </div>
+                      
+                      <WeeklyCalendar 
+                        days={weekData} 
+                        month={getMonthString()} 
+                        onDayClick={(day) => {
+                          if (selectedDay && day && selectedDay.fullDate.getTime() === day.fullDate.getTime()) {
+                            setSelectedDay(null);
+                          } else {
+                            setSelectedDay(day);
+                          }
+                        }}
+                        selectedDay={selectedDay}
+                      />
+
+                      {/* Selected Day Assignments Section - Inside the same card for seamless look */}
+                      <AnimatePresence>
+                        {selectedDay && selectedDay.assignments.length > 0 && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0, y: -20 }}
+                            animate={{ opacity: 1, height: "auto", y: 0 }}
+                            exit={{ opacity: 0, height: 0, y: -20 }}
+                            transition={{
+                              duration: 0.3,
+                              ease: [0.4, 0, 0.2, 1],
+                            }}
+                            className="overflow-hidden"
+                          >
+                            <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+                              <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                                {selectedDay.day}, {getMonthString().split(' ? ')[0]} {selectedDay.date}
+                              </h2>
+                              <button
+                                onClick={() => setSelectedDay(null)}
+                                className="text-xs text-muted-foreground hover:text-foreground "
+                              >
+                                Close
+                              </button>
                             </div>
-                          );
-                        })}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                            <div className="p-5 space-y-0">
+                              {selectedDay.assignments.map((assignment) => {
+                                const formatTime = (dateString: string) => {
+                                  const date = new Date(dateString);
+                                  return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                                };
+                                
+                                // Find the full assignment data from canvasData
+                                const fullAssignment = canvasData.assignments.find(a => a.id === assignment.id);
+                                const isQuiz = fullAssignment?.isQuiz || fullAssignment?.submissionTypes?.some(type => type.includes("quiz")) || false;
+                                
+                                // Check if assignment is completed (either manually marked, workflowState, or submissionStatus === "yes")
+                                const isCompleted = assignment.workflowState !== "pending" || 
+                                                   completedAssignments.has(assignment.id) ||
+                                                   fullAssignment?.submissionStatus === "yes";
+                                const dueDate = new Date(assignment.dueAt);
+                                const formattedDue = (() => {
+                                  const month = dueDate.toLocaleDateString("en-US", { month: "short" });
+                                  const day = dueDate.getDate();
+                                  const time = dueDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+                                  return `${month} ${day} at ${time}`;
+                                })();
+                                
+                                return (
+                                  <div
+                                    key={assignment.id}
+                                    className={cn(
+                                      "p-4 border hover:bg-white/5 cursor-pointer",
+                                      isQuiz ? "border-2 border-red-500/80" : "border border-border",
+                                      isCompleted && "opacity-60"
+                                    )}
+                                    onClick={() => {
+                                      openSidebarItem({
+                                        id: String(assignment.id),
+                                        type: "assignment",
+                                        title: assignment.title,
+                                        subtitle: `${isQuiz ? "Quiz" : "Assignment"} ? ${assignment.courseCode}`,
+                                        dueDate: formattedDue,
+                                        points: assignment.pointsPossible,
+                                        isCompleted: isCompleted,
+                                        courseCode: assignment.courseCode,
+                                        canvasUrl: fullAssignment?.url,
+                                      });
+                                    }}
+                                  >
+                                    <div className="flex items-start justify-between gap-2 mb-2">
+                                      <p className={cn(
+                                        "text-sm font-medium text-foreground/90 flex-1",
+                                        isCompleted && "line-through"
+                                      )}>
+                                        {assignment.title}
+                                      </p>
+                                      {assignment.pointsPossible && (
+                                        <span className="text-xs text-muted-foreground flex-shrink-0">
+                                          {assignment.pointsPossible} pts
+                                        </span>
+                                      )}
+                                    </div>
+                                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                                      <div className="flex items-center gap-1">
+                                        <Clock className="w-3 h-3" />
+                                        <span>{formatTime(assignment.dueAt)}</span>
+                                      </div>
+                                      {isCompleted && (
+                                        <span className="text-xs text-muted-foreground/70">
+                                          {assignment.workflowState === "submitted" ? "Submitted" : 
+                                           assignment.workflowState === "graded" ? "Graded" : 
+                                           "Completed"}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
 
-              {/* Old location of assignments section - Removed */}
+                    {/* Old location of assignments section - Removed */}
 
-              <div className="mt-6">
-                <ActiveClasses classes={activeClasses} />
+                    <div className="mt-6">
+                      <ActiveClasses classes={activeClasses} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div className="lg:col-span-4">
+                  <div className="p-5 sm:p-8 space-y-6">
+                    <SemesterProgress 
+                      percentage={semesterProgress ?? 0} 
+                      message=""
+                      isOnBreak={isOnBreak}
+                    />
+                    <DueToday 
+                      assignments={dueToday} 
+                      onToggleComplete={toggleAssignmentComplete}
+                      onOpenAssignment={(assignment) => {
+                        openSidebarItem({
+                          id: String(assignment.id),
+                          type: "assignment",
+                          title: assignment.title,
+                          subtitle: `${assignment.type} ? ${assignment.courseCode}`,
+                          dueDate: assignment.due,
+                          points: assignment.points,
+                          isCompleted: assignment.isCompleted,
+                          courseCode: assignment.courseCode,
+                          canvasUrl: assignment.url,
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="lg:col-span-4">
-            <div className="p-5 sm:p-8 space-y-6">
-              <SemesterProgress 
-                percentage={semesterProgress ?? 0} 
-                message=""
-                isOnBreak={isOnBreak}
-              />
-              <DueToday 
-                assignments={dueToday} 
-                onToggleComplete={toggleAssignmentComplete}
-                onOpenAssignment={(assignment) => {
-                  openSidebarItem({
-                    id: String(assignment.id),
-                    type: "assignment",
-                    title: assignment.title,
-                    subtitle: `${assignment.type} • ${assignment.courseCode}`,
-                    dueDate: assignment.due,
-                    points: assignment.points,
-                    isCompleted: assignment.isCompleted,
-                    courseCode: assignment.courseCode,
-                    canvasUrl: assignment.url,
-                  });
-                }}
-              />
-            </div>
-          </div>
+          </Layout>
         </div>
-      </div>
+
+      {/* Sidebar Viewer */}
       <SidebarViewer />
-    </Layout>
+    </div>
   );
 };
 

@@ -1,0 +1,150 @@
+{
+	"quizId": "491805",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491805",
+	"extractedAt": "2025-12-04T06:16:41.031Z",
+	"title": "\"Customer\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Customer\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Customer\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404797",
+			"type": null,
+			"text": "Which of the following best describes the shape of the Market S-curve as it relates to the diffusion of innovation over time?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "541\n\n    \n         \n      \n        A steady decline in adoption rates after an initial peak, as early demand wanes.\n        \n      \n    \n    \n      \n    \n    \n      A steady decline in adoption rates after an initial peak, as early demand wanes.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404797\n      541\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9070\n\n    \n         \n      \n        Slow initial growth, followed by rapid adoption, and eventually plateauing as the market approaches saturation.\n        \n      \n    \n    \n      \n    \n    \n      Slow initial growth, followed by rapid adoption, and eventually plateauing as the market approaches saturation.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404797\n      9070\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2578\n\n    \n         \n      \n        Rapid growth initially, gradually slowing down as more competitors enter the market.\n        \n      \n    \n    \n      \n    \n    \n      Rapid growth initially, gradually slowing down as more competitors enter the market.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404797\n      2578\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1496\n\n    \n         \n      \n        Constant linear growth due to steady adoption rates throughout the product lifecycle.\n        \n      \n    \n    \n      \n    \n    \n      Constant linear growth due to steady adoption rates throughout the product lifecycle.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404797\n      1496\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404798",
+			"type": null,
+			"text": "Which group is typically the most risk-averse, adopting a new product only after the majority of the market has already done so and when it has become a necessity?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "1937\n\n    \n         \n      \n        Laggards\n        \n      \n    \n    \n      \n    \n    \n      Laggards\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404798\n      1937\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "534\n\n    \n         \n      \n        Late majority\n        \n      \n    \n    \n      \n    \n    \n      Late majority\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404798\n      534\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9862\n\n    \n         \n      \n        Early adopters\n        \n      \n    \n    \n      \n    \n    \n      Early adopters\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404798\n      9862\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "215\n\n    \n         \n      \n        Early majority\n        \n      \n    \n    \n      \n    \n    \n      Early majority\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404798\n      215\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404799",
+			"type": null,
+			"text": "What is the primary factor influencing the late majority's decision to adopt a product?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3866\n\n    \n         \n      \n        Novelty\n        \n      \n    \n    \n      \n    \n    \n      Novelty\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404799\n      3866\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "857\n\n    \n         \n      \n        Ease of use\n        \n      \n    \n    \n      \n    \n    \n      Ease of use\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404799\n      857\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5608\n\n    \n         \n      \n        Price\n        \n      \n    \n    \n      \n    \n    \n      Price\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404799\n      5608\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "6331\n\n    \n         \n      \n        Reliability\n        \n      \n    \n    \n      \n    \n    \n      Reliability\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404799\n      6331\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404800",
+			"type": null,
+			"text": "The \"chasm\" refers to the gap between which two groups in the technology adoption lifecycle?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "9069\n\n    \n         \n      \n        Early adopters and early majority\n        \n      \n    \n    \n      \n    \n    \n      Early adopters and early majority\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404800\n      9069\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "3279\n\n    \n         \n      \n        Late majority and laggards\n        \n      \n    \n    \n      \n    \n    \n      Late majority and laggards\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404800\n      3279\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6587\n\n    \n         \n      \n        Innovators and early adopters\n        \n      \n    \n    \n      \n    \n    \n      Innovators and early adopters\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404800\n      6587\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6704\n\n    \n         \n      \n        Early majority and late majority\n        \n      \n    \n    \n      \n    \n    \n      Early majority and late majority\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404800\n      6704\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404801",
+			"type": null,
+			"text": "During which stage of the adoption lifecycle is customer acquisition cost (CAC) typically the highest?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4208\n\n    \n         \n      \n        Introduction\n        \n      \n    \n    \n      \n    \n    \n      Introduction\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404801\n      4208\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "9937\n\n    \n         \n      \n        Rebranding\n        \n      \n    \n    \n      \n    \n    \n      Rebranding\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404801\n      9937\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3784\n\n    \n         \n      \n        Maturity\n        \n      \n    \n    \n      \n    \n    \n      Maturity\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404801\n      3784\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8114\n\n    \n         \n      \n        Growth\n        \n      \n    \n    \n      \n    \n    \n      Growth\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404801\n      8114\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

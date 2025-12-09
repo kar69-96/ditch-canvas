@@ -68,8 +68,9 @@ export function DueToday({ assignments, onToggleComplete, onOpenAssignment }: Du
           >
             {assignments.map((assignment, index) => {
               const borderClass = (assignment.isMidterm || assignment.type === "Quiz") 
-                ? "border-2 border-red-500/60" 
+                ? "border-2 border-red-500/80" 
                 : "";
+              const isQuiz = assignment.type === "Quiz";
               const isHovered = hoveredIndex === index;
               
               return (

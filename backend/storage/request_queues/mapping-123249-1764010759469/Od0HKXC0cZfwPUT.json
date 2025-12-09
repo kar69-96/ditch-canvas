@@ -1,9 +1,0 @@
-{
-	"id": "Od0HKXC0cZfwPUT",
-	"json": "{\"id\":\"Od0HKXC0cZfwPUT\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/textbooks-slash-data-slash-assignments-portal\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/textbooks-slash-data-slash-assignments-portal\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/textbooks-slash-data-slash-assignments-portal\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T18:59:46.711Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/textbooks-slash-data-slash-assignments-portal",
-	"url": "https://canvas.colorado.edu/courses/123249/pages/textbooks-slash-data-slash-assignments-portal"
-}

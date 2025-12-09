@@ -1,0 +1,57 @@
+{
+	"quizId": "497935",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497935",
+	"extractedAt": "2025-12-04T06:37:00.050Z",
+	"title": "REFLECTION Case 2 Bob's Baloney",
+	"description": "<p>Please answer each question as you reflect on our discussion today.</p>\n<p>&nbsp;</p>",
+	"descriptionText": "Please answer each question as you reflect on our discussion today.\n ",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463783",
+			"type": null,
+			"text": "Name 2 Takeaways from this case",
+			"points": 1,
+			"answers": []
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463784",
+			"type": null,
+			"text": "What is a remaining question that you still have?",
+			"points": 1,
+			"answers": []
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463785",
+			"type": null,
+			"text": "Who gave an interesting input, and what did they say?",
+			"points": 0.5,
+			"answers": []
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463786",
+			"type": null,
+			"text": "Name another colleague who offered an interesting input, and what did they say?",
+			"points": 0.5,
+			"answers": []
+		}
+	],
+	"questionCount": 4,
+	"attachments": []
+}

@@ -179,6 +179,27 @@ const formatFileSize = (size?: number) => {
   return `${(size / (1024 * 1024)).toFixed(2)} MB`;
 };
 
+// Convert Canvas download URLs to viewer URLs to open in browser instead of downloading
+const convertCanvasUrlToViewer = (url: string): string => {
+  if (!url.includes('canvas.colorado.edu')) return url;
+  
+  // Remove /download from the URL if present
+  let viewerUrl = url.replace(/\/download(\?|$)/, '/$1');
+  
+  // Remove download-related query parameters
+  try {
+    const urlObj = new URL(viewerUrl);
+    urlObj.searchParams.delete('download_frd');
+    urlObj.searchParams.delete('download');
+    viewerUrl = urlObj.toString();
+  } catch (e) {
+    // If URL parsing fails, just remove common download params with regex
+    viewerUrl = viewerUrl.replace(/[?&]download_frd=\d+/g, '').replace(/[?&]download=1/g, '');
+  }
+  
+  return viewerUrl;
+};
+
 export function SidebarProvider({ children }: SidebarProviderProps) {
   const [tabs, setTabs] = useState<SidebarTab[]>([]);
   const [activeTabId, setActiveTabId] = useState<string | null>(null);
@@ -701,7 +722,12 @@ function SidebarContent({ item, toggleComplete, openItem }: SidebarContentProps)
               {downloadTarget && (
                 <Button
                   variant="outline"
-                  onClick={() => window.open(downloadTarget, "_blank", "noopener noreferrer")}
+                  onClick={() => {
+                    const urlToOpen = downloadTarget.includes('canvas.colorado.edu') 
+                      ? convertCanvasUrlToViewer(downloadTarget)
+                      : downloadTarget;
+                    window.open(urlToOpen, "_blank", "noopener noreferrer");
+                  }}
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   {downloadTarget.includes('canvas.colorado.edu') ? "Open on Canvas" : downloadLabel}
@@ -727,7 +753,12 @@ function SidebarContent({ item, toggleComplete, openItem }: SidebarContentProps)
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.open(downloadTarget, "_blank", "noopener noreferrer")}
+              onClick={() => {
+                const urlToOpen = downloadTarget.includes('canvas.colorado.edu')
+                  ? convertCanvasUrlToViewer(downloadTarget)
+                  : downloadTarget;
+                window.open(urlToOpen, "_blank", "noopener noreferrer");
+              }}
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               {downloadLabel}

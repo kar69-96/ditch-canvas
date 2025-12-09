@@ -1,0 +1,49 @@
+{
+	"courseId": "123160",
+	"pageSlug": "data-for-bobs-baloney",
+	"url": "https://canvas.colorado.edu/courses/123160/pages/data-for-bobs-baloney",
+	"extractedAt": "2025-12-04T06:37:31.924Z",
+	"title": "Data for Bobs Baloney",
+	"content": "<h1 class=\"page-title\">Data for Bobs Baloney</h1>\n  \n  <div id=\"todo-date-mount-point\"></div>\n  \n    <p>Hello -</p>\n<p>The following is shared with permission.</p>\n<p>You will need to be familiar with this DATA for Monday's class!!</p>\n<p><span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"BobsBaloney_Data.xlsx\" href=\"https://canvas.colorado.edu/courses/123160/files/80560146?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/123160/files/80560146\" data-api-returntype=\"File\">BobsBaloney_Data.xlsx</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/123160/files/80560146/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download BobsBaloney_Data.xlsx</span></a></span></p>\n  \n  \n<div id=\"assign-to-mount-point\"></div>\n<div id=\"choose-editor-mount-point\"></div>",
+	"contentText": "Data for Bobs Baloney\n  \n  \n  \n    Hello -\nThe following is shared with permission.\nYou will need to be familiar with this DATA for Monday's class!!\nBobsBaloney_Data.xlsx\n    \n\nDownload BobsBaloney_Data.xlsx\n  \n  \n\n",
+	"embeddedContent": {
+		"images": [
+			{
+				"src": "https://cuboulder.instructure.com/images/thumbnails/73827477/c3TQqnYJYi9I7wdqgZNgL9V2YYuWY9xi2TpnmNQh",
+				"alt": "Karthik Reddy"
+			},
+			{
+				"src": "https://redshelf-images.s3.amazonaws.com/lms/RSLogo.png",
+				"alt": "RedShelf LTI 1.3 - Production"
+			}
+		],
+		"files": [
+			{
+				"url": "https://canvas.colorado.edu/courses/123160/files/80560146?wrap=1",
+				"name": "BobsBaloney_Data.xlsx"
+			},
+			{
+				"url": "https://canvas.colorado.edu/courses/123160/files/80560146/download?download_frd=1",
+				"name": "Download BobsBaloney_Data.xlsx"
+			}
+		],
+		"videos": [],
+		"links": []
+	},
+	"metadata": {
+		"lastModified": null,
+		"author": null,
+		"published": true
+	},
+	"location": {
+		"source": "standalone",
+		"moduleName": null,
+		"moduleId": null,
+		"moduleIndex": null,
+		"folder": null,
+		"breadcrumbs": [
+			"My Dashboard",
+			"ESBM 4570-001"
+		]
+	}
+}

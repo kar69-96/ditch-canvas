@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginWithEmail } from '@/services/mockApi/auth';
-import { clearCacheForUser } from '@/services/api/canvasApi';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import GlassCard from '@/components/GlassCard';
@@ -26,22 +25,21 @@ const Login = () => {
 
     setIsLoading(true);
     setError(null);
+    
     try {
       const result = await loginWithEmail(email.trim());
-      if (result) {
-        console.log('[Login] Login successful, clearing cache and navigating...');
-        clearCacheForUser(result.user.email?.toLowerCase().trim() || '');
-        // Small delay to ensure session is stored
-        await new Promise(resolve => setTimeout(resolve, 100));
-        navigate('/dashboard');
-      } else {
-        console.error('[Login] Login returned null result');
-        setError('Unable to sign in with that email. Please contact support.');
+      
+      if (!result) {
+        setError('No account found for this email. Please contact support to set up your account.');
         setIsLoading(false);
+        return;
       }
-    } catch (error) {
-      console.error('[Login] Login error:', error);
-      setError(error instanceof Error ? error.message : 'An error occurred during login. Please try again.');
+
+      // Login successful, navigate to dashboard
+      navigate('/dashboard');
+    } catch (err) {
+      console.error('[Login] Login error:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred during login. Please try again.');
       setIsLoading(false);
     }
   };
@@ -56,7 +54,7 @@ const Login = () => {
               Welcome
             </h1>
             <p className="text-muted-foreground text-sm">
-              Enter your .edu email to continue
+              Enter your .edu email to sign in
             </p>
           </div>
 

@@ -1,9 +1,0 @@
-{
-	"id": "wCu8j87gkOxSWAM",
-	"json": "{\"id\":\"wCu8j87gkOxSWAM\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/week-8\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/week-8\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/week-8\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:05:20.286Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/week-8",
-	"url": "https://canvas.colorado.edu/courses/123249/pages/week-8"
-}

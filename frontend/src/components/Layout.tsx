@@ -53,11 +53,14 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
   ];
 
   // Find active nav item index
-  const activeNavIndex = navItems.findIndex((item) =>
-    item.path === "/classes"
-      ? location.pathname.startsWith("/classes")
-      : location.pathname === item.path
-  );
+  const activeNavIndex = navItems.findIndex((item) => {
+    if (item.path === "/classes") {
+      return location.pathname.startsWith("/classes");
+    } else if (item.path === "/calendar") {
+      return location.pathname.startsWith("/calendar");
+    }
+    return location.pathname === item.path;
+  });
 
   const { courses } = useCourses();
   const enrolledClasses = courses.filter(
@@ -151,6 +154,8 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
               const Icon = item.icon;
               const isActive = item.path === "/classes"
                 ? location.pathname.startsWith("/classes")
+                : item.path === "/calendar"
+                ? location.pathname.startsWith("/calendar")
                 : location.pathname === item.path;
               const hasDropdown = (item as any).hasDropdown;
 

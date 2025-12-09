@@ -1,0 +1,49 @@
+{
+	"courseId": "123160",
+	"pageSlug": "groups-projects-dates",
+	"url": "https://canvas.colorado.edu/courses/123160/pages/groups-projects-dates",
+	"extractedAt": "2025-12-04T06:37:41.574Z",
+	"title": "Groups_Projects_Dates",
+	"content": "<h1 class=\"page-title\">Groups_Projects_Dates</h1>\n  \n  <div id=\"todo-date-mount-point\"></div>\n  \n    <p>All -</p>\n<p>Please find the updated spreadsheet attached with GROUPS, Projects and Dates.</p>\n<p>NOTE - some people have dropped and there are at least 3 of you who did not get assigned to a group -- I will update the file as you report groups. <span class=\"instructure_file_holder link_holder instructure_file_link_holder\"><a class=\"inline_disabled preview_in_overlay\" title=\"Groups_Projects_Dates.xlsx\" href=\"https://canvas.colorado.edu/courses/123160/files/80295678?wrap=1\" target=\"_blank\" data-canvas-previewable=\"false\" data-api-endpoint=\"https://canvas.colorado.edu/api/v1/courses/123160/files/80295678\" data-api-returntype=\"File\">Groups_Projects_Dates.xlsx</a><a class=\"file_download_btn\" role=\"button\" download=\"\" style=\"margin-inline-start: 5px; text-decoration: none;\" href=\"https://canvas.colorado.edu/courses/123160/files/80295678/download?download_frd=1\"><span role=\"presentation\"><svg viewBox=\"0 0 1920 1920\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:1em; height:1em; vertical-align:middle; fill:currentColor\">\n    <path d=\"m1807.093 1482.477 79.736 79.963-355.313 355.312H355.346L.035 1562.44l79.85-79.963 322.22 322.334H1484.76l322.334-322.334ZM997.677-.033v1167.02l355.313-355.313 79.962 79.85-491.858 491.633L449.46 891.524l79.962-79.85 355.313 355.313V-.033h112.941Z\" fill-rule=\"evenodd\"></path>\n</svg>\n</span><span class=\"screenreader-only\">Download Groups_Projects_Dates.xlsx</span></a></span>&nbsp;</p>\n  \n  \n<div id=\"assign-to-mount-point\"></div>\n<div id=\"choose-editor-mount-point\"></div>",
+	"contentText": "Groups_Projects_Dates\n  \n  \n  \n    All -\nPlease find the updated spreadsheet attached with GROUPS, Projects and Dates.\nNOTE - some people have dropped and there are at least 3 of you who did not get assigned to a group -- I will update the file as you report groups. Groups_Projects_Dates.xlsx\n    \n\nDownload Groups_Projects_Dates.xlsx \n  \n  \n\n",
+	"embeddedContent": {
+		"images": [
+			{
+				"src": "https://cuboulder.instructure.com/images/thumbnails/73827477/c3TQqnYJYi9I7wdqgZNgL9V2YYuWY9xi2TpnmNQh",
+				"alt": "Karthik Reddy"
+			},
+			{
+				"src": "https://redshelf-images.s3.amazonaws.com/lms/RSLogo.png",
+				"alt": "RedShelf LTI 1.3 - Production"
+			}
+		],
+		"files": [
+			{
+				"url": "https://canvas.colorado.edu/courses/123160/files/80295678?wrap=1",
+				"name": "Groups_Projects_Dates.xlsx"
+			},
+			{
+				"url": "https://canvas.colorado.edu/courses/123160/files/80295678/download?download_frd=1",
+				"name": "Download Groups_Projects_Dates.xlsx"
+			}
+		],
+		"videos": [],
+		"links": []
+	},
+	"metadata": {
+		"lastModified": null,
+		"author": null,
+		"published": true
+	},
+	"location": {
+		"source": "standalone",
+		"moduleName": null,
+		"moduleId": null,
+		"moduleIndex": null,
+		"folder": null,
+		"breadcrumbs": [
+			"My Dashboard",
+			"ESBM 4570-001"
+		]
+	}
+}

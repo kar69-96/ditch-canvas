@@ -14,32 +14,68 @@ import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-// Load environment variables
-try {
-  const { config } = await import('dotenv');
-  config();
-} catch (e) {
-  try {
-    const envPath = join(dirname(__dirname), '.env');
-    const envContent = readFileSync(envPath, 'utf-8');
-    const envVars = {};
-    envContent.split('\n').forEach(line => {
-      const trimmed = line.trim();
-      if (trimmed && !trimmed.startsWith('#')) {
-        const [key, ...valueParts] = trimmed.split('=');
-        if (key && valueParts.length > 0) {
-          envVars[key.trim()] = valueParts.join('=').trim();
-        }
-      }
-    });
-    Object.assign(process.env, envVars);
-  } catch (err) {
-    console.warn('Could not load .env file, using environment variables');
-  }
-}
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// Load environment variables
+// Try multiple .env file locations (prioritize root .env for service key)
+const rootEnvPath = join(dirname(dirname(__dirname)), '.env'); // root .env
+const frontendEnvPath = join(dirname(__dirname), '.env'); // frontend/.env
+
+// Load root .env first (has service key)
+try {
+  if (statSync(rootEnvPath).isFile()) {
+    const { config } = await import('dotenv');
+    config({ path: rootEnvPath });
+    console.log(`📝 Loaded root .env from: ${rootEnvPath}`);
+  }
+} catch (e) {
+  // Continue
+}
+
+// Also load frontend .env to merge (may have VITE_ prefixed vars)
+try {
+  if (statSync(frontendEnvPath).isFile()) {
+    const { config } = await import('dotenv');
+    config({ path: frontendEnvPath, override: false }); // Don't override root .env values
+    console.log(`📝 Also loaded frontend .env from: ${frontendEnvPath}`);
+  }
+} catch (e) {
+  // Continue
+}
+
+// Fallback: manual parsing if dotenv didn't work
+if (!process.env.SUPABASE_SERVICE_KEY && !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  for (const envPath of [rootEnvPath, frontendEnvPath]) {
+    try {
+      const envContent = readFileSync(envPath, 'utf-8');
+      const envVars = {};
+      envContent.split('\n').forEach(line => {
+        const trimmed = line.trim();
+        if (trimmed && !trimmed.startsWith('#')) {
+          const [key, ...valueParts] = trimmed.split('=');
+          if (key && valueParts.length > 0) {
+            // Remove quotes if present
+            let value = valueParts.join('=').trim();
+            if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+              value = value.slice(1, -1);
+            }
+            // Only set if not already in process.env (root .env takes priority)
+            if (!process.env[key.trim()]) {
+              envVars[key.trim()] = value;
+            }
+          }
+        }
+      });
+      Object.assign(process.env, envVars);
+      if (Object.keys(envVars).length > 0) {
+        console.log(`📝 Loaded ${Object.keys(envVars).length} additional variables from ${envPath}`);
+      }
+    } catch (err) {
+      // Try next path
+    }
+  }
+}
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
@@ -51,13 +87,26 @@ if (!supabaseUrl || !supabaseAnonKey) {
   process.exit(1);
 }
 
+// Debug: Check if service key was loaded
+if (process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  console.log('✅ Service key found in environment');
+} else {
+  console.warn('⚠️  Service key not found - checking available env vars...');
+  const serviceKeyVars = Object.keys(process.env).filter(k => k.includes('SERVICE') || k.includes('SERVICE'));
+  if (serviceKeyVars.length > 0) {
+    console.log(`   Found related vars: ${serviceKeyVars.join(', ')}`);
+  }
+}
+
 // Create client with service role key for admin operations (table creation, file uploads)
 // Service role key bypasses RLS and allows table creation
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 if (supabaseServiceKey === supabaseAnonKey) {
   console.warn('⚠️  Warning: Using anon key instead of service role key. Some operations may fail.');
-  console.warn('   Set SUPABASE_SERVICE_ROLE_KEY in .env for full functionality.');
+  console.warn('   Set SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SERVICE_KEY in .env for full functionality.');
+} else {
+  console.log('✅ Using service role key for admin operations');
 }
 
 // Helper function to get table prefix from email
@@ -169,8 +218,8 @@ function getMimeType(filename) {
 
 async function ensureStorageBucket(bucketName) {
   if (!supabaseServiceKey || supabaseServiceKey === supabaseAnonKey) {
-    console.warn('\n⚠️  Cannot auto-create storage bucket without SUPABASE_SERVICE_ROLE_KEY');
-    console.warn('   Set SUPABASE_SERVICE_ROLE_KEY in .env to allow storage management.\n');
+    console.warn('\n⚠️  Cannot auto-create storage bucket without SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SERVICE_KEY');
+    console.warn('   Set SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SERVICE_KEY in .env to allow storage management.\n');
     return false;
   }
 
@@ -286,7 +335,18 @@ async function uploadExtractionData() {
     // Determine the data path
     let extractionDataPath;
     if (dataPathArg) {
-      extractionDataPath = join(__dirname, '..', 'mock-data', 'extraction-data', dataPathArg);
+      // Check if it's an absolute path
+      if (dataPathArg.startsWith('/') || (process.platform === 'win32' && /^[A-Za-z]:/.test(dataPathArg))) {
+        extractionDataPath = dataPathArg;
+        console.log(`📁 Using absolute path: ${extractionDataPath}`);
+      } else if (dataPathArg.startsWith('..')) {
+        // Relative path starting with .. - resolve from frontend directory
+        extractionDataPath = join(__dirname, '..', dataPathArg);
+        console.log(`📁 Using relative path from frontend: ${extractionDataPath}`);
+      } else {
+        // Relative path - use the old logic (relative to mock-data/extraction-data)
+        extractionDataPath = join(__dirname, '..', 'mock-data', 'extraction-data', dataPathArg);
+      }
     } else {
       const sampleDataPath = join(__dirname, '..', 'mock-data', 'extraction-data', 'sample_data');
       const rootDataPath = join(__dirname, '..', 'mock-data', 'extraction-data');
@@ -635,6 +695,79 @@ async function uploadExtractionData() {
       }
     }
     console.log(`   ✅ Uploaded ${announcementCount} announcements`);
+    
+    // Upload quizzes
+    console.log('\n📝 Uploading quizzes...');
+    let quizCount = 0;
+    
+    if (statSync(datasetsPath).isDirectory()) {
+      const courseDirs = readdirSync(datasetsPath, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name);
+      
+      for (const courseDir of courseDirs) {
+        const quizzesPath = join(datasetsPath, courseDir, 'quizzes');
+        let quizFiles = [];
+        
+        try {
+          if (statSync(quizzesPath).isDirectory()) {
+            quizFiles = readdirSync(quizzesPath)
+              .filter(f => f.endsWith('.json'))
+              .sort();
+          }
+        } catch (e) {
+          continue;
+        }
+        
+        if (quizFiles.length === 0) continue;
+        
+        // Match course using strict matching logic
+        const matchResult = findCourseForDirectory(courseDir, courses);
+        if (!matchResult) {
+          console.warn(`   ⚠️  Course not found for directory: ${courseDir} (skipping quizzes)`);
+          continue;
+        }
+        
+        const { course, matchMethod } = matchResult;
+        if (matchMethod !== 'exact courseFolderName' && matchMethod !== 'exact fullName') {
+          console.warn(`   ⚠️  Using ${matchMethod} for "${courseDir}" → "${course.courseFolderName || course.fullName}" (${course.code})`);
+        }
+        
+        for (const file of quizFiles) {
+          try {
+            const filePath = join(quizzesPath, file);
+            const quiz = JSON.parse(readFileSync(filePath, 'utf-8'));
+            
+            const metadata = {
+              extractedWeek: extractWeek(quiz.title),
+              dueDate: quiz.metadata?.dueDate || quiz.dueDate,
+              points: quiz.metadata?.points || quiz.pointsPossible,
+              questionCount: quiz.questionCount || quiz.questions?.length || 0,
+              timeLimit: quiz.metadata?.timeLimit,
+              attempts: quiz.metadata?.attempts,
+            };
+            
+            const { error } = await supabase.rpc('upsert_user_entity', {
+              user_email: normalizedEmail,
+              entity_type_val: 'quiz',
+              entity_id_val: quiz.quizId?.toString() || quiz.id?.toString() || file.replace('.json', ''),
+              data_val: quiz,
+              course_id_val: course.id.toString(),
+              metadata_val: metadata
+              });
+            
+            if (error) {
+              console.error(`   ⚠️  Error uploading quiz:`, error.message);
+            } else {
+              quizCount++;
+            }
+          } catch (fileError) {
+            console.error(`   ⚠️  Error reading quiz file ${file}:`, fileError.message);
+          }
+        }
+      }
+    }
+    console.log(`   ✅ Uploaded ${quizCount} quizzes`);
     
     // Upload modules (process moduleFiles into proper module structure)
     console.log('\n📦 Uploading modules...');

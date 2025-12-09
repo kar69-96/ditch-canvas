@@ -1,0 +1,45 @@
+#!/bin/bash
+# Script to get browserless connection info from EC2 instance
+
+INSTANCE_ID="i-09e83866e4ae5eeb2"
+PUBLIC_IP="54.163.48.64"
+PUBLIC_DNS="ec2-54-163-48-64.compute-1.amazonaws.com"
+
+echo "=========================================="
+echo "Browserless AWS Instance Information"
+echo "=========================================="
+echo ""
+echo "Instance ID: $INSTANCE_ID"
+echo "Public IP: $PUBLIC_IP"
+echo "Public DNS: $PUBLIC_DNS"
+echo ""
+echo "Waiting for instance to be ready..."
+echo ""
+
+# Wait for instance to be ready
+aws ec2 wait instance-status-ok --instance-ids $INSTANCE_ID
+
+echo "Instance is ready!"
+echo ""
+echo "To get the browserless token, SSH into the instance:"
+echo "  ssh -i ~/.ssh/Canvas-Wrapper.pem ec2-user@$PUBLIC_IP"
+echo ""
+echo "Then run:"
+echo "  cat /home/ec2-user/browserless-token.txt"
+echo ""
+echo "Or check if browserless is running:"
+echo "  sudo docker ps"
+echo ""
+echo "=========================================="
+echo "Connection URLs (once token is retrieved):"
+echo "=========================================="
+echo ""
+echo "WebSocket: ws://$PUBLIC_IP:3000/playwright?token=YOUR_TOKEN"
+echo "HTTP: http://$PUBLIC_IP:3000"
+echo "DevTools: http://$PUBLIC_IP:3000/devtools?token=YOUR_TOKEN"
+echo ""
+echo "For HTTPS (recommended for production), set up:"
+echo "  - Domain name pointing to $PUBLIC_IP"
+echo "  - SSL certificate (Let's Encrypt via certbot)"
+echo "  - Reverse proxy (nginx) on ports 80/443 -> 3000"
+echo ""

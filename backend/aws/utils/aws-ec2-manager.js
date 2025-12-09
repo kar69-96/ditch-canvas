@@ -726,6 +726,24 @@ async function cleanup(instanceId, wasAlreadyRunning, forceStop = true) {
   }
 }
 
+/**
+ * Simple HTTP health check for noVNC
+ */
+async function checkNoVncHealth(publicIp, port = 80, timeoutMs = 5000) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  const url = `http://${publicIp}:${port}`;
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+    return { success: res.ok, status: res.status };
+  } catch (error) {
+    clearTimeout(timeout);
+    return { success: false, error: error.message };
+  }
+}
+
 module.exports = {
   // Low-level functions
   startInstance,
@@ -738,6 +756,7 @@ module.exports = {
   // High-level functions
   ensureInstanceReady,
   executeCommand,
-  cleanup
+  cleanup,
+  checkNoVncHealth
 };
 

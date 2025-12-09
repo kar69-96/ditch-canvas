@@ -1,0 +1,9 @@
+{
+	"id": "M60Q7LksXlcMSjk",
+	"json": "{\"id\":\"M60Q7LksXlcMSjk\",\"url\":\"https://canvas.colorado.edu/courses/123160/pages/pela\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/pages/pela\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/pages/pela\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-04T06:31:41.145Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123160/pages/pela",
+	"url": "https://canvas.colorado.edu/courses/123160/pages/pela"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "WgYxjLTkG8yzE3c",
+	"json": "{\"id\":\"WgYxjLTkG8yzE3c\",\"url\":\"https://canvas.colorado.edu/courses/123160/pages/dell\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/pages/dell\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/pages/dell\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-04T06:31:23.274Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123160/pages/dell",
+	"url": "https://canvas.colorado.edu/courses/123160/pages/dell"
+}

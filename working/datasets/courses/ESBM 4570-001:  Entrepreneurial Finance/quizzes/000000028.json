@@ -1,0 +1,125 @@
+{
+	"quizId": "497917",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497917",
+	"extractedAt": "2025-12-04T06:37:11.719Z",
+	"title": "PRE QUIZ Case 2 Bob's Baloney",
+	"description": "<p>You have 15 minutes to complete the following quiz based on Bob's Baloney.</p>\n<p>This is an open note/open case quiz.</p>",
+	"descriptionText": "You have 15 minutes to complete the following quiz based on Bob's Baloney.\nThis is an open note/open case quiz.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463690",
+			"type": null,
+			"text": "Which of the following did Amanda discover was not well at Bob's?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8789\n\n    \n         \n      \n        Investor's publicly criticized management\n        \n      \n    \n    \n      \n    \n    \n      Investor's publicly criticized management\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463690\n      8789\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7666\n\n    \n         \n      \n        a listeria outbreak\n        \n      \n    \n    \n      \n    \n    \n      a listeria outbreak\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463690\n      7666\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "624\n\n    \n         \n      \n        loss of access to supply chain\n        \n      \n    \n    \n      \n    \n    \n      loss of access to supply chain\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463690\n      624\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1862\n\n    \n         \n      \n        PETA launched a campaign against them\n        \n      \n    \n    \n      \n    \n    \n      PETA launched a campaign against them\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463690\n      1862\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463691",
+			"type": null,
+			"text": "Amanda used her skills in which of the following disciplines to determined the credence of Mino's statements",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "5530\n\n    \n         \n      \n        finance\n        \n      \n    \n    \n      \n    \n    \n      finance\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463691\n      5530\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8290\n\n    \n         \n      \n        data analytics\n        \n      \n    \n    \n      \n    \n    \n      data analytics\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463691\n      8290\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9985\n\n    \n         \n      \n        marketing\n        \n      \n    \n    \n      \n    \n    \n      marketing\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463691\n      9985\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8706\n\n    \n         \n      \n        strategy\n        \n      \n    \n    \n      \n    \n    \n      strategy\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463691\n      8706\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463692",
+			"type": null,
+			"text": "In which of the following industries does Bob's Baloney fall?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "9096\n\n    \n         \n      \n        Food\n        \n      \n    \n    \n      \n    \n    \n      Food\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463692\n      9096\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1552\n\n    \n         \n      \n        Dining\n        \n      \n    \n    \n      \n    \n    \n      Dining\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463692\n      1552\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1637\n\n    \n         \n      \n        Entertainment\n        \n      \n    \n    \n      \n    \n    \n      Entertainment\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463692\n      1637\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7252\n\n    \n         \n      \n        Recreation\n        \n      \n    \n    \n      \n    \n    \n      Recreation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463692\n      7252\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463693",
+			"type": null,
+			"text": "Spangler's Decomposition of ROE is know as",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8043\n\n    \n         \n      \n        DuPont Equation\n        \n      \n    \n    \n      \n    \n    \n      DuPont Equation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463693\n      8043\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7951\n\n    \n         \n      \n        Harvard Breakout\n        \n      \n    \n    \n      \n    \n    \n      Harvard Breakout\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463693\n      7951\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1480\n\n    \n         \n      \n        Williams Equation\n        \n      \n    \n    \n      \n    \n    \n      Williams Equation\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463693\n      1480\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6877\n\n    \n         \n      \n        Overthinking\n        \n      \n    \n    \n      \n    \n    \n      Overthinking\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463693\n      6877\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 4,
+	"attachments": []
+}

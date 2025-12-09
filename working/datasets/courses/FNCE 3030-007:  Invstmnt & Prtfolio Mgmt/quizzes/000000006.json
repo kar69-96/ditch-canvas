@@ -1,0 +1,246 @@
+{
+	"quizId": "503735",
+	"courseId": "123249",
+	"url": "https://canvas.colorado.edu/courses/123249/quizzes/503735",
+	"extractedAt": "2025-12-04T06:33:00.100Z",
+	"title": "PQ1",
+	"description": "<p>Practice Quiz PQ1 covers Lectures 1 and 2. It is based on assignments A1 and A2 and the examples covered in Lecture 1 and 2 supplements.</p>\n<p>&nbsp;</p>\n<p>PQ1 is a timed quiz, meaning that once you open it you'll have to complete it within the allotted time. You have 10 attempts.</p>\n<p>&nbsp;</p>\n<p>Please note: PQ1 is not graded.</p>",
+	"descriptionText": "Practice Quiz PQ1 covers Lectures 1 and 2. It is based on assignments A1 and A2 and the examples covered in Lecture 1 and 2 supplements.\n \nPQ1 is a timed quiz, meaning that once you open it you'll have to complete it within the allotted time. You have 10 attempts.\n \nPlease note: PQ1 is not graded.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7531219",
+			"type": null,
+			"text": "The price of a share of Target stock is currently trading at $46.85. You want to buy 110 shares of the stock on margin. Your broker requires an initial margin of 60% and has a maintenance margin of 30%. Your broker charges an effective annual interest rate of 8% on margin loans.\n \nQuestion 1: You plan to borrow as much as you can from your broker to finance your margin position. What is the most you can borrow from your broker?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $5153.5\nB = $3944.2\nC = $3092.1\nD = $2101.4\nE = $2061.4\n \nQuestion 2: If the share price rises to $54.96 after 3 months, what is the equity in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $5153.5\nB = $3944.2\nC = $3092.1\nD = $2101.4\nE = $2061.4\n \nQuestion 3: If the share price rises to $54.96 after 3 months, what is the percentage margin (or percentage equity) in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 164.73%\nB = 107.54%\nC = 65.24%\nD = 27.56%\nE = 14.72%\n \nQuestion 4: What is the effective annual return over the 3 month period?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 164.73%\nB = 107.54%\nC = 65.24%\nD = 27.56%\nE = 14.72%\n \nQuestion 5: What is the minimum value the stock price can take after 3 months before you are issued a margin call?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $31.45\nB = $27.29\nC = $26.77\nD = $23.96\nE = $21.4",
+			"points": 50,
+			"answers": [
+				{
+					"text": "E",
+					"isCorrect": true
+				},
+				{
+					"text": "5447\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7531219\n      5447\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "B",
+					"isCorrect": true
+				},
+				{
+					"text": "6374\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7531219\n      6374\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "C",
+					"isCorrect": true
+				},
+				{
+					"text": "2208\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7531219\n      2208\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "8480\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7531219\n      8480\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "B",
+					"isCorrect": true
+				},
+				{
+					"text": "7199\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q5\n      7531219\n      7199\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7531220",
+			"type": null,
+			"text": "The Dec 31 2028 US Treasury bond has a face value of $1000 and an annual coupon rate of 6% paid semi-annually. The bond trades currently at 98.7% of the face value (i.e., $987). You plan to buy 70 bonds on margin. Your broker requires an initial margin of 55% and has a maintenance margin of 27%. Your broker charges an effective annual interest rate of 4.6% on margin loans.\n \nQuestion 1: You plan to borrow as much as you can from your broker to finance your margin position. What is the most you can borrow from your broker?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $69,090\nB = $37,999.5\nC = $36,221.4\nD = $31,678.6\nE = $31,090.5\n \nQuestion 2: If the bond price drops to 94% of the face value after 5 months, and the bond makes exactly one semi-annual coupon payment during this period, what is the equity in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $69,090\nB = $37,999.5\nC = $36,221.4\nD = $31,678.6\nE = $31,090.5\n \nQuestion 3: If the bond price drops to 94% of the face value after 5 months, and the bond makes exactly one semi-annual coupon payment during this period, what is the percentage margin (or percentage equity) in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = -10.86%\nB = -4.68%\nC = 51.86%\nD = 53.35%\nE = 55.05%\n \nQuestion 4: What is the effective annual return over the 5 month period?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = -10.86%\nB = -4.68%\nC = 51.86%\nD = 53.35%\nE = 55.05%\n \nQuestion 5: What is the minimum value the stock price can take after 5 months before you are issued a margin call?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $661.03\nB = $619.93\nC = $608.42\nD = $578.84\nE = $567.33",
+			"points": 50,
+			"answers": [
+				{
+					"text": "E",
+					"isCorrect": true
+				},
+				{
+					"text": "6330\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7531220\n      6330\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "C",
+					"isCorrect": true
+				},
+				{
+					"text": "8606\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7531220\n      8606\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": false
+				},
+				{
+					"text": "3794\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7531220\n      3794\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "8418\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7531220\n      8418\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "B",
+					"isCorrect": false
+				},
+				{
+					"text": "7106\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q5\n      7531220\n      7106\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7531221",
+			"type": null,
+			"text": "The price of a share of Intel stock is currently trading at $24.66. You want to short sale 370 shares of the stock. Your broker requires an initial margin of 50% and has a maintenance margin of 50%. \n \nQuestion 1: How much equity do you need in your account to be able to open the short position?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $13,686.3\nB = $9,124.2\nC = $5,009.8\nD = $4,562.1\nE = $3,985.3\n \nQuestion 2: If the share price were to drop to $21.84 after 6 months and the stock paid one dividend of $1.61 per share during this period, what should be the equity in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $13,686.3\nB = $9,124.2\nC = $5,009.8\nD = $4,562.1\nE = $3,985.3\n \nQuestion 3: If the share price were to drop to $21.84 after 6 months and the stock paid one dividend of $1.61 per share during this period, what should be the percentage margin (or percentage equity) in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 9.81%\nB = 20.59%\nC = 41.24%\nD = 62%\nE = 69.37%\n \nQuestion 4: What is the effective annual return over the 6 month period?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 9.81%\nB = 20.59%\nC = 41.24%\nD = 62%\nE = 69.37%\n \nQuestion 5: What is the maximum value the stock price can take after 6 months before you are issued a margin call?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $25.73\nB = $24.66\nC = $23.59\nD = $18.92\nE = $14.56",
+			"points": 50,
+			"answers": [
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "1203\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7531221\n      1203\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "4448\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7531221\n      4448\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "2754\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7531221\n      2754\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "794\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7531221\n      794\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "5953\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q5\n      7531221\n      5953\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7531222",
+			"type": null,
+			"text": "On Aug 1st 2025, a share of Tesla stock was trading at $460. You believed the stock was overvalued and decided to short sale 100 shares. Your broker requires an initial margin of 60% and has a maintenance margin of 60%. \n \nQuestion 1: How much equity did you need in your account to be able to open the short position on Aug 1st?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $73,600\nB = $46,000\nC = $33,600\nD = $27,600\nE = $23,600\n \nQuestion 2: On Aug 15th, 2025, Tesla share price dropped to $400 per share. What was the equity in your account on Aug 15th?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $73,600\nB = $46,000\nC = $33,600\nD = $27,600\nE = $23,600\n \nQuestion 3: On Aug 25th, 2025, Tesla announced that it plans to pay an extraordinary dividend of $20 per share in 6 month. The announcement led to an increase in Tesla share price to $500 per share. What was the equity in your account on Aug 25th?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $73,600\nB = $46,000\nC = $33,600\nD = $27,600\nE = $23,600\n \nQuestion 4: Did you get a margin call on Aug 25th?\nAnswer: \n\nType one of the following choices: A, B or C:\nA = Yes\nB = No\nC = Lost my phone, so I have no idea ;)",
+			"points": 40,
+			"answers": [
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "1261\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7531222\n      1261\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "2533\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7531222\n      2533\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "3643\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7531222\n      3643\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "868\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7531222\n      868\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7531223",
+			"type": null,
+			"text": "A mutual fund consists of 100,000 shares of Stock A, 200,000 shares of Stock B, and 300,000 shares of stock C. The fund also has $2 million in cash, and $450,000 in liabilities. The fund has 2 million shares outstanding.\n \nQuestion 1: Suppose that on Sep 1st 2025 the closing prices of the shares of Stocks A, B and C are respectively, $520, $410, and $350. What is the fund's NAV per share on Sep 1st?\nAnswer: \n\nType one of the following choices: A, B, C, and D\nA = $123.775\nB = $120.275\nC = $119.5\nD = $117.75\nE = $112.25\n \nQuestion 2: Suppose that on Sep 5th 2025 the closing prices of the shares of Stocks A, B and C are respectively, $550, $400, and $370. Suppose a large fund shareholder wants to redeem 200,000 of the fund shares. What is the fund's NAV after the shareholder redeemed its fund shares?  \nAnswer: \n\nType one of the following choices: A, B, C, and D\nA = $123.775\nB = $120.275\nC = $119.5\nD = $117.75\nE = $112.25\n \nQuestion 3: Suppose that the fund had operating expenses of 0.9%, b-12 fees of 0.5%, and a back-end load of 3%, if the fund is sold within one year, and 0%, if the fund is sold after one year. If the fund generates an average net return of 12.5% per year before fees, how much money would an investor make if it invested $100,000 in the fund for 3 years?\nAnswer: \n\nType one of the following choices: A, B, C, and D\nA = $130,229.34\nB = $132,451.62\nC = $133,019.07\nD = $137,133.06\nE = $138,992.89",
+			"points": 30,
+			"answers": [
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "3165\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7531223\n      3165\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "2335\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7531223\n      2335\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "(You left this blank)",
+					"isCorrect": false
+				},
+				{
+					"text": "3719\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7531223\n      3719\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

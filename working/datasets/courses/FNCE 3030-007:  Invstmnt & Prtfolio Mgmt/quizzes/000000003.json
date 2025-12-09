@@ -1,0 +1,159 @@
+{
+	"quizId": "507675",
+	"courseId": "123249",
+	"url": "https://canvas.colorado.edu/courses/123249/quizzes/507675",
+	"extractedAt": "2025-12-04T06:29:56.964Z",
+	"title": "Midterm Exam",
+	"description": "<p>1. The exam is in-person, during our regular class time</p>\n<p>2. The exam is closed notes/books and no pre-populated Excel spreadsheets are allowed</p>\n<p>3. You are allowed to use a printed formula sheet (front and back)</p>\n<p>4. Please save your Excel work and your hand-written notes</p>\n<p>5. Please upload your work (Excel work and pictures of any hand-written work) by going to <a title=\"Midterm Exam Work Upload\" href=\"https://canvas.colorado.edu/courses/123249/assignments/2528544\" data-course-type=\"assignments\" data-published=\"true\">Midterm Exam Work Upload</a> on Canvas within 20 minutes after the test ended.<strong><em></em></strong></p>\n<p>6. Please note: You must have supporting work to receive full credit for a question.</p>",
+	"descriptionText": "1. The exam is in-person, during our regular class time\n2. The exam is closed notes/books and no pre-populated Excel spreadsheets are allowed\n3. You are allowed to use a printed formula sheet (front and back)\n4. Please save your Excel work and your hand-written notes\n5. Please upload your work (Excel work and pictures of any hand-written work) by going to Midterm Exam Work Upload on Canvas within 20 minutes after the test ended.\n6. Please note: You must have supporting work to receive full credit for a question.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7594521",
+			"type": null,
+			"text": "Consider the following monthly return data on 4 stocks and the S&P500: data_midterm.xlsx\n    \n\nDownload data_midterm.xlsx\nSuppose also that the risk-free rate is 0.0012.\n \nQuestions\n \nQuestion 1: Suppose that on January 1, 2003, you invested in a portfolio P that allocated 25% in Ford, 10% in GM, 35% in WMT,  20% in TGT, and the rest in S&P500. You balanced this portfolio at the beginning of each month until July 30, 2021. What was the Sharpe ratio of this portfolio over the entire sample period (2003/01-2021/07)?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 12.6%\nB = 10.94%\nC = 11.45%\nD = 13.14%\nE = 14.49%\n \nQuestion 2: Suppose that on January 1, 2023, you invested $1 million in portfolio P from part 1. Assuming that rebalanced your portfolio every month until July 30, 2021, how much should your portfolio be worth on July 30, 2021?\n \nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $5,113,804\nB = $4,997,004\nC = $4,997,596\nD = $5,306,763\nE = $4,854,995\n \nQuestion 3: Suppose that on January 1, 2023, you invested $1 million in portfolio P from part 1, and then decided to never rebalance until July 30, 2021. How much should your portfolio be worth on July 30, 2021?\n \nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $5,113,804\nB = $4,997,004\nC = $4,997,596\nD = $5,306,763\nE = $4,854,995\n \nQuestion 4: What is the Sharpe's ratio of the unbalanced portfolio from part 3 over the entire sample period (2003/01-2021/07)?\n \nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 12.6%\nB = 10.94%\nC = 11.45%\nD = 13.14%\nE = 14.49%",
+			"points": 32,
+			"answers": [
+				{
+					"text": "D",
+					"isCorrect": true
+				},
+				{
+					"text": "1829\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7594521\n      1829\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "B",
+					"isCorrect": true
+				},
+				{
+					"text": "8733\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7594521\n      8733\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "2236\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7594521\n      2236\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "E",
+					"isCorrect": true
+				},
+				{
+					"text": "3933\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7594521\n      3933\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7594944",
+			"type": null,
+			"text": "You work in the wealth management group at Well Fargo. A client is interested in building a portfolio that has exposure to domestic equities, international equities and gold. You did some research and came up with 3 ETFs: SPY for domestic equities, IEFA for international equities, and GLD for gold.\n \nBelow are some statistics for the annual returns of these ETFs:\n\n\n\n\nSPY\nIEFA\nGLD\n\n\nExpected return\n11%\n12%\n7%\n\n\nReturn volatility\n21%\n25%\n17%\n\n\n\n \nThe covariance between SPY and IEFA is 0.05, the covariance between SPY and GLD is -0.01, and the covariance between IEFA and GLD is -0.015.\n \nIn addition, the 1-year T-Bills yield (i.e., the risk-free rate) is 2.8%.\n \nQuestions \n \nQuestion 1: Suppose you want to build a portfolio that allocates 45% in SPY, 35% in IEFA and the rest in GLD. What is the Sharpe's ratio of this portfolio?\nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 31.2%\nB = 45.05%\nC = 39.72%\nD = 54.82%\nE = 49.47%\n \nQuestion 2: You want to build the optimal risky portfolio generated by SPY, IEFA and GLD. What is the Sharpe's ratio of this portfolio?\nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 31.2%\nB = 45.05%\nC = 39.72%\nD = 54.82%\nE = 49.47%\n \nQuestion 3: To reduce the risk of your client's portfolio, you plan to combine the optimal risky portfolio in Part 2 with the T-Bills. How much weight should you put on T-Bills such that the portfolio of the optimal risky portfolio and the T-Bills has a return volatility of 10%?\nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 10.48%\nB = 12.6%\nC = 16.93%\nD = 8.52%\nE = 14.28%\n \nQuestion 4: Suppose your client has a risk aversion of A = 5. You are building the optimal (complete) portfolio for your client, that combines the optimal risky portfolio in Part 2 and the T-Bills. What is the allocation of GLD in your client's complete portfolio?\nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 49.3%\nB = 18.1%\nC = 27.8%\nD = 31.8%\nE = 76.2%",
+			"points": 36,
+			"answers": [
+				{
+					"text": "B",
+					"isCorrect": true
+				},
+				{
+					"text": "4165\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7594944\n      4165\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": true
+				},
+				{
+					"text": "9063\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7594944\n      9063\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "E",
+					"isCorrect": true
+				},
+				{
+					"text": "9315\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7594944\n      9315\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "C",
+					"isCorrect": false
+				},
+				{
+					"text": "2771\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7594944\n      2771\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7596032",
+			"type": null,
+			"text": "You work for Amundi Funds out of Paris, and your boss asked you to set up a strategy that buys long the ETF SPY (domestic stocks) and short sales the ETF IEFA (international stocks). PNB Paribas is Amundi's broker and have the following margin requirements:\n1) Initial margin for buying on margin and for short selling is 65%\n2) Maintenance margin on buying on margin is 35%\n3) Maintenance margin on short-selling is 50%\n4) Interest rate on margin loans is 3% per year\n \nThe strategy requires that you buy long 10,000 shares of SPY and sell short 60,000 shares of IEFA.\n \nSuppose that today is Aug 20, 2025, and that a shares of SPY trades at $650, while a share of IEFA trades at $110.\n \nQuestions\n \nQuestion 1: Suppose that on Oct 20, 2025 (two months later), a share of SPY trades for $610. What should be the percentage equity of your SPY position  in your margin account?\n \nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 61.59%\nB = 51.25%\nC = 62.52%\nD = 46.8%\nE = 57.36%\n \nQuestion 2: Suppose that on Oct 20, 2025 (two months later), a share of IEFA trades for $105. What should be the percentage equity of your IEFA position in your margin account?\n \nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 67.58%\nB = 59.61%\nC = 62.52%\nD = 72.86%\nE = 80.26%\n \nQuestion 3: What is the lowest price that a share of IEFA should be trading on Oct 20, 2025 (two months later) for the Amundi to get a margin call on the IEFA position?\nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = $121\nB = $134.44\nC = $110\nD = $127.6\nE = $118.52\n \nQuestion 4: Suppose that on Oct 20, 2025 (two months later), a share of SPY trades for $610 while a share of IEFA trades for $105. What is the return on your strategy between Aug 20, 2025 and Oct 20, 2025?\nAnswer: \n\nType one of the following choices: A, B, C, D and E\nA = 6.21%\nB = 3.8%\nC = 0.27%\nD = -4.03%\nE = -5.21%",
+			"points": 32,
+			"answers": [
+				{
+					"text": "C",
+					"isCorrect": true
+				},
+				{
+					"text": "5576\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7596032\n      5576\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": true
+				},
+				{
+					"text": "6947\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7596032\n      6947\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "7589\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7596032\n      7589\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": false
+				},
+				{
+					"text": "471\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q4\n      7596032\n      471\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 3,
+	"attachments": [
+		{
+			"name": "data_midterm.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123249/files/81215791?wrap=1",
+			"type": null
+		},
+		{
+			"name": "Download data_midterm.xlsx",
+			"url": "https://canvas.colorado.edu/courses/123249/files/81215791/download?download_frd=1",
+			"type": null
+		}
+	]
+}

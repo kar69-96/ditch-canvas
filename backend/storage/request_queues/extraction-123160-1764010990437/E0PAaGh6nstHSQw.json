@@ -1,9 +1,0 @@
-{
-	"id": "E0PAaGh6nstHSQw",
-	"json": "{\"id\":\"E0PAaGh6nstHSQw\",\"url\":\"https://canvas.colorado.edu/courses/123160/syllabus\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/syllabus\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/syllabus\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"syllabus\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:05:43.595Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123160/syllabus",
-	"url": "https://canvas.colorado.edu/courses/123160/syllabus"
-}

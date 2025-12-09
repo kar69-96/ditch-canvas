@@ -35,6 +35,7 @@ export async function loadCanvasDataFromSupabase(userEmail: string): Promise<Can
     // Separate entities by type
     const courses = allEntities.filter(e => e.entity_type === 'course');
     const assignments = allEntities.filter(e => e.entity_type === 'assignment');
+    const quizzes = allEntities.filter(e => e.entity_type === 'quiz');
     const announcements = allEntities.filter(e => e.entity_type === 'announcement');
     const modules = allEntities.filter(e => e.entity_type === 'module');
     const pages = allEntities.filter(e => e.entity_type === 'page');
@@ -42,7 +43,7 @@ export async function loadCanvasDataFromSupabase(userEmail: string): Promise<Can
     const fileBinaries = allEntities.filter(e => e.entity_type === 'file_binary');
     const gradesEntities = allEntities.filter(e => e.entity_type === 'grades');
 
-    console.log(`[supabaseDataLoader] Found ${courses.length} courses, ${assignments.length} assignments, ${announcements.length} announcements, ${modules.length} modules, ${pages.length} pages, ${files.length} file metadata, ${fileBinaries.length} uploaded files`);
+    console.log(`[supabaseDataLoader] Found ${courses.length} courses, ${assignments.length} assignments, ${quizzes.length} quizzes, ${announcements.length} announcements, ${modules.length} modules, ${pages.length} pages, ${files.length} file metadata, ${fileBinaries.length} uploaded files`);
 
     if (courses.length === 0) {
       console.warn(`[supabaseDataLoader] No courses found for email: ${normalizedEmail}`);
@@ -75,6 +76,44 @@ export async function loadCanvasDataFromSupabase(userEmail: string): Promise<Can
     // Convert assignments
     const assignmentsData = assignments.map(entity => {
       const assignment = entity.data as any;
+      const metadata = entity.metadata as any || {};
+      
+      // Extract submission status from multiple possible locations and field name variations
+      // Check assignment.data first, then metadata, then check for alternative field names
+      const submissionStatus = 
+        assignment.submissionStatus || 
+        assignment.submission_status || 
+        metadata.submissionStatus ||
+        metadata.submission_status ||
+        (assignment.submitted === true ? 'yes' : (assignment.submitted === false ? 'no' : null)) ||
+        (assignment.hasSubmission === true ? 'yes' : (assignment.hasSubmission === false ? 'no' : null)) ||
+        null;
+      
+      const submissionStatusText = 
+        assignment.submissionStatusText || 
+        assignment.submission_status_text ||
+        metadata.submissionStatusText ||
+        metadata.submission_status_text ||
+        null;
+      
+      // Debug logging: Log first few assignments to see the structure
+      const assignmentId = assignment.id || assignment.assignmentId || entity.entity_id;
+      if (assignments.indexOf(entity) < 3) {
+        console.log(`[supabaseDataLoader] Sample assignment ${assignmentId}:`, {
+          title: assignment.title?.substring(0, 30),
+          hasSubmissionStatus: !!assignment.submissionStatus,
+          hasSubmissionStatusText: !!assignment.submissionStatusText,
+          submissionStatus: assignment.submissionStatus,
+          submissionStatusText: assignment.submissionStatusText,
+          allKeys: Object.keys(assignment).filter(k => k.toLowerCase().includes('submission') || k.toLowerCase().includes('submit'))
+        });
+      }
+      
+      // Check if this is a quiz based on submission types
+      const isQuizFromTypes = (assignment.submissionTypes || assignment.submission_types || []).some((type: string) => 
+        type.toLowerCase().includes("quiz")
+      );
+      
       return {
         id: parseInt(entity.entity_id) || assignment.assignmentId || assignment.id || 0,
         title: assignment.title || 'Untitled Assignment',
@@ -87,8 +126,75 @@ export async function loadCanvasDataFromSupabase(userEmail: string): Promise<Can
         submissionTypes: (assignment.submissionTypes || assignment.submission_types || []) as string[],
         workflowState: assignment.workflowState || assignment.workflow_state || 'pending',
         url: assignment.url || null,
+        submissionStatus: submissionStatus as "yes" | "no" | null,
+        submissionStatusText: submissionStatusText || null,
+        isQuiz: isQuizFromTypes, // Flag for quizzes
       };
     });
+
+    // Convert quizzes to assignment format (so they can be displayed together)
+    const quizzesAsAssignments = quizzes.map(entity => {
+      const quiz = entity.data as any;
+      const metadata = entity.metadata as any || {};
+      
+      // Extract submission status for quizzes (similar to assignments)
+      const submissionStatus = 
+        quiz.submissionStatus || 
+        quiz.submission_status || 
+        metadata.submissionStatus ||
+        metadata.submission_status ||
+        null;
+      
+      const submissionStatusText = 
+        quiz.submissionStatusText || 
+        quiz.submission_status_text ||
+        metadata.submissionStatusText ||
+        metadata.submission_status_text ||
+        null;
+      
+      // Get due date from metadata or quiz data - quizzes often don't have due dates, so use extractedAt as fallback
+      let dueDate = metadata.dueDate || quiz.metadata?.dueDate || quiz.dueDate || null;
+      if (!dueDate && quiz.extractedAt) {
+        // If no due date, use extracted date as a fallback so quizzes still appear
+        dueDate = quiz.extractedAt;
+      }
+      
+      // Get course info from courseId
+      const courseId = entity.course_id ? parseInt(entity.course_id) : (parseInt(quiz.courseId) || 0);
+      const course = coursesData.find(c => c.id === courseId);
+      
+      return {
+        id: parseInt(entity.entity_id) || parseInt(quiz.quizId) || 0,
+        title: quiz.title || 'Untitled Quiz',
+        courseId: courseId,
+        courseName: quiz.courseName || quiz.course_name || course?.name || '',
+        courseCode: quiz.courseCode || quiz.course_code || course?.code || '',
+        dueAt: dueDate || '', // Empty string if no date - will be handled as "unknown date"
+        assignedAt: quiz.assignedAt || quiz.assigned_at || quiz.extractedAt || new Date().toISOString(),
+        pointsPossible: metadata.points || quiz.metadata?.points || quiz.pointsPossible || null,
+        submissionTypes: ['online_quiz'] as string[], // Mark as quiz type
+        workflowState: quiz.workflowState || quiz.workflow_state || (quiz.metadata?.isPublished ? 'published' : 'pending'),
+        url: quiz.url || null,
+        submissionStatus: submissionStatus as "yes" | "no" | null,
+        submissionStatusText: submissionStatusText || null,
+        isQuiz: true, // Flag to identify quizzes
+      };
+    });
+    
+    // Debug logging for quizzes
+    if (quizzes.length > 0) {
+      console.log(`[supabaseDataLoader] Converting ${quizzes.length} quizzes to assignments:`, 
+        quizzesAsAssignments.slice(0, 3).map(q => ({ 
+          title: q.title.substring(0, 40), 
+          courseId: q.courseId, 
+          dueAt: q.dueAt || 'no date',
+          isQuiz: q.isQuiz 
+        }))
+      );
+    }
+
+    // Merge quizzes with assignments (quizzes are treated as assignments in the UI)
+    const allAssignmentsData = [...assignmentsData, ...quizzesAsAssignments];
 
     // Convert announcements
     const announcementsData = announcements.map(entity => {
@@ -444,7 +550,7 @@ export async function loadCanvasDataFromSupabase(userEmail: string): Promise<Can
     const canvasData: CanvasData = {
       user,
       courses: coursesData,
-      assignments: assignmentsData,
+      assignments: allAssignmentsData, // Includes both assignments and quizzes
       announcements: announcementsData,
       modules: modulesData,
       pages: pagesData,
@@ -452,7 +558,17 @@ export async function loadCanvasDataFromSupabase(userEmail: string): Promise<Can
       grades: gradesData,
     };
 
+    // Log summary of submission status
+    const assignmentsWithSubmissionStatus = allAssignmentsData.filter(a => a.submissionStatus !== null && a.submissionStatus !== undefined);
+    const submittedAssignments = allAssignmentsData.filter(a => a.submissionStatus === 'yes');
+    const quizCount = allAssignmentsData.filter(a => a.isQuiz).length;
+    const quizTitles = allAssignmentsData.filter(a => a.isQuiz).slice(0, 5).map(a => a.title);
     console.log(`[supabaseDataLoader] Successfully loaded Canvas data for ${normalizedEmail}`);
+    console.log(`[supabaseDataLoader] Summary: ${allAssignmentsData.length} total items (${assignmentsData.length} assignments + ${quizCount} quizzes), ${assignmentsWithSubmissionStatus.length} with submission status, ${submittedAssignments.length} marked as submitted`);
+    if (quizCount > 0) {
+      console.log(`[supabaseDataLoader] Quiz titles (first 5):`, quizTitles);
+    }
+    
     return canvasData;
   } catch (error) {
     console.error(`[supabaseDataLoader] Error loading data for ${normalizedEmail}:`, error);

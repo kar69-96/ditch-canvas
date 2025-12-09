@@ -1,0 +1,150 @@
+{
+	"quizId": "491802",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491802",
+	"extractedAt": "2025-12-04T06:16:51.029Z",
+	"title": "\"Sources of Funding\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Sources of Funding\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Sources of Funding\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404782",
+			"type": null,
+			"text": "Which of the following is the LEAST relevant factor for targeting the funding source?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "9262\n\n    \n         \n      \n        Ratio of outputs to inputs\n        \n      \n    \n    \n      \n    \n    \n      Ratio of outputs to inputs\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404782\n      9262\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8662\n\n    \n         \n      \n        Pace of growth\n        \n      \n    \n    \n      \n    \n    \n      Pace of growth\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404782\n      8662\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2299\n\n    \n         \n      \n        Asset intensity\n        \n      \n    \n    \n      \n    \n    \n      Asset intensity\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404782\n      2299\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6800\n\n    \n         \n      \n        Intellectual property rights\n        \n      \n    \n    \n      \n    \n    \n      Intellectual property rights\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404782\n      6800\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404783",
+			"type": null,
+			"text": "Which of the following financial sources has the LEAST potential for dilution?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3786\n\n    \n         \n      \n        Strategic investor\n        \n      \n    \n    \n      \n    \n    \n      Strategic investor\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404783\n      3786\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4914\n\n    \n         \n      \n        Angel investor\n        \n      \n    \n    \n      \n    \n    \n      Angel investor\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404783\n      4914\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3589\n\n    \n         \n      \n        Bootstrapping\n        \n      \n    \n    \n      \n    \n    \n      Bootstrapping\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404783\n      3589\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8583\n\n    \n         \n      \n        VC\n        \n      \n    \n    \n      \n    \n    \n      VC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404783\n      8583\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404784",
+			"type": null,
+			"text": "Which of the following has the MOST potential for deep field expertise?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3784\n\n    \n         \n      \n        Bank\n        \n      \n    \n    \n      \n    \n    \n      Bank\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404784\n      3784\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6386\n\n    \n         \n      \n        VC\n        \n      \n    \n    \n      \n    \n    \n      VC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404784\n      6386\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "4783\n\n    \n         \n      \n        Crowdfunding\n        \n      \n    \n    \n      \n    \n    \n      Crowdfunding\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404784\n      4783\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4085\n\n    \n         \n      \n        Angel investor\n        \n      \n    \n    \n      \n    \n    \n      Angel investor\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404784\n      4085\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404785",
+			"type": null,
+			"text": "Which of the following is generally NOT offered by an incubator?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3548\n\n    \n         \n      \n        Mentorship\n        \n      \n    \n    \n      \n    \n    \n      Mentorship\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404785\n      3548\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2191\n\n    \n         \n      \n        Liquidity options\n        \n      \n    \n    \n      \n    \n    \n      Liquidity options\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404785\n      2191\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7363\n\n    \n         \n      \n        Network of startups\n        \n      \n    \n    \n      \n    \n    \n      Network of startups\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404785\n      7363\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8150\n\n    \n         \n      \n        Office space\n        \n      \n    \n    \n      \n    \n    \n      Office space\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404785\n      8150\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404786",
+			"type": null,
+			"text": "Which type of projects is best suited for commercial bank funding?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "9712\n\n    \n         \n      \n        Capital-intensive new technologies\n        \n      \n    \n    \n      \n    \n    \n      Capital-intensive new technologies\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404786\n      9712\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "668\n\n    \n         \n      \n        Novel technologies\n        \n      \n    \n    \n      \n    \n    \n      Novel technologies\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404786\n      668\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3532\n\n    \n         \n      \n        Capital-intensive proven technologies\n        \n      \n    \n    \n      \n    \n    \n      Capital-intensive proven technologies\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404786\n      3532\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8117\n\n    \n         \n      \n        Small businesses\n        \n      \n    \n    \n      \n    \n    \n      Small businesses\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404786\n      8117\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

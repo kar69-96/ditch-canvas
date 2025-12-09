@@ -1,0 +1,157 @@
+{
+	"quizId": "504286",
+	"courseId": "123249",
+	"url": "https://canvas.colorado.edu/courses/123249/quizzes/504286",
+	"extractedAt": "2025-12-04T06:29:56.957Z",
+	"title": "Q1",
+	"description": "<p>Quiz Q1 covers Lectures 1 and 2. It is based on assignments A1 and A2 and the examples covered in Lecture 1 and 2 supplements. Make sure to practice PQ1 before attempting Q1.</p>\n<p>&nbsp;</p>\n<p>Q1 is a timed quiz, meaning that once you open it you'll have to complete it within the allotted time. If you open it by accident, you have to take the quiz.&nbsp;</p>\n<p>&nbsp;</p>\n<p>You have only <strong>one</strong> attempt at this quiz.&nbsp;</p>\n<p>&nbsp;</p>\n<p><span style=\"text-decoration: underline;\">Honesty code: </span>Please work by yourself. Do not take picture of the questions and share them with your colleagues. If I hear of any improper behavior, everybody involved will receive a score of <strong>zero</strong> (e.g., I can see how much time you spend on each question...)</p>",
+	"descriptionText": "Quiz Q1 covers Lectures 1 and 2. It is based on assignments A1 and A2 and the examples covered in Lecture 1 and 2 supplements. Make sure to practice PQ1 before attempting Q1.\n \nQ1 is a timed quiz, meaning that once you open it you'll have to complete it within the allotted time. If you open it by accident, you have to take the quiz. \n \nYou have only one attempt at this quiz. \n \nHonesty code: Please work by yourself. Do not take picture of the questions and share them with your colleagues. If I hear of any improper behavior, everybody involved will receive a score of zero (e.g., I can see how much time you spend on each question...)",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7538644",
+			"type": null,
+			"text": "The price of a share of Meta stock is currently trading at $750. You want to buy 100 shares of the stock on margin. Your broker requires an initial margin of 58% and has a maintenance margin of 27%. Your broker charges an effective annual interest rate of 6% on margin loans.\nYou plan to borrow as much as you can from your broker to finance your margin position.\n \nQuestion 1: If the share price rises to $760 after 6 months, what is the percentage margin (or percentage equity) in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA =58.55%\nB =58.09%\nC =57.33%\nD =57.16%\nE =56.07%\n \nQuestion 2: If the share price drops to $730 after 6 months, what is the percentage margin (or percentage equity) in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 54.09%\nB = 54.26%\nC = 55.27%\nD = 55.57%\nE = 56.85%\n \n \nQuestion 3: What is the minimum value the stock price can take after 6 months before you are issued a margin call?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $444.26\nB = $431.51\nC = $388.14\nD = $354.72\nE = $255.36",
+			"points": 30,
+			"answers": [
+				{
+					"text": "C",
+					"isCorrect": true
+				},
+				{
+					"text": "9526\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7538644\n      9526\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": true
+				},
+				{
+					"text": "3144\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7538644\n      3144\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "7713\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7538644\n      7713\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7538672",
+			"type": null,
+			"text": "A share of Dell stock is currently trading at $135. The stock is expected to pay a dividend of $0.53 per share every quarter.\n \nYou want to buy 1000 shares of the stock on margin. Your broker requires an initial margin of 52% and has a maintenance margin of 24%. Your broker charges an effective annual interest rate of 5.3% on margin loans.\n \nYou plan to borrow as much as you can from your broker to finance your margin position.\n \nQuestion 1: Suppose that after 5 month, the share price drops to $100 and the stock makes exactly one dividend payment of $0.53 per share. What should be the percentage margin (or percentage equity) in your account?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 35.54%\nB = 34.92%\nC = 34.32%\nD = 32.12%\nE = 25.42%\n \nQuestion 2: Suppose that after 5 month, the share price drops to $100 and the stock makes exactly one dividend payment of $0.53 per share. What is the effective annual return over the 5 month period?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = -82.05%\nB = -73.82%\nC = -66.27%\nD = -51.11%\nE = -47.85%\n \nQuestion 3: What is the minimum value that the stock price can take after 5 months before you are issued a margin call? Recall that the stock pays exactly one dividend of $0.53 per share during this period.\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $89.95\nB = $89.23\nC = $88.5\nD = $87.12\nE = $86.42",
+			"points": 30,
+			"answers": [
+				{
+					"text": "C",
+					"isCorrect": true
+				},
+				{
+					"text": "2952\n\n    \n      \n        C\n        \n      \n    \n    \n      \n    \n    \n      C\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7538672\n      2952\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "68\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7538672\n      68\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": false
+				},
+				{
+					"text": "3900\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7538672\n      3900\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7539767",
+			"type": null,
+			"text": "On Aug 1st 2025, a Spirit Airline (SA) bond was trading at 78% of the face value. The bond had a face value of $1000, an annual coupon rate of 8.4%, paid semi-annually, and a maturity date of December 31 2030. \n \nYou believed SA is in trouble and want to short sale 250 of these bonds. For this bond, your broker requires an initial margin of 70% and a maintenance margin of 65%. \n \nQuestion 1: How much equity did you need in your account to be able to open the short position on Aug 1st?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $331,500\nB = $234,200\nC = $195,000\nD = $136,500\nE = $98,950\n \nQuestion 2: On Aug 15th, 2025, the bond made a coupon payment, and was trading at 75% of face value (after it made the coupon payment). What was the percentage margin (or percentage equity) in your account on Aug 15th?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $76.8%\nB = $71.2%\nC = $68.8%\nD = $64.3%\nE = $60.7%\n \nQuestion 3: On Aug 30th, 2025, SA announced that it plans to file for bankruptcy. The bond price dropped to 35% of face value. What was the percentage margin in your account on Aug 30th?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 78.15%\nB = 79.6%\nC = 82.45%\nD = 88.95%\nE = 92.95%",
+			"points": 36,
+			"answers": [
+				{
+					"text": "D",
+					"isCorrect": true
+				},
+				{
+					"text": "1319\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7539767\n      1319\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "B",
+					"isCorrect": true
+				},
+				{
+					"text": "9725\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7539767\n      9725\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "C",
+					"isCorrect": false
+				},
+				{
+					"text": "4462\n\n    \n      \n        E\n        \n      \n    \n    \n      \n    \n    \n      E\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7539767\n      4462\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7539843",
+			"type": null,
+			"text": "Today is Sep 1, 2025. The price of a share of Oracle stock is currently trading at $330. The stock pays a dividend of $0.50 per share every quarter.The next dividend payment is expected to be on Sep 20th, 2025.\n \nYou believe Oracle is overvalued and you want to short sale 500 shares of the stock. Your broker requires an initial margin of 58% and a maintenance margin of 53%. \n \nQuestion 1: Suppose that on Sep 10, 2025, Oracle stock price dropped to $300. What should be the percentage margin (or percentage equity) in your account on this date? Recall, Oracle is not expected to make a dividend payment until Sep 20th.\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 73.63%\nB = 73.8%\nC = 74.35%\nD = 76.13%\nE = 76.72%\n \nQuestion 2: Suppose that on Sep 20th, right after Oracle made its dividend payment, Oracle announced that it plans to double its dividend starting with December. As a result the stock price jumped to $420 per share.  What should be the percentage margin (or percentage equity) in your account on Sep 20th, 2025?\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = 22.91%\nB = 23.24%\nC = 23.75%\nD = 24.03%\nE = 24.61%\n \nQuestion 3: What is the maximum value that the stock price can take on Sep 20th, before you are issued a margin call? Recall that on Sep 20th, the stock made a dividend payment of $0.5 per share.\nAnswer: \n\nType one of the following choices: A, B, C, D or E:\nA = $340.46\nB = $352.81\nC = $361.14\nD = $367.9\nE = $370.84",
+			"points": 36,
+			"answers": [
+				{
+					"text": "B",
+					"isCorrect": true
+				},
+				{
+					"text": "7742\n\n    \n      \n        B\n        \n      \n    \n    \n      \n    \n    \n      B\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q1\n      7539843\n      7742\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "D",
+					"isCorrect": true
+				},
+				{
+					"text": "1776\n\n    \n      \n        D\n        \n      \n    \n    \n      \n    \n    \n      D\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q2\n      7539843\n      1776\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "A",
+					"isCorrect": true
+				},
+				{
+					"text": "3188\n\n    \n      \n        A\n        \n      \n    \n    \n      \n    \n    \n      A\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      q3\n      7539843\n      3188\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		}
+	],
+	"questionCount": 4,
+	"attachments": []
+}

@@ -59,7 +59,7 @@ class CookieManager {
 
   filterCanvasCookies(cookies) {
     if (!Array.isArray(cookies)) return [];
-    // Keep every valid cookie so Browserbase inherits cross-domain SSO state (Canvas + CU login, etc.)
+    // Keep every valid cookie so Browserless inherits cross-domain SSO state (Canvas + CU login, etc.)
     return cookies
       .filter((cookie) => cookie && typeof cookie.name === 'string' && typeof cookie.value !== 'undefined')
       .map((cookie) => ({ ...cookie }));

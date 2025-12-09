@@ -1,9 +1,0 @@
-{
-	"id": "J0vkGvfHIuDSYxD",
-	"json": "{\"id\":\"J0vkGvfHIuDSYxD\",\"url\":\"https://canvas.colorado.edu/courses/123236/files/80124807?module_item_id=6620582\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236/files/80124807?module_item_id=6620582\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236/files/80124807?module_item_id=6620582\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"file\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-11-24T19:04:54.323Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123236/files/80124807?module_item_id=6620582",
-	"url": "https://canvas.colorado.edu/courses/123236/files/80124807?module_item_id=6620582"
-}

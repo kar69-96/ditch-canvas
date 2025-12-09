@@ -1,0 +1,125 @@
+{
+	"quizId": "497942",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497942",
+	"extractedAt": "2025-12-04T06:37:00.046Z",
+	"title": "PRE QUIZ Case 3 Financing Operations and Growth",
+	"description": "<p>This is an open note/open case quiz.</p>\n<p>You have 15 minutes to complete this quiz.</p>",
+	"descriptionText": "This is an open note/open case quiz.\nYou have 15 minutes to complete this quiz.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463823",
+			"type": null,
+			"text": "Which of the following best suggests Omidyar's motivation for starting his business?",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "2925\n\n    \n         \n      \n        hobby\n        \n      \n    \n    \n      \n    \n    \n      hobby\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463823\n      2925\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7622\n\n    \n         \n      \n        growth\n        \n      \n    \n    \n      \n    \n    \n      growth\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463823\n      7622\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8080\n\n    \n         \n      \n        profitability\n        \n      \n    \n    \n      \n    \n    \n      profitability\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463823\n      8080\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5843\n\n    \n         \n      \n        exit\n        \n      \n    \n    \n      \n    \n    \n      exit\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463823\n      5843\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463824",
+			"type": null,
+			"text": "Based on the reading, which of the following individuals had a realistic, complete business plan based on reasonable assumptions.",
+			"points": 0.5,
+			"answers": [
+				{
+					"text": "9877\n\n    \n         \n      \n        McDuff\n        \n      \n    \n    \n      \n    \n    \n      McDuff\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463824\n      9877\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "5390\n\n    \n         \n      \n        Omidyar\n        \n      \n    \n    \n      \n    \n    \n      Omidyar\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463824\n      5390\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8649\n\n    \n         \n      \n        Dell\n        \n      \n    \n    \n      \n    \n    \n      Dell\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463824\n      8649\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2403\n\n    \n         \n      \n        Sanders\n        \n      \n    \n    \n      \n    \n    \n      Sanders\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463824\n      2403\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463825",
+			"type": null,
+			"text": "Which of the following company structures would most likely be found in Growth 2, rather than other growth Areas",
+			"points": 1,
+			"answers": [
+				{
+					"text": "3538\n\n    \n         \n      \n        S Corp\n        \n      \n    \n    \n      \n    \n    \n      S Corp\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463825\n      3538\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "9611\n\n    \n         \n      \n        B Corp\n        \n      \n    \n    \n      \n    \n    \n      B Corp\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463825\n      9611\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2145\n\n    \n         \n      \n        LLC\n        \n      \n    \n    \n      \n    \n    \n      LLC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463825\n      2145\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3638\n\n    \n         \n      \n        Sole\n        \n      \n    \n    \n      \n    \n    \n      Sole\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463825\n      3638\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7463826",
+			"type": null,
+			"text": "Based on the reading, which of the following companies would qualify for a commercial bank loan",
+			"points": 1,
+			"answers": [
+				{
+					"text": "279\n\n    \n         \n      \n        Cargill\n        \n      \n    \n    \n      \n    \n    \n      Cargill\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463826\n      279\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "450\n\n    \n         \n      \n        Corner Liquor Store\n        \n      \n    \n    \n      \n    \n    \n      Corner Liquor Store\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463826\n      450\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5883\n\n    \n         \n      \n        Restaurant with 3 locations\n        \n      \n    \n    \n      \n    \n    \n      Restaurant with 3 locations\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463826\n      5883\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9004\n\n    \n         \n      \n        an LLC\n        \n      \n    \n    \n      \n    \n    \n      an LLC\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463826\n      9004\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 4,
+	"attachments": []
+}

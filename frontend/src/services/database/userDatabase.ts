@@ -45,7 +45,16 @@ function emailToNumericId(email: string): number {
 }
 
 function shouldFallbackForError(error: any): boolean {
-  return !!error && (error.code === 'PGRST205' || error.code === '42P01');
+  // Network errors, connection failures, and missing tables should trigger fallback
+  const isNetworkError = error?.message?.includes('Load failed') || 
+                         error?.message?.includes('Failed to fetch') ||
+                         error?.message?.includes('NetworkError') ||
+                         error?.name === 'TypeError';
+  return !!error && (
+    error.code === 'PGRST205' || 
+    error.code === '42P01' ||
+    isNetworkError
+  );
 }
 
 /**
@@ -140,6 +149,7 @@ export const userDatabase = {
 
       if (error) {
         if (shouldFallbackForError(error)) {
+          console.warn('[userDatabase] Supabase connection failed, falling back to localStorage:', error.message);
           activateUserFallback(error.message);
           return getFallbackUserByEmail(normalizedEmail);
         }
@@ -148,16 +158,28 @@ export const userDatabase = {
           return null;
         }
         console.error('[userDatabase] Error getting user by email:', error);
+        // For other errors, try fallback before giving up
+        if (!userFallbackMode) {
+          activateUserFallback(error.message);
+          return getFallbackUserByEmail(normalizedEmail);
+        }
         return null;
       }
 
       return data ? supabaseRowToUser(data) : null;
     } catch (error) {
-      if (shouldFallbackForError(error)) {
-        activateUserFallback((error as any)?.message);
+      const errorObj = error as any;
+      if (shouldFallbackForError(errorObj)) {
+        console.warn('[userDatabase] Supabase exception, falling back to localStorage:', errorObj?.message);
+        activateUserFallback(errorObj?.message);
         return getFallbackUserByEmail(normalizedEmail);
       }
       console.error('[userDatabase] Exception getting user by email:', error);
+      // Last resort: try fallback
+      if (!userFallbackMode) {
+        activateUserFallback(errorObj?.message);
+        return getFallbackUserByEmail(normalizedEmail);
+      }
       return null;
     }
   },

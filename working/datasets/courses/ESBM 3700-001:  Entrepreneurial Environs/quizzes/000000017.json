@@ -1,0 +1,150 @@
+{
+	"quizId": "491817",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491817",
+	"extractedAt": "2025-12-04T06:17:05.079Z",
+	"title": "\"From Ideas to Opportunities\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"From Ideas to Opportunities\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"From Ideas to Opportunities\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404878",
+			"type": null,
+			"text": "Which of the following is an example of the anchoring bias:",
+			"points": 1,
+			"answers": [
+				{
+					"text": "5295\n\n    \n         \n      \n        When other entrepreneurs follow a specific set of procedures for production, we tend to do the same as well, even if it is not the most optimized approach.\n        \n      \n    \n    \n      \n    \n    \n      When other entrepreneurs follow a specific set of procedures for production, we tend to do the same as well, even if it is not the most optimized approach.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404878\n      5295\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8270\n\n    \n         \n      \n        Our decisions are more difficult to overturn after large investments in the wrong direction.\n        \n      \n    \n    \n      \n    \n    \n      Our decisions are more difficult to overturn after large investments in the wrong direction.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404878\n      8270\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3722\n\n    \n         \n      \n        The outcome of the negotiations that begin around an unreasonably high price is agreement on a relatively higher final price.\n        \n      \n    \n    \n      \n    \n    \n      The outcome of the negotiations that begin around an unreasonably high price is agreement on a relatively higher final price.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404878\n      3722\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1261\n\n    \n         \n      \n        We tend to learn from the characteristics of a selected sample of successful entrepreneurs, disregarding the failed ones.\n        \n      \n    \n    \n      \n    \n    \n      We tend to learn from the characteristics of a selected sample of successful entrepreneurs, disregarding the failed ones.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404878\n      1261\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404879",
+			"type": null,
+			"text": "\"Providing more information can lead to a narrower focus\". This statement refers to which of the following biases?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "575\n\n    \n         \n      \n        Conjunction bias\n        \n      \n    \n    \n      \n    \n    \n      Conjunction bias\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404879\n      575\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "4089\n\n    \n         \n      \n        Confirmation bias\n        \n      \n    \n    \n      \n    \n    \n      Confirmation bias\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404879\n      4089\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7389\n\n    \n         \n      \n        Sunk cost fallacy\n        \n      \n    \n    \n      \n    \n    \n      Sunk cost fallacy\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404879\n      7389\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9743\n\n    \n         \n      \n        Survivorship bias\n        \n      \n    \n    \n      \n    \n    \n      Survivorship bias\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404879\n      9743\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404880",
+			"type": null,
+			"text": "Which of the following is not a characteristic of a business opportunity:",
+			"points": 1,
+			"answers": [
+				{
+					"text": "6631\n\n    \n         \n      \n        Creating value\n        \n      \n    \n    \n      \n    \n    \n      Creating value\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404880\n      6631\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "281\n\n    \n         \n      \n        Building on reliable sources of knowledge\n        \n      \n    \n    \n      \n    \n    \n      Building on reliable sources of knowledge\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404880\n      281\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "955\n\n    \n         \n      \n        Durability\n        \n      \n    \n    \n      \n    \n    \n      Durability\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404880\n      955\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1595\n\n    \n         \n      \n        Offering profit potential\n        \n      \n    \n    \n      \n    \n    \n      Offering profit potential\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404880\n      1595\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404881",
+			"type": null,
+			"text": "What is a sunk cost?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4130\n\n    \n         \n      \n        The price that we pay after blindly following the group actions.\n        \n      \n    \n    \n      \n    \n    \n      The price that we pay after blindly following the group actions.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404881\n      4130\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "830\n\n    \n         \n      \n        An opportunity to pivot to another business.\n        \n      \n    \n    \n      \n    \n    \n      An opportunity to pivot to another business.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404881\n      830\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "3983\n\n    \n         \n      \n        An investment that cannot be recovered.\n        \n      \n    \n    \n      \n    \n    \n      An investment that cannot be recovered.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404881\n      3983\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "1408\n\n    \n         \n      \n        The cost of collecting data for testing our hypotheses.\n        \n      \n    \n    \n      \n    \n    \n      The cost of collecting data for testing our hypotheses.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404881\n      1408\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404882",
+			"type": null,
+			"text": "Which of the following is more likely to result in the entrepreneurial overconfidence?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4098\n\n    \n         \n      \n        Optimism bias\n        \n      \n    \n    \n      \n    \n    \n      Optimism bias\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404882\n      4098\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": false
+				},
+				{
+					"text": "2285\n\n    \n         \n      \n        Herd mentality\n        \n      \n    \n    \n      \n    \n    \n      Herd mentality\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404882\n      2285\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6476\n\n    \n         \n      \n        Confirmation bias\n        \n      \n    \n    \n      \n    \n    \n      Confirmation bias\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404882\n      6476\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9596\n\n    \n         \n      \n        Anchoring\n        \n      \n    \n    \n      \n    \n    \n      Anchoring\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404882\n      9596\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

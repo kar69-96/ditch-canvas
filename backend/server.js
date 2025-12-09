@@ -8,6 +8,7 @@ const cookieRoutes = require('./src/core/cookies');
 const overridesRoutes = require('./src/core/overrides');
 const assignmentsRoutes = require('./src/core/assignments');
 const authRoutes = require('./src/routes/auth');
+const vncAuthRoutes = require('./src/routes/vnc-auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,6 +33,7 @@ app.use('/api/cookies', cookieRoutes);
 app.use('/api/overrides', overridesRoutes);
 app.use('/api/assignments', assignmentsRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/vnc-auth', vncAuthRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({

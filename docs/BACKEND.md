@@ -62,17 +62,70 @@ Run the Supabase schema in your database:
 # and run it in your Supabase SQL editor
 ```
 
-### 4. Browserbase Authentication Setup
+### 4. Authentication via NICE DCV (AWS CLI)
+Use AWS’s native NICE DCV remote desktop on a small EC2 box. This replaces the old VNC/browser streaming flow for cookie capture.
+
+**Provision the box (t3.medium, 30GB, DCV + SSH open only to your IP):**
 ```bash
-# Test Browserbase connectivity
-npm run test:browserbase
+# 1) Variables
+export KEY_NAME=canvas-dcv-key
+export SG_NAME=canvas-dcv-sg
+export REGION=us-east-1
+export MY_IP=$(curl -s https://checkip.amazonaws.com)/32
 
-# Extract Canvas cookies locally (one-time setup)
-npm run auth:extract-cookies
+# 2) Latest Amazon Linux 2023 AMI
+export AMI_ID=$(aws ssm get-parameter \
+  --name /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64 \
+  --region $REGION --query 'Parameter.Value' --output text)
 
-# Inject cookies into Browserbase
-npm run browserbase:inject-cookies
+# 3) SSH key + security group
+aws ec2 create-key-pair --region $REGION --key-name $KEY_NAME \
+  --query 'KeyMaterial' --output text > Canvas-Wrapper.pem
+chmod 600 Canvas-Wrapper.pem
+
+aws ec2 create-security-group --region $REGION \
+  --group-name $SG_NAME --description "NICE DCV + SSH"
+aws ec2 authorize-security-group-ingress --region $REGION \
+  --group-name $SG_NAME --protocol tcp --port 22 --cidr $MY_IP
+aws ec2 authorize-security-group-ingress --region $REGION \
+  --group-name $SG_NAME --protocol tcp --port 8443 --cidr $MY_IP
+
+# 4) Launch t3.medium with 30GB root and DCV bootstrap
+cat > /tmp/dcv-userdata.sh <<'EOF'
+#!/bin/bash
+yum update -y
+yum install -y wget tar
+wget https://d1uj6qtbmh3dt5.cloudfront.net/nice-dcv-el7-x86_64.tgz -O /tmp/dcv.tgz
+tar -xzf /tmp/dcv.tgz -C /tmp
+yum install -y /tmp/nice-dcv-server-*/nice-dcv-server-*x86_64.rpm
+systemctl enable --now dcvserver
+dcv create-session canvas --user ec2-user --type virtual
+# Chromium + Node + Playwright runtime
+yum install -y chromium
+curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+yum install -y nodejs
+npm install -g playwright-core
+EOF
+
+aws ec2 run-instances --region $REGION \
+  --image-id $AMI_ID --count 1 --instance-type t3.medium \
+  --key-name $KEY_NAME --security-groups $SG_NAME \
+  --block-device-mappings DeviceName=/dev/xvda,Ebs={VolumeSize=30} \
+  --user-data file:///tmp/dcv-userdata.sh
 ```
+
+**Log in and capture cookies:**
+1. Grab the public IP from the instance; open `https://<IP>:8443` in your browser and sign in to the DCV console (system user `ec2-user`).  
+2. In the DCV desktop terminal:
+   ```bash
+   git clone https://github.com/your-org/YAY_FINAL.git && cd YAY_FINAL/backend
+   npm install
+   export CHROMIUM_PATH=/usr/bin/chromium-browser  # or /usr/bin/chromium on AL2/AL2023
+   npm run auth:extract-cookies   # Opens headful Chromium inside DCV
+   ```
+3. Complete Canvas login in the visible Chromium window. The script will detect the dashboard, extract cookies, and write `data/auth/canvas-cookies.json`.
+
+No noVNC/Xvfb/streaming is required—Chromium runs directly in the DCV virtual desktop.
 
 ### 5. Run Data Extraction
 ```bash

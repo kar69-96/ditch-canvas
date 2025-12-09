@@ -1,0 +1,24 @@
+{
+	"quizId": "507148",
+	"courseId": "123249",
+	"url": "https://canvas.colorado.edu/courses/123249/quizzes/507148",
+	"extractedAt": "2025-12-04T06:33:00.018Z",
+	"title": "Practice Midterm",
+	"description": "<p>To start the ractice Midterm pls go to accepi.com</p>",
+	"descriptionText": "To start the ractice Midterm pls go to accepi.com",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [],
+	"questionCount": 0,
+	"attachments": []
+}

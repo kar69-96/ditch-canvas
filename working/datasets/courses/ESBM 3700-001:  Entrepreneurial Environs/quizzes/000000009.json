@@ -1,0 +1,150 @@
+{
+	"quizId": "491813",
+	"courseId": "123156",
+	"url": "https://canvas.colorado.edu/courses/123156/quizzes/491813",
+	"extractedAt": "2025-12-04T06:16:36.699Z",
+	"title": "\"Technology\" Assignment",
+	"description": "<p><span>Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Technology\" lecture. Make sure to submit it before the due date.</span></p>",
+	"descriptionText": "Please answer the 5 multiple-choice questions. The questions evaluate your understanding of the topics discussed in the \"Technology\" lecture. Make sure to submit it before the due date.",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7404832",
+			"type": null,
+			"text": "What does a \"short S-curve\" typically indicate about a technology's lifecycle?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "5993\n\n    \n         \n      \n        The technology experiences no performance growth at all.\n        \n      \n    \n    \n      \n    \n    \n      The technology experiences no performance growth at all.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404832\n      5993\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6465\n\n    \n         \n      \n        The technology is highly disruptive and replaces established technologies over a long period.\n        \n      \n    \n    \n      \n    \n    \n      The technology is highly disruptive and replaces established technologies over a long period.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404832\n      6465\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7622\n\n    \n         \n      \n        The technology quickly reaches maturity and has limited overall performance improvements.\n        \n      \n    \n    \n      \n    \n    \n      The technology quickly reaches maturity and has limited overall performance improvements.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404832\n      7622\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "9098\n\n    \n         \n      \n        The technology offers sustained growth and long-term potential.\n        \n      \n    \n    \n      \n    \n    \n      The technology offers sustained growth and long-term potential.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404832\n      9098\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7404833",
+			"type": null,
+			"text": "When does a disruptive technology typically emerge on an S-curve?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "5469\n\n    \n         \n      \n        At the start of the incumbent technology’s rapid growth phase.\n        \n      \n    \n    \n      \n    \n    \n      At the start of the incumbent technology’s rapid growth phase.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404833\n      5469\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "5476\n\n    \n         \n      \n        At the peak of the incumbent technology’s performance.\n        \n      \n    \n    \n      \n    \n    \n      At the peak of the incumbent technology’s performance.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404833\n      5476\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "2751\n\n    \n         \n      \n        After the incumbent technology reaches maturity and faces diminishing returns.\n        \n      \n    \n    \n      \n    \n    \n      After the incumbent technology reaches maturity and faces diminishing returns.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404833\n      2751\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7186\n\n    \n         \n      \n        When both technologies are in decline.\n        \n      \n    \n    \n      \n    \n    \n      When both technologies are in decline.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404833\n      7186\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7404834",
+			"type": null,
+			"text": "What typically happens after a dominant design emerges?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "8068\n\n    \n         \n      \n        The technology becomes obsolete shortly afterwards..\n        \n      \n    \n    \n      \n    \n    \n      The technology becomes obsolete shortly afterwards..\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404834\n      8068\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8540\n\n    \n         \n      \n        Companies continue to invest heavily in radical innovation.\n        \n      \n    \n    \n      \n    \n    \n      Companies continue to invest heavily in radical innovation.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404834\n      8540\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9797\n\n    \n         \n      \n        Innovation shifts toward incremental improvements to optimize the dominant design.\n        \n      \n    \n    \n      \n    \n    \n      Innovation shifts toward incremental improvements to optimize the dominant design.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404834\n      9797\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "308\n\n    \n         \n      \n        Competing technologies enter the market to challenge the dominant design.\n        \n      \n    \n    \n      \n    \n    \n      Competing technologies enter the market to challenge the dominant design.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404834\n      308\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 4,
+			"questionId": "question_7404835",
+			"type": null,
+			"text": "What characterizes the \"exploration\" phase of technological innovation?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "2192\n\n    \n         \n      \n        The scaling and optimization of existing technologies.\n        \n      \n    \n    \n      \n    \n    \n      The scaling and optimization of existing technologies.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404835\n      2192\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9878\n\n    \n         \n      \n        The abandonment of unsuccessful designs.\n        \n      \n    \n    \n      \n    \n    \n      The abandonment of unsuccessful designs.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404835\n      9878\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8421\n\n    \n         \n      \n        A focus on experimentation, radical innovation, and discovering new opportunities.\n        \n      \n    \n    \n      \n    \n    \n      A focus on experimentation, radical innovation, and discovering new opportunities.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404835\n      8421\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "6807\n\n    \n         \n      \n        A focus on incremental improvements and efficiency.\n        \n      \n    \n    \n      \n    \n    \n      A focus on incremental improvements and efficiency.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404835\n      6807\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 5,
+			"questionId": "question_7404836",
+			"type": null,
+			"text": "In which phase are firms more likely to encounter high levels of uncertainty and risk?",
+			"points": 1,
+			"answers": [
+				{
+					"text": "212\n\n    \n         \n      \n        Exploration phase.\n        \n      \n    \n    \n      \n    \n    \n      Exploration phase.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404836\n      212\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "8360\n\n    \n         \n      \n        Exploitation phase.\n        \n      \n    \n    \n      \n    \n    \n      Exploitation phase.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404836\n      8360\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "1752\n\n    \n         \n      \n        Both exploration and exploitation phases equally.\n        \n      \n    \n    \n      \n    \n    \n      Both exploration and exploitation phases equally.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404836\n      1752\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "4859\n\n    \n         \n      \n        Neither phase involves high levels of uncertainty and risk.\n        \n      \n    \n    \n      \n    \n    \n      Neither phase involves high levels of uncertainty and risk.\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7404836\n      4859\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		}
+	],
+	"questionCount": 5,
+	"attachments": []
+}

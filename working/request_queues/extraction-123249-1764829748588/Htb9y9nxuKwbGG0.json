@@ -1,0 +1,9 @@
+{
+	"id": "Htb9y9nxuKwbGG0",
+	"json": "{\"id\":\"Htb9y9nxuKwbGG0\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/intro-to-python-for-finance-optional\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/intro-to-python-for-finance-optional\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/intro-to-python-for-finance-optional\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:30:34.950Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/intro-to-python-for-finance-optional",
+	"url": "https://canvas.colorado.edu/courses/123249/pages/intro-to-python-for-finance-optional"
+}

@@ -1,9 +1,0 @@
-{
-	"id": "EEig0bZsPpf528x",
-	"json": "{\"id\":\"EEig0bZsPpf528x\",\"url\":\"https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":2,\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:02:13.473Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111",
-	"url": "https://canvas.colorado.edu/courses/121531/quizzes/509873/take?user_id=459111"
-}

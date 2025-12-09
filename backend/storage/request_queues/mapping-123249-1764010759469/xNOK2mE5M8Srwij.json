@@ -1,9 +1,0 @@
-{
-	"id": "xNOK2mE5M8Srwij",
-	"json": "{\"id\":\"xNOK2mE5M8Srwij\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/interactive-brokers-paper-trading-account\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/interactive-brokers-paper-trading-account\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/interactive-brokers-paper-trading-account\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":1,\"__crawlee\":{\"crawlDepth\":1,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T18:59:47.285Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/interactive-brokers-paper-trading-account",
-	"url": "https://canvas.colorado.edu/courses/123249/pages/interactive-brokers-paper-trading-account"
-}

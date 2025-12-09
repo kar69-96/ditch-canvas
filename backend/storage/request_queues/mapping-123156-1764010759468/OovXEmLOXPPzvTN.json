@@ -1,9 +1,0 @@
-{
-	"id": "OovXEmLOXPPzvTN",
-	"json": "{\"id\":\"OovXEmLOXPPzvTN\",\"url\":\"https://canvas.colorado.edu/courses/123156/announcements/1755234\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123156/discussion_topics/1755234\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123156/announcements/1755234\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":2,\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:01:22.424Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123156/announcements/1755234",
-	"url": "https://canvas.colorado.edu/courses/123156/announcements/1755234"
-}

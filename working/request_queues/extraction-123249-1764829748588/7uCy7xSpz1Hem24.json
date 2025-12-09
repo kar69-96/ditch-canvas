@@ -1,0 +1,9 @@
+{
+	"id": "7uCy7xSpz1Hem24",
+	"json": "{\"id\":\"7uCy7xSpz1Hem24\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/office-hours\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/office-hours\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/office-hours\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:30:20.719Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/office-hours",
+	"url": "https://canvas.colorado.edu/courses/123249/pages/office-hours"
+}

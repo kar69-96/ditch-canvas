@@ -1,9 +1,0 @@
-{
-	"id": "YmC9Q731mxMojgC",
-	"json": "{\"id\":\"YmC9Q731mxMojgC\",\"url\":\"https://canvas.colorado.edu/courses/123236/groups\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123236/groups#\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123236/groups\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":2,\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:02:54.051Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123236/groups",
-	"url": "https://canvas.colorado.edu/courses/123236/groups"
-}

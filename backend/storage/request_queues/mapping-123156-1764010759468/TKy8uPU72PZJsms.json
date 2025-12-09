@@ -1,9 +1,0 @@
-{
-	"id": "TKy8uPU72PZJsms",
-	"json": "{\"id\":\"TKy8uPU72PZJsms\",\"url\":\"https://canvas.colorado.edu/courses/123156/grades/459111\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123156/grades/459111\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123156/grades/459111\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"course-link\",\"depth\":3,\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-11-24T19:00:22.108Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123156/grades/459111",
-	"url": "https://canvas.colorado.edu/courses/123156/grades/459111"
-}

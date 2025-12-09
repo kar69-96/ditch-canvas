@@ -8,6 +8,7 @@ import { SidebarProvider } from "@/components/SidebarViewer";
 import { useEffect } from "react";
 import { getPreferences, applyTheme, applyFont } from "@/lib/preferences";
 import Login from "./pages/Login";
+import Landing from "./pages/Landing";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Calendar from "./pages/Calendar";
@@ -40,8 +41,8 @@ const AppContent = () => {
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Login />} />
           
           {/* Protected routes */}
           <Route path="/onboarding" element={
@@ -55,6 +56,16 @@ const AppContent = () => {
             </RouteGuard>
           } />
           <Route path="/calendar" element={
+            <RouteGuard>
+              <Calendar />
+            </RouteGuard>
+          } />
+          <Route path="/calendar/grid" element={
+            <RouteGuard>
+              <Calendar />
+            </RouteGuard>
+          } />
+          <Route path="/calendar/list" element={
             <RouteGuard>
               <Calendar />
             </RouteGuard>

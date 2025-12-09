@@ -1,0 +1,100 @@
+{
+	"quizId": "497938",
+	"courseId": "123160",
+	"url": "https://canvas.colorado.edu/courses/123160/quizzes/497938",
+	"extractedAt": "2025-12-04T06:36:37.213Z",
+	"title": "PRE QUIZ Case 9 Nanogene",
+	"description": "<p>This is an open note/open case quiz.</p>\n<p>You have 15 minutes to complete this quiz.&nbsp;</p>",
+	"descriptionText": "This is an open note/open case quiz.\nYou have 15 minutes to complete this quiz. ",
+	"metadata": {
+		"points": null,
+		"timeLimit": null,
+		"attempts": null,
+		"dueDate": null,
+		"availableFrom": null,
+		"availableUntil": null,
+		"questionCount": null,
+		"isPublished": true,
+		"isGraded": false,
+		"shuffleAnswers": false
+	},
+	"questions": [
+		{
+			"questionNumber": 1,
+			"questionId": "question_7463790",
+			"type": null,
+			"text": "Which of the following was Nanogene's first round of OUTSIDE  funding",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4901\n\n    \n         \n      \n        Founders' Round\n        \n      \n    \n    \n      \n    \n    \n      Founders' Round\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463790\n      4901\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8406\n\n    \n         \n      \n        Angel Round\n        \n      \n    \n    \n      \n    \n    \n      Angel Round\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463790\n      8406\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "6769\n\n    \n         \n      \n        Series A Round\n        \n      \n    \n    \n      \n    \n    \n      Series A Round\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463790\n      6769\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "822\n\n    \n         \n      \n        Employee Options Round\n        \n      \n    \n    \n      \n    \n    \n      Employee Options Round\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463790\n      822\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 2,
+			"questionId": "question_7463791",
+			"type": null,
+			"text": "Which of the following would best describe the Series A Round, if successfully closed",
+			"points": 1,
+			"answers": [
+				{
+					"text": "7672\n\n    \n         \n      \n        Non-Dilutive\n        \n      \n    \n    \n      \n    \n    \n      Non-Dilutive\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463791\n      7672\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "6551\n\n    \n         \n      \n        Down Round\n        \n      \n    \n    \n      \n    \n    \n      Down Round\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463791\n      6551\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "7515\n\n    \n         \n      \n        Up Round\n        \n      \n    \n    \n      \n    \n    \n      Up Round\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463791\n      7515\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "2742\n\n    \n         \n      \n        No Pre Money\n        \n      \n    \n    \n      \n    \n    \n      No Pre Money\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463791\n      2742\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				}
+			]
+		},
+		{
+			"questionNumber": 3,
+			"questionId": "question_7463792",
+			"type": null,
+			"text": "Why was Paige Miller a candidate Nanogene should consider?\nCheck all that apply.",
+			"points": 1,
+			"answers": [
+				{
+					"text": "4623\n\n    \n         \n      \n        former tennis player\n        \n      \n    \n    \n      \n    \n    \n      former tennis player\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463792\n      4623\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "8158\n\n    \n         \n      \n        Track Record\n        \n      \n    \n    \n      \n    \n    \n      Track Record\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463792\n      8158\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				},
+				{
+					"text": "7634\n\n    \n         \n      \n        she would accept 1.5% equity\n        \n      \n    \n    \n      \n    \n    \n      she would accept 1.5% equity\n      \n       \n      \n              \n      \n      \n    \n    \n      exact_answer\n      none\n      7463792\n      7634\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      0",
+					"isCorrect": false
+				},
+				{
+					"text": "9266\n\n    \n         \n      \n        Understands Execution\n        \n      \n    \n    \n      \n    \n    \n      Understands Execution\n      \n       \n      \n              \n                      Your Answer:\n                (You left this blank)\n              \n                It was really: \n      \n      \n    \n    \n      exact_answer\n      none\n      7463792\n      9266\n      \n    \n      \n        0 (with margin: 0)\n      \n      \n        \n          0\n         (with precision: 10)\n      \n      \n        Between 0 and 0\n      \n    \n      \n      \n        margin of error\n        \n          +/-\n        \n        \n      \n    \n      100",
+					"isCorrect": true
+				}
+			]
+		}
+	],
+	"questionCount": 3,
+	"attachments": []
+}
