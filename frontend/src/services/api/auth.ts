@@ -57,23 +57,23 @@ export async function checkEmailExists(email: string) {
 
 export async function startStreamingAuth(email: string) {
   try {
-    // Check if we need to force re-authentication (e.g., after logout)
-    const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
+  // Check if we need to force re-authentication (e.g., after logout)
+  const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
     
     console.log('[API] Starting streaming auth:', { email, forceReauth, url: `${API_BASE}/api/streaming-auth/start` });
-    
-    const res = await fetch(`${API_BASE}/api/streaming-auth/start`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, forceReauth }),
-    });
-    
-    // Clear the flag after starting auth (it will be handled by backend)
-    if (forceReauth) {
-      localStorage.removeItem('canvas_force_reauth');
-    }
-    
-    return handleResponse(res);
+  
+  const res = await fetch(`${API_BASE}/api/streaming-auth/start`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, forceReauth }),
+  });
+  
+  // Clear the flag after starting auth (it will be handled by backend)
+  if (forceReauth) {
+    localStorage.removeItem('canvas_force_reauth');
+  }
+  
+  return handleResponse(res);
   } catch (error: any) {
     console.error('[API] Failed to start streaming auth:', error);
     throw new Error(`Failed to initiate Canvas login: ${error.message}`);

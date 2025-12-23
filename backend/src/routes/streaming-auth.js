@@ -43,7 +43,7 @@ function getCookieFilename(email) {
 }
 
 /**
- * POST /api/streaming-auth/start  
+ * POST /api/streaming-auth/start
  * Starts the streaming server and returns a proxied URL on port 3000
  */
 router.post('/start', async (req, res) => {
@@ -74,11 +74,11 @@ router.post('/start', async (req, res) => {
     if (activeStreamingProcesses.size > 0) {
       // Reuse existing streaming server
       const baseUrl = process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 3000}`;
-      return res.json({
-        success: true,
+        return res.json({
+          success: true,
         url: `${baseUrl}/api/streaming-auth/viewer`,
-        message: 'Streaming server already running'
-      });
+          message: 'Streaming server already running'
+        });
     }
 
     // Path to the streaming script
