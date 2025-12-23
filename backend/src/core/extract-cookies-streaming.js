@@ -5,6 +5,7 @@ const fs = require('fs');
 const dotenv = require('dotenv');
 const http = require('http');
 const express = require('express');
+const cors = require('cors');
 const { Server } = require('socket.io');
 const { chromium } = require('playwright-core');
 
@@ -27,6 +28,9 @@ const OUTPUT_DIR = process.env.OUTPUT_DIR ||
     : path.join(__dirname, '..', '..', 'data', 'auth'));
 const STREAMING_PORT = process.env.STREAMING_PORT || 3002;
 
+// Email-specific cookie output file (if provided)
+const COOKIE_OUTPUT_FILE = process.env.COOKIE_OUTPUT_FILE;
+
 // Optional explicit Chromium path
 const CHROMIUM_PATH =
   process.env.CHROMIUM_PATH ||
@@ -44,6 +48,14 @@ class BrowserStreamingServer {
   constructor(port = STREAMING_PORT) {
     this.port = port;
     this.app = express();
+    
+    // Add CORS middleware for HTTP requests
+    this.app.use(cors({
+      origin: '*',
+      methods: ['GET', 'POST', 'OPTIONS'],
+      credentials: false
+    }));
+    
     this.server = http.createServer(this.app);
     this.io = new Server(this.server, {
       cors: {
@@ -64,8 +76,16 @@ class BrowserStreamingServer {
   }
 
   setupRoutes() {
+    // Add security headers to allow the page to load
+    this.app.use((req, res, next) => {
+      res.setHeader('X-Frame-Options', 'ALLOWALL');
+      res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.socket.io data: blob:; connect-src 'self' ws://localhost:* wss://localhost:* http://localhost:* https://localhost:*;");
+      next();
+    });
+    
     // Serve the HTML5 client
     this.app.get('/', (req, res) => {
+      res.setHeader('Content-Type', 'text/html');
       res.send(this.getClientHTML());
     });
 
@@ -145,18 +165,63 @@ class BrowserStreamingServer {
         }
       });
 
+      socket.on('mouse-down', async (data) => {
+        if (this.page && !this.page.isClosed()) {
+          try {
+            await this.page.mouse.move(data.x, data.y, { steps: 1 });
+            await this.page.mouse.down({ button: data.button || 'left' });
+          } catch (error) {
+            if (!error.message.includes('closed')) {
+              console.error('Error on mouse down:', error);
+            }
+          }
+        }
+      });
+
+      socket.on('mouse-up', async (data) => {
+        if (this.page && !this.page.isClosed()) {
+          try {
+            await this.page.mouse.up({ button: data.button || 'left' });
+          } catch (error) {
+            if (!error.message.includes('closed')) {
+              console.error('Error on mouse up:', error);
+            }
+          }
+        }
+      });
+
       socket.on('mouse-click', async (data) => {
         if (this.page && !this.page.isClosed()) {
           try {
-            // Use mouse click method which is more reliable for interactive elements
+            // Move to position
             await this.page.mouse.move(data.x, data.y, { steps: 1 });
+            
+            // Click the element
             await this.page.mouse.click(data.x, data.y, { 
               button: data.button || 'left',
               clickCount: 1,
               delay: 10
             });
-            // Small delay to ensure the click is processed and focus is set
-            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            // Try to focus the element at the clicked position
+            // This is especially important for input fields
+            try {
+              await this.page.evaluate((x, y) => {
+                const element = document.elementFromPoint(x, y);
+                if (element && (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.isContentEditable)) {
+                  element.focus();
+                  // For input fields, also try to set cursor position
+                  if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.click(); // Extra click to ensure focus
+                  }
+                }
+              }, data.x, data.y);
+            } catch (focusError) {
+              // Ignore focus errors
+            }
+            
+            // Small delay to ensure the click and focus are processed
+            await new Promise(resolve => setTimeout(resolve, 150));
           } catch (error) {
             // Silently ignore if page is closed
             if (!error.message.includes('closed')) {
@@ -220,13 +285,25 @@ class BrowserStreamingServer {
   }
 
   async startBrowser() {
-    console.log('🚀 Starting headful Chromium with CDP...');
+    console.log('🚀 Starting Chromium with CDP...');
     
-    // Check if running in headless environment (EC2 with Xvfb)
-    const isHeadlessEnv = !process.env.DISPLAY || process.env.DISPLAY.includes(':99');
+    // Check if running in Xvfb environment (EC2 with virtual display :99)
+    const isXvfbEnv = process.env.DISPLAY && process.env.DISPLAY.includes(':99');
+    
+    // For local development (macOS/Windows), always run headless to avoid opening visible browser window
+    // The web interface in the pop-up is what users should see
+    // Only run headful if explicitly on EC2/Xvfb environment
+    // Force headless for local development - no visible Chrome window should open
+    let shouldRunHeadless = !isXvfbEnv;
+    
+    if (process.env.FORCE_HEADLESS === 'true') {
+      shouldRunHeadless = true;
+    }
+    
+    console.log(`   Running in ${shouldRunHeadless ? 'headless' : 'headful'} mode (DISPLAY: ${process.env.DISPLAY || 'not set'})`);
     
     const launchOptions = {
-      headless: false, // Always headful for streaming, but will use Xvfb display if available
+      headless: shouldRunHeadless, // Headless for local dev, headful for EC2/Xvfb
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -251,7 +328,7 @@ class BrowserStreamingServer {
     };
     
     // If running in Xvfb, ensure we use the correct display
-    if (isHeadlessEnv && process.env.DISPLAY) {
+    if (isXvfbEnv && process.env.DISPLAY) {
       console.log(`   Using display: ${process.env.DISPLAY}`);
     }
 
@@ -377,6 +454,19 @@ class BrowserStreamingServer {
         // Block all downloads - fully web-based
         acceptDownloads: false
       });
+      
+      // Clear cookies immediately after context creation if force re-auth is requested
+      const forceReauth = process.env.FORCE_REAUTH === 'true';
+      if (forceReauth) {
+        console.log('🧹 Force re-auth requested - clearing all cookies in fresh context...');
+        try {
+          await this.context.clearCookies();
+          console.log('✅ Cookies cleared in browser context - fresh authentication will be required');
+        } catch (error) {
+          console.warn('⚠️  Could not clear cookies:', error.message);
+        }
+      }
+      
       this.page = await this.context.newPage();
       
       // Block all download events - fully web-based, no downloads
@@ -595,29 +685,72 @@ class BrowserStreamingServer {
       throw new Error('Browser not started');
     }
 
-    console.log('🔗 Navigating to Canvas login page...');
-    try {
-      await this.page.goto('https://canvas.colorado.edu', { 
-        waitUntil: 'domcontentloaded',
-        timeout: 30000 
-      });
-      await this.page.waitForTimeout(2000);
-      
-      // Check if page is still open after navigation
-      if (this.page.isClosed()) {
-        throw new Error('Page closed during navigation');
+    // Allow one retry if Canvas returns "Stale Request"
+    const maxAttempts = 2;
+
+    // Check if we need to force re-authentication (e.g., after logout)
+    const forceReauth = process.env.FORCE_REAUTH === 'true';
+    
+    if (forceReauth) {
+      console.log('🧹 Force re-auth requested - clearing all cookies before navigation...');
+      try {
+        // Clear all cookies in the browser context
+        if (this.context) {
+          await this.context.clearCookies();
+          console.log('✅ Cookies cleared - fresh authentication will be required');
+        }
+      } catch (error) {
+        console.warn('⚠️  Could not clear cookies:', error.message);
+        // Continue anyway - navigation will still work
       }
-      
-      const currentUrl = this.page.url();
-      console.log(`📍 Current URL: ${currentUrl}`);
-      
-      return currentUrl;
-    } catch (error) {
-      console.error('❌ Error navigating to Canvas:', error.message);
-      if (this.page.isClosed()) {
-        throw new Error('Page closed unexpectedly during navigation');
+    }
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      console.log(`🔗 Navigating to Canvas login page... (attempt ${attempt}/${maxAttempts})`);
+      try {
+        await this.page.goto('https://canvas.colorado.edu', { 
+          waitUntil: 'domcontentloaded',
+          timeout: 30000 
+        });
+        await this.page.waitForTimeout(2000);
+        
+        // Check if page is still open after navigation
+        if (this.page.isClosed()) {
+          throw new Error('Page closed during navigation');
+        }
+        
+        const currentUrl = this.page.url();
+        const content = await this.page.content().catch(() => '');
+        console.log(`📍 Current URL: ${currentUrl}`);
+        
+        // Detect stale request page and retry with cleared cookies once
+        const isStale = currentUrl.includes('Stale') || content.includes('Stale Request');
+        if (isStale && attempt < maxAttempts) {
+          console.warn('⚠️ Detected stale request page. Clearing cookies and retrying...');
+          try {
+            if (this.context) {
+              await this.context.clearCookies();
+              console.log('✅ Cookies cleared after stale request');
+            }
+          } catch (cookieErr) {
+            console.warn('⚠️ Failed to clear cookies before retry:', cookieErr.message);
+          }
+          await this.page.waitForTimeout(1000);
+          continue; // retry navigation
+        }
+
+        return currentUrl;
+      } catch (error) {
+        console.error('❌ Error navigating to Canvas:', error.message);
+        if (this.page.isClosed()) {
+          throw new Error('Page closed unexpectedly during navigation');
+        }
+        if (attempt >= maxAttempts) {
+          throw error;
+        }
+        console.warn('⚠️ Navigation failed, retrying...', error.message);
+        await this.page.waitForTimeout(1000);
       }
-      throw error;
     }
   }
 
@@ -626,12 +759,19 @@ class BrowserStreamingServer {
       throw new Error('Browser not started');
     }
 
+    const forceReauth = process.env.FORCE_REAUTH === 'true';
+    const startTime = Date.now();
+    const initialWaitTime = forceReauth ? 5000 : 0; // Wait 5 seconds if force re-auth to ensure cookies are cleared
+
     console.log('\n🔐 MANUAL LOGIN REQUIRED');
     console.log('=====================================');
     console.log(`1. Open your browser and go to: http://localhost:${this.port}`);
     console.log('2. Complete the login process in the streaming interface');
     console.log('3. Navigate to the Canvas dashboard');
     console.log('4. The system will auto-detect when login is complete');
+    if (forceReauth) {
+      console.log('⚠️  Force re-authentication enabled - cookies cleared, fresh login required');
+    }
     console.log('⏰ TIMEOUT: extended to allow remote access (2 hours)');
     console.log('=====================================\n');
 
@@ -640,13 +780,18 @@ class BrowserStreamingServer {
     let attempts = 0;
     // Extend timeout so the server stays up for remote login
     const maxAttempts = 7200; // 2 hours (7200 * 1 second)
-    const startTime = Date.now();
     const maxTimeMs = 7200000; // 2 hours
 
     let capturedUsername = null;
 
     // Set up username capture (same as original script)
     await this.setupUsernameCapture();
+
+    // If force re-auth, wait a bit to ensure navigation has happened and cookies are cleared
+    if (forceReauth && initialWaitTime > 0) {
+      console.log(`⏳ Waiting ${initialWaitTime/1000}s for fresh authentication state...`);
+      await this.page.waitForTimeout(initialWaitTime);
+    }
 
     while (!loginDetected && attempts < maxAttempts) {
       if (Date.now() - startTime > maxTimeMs) {
@@ -689,8 +834,35 @@ class BrowserStreamingServer {
 
         const currentUrl = this.page.url();
         const isCanvasUrl = currentUrl.includes('canvas') || currentUrl.includes('colorado.edu');
+        
+        // If force re-auth, also check cookies to ensure we're not using cached auth
+        let hasAuthCookies = false;
+        if (forceReauth) {
+          try {
+            const cookies = await this.context.cookies();
+            hasAuthCookies = cookies.some((c) => 
+              c.name === 'canvas_session' || 
+              c.name === '_legacy_normandy_session' ||
+              (c.domain && (c.domain.includes('canvas') || c.domain.includes('colorado.edu')) && 
+               c.name && (c.name.includes('session') || c.name.includes('canvas')))
+            );
+          } catch (e) {
+            // Ignore cookie check errors
+          }
+        }
 
-        if (isOnDashboard && isCanvasUrl) {
+        // Only detect login if:
+        // 1. We're on dashboard AND on Canvas URL
+        // 2. If forceReauth is true, we must wait at least 10 seconds AND either:
+        //    - No auth cookies detected (fresh login), OR
+        //    - More than 10 seconds have passed (user had time to log in fresh)
+        // 3. If forceReauth is false, we can accept any login immediately
+        const minWaitForReauth = forceReauth ? 10 : 0; // Wait at least 10 seconds if force re-auth
+        const shouldAcceptLogin = isOnDashboard && isCanvasUrl && 
+          (attempts >= minWaitForReauth) && // Must wait minimum time if force re-auth
+          (!forceReauth || !hasAuthCookies || attempts > 15); // If forceReauth, prefer no cookies or wait longer
+
+        if (shouldAcceptLogin) {
           loginDetected = true;
           const elapsed = Math.round((Date.now() - startTime) / 1000);
           console.log('✅ Canvas dashboard detected! Login successful.');
@@ -701,7 +873,11 @@ class BrowserStreamingServer {
         } else {
           const elapsed = Math.round((Date.now() - startTime) / 1000);
           if (attempts % 10 === 0 || attempts <= 5) { // Log every 10 seconds or first 5 attempts
-            console.log(`⏳ Waiting for login... (${attempts}/${maxAttempts}) - ${elapsed}s elapsed - Current: ${currentUrl}`);
+            if (forceReauth && hasAuthCookies && attempts <= 10) {
+              console.log(`⏳ Waiting for fresh login... (cookies detected, need re-auth) - ${elapsed}s elapsed - Current: ${currentUrl}`);
+            } else {
+              console.log(`⏳ Waiting for login... (${attempts}/${maxAttempts}) - ${elapsed}s elapsed - Current: ${currentUrl}`);
+            }
           }
         }
       } catch (error) {
@@ -958,7 +1134,7 @@ class BrowserStreamingServer {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            cursor: crosshair;
+            cursor: default;
             display: block;
             border: none;
             background: #000;
@@ -1008,15 +1184,25 @@ class BrowserStreamingServer {
             }
         });
         
-        // Mouse events
-        frameImg.addEventListener('mousemove', (e) => {
+        // Mouse events - improved click handling
+        frameImg.addEventListener('mousedown', (e) => {
+            e.preventDefault();
             const rect = frameImg.getBoundingClientRect();
             const x = (e.clientX - rect.left) * scaleX;
             const y = (e.clientY - rect.top) * scaleY;
-            socket.emit('mouse-move', { x, y });
+            socket.emit('mouse-down', { x, y, button: e.button === 2 ? 'right' : 'left' });
+        });
+        
+        frameImg.addEventListener('mouseup', (e) => {
+            e.preventDefault();
+            const rect = frameImg.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            socket.emit('mouse-up', { x, y, button: e.button === 2 ? 'right' : 'left' });
         });
         
         frameImg.addEventListener('click', (e) => {
+            e.preventDefault();
             const rect = frameImg.getBoundingClientRect();
             const x = (e.clientX - rect.left) * scaleX;
             const y = (e.clientY - rect.top) * scaleY;
@@ -1123,7 +1309,15 @@ async function extractCanvasCookies() {
       }
     };
 
-    const outputFile = path.join(OUTPUT_DIR, 'canvas-cookies.json');
+    // Use email-specific file if provided, otherwise use default
+    const outputFile = COOKIE_OUTPUT_FILE || path.join(OUTPUT_DIR, 'canvas-cookies.json');
+    
+    // Ensure the directory exists for the output file
+    const outputDir = path.dirname(outputFile);
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+    
     fs.writeFileSync(outputFile, JSON.stringify(cookieData, null, 2));
     
     extractedCookies = cookieData;
@@ -1176,7 +1370,8 @@ async function main() {
       } else {
         console.log(`   - Username: Not captured`);
       }
-      console.log(`   - Saved to: ${path.relative(process.cwd(), path.join(OUTPUT_DIR, 'canvas-cookies.json'))}`);
+      const savedFile = COOKIE_OUTPUT_FILE || path.join(OUTPUT_DIR, 'canvas-cookies.json');
+      console.log(`   - Saved to: ${path.relative(process.cwd(), savedFile)}`);
       console.log(`   - Method: Playwright CDP + WebRTC Streaming`);
       console.log(`   - Server URL: http://${process.env.EC2_PUBLIC_IP || 'localhost'}:3002`);
     } else {

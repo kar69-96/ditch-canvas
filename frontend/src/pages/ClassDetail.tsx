@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { FileText, BookOpen, Bell, Clock, MessageCircle, Send, Bot, Loader2, Maximize2 } from "lucide-react";
+import { FileText, BookOpen, Bell, Clock, MessageCircle, Send, Bot, Loader2, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useCanvasData } from "@/hooks/useCanvasData";
@@ -80,7 +80,6 @@ const ClassDetail = () => {
   const [hoveredAnnouncementIndex, setHoveredAnnouncementIndex] = useState<number | null>(null);
   const [hoveredUpcomingIndex, setHoveredUpcomingIndex] = useState<number | null>(null);
   const [hoveredTopicIndex, setHoveredTopicIndex] = useState<{ moduleIndex: number; topicIndex: number } | null>(null);
-  
   
   // Sync completed assignments with localStorage
   const [completedAssignments, setCompletedAssignments] = useState<Set<number>>(() => {
@@ -689,7 +688,7 @@ const ClassDetail = () => {
         },
       ];
 
-  // Display all modules directly
+  // Show all modules sequentially (no pagination)
   const modules = allModules;
 
   const coursePages = mockCanvasData?.pages
@@ -702,33 +701,129 @@ const ClassDetail = () => {
         .sort((a, b) => (a.title || '').localeCompare(b.title || ''))
     : [];
 
-  // Open syllabus in sidebar
-  const openSyllabus = () => {
-    openSidebarItem({
-      id: `syllabus-${course.id}`,
-      type: "file",
-      title: `${course.code} - Course Syllabus`,
-      courseCode: course.code,
-      fileUrl: samplePdfBase64,
-      fileName: `${course.code}_Syllabus.pdf`,
-      fileMimeType: 'application/pdf',
-      fileExtension: 'pdf',
-    });
-  };
+  // Find syllabus document from files, pages, or module items
+  const syllabusDocument = useMemo(() => {
+    if (!course) return null;
 
-  // Open textbook in sidebar
-  const openTextbook = () => {
-    openSidebarItem({
-      id: `textbook-${course.id}`,
-      type: "file",
-      title: `Textbook for ${course.code}`,
-      courseCode: course.code,
-      fileUrl: samplePdfBase64,
-      fileName: `${course.code}_Textbook.pdf`,
-      fileMimeType: 'application/pdf',
-      fileExtension: 'pdf',
+    const syllabusKeywords = ['syllabus'];
+    const isSyllabusMatch = (text: string): boolean => {
+      if (!text) return false;
+      const lowerText = text.toLowerCase();
+      return syllabusKeywords.some(keyword => lowerText.includes(keyword));
+    };
+
+    // Priority 1: Check course files (PDF, DOCX preferred)
+    const syllabusFiles = courseFiles.filter(file => {
+      const fileName = file.fileName || '';
+      return isSyllabusMatch(fileName);
     });
-  };
+
+    // Sort by preference: PDF > DOCX > other
+    syllabusFiles.sort((a, b) => {
+      const aExt = (a.fileName || '').split('.').pop()?.toLowerCase() || '';
+      const bExt = (b.fileName || '').split('.').pop()?.toLowerCase() || '';
+      const priority = { pdf: 1, docx: 2, doc: 3 };
+      const aPriority = priority[aExt as keyof typeof priority] || 99;
+      const bPriority = priority[bExt as keyof typeof priority] || 99;
+      return aPriority - bPriority;
+    });
+
+    if (syllabusFiles.length > 0) {
+      const file = syllabusFiles[0];
+      return {
+        type: 'file' as const,
+        id: file.id,
+        title: file.fileName || 'Syllabus',
+        fileName: file.fileName || 'Syllabus',
+        url: file.url,
+        storagePath: file.storagePath,
+        storageBucket: file.storageBucket,
+        originalUrl: file.originalUrl,
+        mimeType: file.mimeType,
+        size: file.size,
+        fileExtension: (file.fileName || '').split('.').pop()?.toLowerCase() || null,
+      };
+    }
+
+    // Priority 2: Check course pages
+    const syllabusPages = coursePages.filter(page => {
+      const pageTitle = page.title || '';
+      return isSyllabusMatch(pageTitle);
+    });
+
+    if (syllabusPages.length > 0) {
+      const page = syllabusPages[0];
+      return {
+        type: 'page' as const,
+        id: page.id,
+        title: page.title || 'Syllabus',
+        url: page.url,
+        htmlContent: page.htmlContent,
+      };
+    }
+
+    // Priority 3: Check module items
+    for (const module of courseModules) {
+      for (const item of module.items) {
+        const itemTitle = item.title || item.name || item.fileName || '';
+        if (isSyllabusMatch(itemTitle)) {
+          return {
+            type: 'module-item' as const,
+            id: item.id,
+            title: itemTitle,
+            fileName: item.fileName || itemTitle,
+            storagePath: item.storagePath,
+            storageBucket: item.storageBucket,
+            originalUrl: item.originalUrl,
+            mimeType: item.mimeType,
+            fileExtension: (item.fileName || itemTitle).split('.').pop()?.toLowerCase() || null,
+          };
+        }
+      }
+    }
+
+    return null;
+  }, [course, courseFiles, coursePages, courseModules]);
+
+  // Open syllabus in sidebar
+  const openSyllabus = useCallback(async () => {
+    if (!course) return;
+
+    // If we found a syllabus document, open it
+    if (syllabusDocument) {
+      if (syllabusDocument.type === 'file' || syllabusDocument.type === 'module-item') {
+        // Handle as file
+        await handleOpenFile({
+          id: syllabusDocument.id,
+          fileName: syllabusDocument.fileName || syllabusDocument.title,
+          url: syllabusDocument.url,
+          storagePath: syllabusDocument.storagePath,
+          storageBucket: syllabusDocument.storageBucket,
+          originalUrl: syllabusDocument.originalUrl,
+          mimeType: syllabusDocument.mimeType,
+          size: syllabusDocument.size || null,
+          fileExtension: syllabusDocument.fileExtension || null,
+        }, syllabusDocument.title);
+      } else if (syllabusDocument.type === 'page') {
+        // Handle as page - open in sidebar as announcement type (supports HTML content)
+        openSidebarItem({
+          id: `syllabus-page-${syllabusDocument.id}`,
+          type: "announcement",
+          title: syllabusDocument.title,
+          courseCode: course.code,
+          content: syllabusDocument.htmlContent || '',
+          canvasUrl: syllabusDocument.url,
+        });
+      }
+    } else {
+      // Fallback: Open Canvas syllabus page
+      const canvasSyllabusUrl = `https://canvas.colorado.edu/courses/${course.id}/syllabus`;
+      window.open(canvasSyllabusUrl, '_blank', 'noopener noreferrer');
+    }
+  }, [course, syllabusDocument, handleOpenFile, openSidebarItem]);
+
+  // Get Canvas course URL
+  const canvasCourseUrl = `https://canvas.colorado.edu/courses/${course.id}`;
 
   return (
     <div className="relative w-full">
@@ -758,12 +853,17 @@ const ClassDetail = () => {
                     <span>Syllabus</span>
                   </Button>
                   <Button 
-                    data-sidebar-trigger
+                    asChild
                     className="slide-in-button border border-foreground/20"
-                    onClick={openTextbook}
                   >
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    <span>Textbook</span>
+                    <a 
+                      href={canvasCourseUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      <span>Textbook</span>
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -927,7 +1027,10 @@ const ClassDetail = () => {
                             <span className="text-xs text-muted-foreground w-6">
                               {String(index + 1).padStart(2, "0")}
                             </span>
-                            <p className="text-sm font-medium text-foreground/90">{module.title}</p>
+                            <div>
+                              <p className="text-xs text-foreground/60">{module.week}</p>
+                              <p className="text-sm font-medium text-foreground/90">{module.title}</p>
+                            </div>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4">
@@ -986,81 +1089,6 @@ const ClassDetail = () => {
                     ))}
                   </Accordion>
                   </div>
-                </GlassCard>
-
-                {/* Pages */}
-                <GlassCard hover={false} className="p-0">
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="pages" className="border-none">
-                      <AccordionTrigger className="px-5 py-4 border-b border-border hover:no-underline">
-                        <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                          Course Pages
-                        </h2>
-                      </AccordionTrigger>
-                      <AccordionContent className="p-5 space-y-3">
-                        {coursePages.length > 0 ? (
-                          coursePages.map((page) => (
-                            <div key={page.id} className="p-3 border border-border/60 rounded-md">
-                              <p className="text-sm font-medium text-foreground/90">{page.title}</p>
-                              {page.url && (
-                                <p className="text-xs text-muted-foreground break-all">{page.url}</p>
-                              )}
-                            </div>
-                          ))
-                        ) : (
-                          <p className="text-sm text-muted-foreground">
-                            No pages have been saved for this course yet.
-                          </p>
-                        )}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </GlassCard>
-
-                {/* Files */}
-                <GlassCard hover={false} className="p-0">
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="files" className="border-none">
-                      <AccordionTrigger className="px-5 py-4 border-b border-border hover:no-underline">
-                        <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                          Course Files
-                        </h2>
-                      </AccordionTrigger>
-                      <AccordionContent className="p-5 space-y-3">
-                        {courseFiles.length > 0 ? (
-                          courseFiles.map((file) => {
-                            const isLoading = filePreviewLoading === String(file.id ?? file.fileName);
-                            return (
-                              <button
-                                key={`${file.id}-${file.fileName}`}
-                                data-sidebar-trigger
-                                onClick={() => handleOpenFile(file)}
-                                className="w-full text-left p-3 border border-border/60 rounded-md hover:border-primary/60 hover:bg-secondary/30 transition-colors flex items-center justify-between gap-4"
-                              >
-                                <div className="flex flex-col">
-                                  <p className="text-sm font-medium text-foreground/90">{file.fileName}</p>
-                                  {file.folder && (
-                                    <p className="text-xs text-muted-foreground">Folder: {file.folder}</p>
-                                  )}
-                                </div>
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                  {isLoading ? (
-                                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                  ) : (
-                                    <FileText className="w-4 h-4" />
-                                  )}
-                                </div>
-                              </button>
-                            );
-                          })
-                        ) : (
-                          <p className="text-sm text-muted-foreground">
-                            No files have been saved for this course yet.
-                          </p>
-                        )}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
                 </GlassCard>
               </div>
 
