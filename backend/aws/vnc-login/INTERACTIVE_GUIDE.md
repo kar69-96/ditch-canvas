@@ -154,3 +154,5 @@ If you encounter issues:
 The VNC system provides **full interactive control** - you can use your keyboard and mouse exactly as you would on a local machine. Just click in the VNC window, type your credentials, and navigate normally. The system handles all the technical details automatically.
 
 
+
+

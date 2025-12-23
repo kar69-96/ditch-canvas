@@ -7,14 +7,12 @@ import { RouteGuard } from "@/components/RouteGuard";
 import { SidebarProvider } from "@/components/SidebarViewer";
 import { useEffect } from "react";
 import { getPreferences, applyTheme, applyFont } from "@/lib/preferences";
-import Login from "./pages/Login";
-import Landing from "./pages/Landing";
-import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Calendar from "./pages/Calendar";
 import Classes from "./pages/Classes";
 import ClassDetail from "./pages/ClassDetail";
 import Assignments from "./pages/Assignments";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -41,13 +39,12 @@ const AppContent = () => {
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           
           {/* Protected routes */}
-          <Route path="/onboarding" element={
+          <Route path="/" element={
             <RouteGuard>
-              <Onboarding />
+              <Dashboard />
             </RouteGuard>
           } />
           <Route path="/dashboard" element={

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import { WelcomeHeader } from "@/components/dashboard/WelcomeHeader";
@@ -18,7 +17,6 @@ import { cn } from "@/lib/utils";
 import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const { data: canvasData, loading: dataLoading } = useCanvasData();
   const { openItem: openSidebarItem, isOpen: isSidebarOpen, sidebarWidth, isFullscreen } = useSidebar();
   const [userName, setUserName] = useState("Student");
@@ -132,7 +130,7 @@ const Dashboard = () => {
       if (!session) {
         const isValid = await sessionStorage.hasValidSession();
         if (!isValid) {
-          navigate('/login');
+          // Session invalid - RouteGuard will handle showing auth message
           return;
         }
       }
@@ -146,7 +144,8 @@ const Dashboard = () => {
                            (currentUser.name ? currentUser.name.split(' ')[0] : 'Student');
           setUserName(firstName);
         } else {
-          navigate('/login');
+          // User not found - RouteGuard will handle showing auth message
+          console.warn('[Dashboard] User not found for session');
         }
       }
     }
@@ -232,9 +231,9 @@ const Dashboard = () => {
     const endDay = endOfWeek.getDate();
     
     if (startMonth === endMonth) {
-      return `${startMonth} ${startDay} ? ${endDay}`;
+      return `${startMonth} ${startDay} - ${endDay}`;
     }
-    return `${startMonth} ${startDay} ? ${endMonth} ${endDay}`;
+    return `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
   };
 
   // Generate active classes
@@ -326,10 +325,8 @@ const Dashboard = () => {
       return new Date(a.dueAt).getTime() - new Date(b.dueAt).getTime();
     });
 
-  const session = sessionStorage.getSession();
-  if (!session) {
-    return null;
-  }
+  // Session is already validated by RouteGuard, so we can safely render
+  // If we reach here, user is authenticated
 
   return (
     <div className="relative w-full">
@@ -358,11 +355,7 @@ const Dashboard = () => {
                       <div className="flex items-center justify-between px-5 py-4 border-b border-border">
                         <button
                           onClick={() => setCurrentWeek(currentWeek - 1)}
-                          disabled={currentWeek === 0}
-                          className={cn(
-                            "fill-hover fill-hover-light h-8 w-8 border border-border flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
-                            currentWeek === 0 && "opacity-50 cursor-not-allowed"
-                          )}
+                          className="fill-hover fill-hover-light h-8 w-8 border border-border flex items-center justify-center"
                         >
                           <ChevronLeft className="w-4 h-4" />
                         </button>
@@ -408,7 +401,7 @@ const Dashboard = () => {
                           >
                             <div className="flex items-center justify-between px-5 py-4 border-b border-border">
                               <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                                {selectedDay.day}, {getMonthString().split(' ? ')[0]} {selectedDay.date}
+                                {selectedDay.day}, {getMonthString().split(' - ')[0]} {selectedDay.date}
                               </h2>
                               <button
                                 onClick={() => setSelectedDay(null)}

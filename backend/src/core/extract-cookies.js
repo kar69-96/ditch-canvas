@@ -500,6 +500,7 @@ async function extractCanvasCookies() {
   }
 
   return extractedCookies;
+}
 
 async function main() {
   try {

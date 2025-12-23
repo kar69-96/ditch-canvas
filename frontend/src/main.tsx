@@ -1,9 +1,12 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-// Import clearUserData utility for debugging
-import "./utils/clearUserData";
 import { applyBackgroundColor } from "./lib/preferences";
+
+// Import clearUserData utility for debugging (dev mode only)
+if (import.meta.env.DEV) {
+  import("./utils/clearUserData");
+}
 
 // Ensure the global background color is applied before the app renders
 applyBackgroundColor();

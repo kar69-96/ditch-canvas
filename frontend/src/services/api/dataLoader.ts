@@ -92,6 +92,7 @@ export interface CanvasData {
     folder?: string;
     storageBucket?: string | null;
     storagePath?: string | null;
+    organizedPath?: string | null;
     mimeType?: string | null;
     originalUrl?: string | null;
     canvasFileId?: string | number | null;

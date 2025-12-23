@@ -34,11 +34,12 @@ export function useCanvasData() {
       });
       return canvasData;
     },
-    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
+    staleTime: 1 * 60 * 1000, // Consider data fresh for 1 minute (reduced from 5 minutes)
     gcTime: 30 * 60 * 1000, // Keep in cache for 30 minutes (formerly cacheTime)
     retry: 1,
-    refetchOnWindowFocus: false, // Don't refetch on window focus
-    refetchOnMount: false, // Use cached data if available
+    refetchOnWindowFocus: true, // Refetch when user returns to the tab to get latest updates
+    refetchOnMount: true, // Refetch when component mounts to check for updates
+    refetchInterval: 2 * 60 * 1000, // Automatically refetch every 2 minutes
     enabled: !!userEmail, // Only run query if we have a user email
   });
 

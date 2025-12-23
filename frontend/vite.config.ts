@@ -9,6 +9,13 @@ export default defineConfig(({ mode }) => ({
     host: "0.0.0.0", // Listen on all network interfaces
     port: 5173,
     strictPort: false, // Try next available port if 5173 is taken
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

@@ -13,7 +13,7 @@ import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
 const Calendar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { data: mockCanvasData, loading } = useCanvasData();
+  const { data: canvasData, loading, error } = useCanvasData();
   const { openItem: openSidebarItem, isOpen: isSidebarOpen, sidebarWidth, isFullscreen } = useSidebar();
   const [calendarView, setCalendarView] = useState<"day" | "week" | "month">("month");
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -68,13 +68,13 @@ const Calendar = () => {
 
   // Automatically mark assignments as completed if submissionStatus === "yes"
   useEffect(() => {
-    if (!mockCanvasData || !mockCanvasData.assignments) return;
+    if (!canvasData || !canvasData.assignments) return;
     
     setCompletedAssignments(prev => {
       const newSet = new Set(prev);
       let hasChanges = false;
       
-      mockCanvasData.assignments.forEach(assignment => {
+      canvasData.assignments.forEach(assignment => {
         if (assignment.submissionStatus === "yes" && !newSet.has(assignment.id)) {
           newSet.add(assignment.id);
           hasChanges = true;
@@ -83,7 +83,7 @@ const Calendar = () => {
       
       return hasChanges ? newSet : prev;
     });
-  }, [mockCanvasData]);
+  }, [canvasData]);
 
   // Scroll detection for loading previous days (list view only)
   useEffect(() => {
@@ -159,13 +159,64 @@ const Calendar = () => {
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
   
-  const events = {
-    5: [{ title: "CS 101 Quiz", type: "exam", color: "hsl(247 63% 85%)" }],
-    12: [{ title: "Math Assignment Due", type: "assignment", color: "hsl(20 60% 83%)" }],
-    15: [{ title: "Midterm Exam", type: "exam", color: "hsl(0 84.2% 60.2%)" }],
-    20: [{ title: "Project Presentation", type: "class", color: "hsl(210 50% 79%)" }],
-    28: [{ title: "Final Paper Due", type: "assignment", color: "hsl(20 60% 83%)" }],
-  };
+  // Build events object from actual assignments for the current month
+  const events = useMemo(() => {
+    if (!canvasData) return {};
+    
+    const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    monthStart.setHours(0, 0, 0, 0);
+    const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    monthEnd.setHours(23, 59, 59, 999);
+    
+    const eventsMap: Record<number, Array<{ 
+      title: string; 
+      type: string; 
+      color: string;
+      assignmentId: number;
+      assignmentTitle: string;
+      isCompleted: boolean;
+      isQuiz: boolean;
+      course: string;
+      points?: number;
+      url?: string;
+      dueTime: string;
+    }>> = {};
+    
+    canvasData.assignments.forEach(assignment => {
+      if (!assignment.dueAt) return;
+      
+      const dueDate = new Date(assignment.dueAt);
+      if (isNaN(dueDate.getTime())) return;
+      
+      // Check if assignment is in the current month
+      if (dueDate >= monthStart && dueDate <= monthEnd) {
+        const day = dueDate.getDate();
+        const course = canvasData.courses.find(c => c.id === assignment.courseId);
+        const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+        const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
+        
+        if (!eventsMap[day]) {
+          eventsMap[day] = [];
+        }
+        
+        eventsMap[day].push({
+          title: `${assignment.courseCode || course?.code || ''}: ${assignment.title}`,
+          type: isQuiz ? "exam" : "assignment",
+          color: course?.color || "hsl(220, 45%, 48%)",
+          assignmentId: assignment.id,
+          assignmentTitle: assignment.title, // Store full title separately
+          isCompleted,
+          isQuiz,
+          course: assignment.courseCode || course?.code || '',
+          points: assignment.pointsPossible,
+          url: assignment.url,
+          dueTime: dueDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }),
+        });
+      }
+    });
+    
+    return eventsMap;
+  }, [canvasData, currentDate, completedAssignments]);
 
   const days = [];
   for (let i = 0; i < firstDayOfMonth; i++) {
@@ -175,7 +226,7 @@ const Calendar = () => {
     days.push(i);
   }
 
-  if (loading || !mockCanvasData) {
+  if (loading) {
     return (
       <Layout>
         <div className="flex items-center justify-center min-h-screen">
@@ -188,9 +239,27 @@ const Calendar = () => {
     );
   }
 
-  // Get assignments from mock data with full details
-  const allAssignments = mockCanvasData.assignments.map((assignment) => {
-    const course = mockCanvasData.courses.find(c => c.id === assignment.courseId);
+  if (error || !canvasData) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <CalendarIcon className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
+            <p className="text-muted-foreground mb-2">
+              {error ? 'Error loading calendar data' : 'No calendar data available'}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Please make sure your data has been uploaded to Supabase.
+            </p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // Get assignments from Canvas data with full details
+  const allAssignments = canvasData.assignments.map((assignment) => {
+    const course = canvasData.courses.find(c => c.id === assignment.courseId);
     let dueDate: Date;
     let hasValidDate = true;
     
@@ -406,18 +475,23 @@ const Calendar = () => {
 
   // Day view: Get assignments for the selected day, sorted by due time
   const dayAssignments = useMemo(() => {
+    if (!canvasData) return [];
+    
     const selectedDay = new Date(currentDate);
     selectedDay.setHours(0, 0, 0, 0);
     const nextDay = new Date(selectedDay);
     nextDay.setDate(nextDay.getDate() + 1);
 
-    return mockCanvasData.assignments
+    return canvasData.assignments
       .filter(assignment => {
+        if (!assignment.dueAt) return false;
         const dueDate = new Date(assignment.dueAt);
+        // Check if date is valid
+        if (isNaN(dueDate.getTime())) return false;
         return dueDate >= selectedDay && dueDate < nextDay;
       })
       .map(assignment => {
-        const course = mockCanvasData.courses.find(c => c.id === assignment.courseId);
+        const course = canvasData.courses.find(c => c.id === assignment.courseId);
         const dueDate = new Date(assignment.dueAt);
         const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
         return {
@@ -436,7 +510,7 @@ const Calendar = () => {
         };
       })
       .sort((a, b) => a.due.getTime() - b.due.getTime());
-  }, [currentDate, completedAssignments]);
+  }, [canvasData, currentDate, completedAssignments]);
 
   // Day view metrics
   const dayMetrics = useMemo(() => {
@@ -464,6 +538,8 @@ const Calendar = () => {
 
   // Week view: Generate weekly data similar to dashboard
   const weekData = useMemo(() => {
+    if (!canvasData) return [];
+    
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     const startOfWeek = new Date(currentDate);
     startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
@@ -479,17 +555,29 @@ const Calendar = () => {
       
       const isToday = currentDay.getTime() === today.getTime();
       
-      const assignmentsForDay = mockCanvasData.assignments
+      const assignmentsForDay = canvasData.assignments
         .filter(assignment => {
+          if (!assignment.dueAt) return false;
           const dueDate = new Date(assignment.dueAt);
-          return dueDate >= currentDay && dueDate < nextDay && assignment.workflowState === "pending";
+          // Check if date is valid
+          if (isNaN(dueDate.getTime())) return false;
+          return dueDate >= currentDay && dueDate < nextDay;
         })
         .map(assignment => {
-          const course = mockCanvasData.courses.find(c => c.id === assignment.courseId);
+          const course = canvasData.courses.find(c => c.id === assignment.courseId);
+          const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+          const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
           return {
+            id: assignment.id,
             title: assignment.title,
-            course: assignment.courseCode,
-            color: course?.color || "hsl(220, 70%, 50%)"
+            course: assignment.courseCode || course?.code || '',
+            courseName: course?.name || assignment.courseName || '',
+            color: course?.color || "hsl(220, 70%, 50%)",
+            isQuiz,
+            isCompleted,
+            points: assignment.pointsPossible,
+            url: assignment.url,
+            dueTime: new Date(assignment.dueAt).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }),
           };
         });
 
@@ -500,7 +588,7 @@ const Calendar = () => {
         assignments: assignmentsForDay
       };
     });
-  }, [currentDate]);
+  }, [canvasData, currentDate, completedAssignments]);
 
   return (
     <div className="relative w-full">
@@ -779,11 +867,24 @@ const Calendar = () => {
                       {dayAssignments.map((assignment) => (
                         <div
                           key={assignment.id}
-                          className={`flex items-center gap-4 p-4 border bg-white/5 hover:bg-white/10  ${
+                          className={`flex items-center gap-4 p-4 border bg-white/5 hover:bg-white/10 cursor-pointer ${
                             assignment.isQuiz ? "border-2 border-red-500/80" : "border border-border"
                           } ${
                             assignment.isCompleted ? "opacity-60" : ""
                           }`}
+                          onClick={() => {
+                            openSidebarItem({
+                              id: String(assignment.id),
+                              type: "assignment",
+                              title: assignment.title,
+                              subtitle: `${assignment.isQuiz ? "Quiz" : "Assignment"} • ${assignment.course}`,
+                              dueDate: assignment.dueTime ? `DUE: ${assignment.dueTime}` : "No due date",
+                              points: assignment.points,
+                              isCompleted: assignment.isCompleted,
+                              courseCode: assignment.course,
+                              canvasUrl: assignment.url,
+                            });
+                          }}
                         >
                           <span className="text-xs text-muted-foreground flex-shrink-0">
                             {assignment.course.split(" ")[0]}
@@ -841,13 +942,28 @@ const Calendar = () => {
                         ) : (
                           day.assignments.map((assignment, idx) => (
                             <div
-                              key={idx}
-                              className="p-3 border border-border cursor-pointer  hover:bg-secondary/20 bg-secondary/10"
+                              key={assignment.id || idx}
+                              className={`p-3 border border-border cursor-pointer hover:bg-secondary/20 bg-secondary/10 ${
+                                assignment.isCompleted ? "opacity-60" : ""
+                              }`}
+                              onClick={() => {
+                                openSidebarItem({
+                                  id: String(assignment.id),
+                                  type: "assignment",
+                                  title: assignment.title,
+                                  subtitle: `${assignment.isQuiz ? "Quiz" : "Assignment"} • ${assignment.course}`,
+                                  dueDate: assignment.dueTime ? `DUE: ${assignment.dueTime}` : "No due date",
+                                  points: assignment.points,
+                                  isCompleted: assignment.isCompleted,
+                                  courseCode: assignment.course,
+                                  canvasUrl: assignment.url,
+                                });
+                              }}
                             >
                               <p className="text-xs font-semibold mb-1 text-foreground">
                                 {assignment.course}
                               </p>
-                              <p className="text-[11px] font-medium text-muted-foreground">
+                              <p className={`text-[11px] font-medium ${assignment.isCompleted ? "line-through text-muted-foreground/50" : "text-muted-foreground"}`}>
                                 {assignment.title}
                               </p>
                             </div>
@@ -888,8 +1004,28 @@ const Calendar = () => {
                               <div className="mt-auto w-full space-y-1">
                                 {events[day].map((event, i) => (
                                   <div
-                                    key={i}
-                                    className="text-[10px] px-2 py-1 truncate border border-border bg-secondary/10 text-foreground"
+                                    key={event.assignmentId || i}
+                                    className={`text-[10px] px-2 py-1 truncate border border-border bg-secondary/20 cursor-pointer hover:bg-secondary/30 ${
+                                      event.isCompleted ? "opacity-70" : ""
+                                    }`}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      openSidebarItem({
+                                        id: String(event.assignmentId),
+                                        type: "assignment",
+                                        title: event.assignmentTitle,
+                                        subtitle: `${event.isQuiz ? "Quiz" : "Assignment"} • ${event.course}`,
+                                        dueDate: event.dueTime ? `DUE: ${event.dueTime}` : "No due date",
+                                        points: event.points,
+                                        isCompleted: event.isCompleted,
+                                        courseCode: event.course,
+                                        canvasUrl: event.url,
+                                      });
+                                    }}
+                                    style={{ 
+                                      textDecoration: event.isCompleted ? "line-through" : "none",
+                                      color: event.isCompleted ? "hsl(var(--muted-foreground))" : "hsl(var(--foreground))",
+                                    }}
                                   >
                                     {event.title}
                                   </div>
@@ -904,21 +1040,6 @@ const Calendar = () => {
                   </div>
                 </div>
 
-                {/* Event Types Legend */}
-                <div className="mt-6 flex items-center justify-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 " style={{ background: "hsl(247 63% 85%)" }} />
-                    <span className="text-xs text-foreground/60">Exam</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 " style={{ background: "hsl(20 60% 83%)" }} />
-                    <span className="text-xs text-foreground/60">Assignment</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 " style={{ background: "hsl(210 50% 79%)" }} />
-                    <span className="text-xs text-foreground/60">Class</span>
-                  </div>
-                </div>
               </>
             )}
           </>

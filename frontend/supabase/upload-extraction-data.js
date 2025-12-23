@@ -13,6 +13,7 @@ import { createClient } from '@supabase/supabase-js';
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { generateOrganizedStoragePath, organizeFileByMetadata } from './file-organizer.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -257,25 +258,25 @@ async function ensureStorageBucket(bucketName) {
   return true;
 }
 
-// Function to upload file to Supabase Storage
-async function uploadFileToStorage(bucketName, userEmail, courseId, entityId, filePath, filename) {
+// Function to upload file to Supabase Storage with organized path
+async function uploadFileToStorage(bucketName, userEmail, courseId, entityId, filePath, filename, fileData = {}, metadata = {}) {
   try {
-    // Path within bucket - no user prefix needed since bucket is per-user
-    const storagePath = `courses/${courseId}/files/${entityId}/${filename}`;
+    // Generate organized path based on metadata
+    const organizedPath = generateOrganizedStoragePath(courseId, fileData, metadata, entityId, filename);
     
     // Read file
     const fileBuffer = readFileSync(filePath);
     const fileStats = statSync(filePath);
     const fileSizeMB = (fileStats.size / (1024 * 1024)).toFixed(2);
     
-    console.log(`      📤 Uploading ${filename} (${fileSizeMB} MB)...`);
+    console.log(`      📤 Uploading ${filename} (${fileSizeMB} MB) to organized path...`);
     
     const mimeType = getMimeType(filename);
     
-    // Upload to storage bucket
+    // Upload to storage bucket with organized path
     const { data, error } = await supabase.storage
       .from(bucketName)
-      .upload(storagePath, fileBuffer, {
+      .upload(organizedPath, fileBuffer, {
         contentType: mimeType,
         upsert: true,
         cacheControl: '3600',
@@ -290,10 +291,11 @@ async function uploadFileToStorage(bucketName, userEmail, courseId, entityId, fi
       return null;
     }
     
-    console.log(`      ✅ Uploaded ${filename} (${fileSizeMB} MB)`);
+    console.log(`      ✅ Uploaded ${filename} (${fileSizeMB} MB) to ${organizedPath}`);
     
     return {
-      storagePath: storagePath,
+      storagePath: organizedPath,
+      organizedPath: organizeFileByMetadata(fileData, metadata),
       size: fileStats.size,
       mimeType: mimeType
     };
@@ -1056,6 +1058,11 @@ async function uploadExtractionData() {
               extractedWeek: extractWeek(fileData.moduleName || fileData.name),
               extractedChapter: extractChapter(fileData.name),
               extractedContentType: classifyFileType(fileData.name),
+              organizedPath: organizeFileByMetadata(fileData, {
+                extractedWeek: extractWeek(fileData.moduleName || fileData.name),
+                extractedChapter: extractChapter(fileData.name),
+                extractedContentType: classifyFileType(fileData.name),
+              }),
             };
             
             const { error } = await supabase.rpc('upsert_user_entity', {
@@ -1195,7 +1202,25 @@ async function uploadExtractionData() {
               // Generate entity ID from path
               const entityId = `download_${pathParts.join('_').replace(/[^a-zA-Z0-9_]/g, '_')}`;
               
-              // Upload file to storage (skip if bucket doesn't exist - we'll handle that separately)
+              // Prepare file data and metadata for organization
+              const fileData = {
+                name: filename,
+                moduleName: week ? `Week ${week}` : null,
+                folderPath: pathParts.slice(0, -1),
+              };
+              
+              const metadata = {
+                originalPath: relativePath,
+                entityType: pathParts[0], // 'modules', 'pages', 'announcements', etc.
+                context: pathParts.slice(1, -1).join('/'),
+                fileExtension: filename.split('.').pop(),
+                extractedContentType: classifyFileType(filename),
+                extractedWeek: week,
+                weekKey: weekKey,
+                storageBucket: userBucketName,
+              };
+              
+              // Upload file to storage with organized path (skip if bucket doesn't exist - we'll handle that separately)
               let storageInfo = null;
               if (storageReady) {
                 try {
@@ -1205,8 +1230,14 @@ async function uploadExtractionData() {
                     course.id.toString(),
                     entityId,
                     fileInfo.path,
-                    filename
+                    filename,
+                    fileData,
+                    metadata
                   );
+                  // Add organized path to metadata
+                  if (storageInfo?.organizedPath) {
+                    metadata.organizedPath = storageInfo.organizedPath;
+                  }
                 } catch (storageError) {
                   console.log(`      ⚠️  Skipping storage upload for ${filename} (${storageError.message})`);
                 }
@@ -1235,22 +1266,11 @@ async function uploadExtractionData() {
                 filename: filename,
                 originalPath: relativePath,
                 storagePath: storageInfo?.storagePath,
+                organizedPath: storageInfo?.organizedPath,
                 storageBucket: userBucketName, // Include bucket name for file URL resolution
                 size: storageInfo?.size,
                 mimeType: storageInfo?.mimeType,
               });
-              
-              // Store file metadata
-              const metadata = {
-                originalPath: relativePath,
-                entityType: pathParts[0], // 'modules', 'pages', 'announcements', etc.
-                context: pathParts.slice(1, -1).join('/'),
-                fileExtension: filename.split('.').pop(),
-                extractedContentType: classifyFileType(filename),
-                extractedWeek: week,
-                weekKey: weekKey,
-                storageBucket: userBucketName,
-              };
               
               await supabase.rpc('upsert_user_entity', {
                 user_email: normalizedEmail,

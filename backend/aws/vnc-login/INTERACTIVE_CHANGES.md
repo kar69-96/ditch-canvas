@@ -177,3 +177,5 @@ Common issues:
 All changes focus on making the VNC interface fully interactive with reliable keyboard and mouse input. The system now provides a native desktop-like experience through the web browser, allowing users to interact with the remote browser exactly as they would locally.
 
 
+
+

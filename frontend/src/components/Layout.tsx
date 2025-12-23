@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Calendar, BookOpen, LogOut, Settings } from "lucide-react";
+import { Home, Calendar, BookOpen, LogOut } from "lucide-react";
 import { useCourses } from "@/hooks/useCanvasData";
 import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { logout } from "@/services/mockApi/auth";
@@ -33,7 +33,7 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
         title: "Logged out",
         description: "You have been successfully logged out",
       });
-      navigate("/login");
+      navigate("/");
     } catch (error: any) {
       console.error("Error logging out:", error);
       toast({
@@ -239,32 +239,8 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
             })}
           </ul>
 
-          {/* Settings and Logout Buttons */}
+          {/* Logout Button */}
           <div className="flex items-center gap-1 relative">
-            <button
-              onClick={() => navigate('/onboarding')}
-              className="relative p-2 border border-border bg-background overflow-hidden"
-              title="Settings"
-              onMouseEnter={() => setHoveredActionButton("settings")}
-              onMouseLeave={() => setHoveredActionButton(null)}
-            >
-              {hoveredActionButton === "settings" && (
-                <motion.div
-                  layoutId="actionButtonFill"
-                  className="absolute inset-0 bg-foreground"
-                  initial={false}
-                  transition={{
-                    type: "tween",
-                    duration: 0.15,
-                    ease: "easeOut"
-                  }}
-                />
-              )}
-              <Settings className={cn(
-                "w-4 h-4 relative z-10",
-                hoveredActionButton === "settings" && "text-background"
-              )} />
-            </button>
             <button
               onClick={handleLogout}
               disabled={isLoggingOut}

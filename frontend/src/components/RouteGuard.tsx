@@ -11,12 +11,12 @@ interface RouteGuardProps {
 
 /**
  * RouteGuard component to protect routes that require authentication
- * If requireAuth is true, redirects to /login if no valid session
+ * If requireAuth is true, shows authentication message if no valid session
  */
 export const RouteGuard = ({ children, requireAuth = true }: RouteGuardProps) => {
-  const navigate = useNavigate();
   const [isChecking, setIsChecking] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function checkAuth() {
@@ -26,7 +26,7 @@ export const RouteGuard = ({ children, requireAuth = true }: RouteGuardProps) =>
           console.log('[RouteGuard] Session check:', { hasSession: !!session, userId: session?.userId });
           
           if (!session) {
-            console.warn('[RouteGuard] No session found, redirecting to login');
+            console.warn('[RouteGuard] No session found');
             setIsAuthenticated(false);
             setIsChecking(false);
             navigate('/login');
@@ -37,7 +37,7 @@ export const RouteGuard = ({ children, requireAuth = true }: RouteGuardProps) =>
           console.log('[RouteGuard] Session validity:', isValid);
           
           if (!isValid) {
-            console.warn('[RouteGuard] Session invalid, redirecting to login');
+            console.warn('[RouteGuard] Session invalid');
             setIsAuthenticated(false);
             setIsChecking(false);
             navigate('/login');
@@ -53,12 +53,14 @@ export const RouteGuard = ({ children, requireAuth = true }: RouteGuardProps) =>
           navigate('/login');
           return;
         }
+      } else {
+        setIsAuthenticated(true);
       }
       setIsChecking(false);
     }
     
     checkAuth();
-  }, [navigate, requireAuth]);
+  }, [requireAuth, navigate]);
 
   // Show loading state while checking session
   if (isChecking) {
@@ -74,7 +76,8 @@ export const RouteGuard = ({ children, requireAuth = true }: RouteGuardProps) =>
     );
   }
 
-  if (requireAuth && !isAuthenticated) {
+  // Redirect handled in useEffect, but show loading while redirecting
+  if (requireAuth && !isAuthenticated && !isChecking) {
     return null; // Will redirect in useEffect
   }
 

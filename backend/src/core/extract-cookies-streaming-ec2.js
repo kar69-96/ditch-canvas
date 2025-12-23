@@ -28,6 +28,9 @@ const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
 const STREAMING_PORT = process.env.STREAMING_PORT || 3002;
 const AWS_SSH_USER = process.env.AWS_SSH_USER || 'ec2-user';
 
+// Import shared cookie sync utility
+const { downloadCookiesFromEC2 } = require('./ec2-cookie-sync');
+
 // Get EC2 public IP
 async function getEC2PublicIP() {
   const { exec } = require('child_process');
@@ -198,40 +201,58 @@ REMOTE_EOF`;
           console.log('✅ Created minimal package.json');
         }
         
-        // Install dependencies if needed
-        console.log('📦 Installing dependencies...');
-        const installResult = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "cd ~/canvas-wrapper-streaming && npm install --production --no-audit --no-fund 2>&1"`);
-        if (installResult.stdout) {
-          const output = installResult.stdout;
-          if (output.includes('added') || output.includes('up to date')) {
-            console.log('✅ Dependencies installed');
-          } else {
-            console.log('⚠️  Installation output:', output.split('\n').slice(-3).join('\n'));
+        // Check if dependencies are already installed (skip if node_modules exists)
+        console.log('🔍 Checking if dependencies are installed...');
+        const depsCheck = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "test -d ~/canvas-wrapper-streaming/node_modules && echo 'INSTALLED' || echo 'NOT_INSTALLED'"`).catch(() => ({ stdout: 'NOT_INSTALLED' }));
+        
+        if (depsCheck.stdout && depsCheck.stdout.includes('INSTALLED')) {
+          console.log('✅ Dependencies already installed, skipping npm install');
+        } else {
+          console.log('📦 Installing dependencies...');
+          const installResult = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "cd ~/canvas-wrapper-streaming && npm install --production --no-audit --no-fund 2>&1"`);
+          if (installResult.stdout) {
+            const output = installResult.stdout;
+            if (output.includes('added') || output.includes('up to date')) {
+              console.log('✅ Dependencies installed');
+            } else {
+              console.log('⚠️  Installation output:', output.split('\n').slice(-3).join('\n'));
+            }
           }
         }
         
-        // Ensure Xvfb is installed and running
-        console.log('🖥️  Ensuring Xvfb is installed and running...');
-        const xvfbSetup = `
-# Install Xvfb if not installed
-if ! command -v Xvfb > /dev/null 2>&1; then
-  if command -v dnf > /dev/null 2>&1; then
-    sudo dnf install -y xorg-x11-server-Xvfb 2>&1 | tail -2
-  elif command -v yum > /dev/null 2>&1; then
-    sudo yum install -y xorg-x11-server-Xvfb 2>&1 | tail -2
-  elif command -v apt-get > /dev/null 2>&1; then
-    sudo apt-get update -y 2>&1 | tail -1
-    sudo apt-get install -y xvfb 2>&1 | tail -2
-  fi
+        // Check if Xvfb is installed, only install if missing
+        console.log('🔍 Checking for Xvfb...');
+        const xvfbCheck = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "command -v Xvfb > /dev/null && echo 'INSTALLED' || echo 'NOT_INSTALLED'"`).catch(() => ({ stdout: 'NOT_INSTALLED' }));
+        
+        if (xvfbCheck.stdout && xvfbCheck.stdout.includes('INSTALLED')) {
+          console.log('✅ Xvfb already installed');
+        } else {
+          console.log('🖥️  Installing Xvfb...');
+          const xvfbInstall = `
+if command -v dnf > /dev/null 2>&1; then
+  sudo dnf install -y xorg-x11-server-Xvfb 2>&1 | tail -2
+elif command -v yum > /dev/null 2>&1; then
+  sudo yum install -y xorg-x11-server-Xvfb 2>&1 | tail -2
+elif command -v apt-get > /dev/null 2>&1; then
+  sudo apt-get update -y 2>&1 | tail -1
+  sudo apt-get install -y xvfb 2>&1 | tail -2
 fi
-
-# Start Xvfb
+`.trim();
+          try {
+            await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "${xvfbInstall}"`);
+            console.log('✅ Xvfb installed');
+          } catch (e) {
+            console.log('⚠️  Xvfb installation had issues:', e.message);
+          }
+        }
+        
+        // Start Xvfb (always try to start, it's idempotent)
+        console.log('🖥️  Starting Xvfb...');
+        const xvfbStart = `
 pkill -f "Xvfb :99" 2>/dev/null || true
 sleep 1
 Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset > /tmp/xvfb.log 2>&1 &
 sleep 3
-
-# Verify Xvfb is running
 if pgrep -f 'Xvfb :99' > /dev/null; then
   echo "Xvfb is running"
 else
@@ -241,18 +262,18 @@ else
 fi
 `.trim();
         try {
-          const xvfbResult = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "${xvfbSetup}"`);
+          const xvfbResult = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "${xvfbStart}"`);
           if (xvfbResult.stdout && xvfbResult.stdout.includes('Xvfb is running')) {
             console.log('✅ Xvfb is running');
           } else {
             console.log('⚠️  Xvfb status unclear:', xvfbResult.stdout);
           }
         } catch (e) {
-          console.log('⚠️  Xvfb setup had issues:', e.message);
+          console.log('⚠️  Xvfb startup had issues:', e.message);
           // Continue anyway - the script will fail with a better error if Xvfb isn't working
         }
         
-        // Check for Chrome/Chromium and install if needed
+        // Check for Chrome/Chromium, only install if missing
         console.log('🔍 Checking for Chrome/Chromium...');
         const chromeCheck = await execAsync(`ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${AWS_SSH_USER}@${publicIp} "which google-chrome google-chrome-stable chromium chromium-browser 2>/dev/null | head -1"`).catch(() => ({ stdout: '' }));
         if (!chromeCheck.stdout || !chromeCheck.stdout.trim()) {
@@ -430,6 +451,54 @@ async function main() {
   console.log('📋 Streaming server logs (cookie extraction progress will appear here):\n');
   console.log('─'.repeat(60));
   
+  let extractionCompleted = false;
+  let exitTimeout = null;
+  const { exec } = require('child_process');
+  const { promisify } = require('util');
+  const execAsync = promisify(exec);
+  
+  // Helper to add timeout to execAsync
+  function execWithTimeout(command, timeoutMs = 30000) {
+    return Promise.race([
+      execAsync(command),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error(`Command timed out after ${timeoutMs}ms`)), timeoutMs)
+      )
+    ]);
+  }
+  
+  // Function to check if server is still running and download cookies if not
+  async function checkServerAndDownloadCookies() {
+    try {
+      const checkResult = await execWithTimeout(
+        `ssh -i "${AWS_KEY_FILE}" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5 ${AWS_SSH_USER}@${publicIp} "pgrep -f extract-cookies-streaming"`,
+        5000
+      );
+      // Server is still running
+      return false;
+    } catch (e) {
+      // Server is not running - extraction likely completed
+      if (!extractionCompleted) {
+        extractionCompleted = true;
+        console.log('\n\n✅ Extraction completed. Server has stopped.');
+        console.log('─'.repeat(60));
+        if (exitTimeout) clearTimeout(exitTimeout);
+        logStream.kill();
+        
+        // Download cookies from EC2
+        await downloadCookiesFromEC2(publicIp, AWS_KEY_FILE, AWS_SSH_USER);
+        
+        process.exit(0);
+      }
+      return true;
+    }
+  }
+  
+  // Periodically check if server is still running (every 5 seconds)
+  const serverCheckInterval = setInterval(async () => {
+    await checkServerAndDownloadCookies();
+  }, 5000);
+  
   const logStream = spawn('ssh', [
     '-i', AWS_KEY_FILE,
     '-o', 'StrictHostKeyChecking=no',
@@ -440,7 +509,7 @@ async function main() {
     stdio: ['ignore', 'pipe', 'pipe']
   });
   
-  // Filter out SSH warnings and pass through actual logs
+  // Filter out SSH warnings and detect completion
   logStream.stdout.on('data', (data) => {
     const text = data.toString();
     // Filter out SSH warnings and Amazon Linux banner
@@ -453,6 +522,33 @@ async function main() {
         !text.includes('_/') &&
         !text.includes('/m/')) {
       process.stdout.write(text);
+      
+      // Detect completion messages
+      if (text.includes('completed successfully') || 
+          text.includes('Cookie extraction completed') ||
+          text.includes('Canvas cookie extraction completed')) {
+        if (!extractionCompleted) {
+          extractionCompleted = true;
+          // Wait a moment for final logs, then download cookies and exit
+          exitTimeout = setTimeout(async () => {
+            console.log('\n\n✅ Extraction completed successfully!');
+            console.log('─'.repeat(60));
+            clearInterval(serverCheckInterval);
+            
+            // Download cookies from EC2 before exiting
+            await downloadCookiesFromEC2(publicIp, AWS_KEY_FILE, AWS_SSH_USER);
+            
+            // Check if server stopped, if not wait a bit more
+            await checkServerAndDownloadCookies();
+            
+            // If server check didn't exit, force exit after a short delay
+            setTimeout(() => {
+              logStream.kill();
+              process.exit(0);
+            }, 2000);
+          }, 3000);
+        }
+      }
     }
   });
   
@@ -463,15 +559,28 @@ async function main() {
     }
   });
   
-  logStream.on('close', (code) => {
-    if (code !== 0 && code !== null) {
+  logStream.on('close', async (code) => {
+    clearInterval(serverCheckInterval);
+    if (exitTimeout) clearTimeout(exitTimeout);
+    if (code !== 0 && code !== null && !extractionCompleted) {
       console.log(`\n⚠️  Log stream ended (code: ${code})`);
+    }
+    if (!extractionCompleted) {
+      // Log stream ended but extraction might still be running, check one more time
+      setTimeout(async () => {
+        // Try to download cookies even if we're not sure extraction completed
+        await downloadCookiesFromEC2(publicIp, AWS_KEY_FILE, AWS_SSH_USER);
+        await checkServerAndDownloadCookies();
+        process.exit(0);
+      }, 1000);
     }
   });
   
   // Handle Ctrl+C gracefully
   process.on('SIGINT', () => {
     console.log('\n\n🛑 Stopping log stream...');
+    clearInterval(serverCheckInterval);
+    if (exitTimeout) clearTimeout(exitTimeout);
     logStream.kill();
     process.exit(0);
   });

@@ -34,6 +34,7 @@ const UPDATE_MAX_COURSES = Number(process.env.UPDATE_MAX_COURSES) || null;
 const UPDATE_TEST_DATASET_DIR = path.normalize(path.join(STORAGE_DIR, 'update test'));
 const DATE_TOLERANCE_HOURS = Number(process.env.UPDATE_DATE_TOLERANCE_HOURS) || 24;
 const TITLE_SIMILARITY_THRESHOLD = Number(process.env.UPDATE_TITLE_SIMILARITY_THRESHOLD) || 0.8;
+const AUTO_UPLOAD_TO_SUPABASE = (process.env.AUTO_UPLOAD_TO_SUPABASE || 'true').toLowerCase() !== 'false';
 
 // Import extractors
 const { extractAssignment } = require('../src/crawler/extractors/assignment-extractor.js');
@@ -2539,6 +2540,170 @@ function loadExtractionSummary(extractionFolder) {
 }
 
 /**
+ * Upload extraction data to Supabase
+ */
+async function uploadToSupabase(extractionFolder, summary) {
+  if (!AUTO_UPLOAD_TO_SUPABASE) {
+    console.log('💤 Auto-upload to Supabase is disabled (set AUTO_UPLOAD_TO_SUPABASE=true to enable)\n');
+    return { success: false, skipped: true };
+  }
+
+  const userEmail = summary?.user?.email;
+  if (!userEmail) {
+    console.warn('⚠️  Cannot auto-upload to Supabase: No user email found in extraction summary\n');
+    return { success: false, error: 'No user email' };
+  }
+
+  console.log('☁️  Uploading updated data to Supabase...\n');
+  
+  try {
+    const { exec } = require('child_process');
+    const { promisify } = require('util');
+    const execAsync = promisify(exec);
+    
+    // Get the full path to the extraction folder
+    const extractionDataPath = path.join(STORAGE_DIR, extractionFolder);
+    
+    // Try multiple possible paths for the upload script
+    // 1. Frontend directory (local development - backend/../frontend)
+    // 2. Frontend directory (AWS - backend is in ~/Canvas-Wrapper, frontend is in ~/Canvas-Wrapper/../frontend)
+    // 3. From workspace root
+    const possiblePaths = [
+      path.join(__dirname, '..', '..', 'frontend', 'supabase', 'upload-extraction-data.js'),
+      path.join(__dirname, '..', '..', '..', 'frontend', 'supabase', 'upload-extraction-data.js'),
+      path.join(process.cwd(), 'frontend', 'supabase', 'upload-extraction-data.js'),
+      path.join(process.env.HOME || process.env.USERPROFILE || '', 'Canvas-Wrapper', '..', 'frontend', 'supabase', 'upload-extraction-data.js'),
+    ];
+    
+    let uploadScriptPath = null;
+    let frontendDir = null;
+    
+    for (const possiblePath of possiblePaths) {
+      if (fs.existsSync(possiblePath)) {
+        uploadScriptPath = possiblePath;
+        frontendDir = path.dirname(path.dirname(possiblePath)); // Go up from supabase/ to frontend/
+        break;
+      }
+    }
+    
+    // If still not found, check if we're on AWS and try to find it
+    if (!uploadScriptPath) {
+      const isAWS = process.env.AWS_INSTANCE_ID || process.env.HEADLESS === 'true';
+      
+      if (isAWS) {
+        // On AWS, frontend is synced to ~/frontend
+        const homeDir = process.env.HOME || '/home/ec2-user';
+        const awsPaths = [
+          path.join(homeDir, 'frontend', 'supabase', 'upload-extraction-data.js'),
+          path.join(homeDir, 'Canvas-Wrapper', '..', 'frontend', 'supabase', 'upload-extraction-data.js'),
+        ];
+        
+        for (const awsPath of awsPaths) {
+          if (fs.existsSync(awsPath)) {
+            uploadScriptPath = awsPath;
+            frontendDir = path.dirname(path.dirname(awsPath));
+            break;
+          }
+        }
+      }
+    }
+    
+    // Use npm run supabase:upload-data instead of running the script directly
+    // This ensures proper environment setup and uses the npm script
+    // Find the frontend directory (where package.json with the script is located)
+    if (!frontendDir) {
+      // Try to find frontend directory from upload script path or other locations
+      const possibleFrontendDirs = [
+        path.join(__dirname, '..', '..', 'frontend'),
+        path.join(process.cwd(), 'frontend'),
+        path.join(process.env.HOME || process.env.USERPROFILE || '', 'frontend'),
+      ];
+      
+      for (const dir of possibleFrontendDirs) {
+        const packageJsonPath = path.join(dir, 'package.json');
+        if (fs.existsSync(packageJsonPath)) {
+          frontendDir = dir;
+          break;
+        }
+      }
+    }
+    
+    if (!frontendDir || !fs.existsSync(path.join(frontendDir, 'package.json'))) {
+      const isAWS = process.env.AWS_INSTANCE_ID || process.env.HEADLESS === 'true';
+      
+      if (isAWS) {
+        console.warn('⚠️  Running on AWS instance - frontend directory not found');
+        console.warn('   Make sure frontend directory was synced to AWS');
+        console.warn('   Data has been updated on AWS. To upload to Supabase:');
+        console.warn(`   1. Ensure frontend directory is synced to AWS`);
+        console.warn(`   2. Ensure .env with Supabase credentials is on AWS`);
+        console.warn(`   Or download data and run locally: npm run supabase:upload-data ${userEmail} "${extractionDataPath}"\n`);
+        return { success: false, error: 'Frontend directory not found on AWS', needsLocalUpload: true };
+      }
+      
+      console.warn(`⚠️  Frontend directory not found (needed for npm run supabase:upload-data)`);
+      console.warn('   Skipping auto-upload to Supabase\n');
+      return { success: false, error: 'Frontend directory not found' };
+    }
+    
+    // Run the upload using npm run supabase:upload-data
+    // This ensures proper environment setup and script execution
+    const command = `npm run supabase:upload-data "${userEmail}" "${extractionDataPath}"`;
+    console.log(`   Running: ${command}\n`);
+    console.log(`   Working directory: ${frontendDir}\n`);
+    
+    try {
+      const { stdout, stderr } = await execAsync(command, {
+        cwd: frontendDir,
+        maxBuffer: 10 * 1024 * 1024, // 10MB buffer
+        env: { ...process.env }
+      });
+      
+      if (stdout) {
+        console.log(stdout);
+      }
+      if (stderr) {
+        // stderr might contain warnings, check if it's actually an error
+        const stderrLower = stderr.toLowerCase();
+        if (stderrLower.includes('error') && !stderrLower.includes('warning')) {
+          console.error('⚠️  Upload script stderr:', stderr);
+        } else if (stderr.trim()) {
+          console.log('ℹ️  Upload script info:', stderr);
+        }
+      }
+      
+      console.log('✅ Successfully uploaded data to Supabase\n');
+      return { success: true };
+    } catch (execError) {
+      // execAsync throws an error if the command fails
+      console.error(`❌ Upload script failed: ${execError.message}\n`);
+      if (execError.stdout) {
+        console.log('stdout:', execError.stdout);
+      }
+      if (execError.stderr) {
+        console.error('stderr:', execError.stderr);
+      }
+      if (execError.code !== undefined) {
+        console.error(`Exit code: ${execError.code}`);
+      }
+      return { success: false, error: execError.message };
+    }
+  } catch (error) {
+    console.error(`❌ Failed to upload to Supabase: ${error.message}\n`);
+    if (error.stdout) {
+      console.log('stdout:', error.stdout);
+    }
+    if (error.stderr) {
+      console.error('stderr:', error.stderr);
+    }
+    if (error.code !== undefined) {
+      console.error(`Exit code: ${error.code}`);
+    }
+    return { success: false, error: error.message };
+  }
+}
+
+/**
  * Get stored extracted data for a course from summary file
  */
 function getStoredExtractedDataFromSummary(summary, courseId) {
@@ -3220,6 +3385,14 @@ async function main() {
           if (applyResult.updateLogPath) {
             console.log(`📝 Update log saved to: ${applyResult.updateLogPath}\n`);
           }
+          
+          // Reload summary to get updated data
+          const updatedSummary = loadExtractionSummary(extractionFolder);
+          
+          // Auto-upload to Supabase if enabled
+          if (updatedSummary) {
+            await uploadToSupabase(extractionFolder, updatedSummary);
+          }
         } else {
           console.error('⚠️  Some changes may not have been applied. Check the logs above.\n');
         }
@@ -3237,6 +3410,14 @@ async function main() {
     } else if (coursesWithUpdates.length > 0) {
       // Save update log even if no changes were applied
       saveUpdateLog(diffReport, extractionFolder, 0);
+    } else if (!UPDATE_DRY_RUN && coursesWithUpdates.length === 0) {
+      // Even if no updates were found, ensure Supabase is synced with latest data
+      // This handles cases where the extraction folder was updated manually
+      console.log('📊 No updates found, but ensuring Supabase is synced with latest data...\n');
+      const summary = loadExtractionSummary(extractionFolder);
+      if (summary) {
+        await uploadToSupabase(extractionFolder, summary);
+      }
     }
     
     // Report results

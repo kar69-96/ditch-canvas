@@ -63,20 +63,20 @@ export default function Login() {
     if (isReauth) {
       setStatus('Cookies expired. Re-authenticating...');
     } else {
-      setStatus('Checking email...');
+    setStatus('Checking email...');
     }
 
     try {
       // Check if email exists in Supabase (skip on re-auth)
       if (!isReauth) {
         console.log('[Login] Checking email:', email);
-        const emailCheck = await checkEmailExists(email);
+      const emailCheck = await checkEmailExists(email);
         console.log('[Login] Email check result:', emailCheck);
-        
-        if (!emailCheck.exists) {
-          setError('Email not found. Sign up flow coming soon.');
-          setLoading(false);
-          return;
+      
+      if (!emailCheck.exists) {
+        setError('Email not found. Sign up flow coming soon.');
+        setLoading(false);
+        return;
         }
       }
 
@@ -114,6 +114,11 @@ export default function Login() {
           // Check for extraction results periodically (even if popup is still open)
           if (!extractionCompleted) {
             const extractionResult = await getExtractionResult(email);
+            
+            // Skip if still pending (extraction in progress)
+            if (extractionResult.pending) {
+              return; // Continue polling
+            }
             
             if (extractionResult.success && extractionResult.username) {
               extractionCompleted = true;
@@ -207,6 +212,12 @@ export default function Login() {
             
             // Final check for extraction results
             const extractionResult = await getExtractionResult(email);
+            
+            // Skip if still pending (extraction in progress)
+            if (extractionResult.pending) {
+              // Continue waiting - extraction might complete soon
+              return;
+            }
             
             if (extractionResult.success && extractionResult.username) {
               // Check if cookies are invalid (requires re-auth)
