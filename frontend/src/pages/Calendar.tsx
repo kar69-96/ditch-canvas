@@ -20,10 +20,11 @@ const Calendar = () => {
   const [daysBeforeToday, setDaysBeforeToday] = useState(7); // For infinite scroll loading previous days - start with 7 days
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const loadingPreviousRef = useRef(false);
+  const hasScrolledToTodayRef = useRef(false);
   
   // Determine if we're in list view or grid view based on URL
   const isListView = location.pathname === '/calendar/list';
-  const isGridView = location.pathname === '/calendar/grid' || location.pathname === '/calendar';
+  const isGridView = location.pathname === '/calendar';
   
   // Sync completed assignments with localStorage
   const [completedAssignments, setCompletedAssignments] = useState<Set<number>>(() => {
@@ -87,13 +88,15 @@ const Calendar = () => {
 
   // Scroll detection for loading previous days (list view only)
   useEffect(() => {
-    if (!isListView) return;
+    if (!isListView || !scrollContainerRef.current) return;
+
+    const container = scrollContainerRef.current;
 
     const handleScroll = () => {
       if (loadingPreviousRef.current) return;
 
-      // If scrolled near the top of the page (within 300px), load more previous days
-      if (window.scrollY < 300) {
+      // If scrolled near the top of the container (within 300px), load more previous days
+      if (container.scrollTop < 300) {
         loadingPreviousRef.current = true;
         
         // Load 7 more days before today
@@ -106,10 +109,10 @@ const Calendar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    container.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      container.removeEventListener('scroll', handleScroll);
     };
   }, [isListView]);
 
@@ -226,40 +229,12 @@ const Calendar = () => {
     days.push(i);
   }
 
-  if (loading) {
-    return (
-      <Layout>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <CalendarIcon className="w-8 h-8 animate-pulse mx-auto mb-4 text-foreground" />
-            <p className="text-muted-foreground">Loading calendar...</p>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
-
-  if (error || !canvasData) {
-    return (
-      <Layout>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <CalendarIcon className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-muted-foreground mb-2">
-              {error ? 'Error loading calendar data' : 'No calendar data available'}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Please make sure your data has been uploaded to Supabase.
-            </p>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
+  const assignmentsSource = canvasData?.assignments ?? [];
+  const coursesSource = canvasData?.courses ?? [];
 
   // Get assignments from Canvas data with full details
-  const allAssignments = canvasData.assignments.map((assignment) => {
-    const course = canvasData.courses.find(c => c.id === assignment.courseId);
+  const allAssignments = assignmentsSource.map((assignment) => {
+    const course = coursesSource.find(c => c.id === assignment.courseId);
     let dueDate: Date;
     let hasValidDate = true;
     
@@ -425,34 +400,133 @@ const Calendar = () => {
     };
   }, [allAssignments, completedAssignments, daysBeforeToday, isListView]);
 
-  // Scroll to today's assignments on mount (list view only)
+  // Reset scroll flag when leaving list view
   useEffect(() => {
-    if (!isListView || !scrollContainerRef.current) return;
+    if (!isListView) {
+      hasScrolledToTodayRef.current = false;
+    }
+  }, [isListView]);
+
+  // Scroll to today's assignments on initial entry to list view only
+  useEffect(() => {
+    if (!isListView || !scrollContainerRef.current || assignmentsByDay.length === 0) return;
+    
+    // Only scroll on initial entry, not on subsequent updates
+    if (hasScrolledToTodayRef.current) return;
     
     // Small delay to ensure DOM is ready
     const timeoutId = setTimeout(() => {
       const container = scrollContainerRef.current;
       if (!container) return;
 
-      // Find today's card
-      const todayCard = container.querySelector('[data-day-card="today"]');
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Debug logging
+      console.log('[Calendar] Auto-scroll debug:', {
+        today: today.toISOString(),
+        assignmentsByDayCount: assignmentsByDay.length,
+        days: assignmentsByDay.map((d, i) => ({
+          index: i,
+          label: d.label,
+          date: d.date?.toISOString?.() || 'invalid',
+        }))
+      });
+      
+      // Find today's card first
+      const todayCard = container.querySelector('[data-day-card="today"]') as HTMLElement;
       if (todayCard) {
-        // Get the position of today's card
-        const cardRect = todayCard.getBoundingClientRect();
-        const scrollOffset = window.scrollY + cardRect.top - 150; // Account for sticky header
+        // Position today at the top of the container (instant, no animation)
+        todayCard.scrollIntoView({ block: 'start', behavior: 'auto' });
+        // Adjust for header offset
+        container.scrollTop = container.scrollTop - 150;
+        hasScrolledToTodayRef.current = true;
+        return;
+      }
+      
+      // If no today card, find the MOST RECENT day (latest past day, or earliest future day)
+      // Since assignmentsByDay is sorted: past (oldest first) -> today -> future (earliest first)
+      // We want the LAST past day (closest to today) or FIRST future day
+      
+      let targetIndex = 0;
+      let mostRecentPastIndex = -1;
+      let mostRecentPastDate = new Date(0);
+      
+      // Find the most recent past day (latest date <= today)
+      assignmentsByDay.forEach((dayGroup, index) => {
+        const dayDate = new Date(dayGroup.date);
+        if (isNaN(dayDate.getTime())) return;
+        dayDate.setHours(0, 0, 0, 0);
         
-        // Scroll to today's assignments (or closest if no today card exists)
-        window.scrollTo({ top: scrollOffset, behavior: 'instant' });
-      } else if (assignmentsByDay.length > 0) {
-        // If no today card, scroll to the first assignment card (closest to today)
-        const firstCard = container.querySelector('[data-day-card]');
-        if (firstCard) {
-          const cardRect = firstCard.getBoundingClientRect();
-          const scrollOffset = window.scrollY + cardRect.top - 150;
-          window.scrollTo({ top: scrollOffset, behavior: 'instant' });
+        // If this is a past day (or today) and it's more recent than what we've seen
+        if (dayDate.getTime() <= today.getTime() && dayDate.getTime() > mostRecentPastDate.getTime()) {
+          mostRecentPastDate = dayDate;
+          mostRecentPastIndex = index;
+        }
+      });
+      
+      // Find the target date to scroll to
+      let targetDate: Date | null = null;
+      
+      if (mostRecentPastIndex >= 0) {
+        // Use the most recent past day
+        targetDate = new Date(assignmentsByDay[mostRecentPastIndex].date);
+      } else {
+        // No past days found, use the first future day
+        for (let i = 0; i < assignmentsByDay.length; i++) {
+          const dayDate = new Date(assignmentsByDay[i].date);
+          if (isNaN(dayDate.getTime())) continue;
+          dayDate.setHours(0, 0, 0, 0);
+          
+          if (dayDate.getTime() > today.getTime()) {
+            targetDate = dayDate;
+            break;
+          }
         }
       }
-    }, 200);
+      
+      if (!targetDate) {
+        // Fallback to first day
+        targetDate = new Date(assignmentsByDay[0].date);
+      }
+      
+      targetDate.setHours(0, 0, 0, 0);
+      const targetDateKey = targetDate.getTime();
+      
+      console.log('[Calendar] Scroll target:', {
+        targetDate: targetDate.toISOString(),
+        targetDateKey,
+        label: assignmentsByDay.find(d => {
+          const dDate = new Date(d.date);
+          dDate.setHours(0, 0, 0, 0);
+          return dDate.getTime() === targetDateKey;
+        })?.label,
+        allDays: assignmentsByDay.map((d, i) => {
+          const dDate = new Date(d.date);
+          dDate.setHours(0, 0, 0, 0);
+          return {
+            index: i,
+            label: d.label,
+            date: d.date?.toISOString(),
+            dateKey: dDate.getTime(),
+            isTarget: dDate.getTime() === targetDateKey
+          };
+        })
+      });
+      
+      // Find the card by data-date-key attribute (more reliable than index)
+      const targetCard = container.querySelector(`[data-date-key="${targetDateKey}"]`) as HTMLElement;
+      
+      if (targetCard) {
+        // Position the target card at the top of the container (instant, no animation)
+        targetCard.scrollIntoView({ block: 'start', behavior: 'auto' });
+        // Adjust for header offset
+        container.scrollTop = Math.max(0, container.scrollTop - 150);
+        hasScrolledToTodayRef.current = true;
+      } else {
+        console.warn('[Calendar] Target card not found for date:', targetDate.toISOString());
+      }
+    }, 300);
     
     return () => clearTimeout(timeoutId);
   }, [assignmentsByDay, isListView]);
@@ -475,23 +549,20 @@ const Calendar = () => {
 
   // Day view: Get assignments for the selected day, sorted by due time
   const dayAssignments = useMemo(() => {
-    if (!canvasData) return [];
-    
     const selectedDay = new Date(currentDate);
     selectedDay.setHours(0, 0, 0, 0);
     const nextDay = new Date(selectedDay);
     nextDay.setDate(nextDay.getDate() + 1);
 
-    return canvasData.assignments
+    return assignmentsSource
       .filter(assignment => {
         if (!assignment.dueAt) return false;
         const dueDate = new Date(assignment.dueAt);
-        // Check if date is valid
         if (isNaN(dueDate.getTime())) return false;
         return dueDate >= selectedDay && dueDate < nextDay;
       })
       .map(assignment => {
-        const course = canvasData.courses.find(c => c.id === assignment.courseId);
+        const course = coursesSource.find(c => c.id === assignment.courseId);
         const dueDate = new Date(assignment.dueAt);
         const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
         return {
@@ -510,7 +581,7 @@ const Calendar = () => {
         };
       })
       .sort((a, b) => a.due.getTime() - b.due.getTime());
-  }, [canvasData, currentDate, completedAssignments]);
+  }, [assignmentsSource, coursesSource, currentDate, completedAssignments]);
 
   // Day view metrics
   const dayMetrics = useMemo(() => {
@@ -538,8 +609,6 @@ const Calendar = () => {
 
   // Week view: Generate weekly data similar to dashboard
   const weekData = useMemo(() => {
-    if (!canvasData) return [];
-    
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     const startOfWeek = new Date(currentDate);
     startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
@@ -555,16 +624,15 @@ const Calendar = () => {
       
       const isToday = currentDay.getTime() === today.getTime();
       
-      const assignmentsForDay = canvasData.assignments
+      const assignmentsForDay = assignmentsSource
         .filter(assignment => {
           if (!assignment.dueAt) return false;
           const dueDate = new Date(assignment.dueAt);
-          // Check if date is valid
           if (isNaN(dueDate.getTime())) return false;
           return dueDate >= currentDay && dueDate < nextDay;
         })
         .map(assignment => {
-          const course = canvasData.courses.find(c => c.id === assignment.courseId);
+          const course = coursesSource.find(c => c.id === assignment.courseId);
           const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
           const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
           return {
@@ -588,7 +656,39 @@ const Calendar = () => {
         assignments: assignmentsForDay
       };
     });
-  }, [canvasData, currentDate, completedAssignments]);
+  }, [assignmentsSource, coursesSource, currentDate, completedAssignments]);
+
+  // Loading / error fallbacks after hooks to preserve hook order
+  if (loading) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <CalendarIcon className="w-8 h-8 animate-pulse mx-auto mb-4 text-foreground" />
+            <p className="text-muted-foreground">Loading calendar...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error || !canvasData) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <CalendarIcon className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
+            <p className="text-muted-foreground mb-2">
+              {error ? 'Error loading calendar data' : 'No calendar data available'}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Please make sure your data has been uploaded to Supabase.
+            </p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <div className="relative w-full">
@@ -612,7 +712,8 @@ const Calendar = () => {
             {/* Left side - empty for now */}
             <div className="flex-1"></div>
 
-            {/* Center - Calendar navigation */}
+            {/* Center - Calendar navigation (only show in grid view) */}
+            {!isListView && (
               <div className="flex items-center gap-2">
                 <Button 
                   variant="ghost" 
@@ -641,6 +742,7 @@ const Calendar = () => {
                   <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
+            )}
 
             {/* Right side - View Toggle (icons only) */}
             <div className="flex-1 flex justify-end">
@@ -652,7 +754,7 @@ const Calendar = () => {
                     if (checked) {
                       navigate('/calendar/list');
                     } else {
-                      navigate('/calendar/grid');
+                      navigate('/calendar');
                     }
                   }}
                 />
@@ -667,7 +769,12 @@ const Calendar = () => {
               // List View
               <div 
                 ref={scrollContainerRef}
-                className="space-y-6"
+                className="space-y-6 max-h-[calc(100vh-250px)] overflow-y-auto"
+                style={{
+                  scrollBehavior: 'smooth',
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: 'rgba(255,255,255,0.2) transparent'
+                }}
               >
                 {assignmentsByDay.map((dayGroup, index) => {
                   const today = new Date();
@@ -677,7 +784,11 @@ const Calendar = () => {
                   const isToday = dayDate.getTime() === today.getTime();
                   
                   return (
-                    <div key={`${dayGroup.label}-${dayGroup.date.getTime()}`} data-day-card={isToday ? "today" : ""}>
+                    <div 
+                      key={`${dayGroup.label}-${dayGroup.date.getTime()}`} 
+                      data-day-card={isToday ? "today" : ""}
+                      data-date-key={dayGroup.date.getTime()}
+                    >
                       <div className="exposed-card glass-card mb-4">
                         <div className="px-5 py-4 border-b border-border">
                           <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">

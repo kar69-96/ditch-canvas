@@ -17,7 +17,7 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
   const navItemRefs = useRef<(HTMLLIElement | null)[]>([]);
   const ulRef = useRef<HTMLUListElement | null>(null);
 
-  // Active fill indicator (moves on route change/click)
+  // Active fill indicator (moves on route change/click) - uses framer-motion for smooth snapping
   const [activeFillStyle, setActiveFillStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
   const [isFillInitialized, setIsFillInitialized] = useState(false);
 
@@ -47,15 +47,15 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
   };
 
   const navItems = [
-    { path: "/dashboard", icon: Home, label: "Dashboard" },
+    { path: "/", icon: Home, label: "Dashboard" },
     { path: "/calendar", icon: Calendar, label: "Calendar" },
-    { path: "/classes", icon: BookOpen, label: "Classes", hasDropdown: true },
+    { path: "/courses", icon: BookOpen, label: "Classes", hasDropdown: true },
   ];
 
   // Find active nav item index
   const activeNavIndex = navItems.findIndex((item) => {
-    if (item.path === "/classes") {
-      return location.pathname.startsWith("/classes");
+    if (item.path === "/courses") {
+      return location.pathname.startsWith("/courses");
     } else if (item.path === "/calendar") {
       return location.pathname.startsWith("/calendar");
     }
@@ -67,7 +67,7 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
     (course) => course.workflowState === "available"
   );
 
-  // Update active fill position (only on route change)
+  // Update active fill position (only on route change/click) - snaps from current position
   useLayoutEffect(() => {
     if (activeNavIndex >= 0 && activeNavIndex < navItemRefs.current.length) {
       const ref = navItemRefs.current[activeNavIndex];
@@ -88,7 +88,7 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
         }
       }
     }
-  }, [activeNavIndex, location.pathname]);
+  }, [activeNavIndex, location.pathname, isFillInitialized, isUnderlineInitialized]);
 
   // Update underline position - always snaps from active position to hovered position
   useLayoutEffect(() => {
@@ -108,7 +108,7 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
         if (!isUnderlineInitialized) setIsUnderlineInitialized(true);
       }
     }
-  }, [hoveredNavIndex, activeNavIndex]);
+  }, [hoveredNavIndex, activeNavIndex, isUnderlineInitialized]);
 
   // Determine if underline should be visible (only when hovering non-active item)
   const isUnderlineVisible = hoveredNavIndex !== null && hoveredNavIndex !== activeNavIndex;
@@ -120,40 +120,52 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
 
       {/* Navigation Menu */}
       <nav className={cn(
-        "sticky top-0 z-50 bg-background border-b border-border",
+        "z-50 bg-background border-b border-border",
         constrainNav && "max-w-6xl mx-auto"
       )}>
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
           <ul ref={ulRef} className="flex flex-row gap-1 relative">
-            {/* Active fill indicator - moves on route change/click */}
-            {activeNavIndex >= 0 && (
-              <div
-                className="absolute inset-y-0 bg-foreground pointer-events-none"
+            {/* Active fill indicator - moves on route change/click with smooth snapping */}
+            {/* Z-index: above border (z-10) but below text (z-20) */}
+            {activeNavIndex >= 0 && isFillInitialized && (
+              <motion.div
+                layoutId="navActiveFill"
+                className="absolute inset-y-0 bg-foreground pointer-events-none z-10"
                 style={{
-                  left: 0,
+                  left: activeFillStyle.left,
                   width: activeFillStyle.width,
-                  transform: `translateX(${activeFillStyle.left}px)`,
-                  transition: isFillInitialized ? 'transform 0.1s ease-out, width 0.1s ease-out' : 'none',
+                }}
+                initial={false}
+                transition={{
+                  type: "tween",
+                  duration: 0.1,
+                  ease: "easeOut",
                 }}
               />
             )}
-            {/* Hover underline indicator - always positioned, visibility controlled */}
-            <div
-              className="absolute bottom-0 h-[3px] bg-foreground pointer-events-none"
-              style={{
-                left: 0,
-                width: underlineStyle.width,
-                transform: `translateX(${underlineStyle.left}px)`,
-                opacity: isUnderlineVisible ? 1 : 0,
-                transition: isUnderlineInitialized
-                  ? 'transform 0.12s ease-out, width 0.12s ease-out, opacity 0.04s linear'
-                  : 'none',
-              }}
-            />
+            {/* Hover underline indicator - snaps on hover, always positioned */}
+            {/* Z-index: above border (z-10) and fill (z-10), but below text (z-20) */}
+            {/* Uses same snapping effect as weekly view underline */}
+            {isUnderlineInitialized && (
+              <motion.div
+                className="absolute bottom-0 h-[2px] bg-foreground pointer-events-none z-[11]"
+                animate={{
+                  left: underlineStyle.left,
+                  width: underlineStyle.width,
+                  opacity: isUnderlineVisible ? 1 : 0,
+                }}
+                initial={false}
+                transition={{
+                  type: "tween",
+                  duration: 0.1,
+                  ease: "easeOut",
+                }}
+              />
+            )}
             {navItems.map((item, index) => {
               const Icon = item.icon;
-              const isActive = item.path === "/classes"
-                ? location.pathname.startsWith("/classes")
+              const isActive = item.path === "/courses"
+                ? location.pathname.startsWith("/courses")
                 : item.path === "/calendar"
                 ? location.pathname.startsWith("/calendar")
                 : location.pathname === item.path;
@@ -181,8 +193,10 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
                         to={item.path}
                         className="flex items-center gap-2 px-4 py-2 border border-border cursor-pointer relative"
                       >
-                        <Icon className={cn("w-4 h-4 relative z-10 shrink-0", isActive && "text-background")} />
-                        <span className={cn("text-sm font-medium relative z-10 whitespace-nowrap", isActive && "text-background")}>
+                        {/* Border is on the Link element (lowest layer, z-0) */}
+                        {/* Fill and underline are z-10, text is z-20 */}
+                        <Icon className={cn("w-4 h-4 relative z-20 shrink-0", isActive && "text-background")} />
+                        <span className={cn("text-sm font-medium relative z-20 whitespace-nowrap", isActive && "text-background")}>
                           {item.label}
                         </span>
                       </Link>
@@ -193,7 +207,7 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
                               {enrolledClasses.map((course, courseIndex) => (
                                 <Link
                                   key={course.id}
-                                  to={`/classes/${course.id}`}
+                                  to={`/courses/${course.id}`}
                                   className="block"
                                   onClick={() => setShowClassesDropdown(false)}
                                 >
@@ -229,8 +243,10 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
                     onMouseEnter={() => setHoveredNavIndex(index)}
                     onMouseLeave={() => setHoveredNavIndex(null)}
                   >
-                    <Icon className={cn("w-4 h-4 relative z-10 shrink-0", isActive && "text-background")} />
-                    <span className={cn("text-sm font-medium relative z-10 whitespace-nowrap", isActive && "text-background")}>
+                    {/* Border is on the Link element (lowest layer, z-0) */}
+                    {/* Fill and underline are z-10, text is z-20 */}
+                    <Icon className={cn("w-4 h-4 relative z-20 shrink-0", isActive && "text-background")} />
+                    <span className={cn("text-sm font-medium relative z-20 whitespace-nowrap", isActive && "text-background")}>
                       {item.label}
                     </span>
                   </Link>

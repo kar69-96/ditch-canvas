@@ -47,7 +47,7 @@ const Classes = () => {
               <GlassCard
                 key={course.id}
                 className="cursor-pointer fill-hover fill-hover-light"
-                onClick={() => navigate(`/classes/${course.id}`)}
+                onClick={() => navigate(`/courses/${course.id}`)}
               >
                 <div className="space-y-4">
                   {/* Course Header */}

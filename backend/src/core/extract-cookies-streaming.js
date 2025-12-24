@@ -707,21 +707,21 @@ class BrowserStreamingServer {
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       console.log(`🔗 Navigating to Canvas login page... (attempt ${attempt}/${maxAttempts})`);
-      try {
-        await this.page.goto('https://canvas.colorado.edu', { 
-          waitUntil: 'domcontentloaded',
-          timeout: 30000 
-        });
-        await this.page.waitForTimeout(2000);
-        
-        // Check if page is still open after navigation
-        if (this.page.isClosed()) {
-          throw new Error('Page closed during navigation');
-        }
-        
-        const currentUrl = this.page.url();
+    try {
+      await this.page.goto('https://canvas.colorado.edu', { 
+        waitUntil: 'domcontentloaded',
+        timeout: 30000 
+      });
+      await this.page.waitForTimeout(2000);
+      
+      // Check if page is still open after navigation
+      if (this.page.isClosed()) {
+        throw new Error('Page closed during navigation');
+      }
+      
+      const currentUrl = this.page.url();
         const content = await this.page.content().catch(() => '');
-        console.log(`📍 Current URL: ${currentUrl}`);
+      console.log(`📍 Current URL: ${currentUrl}`);
         
         // Detect stale request page and retry with cleared cookies once
         const isStale = currentUrl.includes('Stale') || content.includes('Stale Request');
@@ -738,15 +738,15 @@ class BrowserStreamingServer {
           await this.page.waitForTimeout(1000);
           continue; // retry navigation
         }
-
-        return currentUrl;
-      } catch (error) {
-        console.error('❌ Error navigating to Canvas:', error.message);
-        if (this.page.isClosed()) {
-          throw new Error('Page closed unexpectedly during navigation');
-        }
+      
+      return currentUrl;
+    } catch (error) {
+      console.error('❌ Error navigating to Canvas:', error.message);
+      if (this.page.isClosed()) {
+        throw new Error('Page closed unexpectedly during navigation');
+      }
         if (attempt >= maxAttempts) {
-          throw error;
+      throw error;
         }
         console.warn('⚠️ Navigation failed, retrying...', error.message);
         await this.page.waitForTimeout(1000);

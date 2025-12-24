@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import { RouteGuard } from "@/components/RouteGuard";
 import { SidebarProvider } from "@/components/SidebarViewer";
 import { useEffect } from "react";
@@ -14,6 +14,12 @@ import ClassDetail from "./pages/ClassDetail";
 import Assignments from "./pages/Assignments";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+
+// Redirect component for dynamic routes
+const ClassesRedirect = () => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`/courses/${id}`} replace />;
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,17 +53,14 @@ const AppContent = () => {
               <Dashboard />
             </RouteGuard>
           } />
-          <Route path="/dashboard" element={
-            <RouteGuard>
-              <Dashboard />
-            </RouteGuard>
-          } />
+          
+          {/* Redirects for old URLs */}
+          <Route path="/dashboard" element={<Navigate to="/" replace />} />
+          <Route path="/calendar/grid" element={<Navigate to="/calendar" replace />} />
+          <Route path="/classes" element={<Navigate to="/courses" replace />} />
+          <Route path="/classes/:id" element={<ClassesRedirect />} />
+          
           <Route path="/calendar" element={
-            <RouteGuard>
-              <Calendar />
-            </RouteGuard>
-          } />
-          <Route path="/calendar/grid" element={
             <RouteGuard>
               <Calendar />
             </RouteGuard>
@@ -67,12 +70,12 @@ const AppContent = () => {
               <Calendar />
             </RouteGuard>
           } />
-          <Route path="/classes" element={
+          <Route path="/courses" element={
             <RouteGuard>
               <Classes />
             </RouteGuard>
           } />
-          <Route path="/classes/:id" element={
+          <Route path="/courses/:id" element={
             <RouteGuard>
               <ClassDetail />
             </RouteGuard>

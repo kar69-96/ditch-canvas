@@ -16,8 +16,37 @@ export default defineConfig(({ mode }) => ({
         secure: false,
       },
     },
+    // Middleware to handle SPA routing - serve index.html for all non-API routes
+    middlewareMode: false,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+    // Custom plugin to handle SPA routing fallback
+    {
+      name: 'spa-fallback',
+      configureServer(server) {
+        return () => {
+          server.middlewares.use((req, res, next) => {
+            // Skip API routes (handled by proxy)
+            if (req.url?.startsWith('/api')) {
+              return next();
+            }
+            // Skip if Vite is already handling it (has file extension or is a Vite internal route)
+            if (req.url?.includes('.') && !req.url?.endsWith('/')) {
+              return next();
+            }
+            // For SPA routes (no file extension), serve index.html
+            // This ensures client-side routing works on refresh
+            if (req.url && !req.url.includes('.')) {
+              req.url = '/index.html';
+            }
+            next();
+          });
+        };
+      },
+    },
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

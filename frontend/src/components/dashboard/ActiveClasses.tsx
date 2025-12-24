@@ -24,7 +24,7 @@ export function ActiveClasses({ classes }: ActiveClassesProps) {
         {classes.map((cls, index) => (
           <Link
             key={cls.code}
-            to={`/classes/${cls.id}`}
+            to={`/courses/${cls.id}`}
             className="group fill-hover fill-hover-light flex items-center justify-between px-5 py-4 border-b border-border last:border-b-0 cursor-pointer block"
           >
             <div className="flex items-center gap-4">
