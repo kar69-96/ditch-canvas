@@ -5,10 +5,18 @@ import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, List, Clock, FileText, Rocket } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, List, Clock, FileText, Rocket, Download } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 import { useCanvasData } from "@/hooks/useCanvasData";
 import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
+import { connectIntegration, listIntegrations, syncIntegration } from "@/services/api/integrations";
+import { toast } from "@/hooks/use-toast";
 
 const Calendar = () => {
   const navigate = useNavigate();
@@ -140,6 +148,137 @@ const Calendar = () => {
       newDate.setMonth(newDate.getMonth() + 1);
     }
     setCurrentDate(newDate);
+  };
+
+  // Handle export integration
+  const handleExport = async (provider: "google" | "notion") => {
+    try {
+      // First, check if integration already exists
+      const integrations = await listIntegrations();
+      const existingIntegration = integrations.find(i => i.provider === provider);
+      
+      if (existingIntegration && existingIntegration.status === 'active') {
+        // Integration exists - just sync and open the sheet
+        toast({
+          title: "Syncing assignments...",
+          description: `Updating your ${provider === "google" ? "Google Sheet" : "Notion database"}...`,
+        });
+        
+        try {
+          const result = await syncIntegration(provider);
+          
+          toast({
+            title: "Sync complete",
+            description: `Your assignments have been synced.`,
+          });
+          
+          // Open the sheet/database
+          if (result.redirectUrl) {
+            window.open(result.redirectUrl, '_blank');
+          } else if (provider === 'google' && existingIntegration.external_target_id) {
+            // Construct Google Sheets URL from stored ID
+            window.open(`https://docs.google.com/spreadsheets/d/${existingIntegration.external_target_id}`, '_blank');
+          }
+        } catch (syncError) {
+          console.error('Sync error:', syncError);
+          toast({
+            title: "Sync failed",
+            description: syncError instanceof Error ? syncError.message : "Failed to sync assignments.",
+            variant: "destructive",
+          });
+        }
+        return;
+      }
+      
+      // No integration exists - start OAuth flow
+      const authUrl = await connectIntegration(provider);
+      // Open OAuth flow in a new window
+      const popup = window.open(
+        authUrl,
+        `${provider}Auth`,
+        "width=600,height=700,scrollbars=yes,resizable=yes"
+      );
+      
+      if (!popup) {
+        toast({
+          title: "Popup blocked",
+          description: "Please allow popups for this site to connect your integration.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Listen for messages from the OAuth callback page
+      const messageHandler = (event: MessageEvent) => {
+        // Verify message is from our backend or same origin (security check)
+        const allowedOrigins = [
+          window.location.origin,
+          'http://localhost:3000',
+          'http://127.0.0.1:3000',
+        ];
+        if (!allowedOrigins.includes(event.origin)) {
+          console.log('Ignoring message from unauthorized origin:', event.origin);
+          return;
+        }
+        
+        if (event.data.type === 'integration-success') {
+          window.removeEventListener('message', messageHandler);
+          
+          toast({
+            title: "Integration connected",
+            description: `Your assignments will now sync to ${provider === "google" ? "Google Sheets" : "Notion"}.`,
+          });
+          
+          // If there's a redirect URL (Google Sheets), open it
+          if (event.data.redirectUrl) {
+            // Try to open in new tab
+            const newWindow = window.open(event.data.redirectUrl, '_blank');
+            if (!newWindow) {
+              // Popup blocked - show toast with link
+              toast({
+                title: "Spreadsheet ready",
+                description: (
+                  <a href={event.data.redirectUrl} target="_blank" rel="noopener noreferrer" className="underline">
+                    Click here to open your spreadsheet
+                  </a>
+                ),
+              });
+            }
+          }
+          
+          // Close popup after a delay
+          setTimeout(() => {
+            popup?.close();
+          }, 1000);
+        } else if (event.data.type === 'integration-error') {
+          window.removeEventListener('message', messageHandler);
+          popup?.close();
+          
+          toast({
+            title: "Connection failed",
+            description: event.data.message || `Failed to connect ${provider} integration.`,
+            variant: "destructive",
+          });
+        }
+      };
+      
+      window.addEventListener('message', messageHandler);
+      
+      // Also monitor for popup close (in case user closes manually)
+      const checkClosed = setInterval(() => {
+        if (popup?.closed) {
+          clearInterval(checkClosed);
+          window.removeEventListener('message', messageHandler);
+        }
+      }, 500);
+    } catch (error) {
+      console.error(`Failed to connect ${provider}:`, error);
+      toast({
+        title: "Connection failed",
+        description: error instanceof Error ? error.message : `Failed to connect ${provider} integration.`,
+        variant: "destructive",
+      });
+    }
   };
 
   // Get title based on view
@@ -744,21 +883,53 @@ const Calendar = () => {
               </div>
             )}
 
-            {/* Right side - View Toggle (icons only) */}
+            {/* Right side - Export and View Toggle */}
             <div className="flex-1 flex justify-end">
-              <div className="exposed-card glass-card flex items-center gap-2 px-3 py-2">
-                <CalendarIcon className={`w-4 h-4 ${isGridView ? 'text-primary' : 'text-foreground/60'}`} />
-                <Switch
-                  checked={isListView}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      navigate('/calendar/list');
-                    } else {
-                      navigate('/calendar');
-                    }
-                  }}
-                />
-                <List className={`w-4 h-4 ${isListView ? 'text-primary' : 'text-foreground/60'}`} />
+              <div className="flex flex-col items-end gap-2">
+                {/* Export Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="exposed-card glass-card flex items-center gap-2 px-3 py-2"
+                    >
+                      <Download className="w-4 h-4 text-foreground/80" />
+                      <span className="text-sm">Export</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="bg-popover border border-border">
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onSelect={() => handleExport("google")}
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Google Sheets
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onSelect={() => handleExport("notion")}
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Notion
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* View Toggle (icons only) */}
+                <div className="exposed-card glass-card flex items-center gap-2 px-3 py-2">
+                  <CalendarIcon className={`w-4 h-4 ${isGridView ? 'text-primary' : 'text-foreground/60'}`} />
+                  <Switch
+                    checked={isListView}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        navigate('/calendar/list');
+                      } else {
+                        navigate('/calendar');
+                      }
+                    }}
+                  />
+                  <List className={`w-4 h-4 ${isListView ? 'text-primary' : 'text-foreground/60'}`} />
+                </div>
               </div>
             </div>
           </div>

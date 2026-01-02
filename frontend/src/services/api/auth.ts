@@ -16,36 +16,6 @@ async function handleResponse(response: Response) {
   return data;
 }
 
-export async function authenticateWithCanvas(email?: string) {
-  const res = await fetch(`${API_BASE}/api/auth/canvas/authenticate`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  });
-  return handleResponse(res);
-}
-
-export async function loginWithCanvas(email: string) {
-  const res = await fetch(`${API_BASE}/api/auth/canvas/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  });
-  return handleResponse(res);
-}
-
-export async function checkAuthStatus(sessionToken: string) {
-  const res = await fetch(`${API_BASE}/api/auth/canvas/status/${sessionToken}`);
-  return handleResponse(res);
-}
-
-export async function releaseAuthSession(sessionToken: string) {
-  const res = await fetch(`${API_BASE}/api/auth/canvas/release/${sessionToken}`, {
-    method: 'POST',
-  });
-  return handleResponse(res);
-}
-
 export async function checkEmailExists(email: string) {
   const res = await fetch(`${API_BASE}/api/streaming-auth/check-email`, {
     method: 'POST',
@@ -60,9 +30,10 @@ export async function startStreamingAuth(email: string) {
   // Check if we need to force re-authentication (e.g., after logout)
   const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
     
-    console.log('[API] Starting streaming auth:', { email, forceReauth, url: `${API_BASE}/api/streaming-auth/start` });
+    const apiUrl = `${API_BASE}/api/streaming-auth/start`;
+    console.log('[API] Starting streaming auth:', { email, forceReauth, url: apiUrl, API_BASE });
   
-  const res = await fetch(`${API_BASE}/api/streaming-auth/start`, {
+  const res = await fetch(apiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, forceReauth }),
@@ -76,7 +47,19 @@ export async function startStreamingAuth(email: string) {
   return handleResponse(res);
   } catch (error: any) {
     console.error('[API] Failed to start streaming auth:', error);
-    throw new Error(`Failed to initiate Canvas login: ${error.message}`);
+    
+    // Provide more helpful error messages
+    let errorMessage = error.message || 'Unknown error';
+    
+    // Check for common network errors
+    if (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError')) {
+      const backendUrl = API_BASE || 'http://localhost:3000';
+      errorMessage = `Cannot connect to backend server at ${backendUrl}. Please ensure the backend server is running.`;
+    } else if (error.message?.includes('CORS')) {
+      errorMessage = 'CORS error: The backend server may not be configured to allow requests from this origin.';
+    }
+    
+    throw new Error(`Failed to initiate Canvas login: ${errorMessage}`);
   }
 }
 

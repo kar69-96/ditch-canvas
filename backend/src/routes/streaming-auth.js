@@ -22,6 +22,8 @@ const activeStreamingProcesses = new Map();
 const extractionResults = new Map();
 // Store session start times by email
 const sessionStartTimes = new Map();
+// Store active AWS update processes to prevent multiple simultaneous runs
+const activeAwsUpdateProcesses = new Set();
 
 // Default streaming port (internal)
 const STREAMING_PORT = process.env.STREAMING_PORT || 3002;
@@ -115,8 +117,12 @@ router.post('/start', async (req, res) => {
       const output = data.toString();
       console.log(`[streaming] ${output.trim()}`);
       
-      // Check for extraction completion
-      if (output.includes('Cookie extraction completed') || output.includes('Login complete')) {
+      // Check for extraction completion - multiple patterns to catch it
+      if (output.includes('Cookie extraction completed') || 
+          output.includes('Login complete') ||
+          output.includes('✅ Cookie extraction completed') ||
+          output.includes('Cookies saved to:')) {
+        console.log('[streaming-auth] Detected cookie extraction completion, checking results...');
         setTimeout(() => {
           checkAndStoreExtractionResults(normalizedEmail);
         }, 2000);
@@ -127,9 +133,18 @@ router.post('/start', async (req, res) => {
       console.error(`[streaming] Error: ${data.toString().trim()}`);
     });
 
-    // Handle process exit
+    // Handle process exit - also check for extraction results on exit
     childProcess.on('exit', (code) => {
       console.log(`[streaming] Process exited with code ${code}`);
+      
+      // Check for extraction results on exit (in case stdout messages were missed)
+      if (code === 0) {
+        console.log('[streaming-auth] Streaming process completed successfully, checking for extraction results...');
+        setTimeout(() => {
+          checkAndStoreExtractionResults(normalizedEmail);
+        }, 1000);
+      }
+      
       activeStreamingProcesses.delete(normalizedEmail);
     });
 
@@ -625,10 +640,134 @@ router.post('/verify-login', async (req, res) => {
   }
 });
 
+/**
+ * Copy email-specific cookie file to main canvas-cookies.json
+ * This ensures compatibility with AWS update script
+ */
+function copyCookiesToMainFile(email) {
+  const normalizedEmail = email.toLowerCase().trim();
+  const emailSpecificFile = getCookieFilename(normalizedEmail);
+  const mainCookieFile = path.join(OUTPUT_DIR, 'canvas-cookies.json');
+  
+  console.log('[streaming-auth] Copying cookies to main file...');
+  console.log('[streaming-auth]    From:', emailSpecificFile);
+  console.log('[streaming-auth]    To:', mainCookieFile);
+  console.log('[streaming-auth]    Email-specific file exists:', fs.existsSync(emailSpecificFile));
+  
+  if (fs.existsSync(emailSpecificFile)) {
+    try {
+      // Ensure output directory exists
+      if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+        console.log('[streaming-auth]    Created output directory:', OUTPUT_DIR);
+      }
+      
+      // Copy the email-specific cookie file to the main cookie file
+      fs.copyFileSync(emailSpecificFile, mainCookieFile);
+      console.log(`[streaming-auth] ✅ Copied cookies to main file: ${mainCookieFile}`);
+      
+      // Verify the copy was successful
+      if (fs.existsSync(mainCookieFile)) {
+        const stats = fs.statSync(mainCookieFile);
+        console.log(`[streaming-auth]    Main cookie file size: ${stats.size} bytes`);
+        return true;
+      } else {
+        console.error('[streaming-auth] ❌ Main cookie file does not exist after copy!');
+        return false;
+      }
+    } catch (error) {
+      console.error('[streaming-auth] ❌ Error copying cookies to main file:', error);
+      return false;
+    }
+  } else {
+    console.warn('[streaming-auth] ⚠️  Email-specific cookie file not found, cannot copy');
+  }
+  return false;
+}
+
+/**
+ * Run AWS update script in the background
+ * This runs asynchronously and doesn't block the login flow
+ * Prevents multiple simultaneous runs
+ */
+function runAwsUpdateInBackground() {
+  // Check if AWS update is already running
+  if (activeAwsUpdateProcesses.size > 0) {
+    console.log('[streaming-auth] AWS update script already running, skipping duplicate run');
+    return;
+  }
+  
+  const awsUpdateScript = path.join(__dirname, '..', '..', 'aws', 'run-aws-update.js');
+  
+  if (!fs.existsSync(awsUpdateScript)) {
+    console.warn('[streaming-auth] AWS update script not found at:', awsUpdateScript);
+    console.warn('[streaming-auth] Skipping background update');
+    return;
+  }
+  
+  // Check if AWS_INSTANCE_ID is configured
+  if (!process.env.AWS_INSTANCE_ID) {
+    console.warn('[streaming-auth] AWS_INSTANCE_ID not configured, skipping AWS update');
+    console.warn('[streaming-auth] Set AWS_INSTANCE_ID environment variable to enable automatic updates');
+    return;
+  }
+  
+  console.log('[streaming-auth] ✅ Starting AWS update script in background...');
+  console.log('[streaming-auth]    AWS Instance ID:', process.env.AWS_INSTANCE_ID);
+  console.log('[streaming-auth]    Script path:', awsUpdateScript);
+  
+  // Spawn the AWS update script as a detached process
+  const childProcess = spawn('node', [awsUpdateScript], {
+    cwd: path.join(__dirname, '..', '..'),
+    stdio: ['ignore', 'pipe', 'pipe'],
+    detached: true, // Detach so it runs independently
+    env: {
+      ...process.env,
+      // Ensure the AWS update script has access to all necessary env vars
+    }
+  });
+  
+  // Track this process
+  activeAwsUpdateProcesses.add(childProcess.pid);
+  console.log('[streaming-auth]    AWS update process started with PID:', childProcess.pid);
+  
+  // Unref to allow the parent process to exit independently
+  childProcess.unref();
+  
+  // Log output for debugging (but don't block)
+  childProcess.stdout.on('data', (data) => {
+    const output = data.toString().trim();
+    console.log(`[aws-update] ${output}`);
+  });
+  
+  childProcess.stderr.on('data', (data) => {
+    const output = data.toString().trim();
+    console.error(`[aws-update] ${output}`);
+  });
+  
+  childProcess.on('exit', (code) => {
+    activeAwsUpdateProcesses.delete(childProcess.pid);
+    if (code === 0) {
+      console.log('[streaming-auth] ✅ AWS update script completed successfully');
+    } else {
+      console.warn(`[streaming-auth] ⚠️  AWS update script exited with code ${code}`);
+    }
+  });
+  
+  childProcess.on('error', (error) => {
+    activeAwsUpdateProcesses.delete(childProcess.pid);
+    console.error('[streaming-auth] ❌ Failed to start AWS update script:', error);
+  });
+}
+
 // Function to check and store extraction results
 function checkAndStoreExtractionResults(email) {
   const normalizedEmail = email.toLowerCase().trim();
   const outputFile = getCookieFilename(normalizedEmail);
+  
+  console.log('[streaming-auth] Checking extraction results for:', normalizedEmail);
+  console.log('[streaming-auth]    Looking for file:', outputFile);
+  console.log('[streaming-auth]    File exists:', fs.existsSync(outputFile));
   
   if (fs.existsSync(outputFile)) {
     try {
@@ -636,17 +775,37 @@ function checkAndStoreExtractionResults(email) {
       const username = cookieData.username || cookieData.metadata?.username;
       const extractedAt = cookieData.metadata?.extractedAt || new Date().toISOString();
       
+      console.log('[streaming-auth]    Cookie data parsed successfully');
+      console.log('[streaming-auth]    Username:', username || 'not found');
+      console.log('[streaming-auth]    Cookies count:', cookieData.cookies?.length || 0);
+      
       if (username) {
         extractionResults.set(normalizedEmail, {
           username,
           cookies: cookieData.cookies || [],
           extractedAt
         });
-        console.log(`[streaming-auth] Stored extraction results for ${normalizedEmail}`);
+        console.log(`[streaming-auth] ✅ Stored extraction results for ${normalizedEmail}`);
+        
+        // Copy cookies to main file for AWS update script compatibility
+        console.log('[streaming-auth] Starting cookie copy process...');
+        const copied = copyCookiesToMainFile(normalizedEmail);
+        
+        if (copied) {
+          console.log('[streaming-auth] ✅ Cookies copied successfully, triggering AWS update...');
+          // Trigger AWS update script in background after successful cookie extraction
+          runAwsUpdateInBackground();
+        } else {
+          console.error('[streaming-auth] ❌ Failed to copy cookies, AWS update will not run');
+        }
+      } else {
+        console.warn('[streaming-auth] ⚠️  Username not found in cookie data, skipping AWS update');
       }
     } catch (error) {
-      console.error('[streaming-auth] Error parsing extraction results:', error);
+      console.error('[streaming-auth] ❌ Error parsing extraction results:', error);
     }
+  } else {
+    console.warn('[streaming-auth] ⚠️  Cookie file not found, cannot process extraction results');
   }
 }
 
@@ -661,6 +820,82 @@ setInterval(() => {
     }
   }
 }, 3000); // Check every 3 seconds
+
+/**
+ * GET /api/streaming-auth/update-status
+ * Check AWS update status and configuration
+ */
+router.get('/update-status', async (req, res) => {
+  try {
+    const mainCookieFile = path.join(OUTPUT_DIR, 'canvas-cookies.json');
+    const awsUpdateScript = path.join(__dirname, '..', '..', 'aws', 'run-aws-update.js');
+    
+    const status = {
+      awsConfigured: !!process.env.AWS_INSTANCE_ID,
+      awsInstanceId: process.env.AWS_INSTANCE_ID || null,
+      scriptExists: fs.existsSync(awsUpdateScript),
+      scriptPath: awsUpdateScript,
+      cookiesExist: fs.existsSync(mainCookieFile),
+      cookieFile: mainCookieFile,
+      activeUpdates: activeAwsUpdateProcesses.size,
+      ready: !!process.env.AWS_INSTANCE_ID && fs.existsSync(awsUpdateScript) && fs.existsSync(mainCookieFile)
+    };
+    
+    res.json({
+      success: true,
+      ...status
+    });
+  } catch (error) {
+    console.error('[streaming-auth] Error checking update status:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Failed to check update status'
+    });
+  }
+});
+
+/**
+ * POST /api/streaming-auth/trigger-update
+ * Manually trigger AWS update script (for testing/debugging)
+ */
+router.post('/trigger-update', async (req, res) => {
+  try {
+    console.log('[streaming-auth] Manual AWS update trigger requested');
+    
+    // Check if AWS_INSTANCE_ID is configured
+    if (!process.env.AWS_INSTANCE_ID) {
+      return res.status(400).json({
+        success: false,
+        error: 'AWS_INSTANCE_ID not configured'
+      });
+    }
+    
+    // Check if main cookie file exists
+    const mainCookieFile = path.join(OUTPUT_DIR, 'canvas-cookies.json');
+    if (!fs.existsSync(mainCookieFile)) {
+      return res.status(400).json({
+        success: false,
+        error: 'No cookies found. Please login first.',
+        cookieFile: mainCookieFile
+      });
+    }
+    
+    // Trigger AWS update
+    runAwsUpdateInBackground();
+    
+    res.json({
+      success: true,
+      message: 'AWS update script triggered in background',
+      awsInstanceId: process.env.AWS_INSTANCE_ID
+    });
+  } catch (error) {
+    console.error('[streaming-auth] Error triggering update:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Failed to trigger update'
+    });
+  }
+});
 
 module.exports = router;
 

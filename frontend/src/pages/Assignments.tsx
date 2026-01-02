@@ -7,6 +7,7 @@ import { Calendar as CalendarIcon, List, Clock, FileText, Rocket } from "lucide-
 import { Checkbox } from "@/components/ui/checkbox";
 import { useCanvasData } from "@/hooks/useCanvasData";
 import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
+import IntegrationsPanel from "@/components/IntegrationsPanel";
 
 const Assignments = () => {
   const navigate = useNavigate();
@@ -360,6 +361,11 @@ const Assignments = () => {
             </div>
           </div>
         </header>
+
+        {/* Integrations */}
+        <div className="mt-4">
+          <IntegrationsPanel />
+        </div>
 
         {/* Assignments grouped by day with infinite scroll */}
         <div 

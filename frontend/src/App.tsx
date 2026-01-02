@@ -14,6 +14,9 @@ import ClassDetail from "./pages/ClassDetail";
 import Assignments from "./pages/Assignments";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Learn from "./pages/Learn";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
 
 // Redirect component for dynamic routes
 const ClassesRedirect = () => {
@@ -46,6 +49,8 @@ const AppContent = () => {
         <Routes>
           {/* Public routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfUse />} />
           
           {/* Protected routes */}
           <Route path="/" element={
@@ -78,6 +83,11 @@ const AppContent = () => {
           <Route path="/courses/:id" element={
             <RouteGuard>
               <ClassDetail />
+            </RouteGuard>
+          } />
+          <Route path="/courses/:id/learn" element={
+            <RouteGuard>
+              <Learn />
             </RouteGuard>
           } />
           <Route path="/assignments" element={

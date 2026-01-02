@@ -4,9 +4,21 @@ import Layout from "@/components/Layout";
 import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { FileText, BookOpen, Bell, Clock, MessageCircle, Send, Bot, Loader2, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
+import { FileText, BookOpen, Bell, Clock, MessageCircle, Send, Bot, Loader2, Maximize2, ChevronLeft, ChevronRight, ExternalLink, Plus } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useCanvasData } from "@/hooks/useCanvasData";
 import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
 import { toast } from "@/hooks/use-toast";
@@ -76,6 +88,10 @@ const ClassDetail = () => {
   const [isLoadingResponse, setIsLoadingResponse] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const [isPopoutActive, setIsPopoutActive] = useState(false);
+  
+  // Chat configuration state
+  const [selectedModules, setSelectedModules] = useState<Set<string>>(new Set());
+  const [selectedModel, setSelectedModel] = useState<'auto' | 'chatgpt' | 'gemini' | 'claude'>('auto');
   
   // Hover state for outline snapping animations
   const [hoveredAnnouncementIndex, setHoveredAnnouncementIndex] = useState<number | null>(null);
@@ -663,6 +679,30 @@ const ClassDetail = () => {
 
   // Show all modules sequentially (no pagination)
   const modules = allModules;
+  
+  // Helper functions for module selection
+  const toggleModule = (moduleId: string) => {
+    setSelectedModules(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(moduleId)) {
+        newSet.delete(moduleId);
+      } else {
+        newSet.add(moduleId);
+      }
+      return newSet;
+    });
+  };
+  
+  const selectAllModules = () => {
+    const allModuleIds = modules.map(m => m.title);
+    setSelectedModules(new Set(allModuleIds));
+  };
+  
+  const deselectAllModules = () => {
+    setSelectedModules(new Set());
+  };
+  
+  const areAllModulesSelected = modules.length > 0 && selectedModules.size === modules.length;
 
   const coursePages = useMemo(() => {
     if (!mockCanvasData?.pages || !course) return [];
@@ -907,12 +947,12 @@ const ClassDetail = () => {
                               const popoutKey = `chat_popout_active_${courseId}`;
                               localStorage.setItem(popoutKey, 'true');
                               setIsPopoutActive(true);
-                              window.open(`/chat/${courseId}`, '_blank');
+                              window.open(`/courses/${courseId}/learn`, '_blank', 'noopener,noreferrer');
                             }
                           }}
                           title="Open chat in new tab"
                         >
-                          <Maximize2 className="w-4 h-4" />
+                          <ExternalLink className="w-4 h-4" />
                         </Button>
                       </div>
                   
@@ -990,6 +1030,117 @@ const ClassDetail = () => {
                         }}
                         className="flex gap-2 px-5 pb-4"
                       >
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className="h-10 w-10 p-0 hover:opacity-70 transition-opacity border border-foreground/20"
+                            >
+                              <Plus className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="start" className="w-56 bg-popover border border-border">
+                            {/* Content Selector */}
+                            <DropdownMenuLabel className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase">
+                              Content Selector
+                            </DropdownMenuLabel>
+                            <DropdownMenuItem
+                              className="px-3 py-2 cursor-pointer"
+                              onSelect={(e) => {
+                                e.preventDefault();
+                                if (areAllModulesSelected) {
+                                  deselectAllModules();
+                                } else {
+                                  selectAllModules();
+                                }
+                              }}
+                            >
+                              <Checkbox
+                                checked={areAllModulesSelected}
+                                className="mr-2"
+                                onCheckedChange={(checked) => {
+                                  if (checked) {
+                                    selectAllModules();
+                                  } else {
+                                    deselectAllModules();
+                                  }
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                              <span className="text-sm">Select All</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <div className="max-h-[200px] overflow-y-auto">
+                              {modules.map((module) => (
+                                <DropdownMenuItem
+                                  key={module.title}
+                                  className="px-3 py-2 cursor-pointer"
+                                  onSelect={(e) => {
+                                    e.preventDefault();
+                                    toggleModule(module.title);
+                                  }}
+                                >
+                                  <Checkbox
+                                    checked={selectedModules.has(module.title)}
+                                    className="mr-2"
+                                    onCheckedChange={() => toggleModule(module.title)}
+                                    onClick={(e) => e.stopPropagation()}
+                                  />
+                                  <span className="text-sm">{module.title}</span>
+                                </DropdownMenuItem>
+                              ))}
+                            </div>
+                            <DropdownMenuSeparator />
+                            
+                            {/* Model Selector */}
+                            <DropdownMenuSub>
+                              <DropdownMenuSubTrigger className="px-3 py-2">
+                                <span className="text-xs font-semibold text-muted-foreground uppercase">
+                                  Model
+                                </span>
+                                <span className="ml-auto text-xs text-foreground/60 capitalize">
+                                  {selectedModel}
+                                </span>
+                              </DropdownMenuSubTrigger>
+                              <DropdownMenuSubContent className="bg-popover border border-border">
+                                <DropdownMenuItem
+                                  className="px-3 py-2 cursor-pointer"
+                                  onSelect={() => setSelectedModel('auto')}
+                                >
+                                  <span className={`text-sm ${selectedModel === 'auto' ? 'font-medium text-primary' : ''}`}>
+                                    Auto
+                                  </span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  className="px-3 py-2 cursor-pointer"
+                                  onSelect={() => setSelectedModel('chatgpt')}
+                                >
+                                  <span className={`text-sm ${selectedModel === 'chatgpt' ? 'font-medium text-primary' : ''}`}>
+                                    ChatGPT
+                                  </span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  className="px-3 py-2 cursor-pointer"
+                                  onSelect={() => setSelectedModel('gemini')}
+                                >
+                                  <span className={`text-sm ${selectedModel === 'gemini' ? 'font-medium text-primary' : ''}`}>
+                                    Gemini
+                                  </span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  className="px-3 py-2 cursor-pointer"
+                                  onSelect={() => setSelectedModel('claude')}
+                                >
+                                  <span className={`text-sm ${selectedModel === 'claude' ? 'font-medium text-primary' : ''}`}>
+                                    Claude
+                                  </span>
+                                </DropdownMenuItem>
+                              </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                         <Input
                           type="text"
                           value={chatInput}

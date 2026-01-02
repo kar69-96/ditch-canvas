@@ -1,0 +1,28 @@
+name: Run integration sync
+
+on:
+  schedule:
+    - cron: "0 7 * * *" # daily at 07:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  run-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call backend sync endpoint
+        env:
+          SYNC_URL: ${{ secrets.INTEGRATIONS_SYNC_URL }}
+          CRON_SECRET: ${{ secrets.INTEGRATIONS_CRON_SECRET }}
+        run: |
+          if [ -z "$SYNC_URL" ]; then
+            echo "SYNC_URL not set; skipping."
+            exit 0
+          fi
+          echo "Triggering sync at $SYNC_URL"
+          curl -X POST "$SYNC_URL" \
+            -H "x-cron-secret: $CRON_SECRET" \
+            -H "Content-Type: application/json"
+
+
+
+

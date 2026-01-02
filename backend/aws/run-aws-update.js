@@ -36,11 +36,16 @@ for (const envPath of envPaths) {
 }
 
 const { ensureInstanceReady, executeCommand, cleanup, waitForSSH } = require('./utils/aws-ec2-manager.js');
+const { CloudWatchLogger } = require('./utils/cloudwatch-logs.js');
 
 // Configuration
 const AWS_INSTANCE_ID = process.env.AWS_INSTANCE_ID;
 const AWS_KEY_FILE = process.env.AWS_KEY_FILE || path.join(__dirname, '..', 'Canvas-Wrapper.pem');
 const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
+
+// CloudWatch logging (optional, enabled by default)
+const ENABLE_CLOUDWATCH_LOGS = process.env.ENABLE_CLOUDWATCH_LOGS !== 'false';
+let cloudWatchLogger = null;
 
 /**
  * Sync cookies to AWS instance
@@ -559,6 +564,43 @@ async function main() {
   let publicIp = null;
   let exitCode = 0;
   
+  // Initialize CloudWatch logging
+  if (ENABLE_CLOUDWATCH_LOGS) {
+    try {
+      const streamName = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5); // Format: 2025-12-24T19-12-00
+      cloudWatchLogger = new CloudWatchLogger();
+      await cloudWatchLogger.initialize(streamName);
+      console.log(`📊 CloudWatch logging enabled: ${cloudWatchLogger.streamName}`);
+      
+      // Override console.log to also send to CloudWatch
+      const originalLog = console.log.bind(console);
+      const originalError = console.error.bind(console);
+      
+      console.log = (...args) => {
+        originalLog(...args);
+        if (cloudWatchLogger) {
+          const message = args.map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+          ).join(' ');
+          cloudWatchLogger.log(message, 'INFO').catch(() => {});
+        }
+      };
+      
+      console.error = (...args) => {
+        originalError(...args);
+        if (cloudWatchLogger) {
+          const message = args.map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+          ).join(' ');
+          cloudWatchLogger.log(message, 'ERROR').catch(() => {});
+        }
+      };
+    } catch (error) {
+      console.warn(`⚠️  CloudWatch logging failed: ${error.message}`);
+      console.warn('   Continuing without CloudWatch logs...');
+    }
+  }
+  
   try {
     console.log('🚀 AWS Update Checker Runner');
     console.log('='.repeat(60));
@@ -798,6 +840,15 @@ async function main() {
     const minutes = Math.floor(overallDuration / 60000);
     const seconds = Math.floor((overallDuration % 60000) / 1000);
     console.log(`\n✅ Process completed in ${minutes}m ${seconds}s`);
+    
+    // Close CloudWatch logger
+    if (cloudWatchLogger) {
+      await cloudWatchLogger.close();
+      if (cloudWatchLogger.streamName) {
+        console.log(`\n📊 View logs in CloudWatch: ${cloudWatchLogger.streamName}`);
+        console.log(`   Run: node tail-cloudwatch-logs.js ${cloudWatchLogger.streamName.replace(/^update-run-/, '')}`);
+      }
+    }
     
     process.exit(exitCode);
   }

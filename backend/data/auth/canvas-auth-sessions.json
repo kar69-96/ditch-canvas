@@ -1331,5 +1331,117 @@
       "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
       "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
     }
+  },
+  {
+    "token": "4da7cce054e59a2f4ea9ce92521d2b45",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-30T23:16:15.029Z",
+    "expiresAt": "2025-12-31T00:16:15.029Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-30T23:16:16.466Z"
+  },
+  {
+    "token": "0dd46ec930e57305920a1446964daf12",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-30T23:16:19.285Z",
+    "expiresAt": "2025-12-31T00:16:19.285Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-30T23:17:16.738Z"
+  },
+  {
+    "token": "97d692e5a65d018e850dcd8eed82a2fc",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-31T00:29:59.234Z",
+    "expiresAt": "2025-12-31T01:29:59.234Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-31T00:30:56.686Z"
+  },
+  {
+    "token": "23891097029b863b0b20784171f059ca",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-31T00:35:17.027Z",
+    "expiresAt": "2025-12-31T01:35:17.027Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-31T00:35:21.759Z"
+  },
+  {
+    "token": "8b31e6670f4e385d1ed7fa84da864e3b",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-31T00:35:24.615Z",
+    "expiresAt": "2025-12-31T01:35:24.615Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-31T00:35:45.291Z"
+  },
+  {
+    "token": "121ffb86d2494a2f21734a6553887c2d",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-31T00:35:48.105Z",
+    "expiresAt": "2025-12-31T01:35:48.105Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-31T00:36:45.477Z"
+  },
+  {
+    "token": "c876a284d102c35fb7aadb13ddd58728",
+    "status": "failed",
+    "email": "kare6625@colorado.edu",
+    "createdAt": "2025-12-31T00:39:47.225Z",
+    "expiresAt": "2025-12-31T01:39:47.226Z",
+    "identikey": null,
+    "cookies": null,
+    "userInfo": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed",
+    "browserlessSession": {
+      "connectUrl": "wss://production-sfo.browserless.io/chromium/playwright?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d",
+      "liveViewUrl": "https://production-sfo.browserless.io?token=2TYGehAahcLSQpte536d0261b09ecf0eed575f14d4a1fb28d#/sessions"
+    },
+    "completedAt": "2025-12-31T00:40:43.112Z"
   }
 ]

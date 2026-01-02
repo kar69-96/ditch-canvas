@@ -151,8 +151,14 @@ class BrowserStreamingServer {
         socket.broadcast.emit('ice-candidate', candidate);
       });
 
-      // Handle mouse events from client
+      // Handle mouse events from client with throttling
+      let lastMouseMoveTime = 0;
       socket.on('mouse-move', async (data) => {
+        // Throttle mouse move events to prevent overload
+        const now = Date.now();
+        if (now - lastMouseMoveTime < 16) return; // Max 60fps
+        lastMouseMoveTime = now;
+        
         if (this.page && !this.page.isClosed()) {
           try {
             await this.page.mouse.move(data.x, data.y);
@@ -182,6 +188,11 @@ class BrowserStreamingServer {
         if (this.page && !this.page.isClosed()) {
           try {
             await this.page.mouse.up({ button: data.button || 'left' });
+            // REMOVED: Manual focus logic that caused viewport jumps
+            // Playwright's mouse.click() and mouse.down()/mouse.up() already handle
+            // element focusing automatically. Manual focus() calls can cause Chrome
+            // to scroll or adjust the visual viewport if the caret is offscreen,
+            // making the CSS/DEVICE pixel mismatch visible and causing page "jumps".
           } catch (error) {
             if (!error.message.includes('closed')) {
               console.error('Error on mouse up:', error);
@@ -190,46 +201,8 @@ class BrowserStreamingServer {
         }
       });
 
-      socket.on('mouse-click', async (data) => {
-        if (this.page && !this.page.isClosed()) {
-          try {
-            // Move to position
-            await this.page.mouse.move(data.x, data.y, { steps: 1 });
-            
-            // Click the element
-            await this.page.mouse.click(data.x, data.y, { 
-              button: data.button || 'left',
-              clickCount: 1,
-              delay: 10
-            });
-            
-            // Try to focus the element at the clicked position
-            // This is especially important for input fields
-            try {
-              await this.page.evaluate((x, y) => {
-                const element = document.elementFromPoint(x, y);
-                if (element && (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.isContentEditable)) {
-                  element.focus();
-                  // For input fields, also try to set cursor position
-                  if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.click(); // Extra click to ensure focus
-                  }
-                }
-              }, data.x, data.y);
-            } catch (focusError) {
-              // Ignore focus errors
-            }
-            
-            // Small delay to ensure the click and focus are processed
-            await new Promise(resolve => setTimeout(resolve, 150));
-          } catch (error) {
-            // Silently ignore if page is closed
-            if (!error.message.includes('closed')) {
-              console.error('Error clicking:', error);
-            }
-          }
-        }
-      });
+      // Removed mouse-click handler to prevent double-clicking
+      // Using only mouse-down/mouse-up for cleaner interaction
 
       // Optimize keyboard input with immediate processing (no queue for responsiveness)
       socket.on('keyboard-input', (data) => {
@@ -449,8 +422,12 @@ class BrowserStreamingServer {
       }
 
       // Create browser context with download blocking
+      // CRITICAL: Set deviceScaleFactor to 1 to prevent CSS/DEVICE pixel mismatch
+      // Without this, mouse coordinates (CSS pixels) don't match screencast frames (DEVICE pixels)
+      // This causes page "jumps" after interactions when Chrome re-renders
       this.context = await this.browser.newContext({
         viewport: { width: 1920, height: 1080 },
+        deviceScaleFactor: 1, // Force 1:1 CSS to device pixel ratio
         // Block all downloads - fully web-based
         acceptDownloads: false
       });
@@ -528,9 +505,12 @@ class BrowserStreamingServer {
       });
       
       // Ensure page stays open - prevent accidental closure
-      this.page.on('framenavigated', () => {
+      this.page.on('framenavigated', async () => {
         if (this.page.isClosed()) {
           console.log('⚠️  Page closed after navigation - this should not happen');
+        } else {
+          // Re-apply CSS lock after navigation (CDP lock persists)
+          await this.lockVisualViewport();
         }
       });
 
@@ -538,9 +518,14 @@ class BrowserStreamingServer {
       const client = await this.context.newCDPSession(this.page);
       this.cdpSession = client;
 
-      // Enable Page domain for frame capture
+      // Enable required CDP domains
       await client.send('Page.enable');
       await client.send('Runtime.enable');
+      // Note: Emulation domain doesn't need explicit enable
+
+      // CRITICAL FIX: Use CDP to lock viewport at device level
+      // This prevents visual viewport movement that causes jitter
+      await this.lockViewportWithCDP(client);
 
       // Start frame capture
       this.startFrameCapture(client);
@@ -549,6 +534,90 @@ class BrowserStreamingServer {
     } catch (error) {
       console.error('❌ Failed to launch browser:', error);
       throw error;
+    }
+  }
+
+  async lockViewportWithCDP(cdpSession) {
+    // Lock the viewport using CDP's Emulation domain
+    // This is the only reliable way to prevent visual viewport movement
+    // JavaScript-based approaches don't work because Chrome moves the viewport
+    // BEFORE JavaScript event handlers run
+    try {
+      // Set device metrics to match our viewport exactly
+      // mobile: false is CRITICAL - it disables the visual viewport
+      // The visual viewport is a mobile-specific feature that Chrome
+      // enables by default even on desktop when certain conditions are met
+      await cdpSession.send('Emulation.setDeviceMetricsOverride', {
+        width: 1920,
+        height: 1080,
+        deviceScaleFactor: 1,
+        mobile: false,  // CRITICAL: Disables visual viewport entirely
+        screenWidth: 1920,
+        screenHeight: 1080,
+        positionX: 0,
+        positionY: 0,
+        dontSetVisibleSize: false,
+        screenOrientation: {
+          angle: 0,
+          type: 'landscapePrimary'
+        }
+      });
+
+      // Disable scroll events that could cause viewport changes
+      await cdpSession.send('Emulation.setScrollbarsHidden', { hidden: false });
+
+      // Disable touch emulation which can cause visual viewport issues
+      await cdpSession.send('Emulation.setTouchEmulationEnabled', { enabled: false });
+
+      // Set focus emulation to not scroll
+      await cdpSession.send('Emulation.setFocusEmulationEnabled', { enabled: false }).catch(() => {
+        // This command may not exist in all Chrome versions
+      });
+
+      console.log('🔒 Viewport locked via CDP Emulation (mobile=false, no visual viewport)');
+    } catch (error) {
+      console.warn('⚠️  Could not lock viewport via CDP:', error.message);
+    }
+  }
+
+  async lockVisualViewport() {
+    // Additional JavaScript-based lock as backup
+    // The CDP-level fix is the primary solution
+    if (!this.page || this.page.isClosed()) {
+      return;
+    }
+
+    try {
+      await this.page.evaluate(() => {
+        // Add CSS to help prevent any remaining viewport movement
+        const style = document.createElement('style');
+        style.id = '__viewport_lock_style__';
+        style.textContent = `
+          /* Prevent inputs from causing scroll jumps */
+          input:focus, textarea:focus, [contenteditable]:focus {
+            scroll-margin: 0 !important;
+          }
+          /* Force instant scroll behavior */
+          * {
+            scroll-behavior: auto !important;
+          }
+          /* Prevent caret from triggering viewport adjustment */
+          :focus {
+            outline-offset: 0 !important;
+          }
+        `;
+        
+        // Remove existing style if present
+        const existingStyle = document.getElementById('__viewport_lock_style__');
+        if (existingStyle) {
+          existingStyle.remove();
+        }
+        document.head.appendChild(style);
+      });
+
+      console.log('🔒 CSS viewport lock applied');
+    } catch (error) {
+      // Don't throw - this is a backup fix
     }
   }
 
@@ -634,10 +703,10 @@ class BrowserStreamingServer {
       }
     });
 
-    // Start screencast with better settings
+    // Start screencast with better settings for smoother interaction
     cdpSession.send('Page.startScreencast', {
       format: 'jpeg',
-      quality: 80,
+      quality: 75, // Slightly lower quality for better performance
       maxWidth: 1920,
       maxHeight: 1080,
       everyNthFrame: 1  // Capture every frame for smooth interaction
@@ -651,14 +720,14 @@ class BrowserStreamingServer {
     // Also set up a fallback screenshot mechanism if screencast fails
     // Only use this if screencast frames aren't coming through
     this.frameCaptureInterval = setInterval(async () => {
-      // Only use fallback if no screencast frames in last 500ms
+      // Only use fallback if no screencast frames in last 300ms (faster fallback)
       if (this.page && !this.page.isClosed() && this.clients.size > 0 && 
-          (Date.now() - lastScreencastFrame > 500)) {
+          (Date.now() - lastScreencastFrame > 300)) {
         try {
           // Take a screenshot as fallback if screencast isn't working
           const screenshot = await this.page.screenshot({ 
             type: 'jpeg', 
-            quality: 80,
+            quality: 75,  // Slightly lower quality for faster capture
             fullPage: false 
           });
           const base64 = screenshot.toString('base64');
@@ -677,7 +746,7 @@ class BrowserStreamingServer {
           // Ignore screenshot errors
         }
       }
-    }, 200); // Check every 200ms for fallback
+    }, 100); // Check more frequently for faster fallback (100ms instead of default)
   }
 
   async navigateToCanvas() {
@@ -1129,6 +1198,13 @@ class BrowserStreamingServer {
             height: 100%;
             overflow: hidden;
             background: #000;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            /* Improve rendering performance */
+            will-change: transform;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         #browser-frame {
             width: 100%;
@@ -1140,6 +1216,33 @@ class BrowserStreamingServer {
             background: #000;
             min-width: 100%;
             min-height: 100%;
+            /* Prevent layout shifts */
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* Optimize for interaction */
+            pointer-events: auto;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            /* Hardware acceleration for smoother performance */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            /* Prevent jumping during load */
+            image-rendering: auto;
+            will-change: contents;
+        }
+        /* Disable text selection globally to improve interaction */
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
 </head>
@@ -1150,8 +1253,59 @@ class BrowserStreamingServer {
         const socket = io();
         const frameImg = document.getElementById('browser-frame');
         
-        let scaleX = 1;
-        let scaleY = 1;
+        // Set onerror handler once
+        frameImg.onerror = (e) => {
+            console.error('❌ Error loading frame image:', e);
+        };
+        
+        // Correct coordinate mapping for object-fit: contain (accounts for letterboxing)
+        function getImageCoordinates(e) {
+            const rect = frameImg.getBoundingClientRect();
+            
+            // Get natural image dimensions
+            const naturalWidth = frameImg.naturalWidth || 1920;
+            const naturalHeight = frameImg.naturalHeight || 1080;
+            
+            if (!naturalWidth || !naturalHeight || !rect.width || !rect.height) {
+                // Fallback if image not loaded yet
+                return {
+                    x: Math.max(0, Math.min((e.clientX - rect.left) * (naturalWidth / rect.width), naturalWidth)),
+                    y: Math.max(0, Math.min((e.clientY - rect.top) * (naturalHeight / rect.height), naturalHeight))
+                };
+            }
+            
+            // Calculate aspect ratios
+            const imgAspect = naturalWidth / naturalHeight;
+            const elAspect = rect.width / rect.height;
+            
+            let renderWidth, renderHeight, offsetX, offsetY;
+            
+            if (imgAspect > elAspect) {
+                // Image is wider - letterboxed vertically (black bars top/bottom)
+                renderWidth = rect.width;
+                renderHeight = rect.width / imgAspect;
+                offsetX = 0;
+                offsetY = (rect.height - renderHeight) / 2;
+            } else {
+                // Image is taller - letterboxed horizontally (black bars left/right)
+                renderHeight = rect.height;
+                renderWidth = rect.height * imgAspect;
+                offsetY = 0;
+                offsetX = (rect.width - renderWidth) / 2;
+            }
+            
+            // Convert client coordinates to image coordinates
+            const clientX = e.clientX - rect.left - offsetX;
+            const clientY = e.clientY - rect.top - offsetY;
+            
+            const x = clientX * (naturalWidth / renderWidth);
+            const y = clientY * (naturalHeight / renderHeight);
+            
+            return {
+                x: Math.max(0, Math.min(x, naturalWidth)),
+                y: Math.max(0, Math.min(y, naturalHeight))
+            };
+        }
         
         socket.on('connect', () => {
             console.log('✅ Connected to server');
@@ -1166,16 +1320,6 @@ class BrowserStreamingServer {
             if (data && data.data) {
                 try {
                     frameImg.src = 'data:image/jpeg;base64,' + data.data;
-                    
-                    // Calculate scale for coordinate mapping
-                    frameImg.onload = () => {
-                        scaleX = frameImg.naturalWidth / frameImg.clientWidth;
-                        scaleY = frameImg.naturalHeight / frameImg.clientHeight;
-                    };
-                    
-                    frameImg.onerror = (e) => {
-                        console.error('❌ Error loading frame image:', e);
-                    };
                 } catch (error) {
                     console.error('❌ Error setting frame:', error);
                 }
@@ -1184,30 +1328,33 @@ class BrowserStreamingServer {
             }
         });
         
-        // Mouse events - improved click handling
+        // Mouse events - using correct letterboxing-aware coordinates
+        let lastMouseMove = 0;
+        const mouseMoveThrottle = 16; // ~60fps throttling for mouse movements
+        
+        frameImg.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastMouseMove < mouseMoveThrottle) return;
+            lastMouseMove = now;
+            
+            const { x, y } = getImageCoordinates(e);
+            socket.emit('mouse-move', { x, y });
+        });
+        
         frameImg.addEventListener('mousedown', (e) => {
             e.preventDefault();
-            const rect = frameImg.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
+            const { x, y } = getImageCoordinates(e);
             socket.emit('mouse-down', { x, y, button: e.button === 2 ? 'right' : 'left' });
         });
         
         frameImg.addEventListener('mouseup', (e) => {
             e.preventDefault();
-            const rect = frameImg.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
+            const { x, y } = getImageCoordinates(e);
             socket.emit('mouse-up', { x, y, button: e.button === 2 ? 'right' : 'left' });
         });
         
-        frameImg.addEventListener('click', (e) => {
-            e.preventDefault();
-            const rect = frameImg.getBoundingClientRect();
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
-            socket.emit('mouse-click', { x, y, button: e.button === 2 ? 'right' : 'left' });
-        });
+        // Removed mouse-click handler to prevent double-clicking
+        // Using only mouse-down/mouse-up for cleaner interaction
         
         frameImg.addEventListener('contextmenu', (e) => {
             e.preventDefault();
@@ -1255,8 +1402,8 @@ class BrowserStreamingServer {
             });
         });
         
-        // Focus the frame for keyboard input
-        frameImg.addEventListener('click', () => {
+        // Focus the frame for keyboard input on mousedown
+        frameImg.addEventListener('mousedown', () => {
             frameImg.focus();
         });
         

@@ -1,16 +1,24 @@
-require('dotenv').config();
+// Load .env from root directory (one level up from backend/)
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const fs = require('fs');
 
-const cookieRoutes = require('./src/core/cookies');
 const overridesRoutes = require('./src/core/overrides');
 const assignmentsRoutes = require('./src/core/assignments');
-const authRoutes = require('./src/routes/auth');
 const vncAuthRoutes = require('./src/routes/vnc-auth');
 const streamingAuthRoutes = require('./src/routes/streaming-auth');
 const fileOrganizationRoutes = require('./src/routes/file-organization');
+
+// Optional integrations - don't crash if dependencies are missing
+let integrationsRoutes = null;
+try {
+  integrationsRoutes = require('./src/routes/integrations');
+} catch (error) {
+  console.warn('⚠️  Integrations module not available:', error.message);
+  console.warn('   Calendar integrations will be disabled');
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -71,13 +79,16 @@ app.use('/socket.io', (req, res) => {
   });
 });
 
-app.use('/api/cookies', cookieRoutes);
 app.use('/api/overrides', overridesRoutes);
 app.use('/api/assignments', assignmentsRoutes);
-app.use('/api/auth', authRoutes);
 app.use('/api/vnc-auth', vncAuthRoutes);
 app.use('/api/streaming-auth', streamingAuthRoutes);
 app.use('/api', fileOrganizationRoutes);
+
+// Only add integrations routes if module is available
+if (integrationsRoutes) {
+  app.use('/api/integrations', integrationsRoutes);
+}
 
 app.get('/api/health', (_req, res) => {
   res.json({

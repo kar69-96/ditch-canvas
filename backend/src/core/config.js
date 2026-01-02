@@ -1,4 +1,6 @@
-require('dotenv').config();
+// Load .env from root directory (already loaded by server.js, but ensure it's loaded here too)
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '..', '.env') });
 
 function getRequiredEnv(name, value) {
   if (!value) {
