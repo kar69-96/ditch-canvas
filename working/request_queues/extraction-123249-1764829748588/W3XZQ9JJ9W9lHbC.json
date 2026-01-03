@@ -1,9 +1,0 @@
-{
-	"id": "W3XZQ9JJ9W9lHbC",
-	"json": "{\"id\":\"W3XZQ9JJ9W9lHbC\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/week-15\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/week-15\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/week-15\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:31:16.085Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/week-15",
-	"url": "https://canvas.colorado.edu/courses/123249/pages/week-15"
-}

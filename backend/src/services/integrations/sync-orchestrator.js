@@ -41,16 +41,24 @@ async function fetchAssignments(userEmail) {
       // Map flexible storage entities to expected format
       return entities.map((entity) => {
         const data = entity.data || {};
+        const metadata = entity.metadata || {};
         const internalId = data.id?.toString() || entity.entity_id;
         
         // Check if assignment is completed
-        // Completed if: submissionStatus === "yes" OR workflow_state is "submitted" or "graded"
+        // Priority: userMarkedComplete (from Supabase) > Canvas submission status
+        // userMarkedComplete is stored in metadata.userMarkedComplete or data.userMarkedComplete
+        const userMarkedComplete = metadata.userMarkedComplete === true || data.userMarkedComplete === true;
+        
+        // Canvas submission status (from Canvas data)
         const submissionStatus = data.submissionStatus || data.submission_status;
         const workflowState = data.workflowState || data.workflow_state;
-        const isCompleted = 
+        const isCanvasComplete = 
           submissionStatus === "yes" || 
           workflowState === "submitted" ||
           workflowState === "graded";
+        
+        // Final completion status: user-marked takes precedence, fallback to Canvas status
+        const isCompleted = userMarkedComplete || isCanvasComplete;
         
         return {
           assignment_id: data.id?.toString(),
@@ -136,18 +144,10 @@ async function runIntegration(integration, assignments) {
     return;
   }
 
-  // Get completed assignment IDs from integration config
-  const completedIds = integration.target_config?.completedAssignmentIds || [];
-  const completedSet = new Set(completedIds.map(id => String(id)));
-
-  // Mark assignments as completed if they're in the completed set
-  assignments = assignments.map(a => {
-    const assignmentId = String(a.id || a.assignment_id || a.internalId);
-    return {
-      ...a,
-      isCompleted: a.isCompleted || completedSet.has(assignmentId),
-    };
-  });
+  // Completion status is now read directly from Supabase assignment entities
+  // (stored in metadata.userMarkedComplete or data.userMarkedComplete)
+  // The isCompleted flag is already set correctly in fetchAssignments()
+  // No need to merge with integration config - Supabase is the single source of truth
 
   if (integration.provider === 'google') {
     await syncGoogle({

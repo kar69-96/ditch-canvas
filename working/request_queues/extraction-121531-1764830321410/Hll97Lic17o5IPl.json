@@ -1,9 +1,0 @@
-{
-	"id": "Hll97Lic17o5IPl",
-	"json": "{\"id\":\"Hll97Lic17o5IPl\",\"url\":\"https://canvas.colorado.edu/courses/121531/assignments/2416054\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/assignments/2416054\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/assignments/2416054\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"assignment\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:39:28.409Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/121531/assignments/2416054",
-	"url": "https://canvas.colorado.edu/courses/121531/assignments/2416054"
-}

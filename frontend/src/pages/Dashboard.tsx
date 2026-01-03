@@ -9,6 +9,7 @@ import { DueToday } from "@/components/dashboard/DueToday";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { useCanvasData } from "@/hooks/useCanvasData";
+import { useAssignmentCompletion } from "@/hooks/useAssignmentCompletion";
 import { sessionStorage } from "@/storage/session";
 import { userStorage } from "@/storage/user";
 import { getPreferences, applyTheme, applyFont } from "@/lib/preferences";
@@ -23,79 +24,8 @@ const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [currentWeek, setCurrentWeek] = useState(0);
   
-  // Sync completed assignments with localStorage
-  const [completedAssignments, setCompletedAssignments] = useState<Set<number>>(() => {
-    const stored = localStorage.getItem('completedAssignments');
-    return stored ? new Set(JSON.parse(stored)) : new Set();
-  });
-  
-  // Sync to localStorage whenever completedAssignments changes
-  useEffect(() => {
-    localStorage.setItem('completedAssignments', JSON.stringify(Array.from(completedAssignments)));
-  }, [completedAssignments]);
-
-  // Automatically mark assignments as completed if submissionStatus === "yes"
-  useEffect(() => {
-    if (!canvasData || !canvasData.assignments) return;
-    
-    setCompletedAssignments(prev => {
-      const newSet = new Set(prev);
-      let hasChanges = false;
-      
-      canvasData.assignments.forEach(assignment => {
-        if (assignment.submissionStatus === "yes" && !newSet.has(assignment.id)) {
-          newSet.add(assignment.id);
-          hasChanges = true;
-        }
-      });
-      
-      return hasChanges ? newSet : prev;
-    });
-  }, [canvasData]);
-
-  // Listen for completion changes
-  useEffect(() => {
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'completedAssignments' && e.newValue) {
-        try {
-          const newCompleted = new Set<number>(JSON.parse(e.newValue));
-          setCompletedAssignments(newCompleted);
-        } catch (error) {
-          console.error('Error parsing completedAssignments:', error);
-        }
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    const handleCustomStorage = () => {
-      const stored = localStorage.getItem('completedAssignments');
-      if (stored) {
-        setCompletedAssignments(new Set(JSON.parse(stored)));
-      }
-    };
-
-    window.addEventListener('completedAssignmentsUpdated', handleCustomStorage);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('completedAssignmentsUpdated', handleCustomStorage);
-    };
-  }, []);
-
-  const toggleAssignmentComplete = (assignmentId: number, e?: React.MouseEvent) => {
-    if (e) {
-      e.stopPropagation();
-    }
-    setCompletedAssignments(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(assignmentId)) {
-        newSet.delete(assignmentId);
-      } else {
-        newSet.add(assignmentId);
-      }
-      return newSet;
-    });
-  };
+  // Use the assignment completion hook (updates Supabase - single source of truth)
+  const { completedAssignments, toggleAssignmentComplete, isAssignmentComplete } = useAssignmentCompletion();
   const [selectedDay, setSelectedDay] = useState<{
     day: string;
     date: number;
@@ -296,7 +226,7 @@ const Dashboard = () => {
       const dueDate = new Date(assignment.dueAt);
       const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
       // Check if assignment is completed (either manually marked or submissionStatus === "yes")
-      const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
+      const isCompleted = isAssignmentComplete(assignment.id, assignment.submissionStatus);
       
       return {
         id: assignment.id,
@@ -423,8 +353,7 @@ const Dashboard = () => {
                                 
                                 // Check if assignment is completed (either manually marked, workflowState, or submissionStatus === "yes")
                                 const isCompleted = assignment.workflowState !== "pending" || 
-                                                   completedAssignments.has(assignment.id) ||
-                                                   fullAssignment?.submissionStatus === "yes";
+                                                   isAssignmentComplete(assignment.id, fullAssignment?.submissionStatus);
                                 const dueDate = new Date(assignment.dueAt);
                                 const formattedDue = (() => {
                                   const month = dueDate.toLocaleDateString("en-US", { month: "short" });

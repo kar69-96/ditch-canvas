@@ -111,6 +111,42 @@ export async function getAnnouncements(): Promise<CanvasData['announcements']> {
 }
 
 /**
+ * Update assignment completion status in Supabase
+ * This is the single source of truth for completion status
+ */
+export async function updateAssignmentCompletion(
+  assignmentId: number,
+  isCompleted: boolean,
+  courseId?: number
+): Promise<{ success: boolean; message?: string }> {
+  const user = await getCurrentUser();
+  if (!user?.email) {
+    throw new Error("No user email available");
+  }
+
+  const API_BASE =
+    import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:3000/api";
+
+  const res = await fetch(`${API_BASE}/assignments/${assignmentId}/complete`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userEmail: user.email,
+      isCompleted,
+      courseId,
+    }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed to update assignment completion: ${text}`);
+  }
+
+  const data = await res.json();
+  return data;
+}
+
+/**
  * Get announcements for a specific course
  */
 export async function getAnnouncementsByCourse(courseId: number): Promise<CanvasData['announcements']> {

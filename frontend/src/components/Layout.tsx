@@ -33,7 +33,8 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
         title: "Logged out",
         description: "You have been successfully logged out",
       });
-      navigate("/");
+      // Refresh the page and redirect to login
+      window.location.href = "/login";
     } catch (error: any) {
       console.error("Error logging out:", error);
       toast({
@@ -41,7 +42,6 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
         description: error.message || "Failed to log out",
         variant: "destructive",
       });
-    } finally {
       setIsLoggingOut(false);
     }
   };

@@ -35,28 +35,31 @@ function wantsHtml(req) {
 function sendSuccess(res, payload) {
   if (wantsHtml(res.req)) {
     const safePayload = JSON.stringify(payload || {});
+    const provider = payload?.provider || 'integration';
+    const linkText = provider === 'google' ? 'spreadsheet' : 'database';
+    const statusText = provider === 'google' ? 'Opening spreadsheet...' : 'Opening database...';
     return res.send(
       `<html><head><title>Integration Connected</title></head><body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
         <h2 style="color: #4CAF50;">✅ Integration Connected!</h2>
         <p>Your assignments are being synced...</p>
-        <p id="status">Opening spreadsheet...</p>
+        <p id="status">${statusText}</p>
         <script>
         (function() {
           const data = ${safePayload};
           const statusEl = document.getElementById('status');
           
-          function openSpreadsheet() {
+          function openLink() {
             if (data.redirectUrl) {
               try {
                 // Try to open in new tab
                 const newWindow = window.open(data.redirectUrl, '_blank');
                 if (newWindow) {
-                  statusEl.textContent = 'Spreadsheet opened! You can close this window.';
+                  statusEl.textContent = '${linkText.charAt(0).toUpperCase() + linkText.slice(1)} opened! You can close this window.';
                 } else {
-                  statusEl.innerHTML = 'Popup blocked. <a href=\"' + data.redirectUrl + '\" target=\"_blank\">Click here to open spreadsheet</a>';
+                  statusEl.innerHTML = 'Popup blocked. <a href=\"' + data.redirectUrl + '\" target=\"_blank\">Click here to open ${linkText}</a>';
                 }
               } catch (err) {
-                statusEl.innerHTML = 'Error opening spreadsheet. <a href=\"' + data.redirectUrl + '\" target=\"_blank\">Click here to open</a>';
+                statusEl.innerHTML = 'Error opening ${linkText}. <a href=\"' + data.redirectUrl + '\" target=\"_blank\">Click here to open</a>';
               }
             }
           }
@@ -77,15 +80,15 @@ function sendSuccess(res, payload) {
               }, '*');
             }
             
-            // Open spreadsheet immediately
-            openSpreadsheet();
+            // Open link immediately
+            openLink();
             
             // Also try after a short delay (in case popup blocker needs user interaction)
-            setTimeout(openSpreadsheet, 500);
+            setTimeout(openLink, 500);
             
           } catch (err) {
             console.error('postMessage failed', err);
-            openSpreadsheet();
+            openLink();
           }
           
           // Close window after 3 seconds
@@ -269,34 +272,133 @@ async function exchangeNotionCode(code) {
   return res.json();
 }
 
-async function createNotionDatabase(accessToken) {
+async function findAccessibleNotionPage(accessToken) {
   const { Client } = require('@notionhq/client');
-  const parentPageId = requireEnv('NOTION_PARENT_PAGE_ID');
+  const notion = new Client({ auth: accessToken });
+
+  try {
+    // Search for accessible pages
+    const searchResponse = await notion.search({
+      filter: { property: 'object', value: 'page' },
+      page_size: 10,
+    });
+
+    // Return the first accessible page
+    if (searchResponse.results && searchResponse.results.length > 0) {
+      const firstPage = searchResponse.results[0];
+      return firstPage.id;
+    }
+
+    throw new Error('No accessible pages found');
+  } catch (error) {
+    if (error.code === 'object_not_found' || error.message?.includes('No accessible pages')) {
+      throw new Error(
+        'No accessible Notion pages found. ' +
+        'Please share at least one page with the integration during OAuth, ' +
+        'or manually share a page with "Canvas Assignments Sync" integration.'
+      );
+    }
+    throw error;
+  }
+}
+
+async function createNotionDatabase(accessToken, parentPageId = null) {
+  const { Client } = require('@notionhq/client');
   const notion = new Client({ auth: accessToken });
   const title = 'Assignments Sync';
 
-  const response = await notion.databases.create({
-    parent: { page_id: parentPageId },
-    title: [
-      {
-        type: 'text',
-        text: { content: title },
-      },
-    ],
-    properties: {
-      Name: { title: {} },
-      Course: { rich_text: {} },
-      Due: { date: {} },
-      Points: { number: {} },
-      Status: { select: { options: [{ name: 'pending' }, { name: 'submitted' }, { name: 'graded' }] } },
-      URL: { url: {} },
-    },
-  });
+  // If no parentPageId provided, try to find one automatically
+  let normalizedPageId = parentPageId;
+  
+  if (!normalizedPageId) {
+    try {
+      normalizedPageId = await findAccessibleNotionPage(accessToken);
+    } catch (error) {
+      throw new Error(
+        `Could not find an accessible Notion page. ${error.message} ` +
+        'Make sure to share at least one page with the integration during OAuth.'
+      );
+    }
+  }
 
-  return {
-    databaseId: response.id,
-    title,
-  };
+  // Normalize page ID (remove dashes, spaces, and extract just the ID part)
+  // Notion page IDs are 32 characters (UUID without dashes)
+  normalizedPageId = normalizedPageId.trim();
+  
+  // If it's a full URL, extract the ID
+  if (normalizedPageId.includes('notion.so/')) {
+    const match = normalizedPageId.match(/[a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i);
+    if (match) {
+      normalizedPageId = match[0];
+    }
+  }
+  
+  // Remove dashes to get 32-char UUID
+  normalizedPageId = normalizedPageId.replace(/-/g, '');
+  
+  // Add dashes back in UUID format: 8-4-4-4-12
+  if (normalizedPageId.length === 32) {
+    normalizedPageId = [
+      normalizedPageId.slice(0, 8),
+      normalizedPageId.slice(8, 12),
+      normalizedPageId.slice(12, 16),
+      normalizedPageId.slice(16, 20),
+      normalizedPageId.slice(20, 32)
+    ].join('-');
+  }
+
+  try {
+    const response = await notion.databases.create({
+      parent: { page_id: normalizedPageId },
+      title: [
+        {
+          type: 'text',
+          text: { content: title },
+        },
+      ],
+      properties: {
+        Name: { title: {} },
+        Course: { rich_text: {} },
+        Due: { date: {} },
+        Points: { number: {} },
+        Status: { select: { options: [{ name: 'pending' }, { name: 'submitted' }, { name: 'graded' }] } },
+        URL: { url: {} },
+      },
+    });
+
+    // Construct Notion database URL
+    // Correct format: https://www.notion.so/{databaseIdWithoutDashes}
+    // Example: https://www.notion.so/2dd0d9fedeba81fea804c7c28eb5415c
+    // Database IDs from API have dashes (UUID format), but URLs need them removed
+    const databaseIdWithoutDashes = response.id.replace(/-/g, '');
+    const databaseUrl = `https://www.notion.so/${databaseIdWithoutDashes}`;
+
+    return {
+      databaseId: response.id,
+      title,
+      databaseUrl,
+      parentPageId: normalizedPageId,
+    };
+  } catch (error) {
+    // Provide helpful error messages for common issues
+    if (error.code === 'object_not_found' || error.message?.includes('Could not find page')) {
+      const integrationName = process.env.NOTION_INTEGRATION_NAME || 'Canvas Assignments Sync';
+      throw new Error(
+        `Could not find page with ID: ${normalizedPageId}. ` +
+        `Make sure the page is shared with your integration "${integrationName}". ` +
+        `To fix: Open the page in Notion → Click "..." menu → "Add connections" → Select "${integrationName}"`
+      );
+    }
+    if (error.code === 'restricted_resource') {
+      throw new Error(
+        `Access denied to page ${normalizedPageId}. ` +
+        `The page must be shared with your integration. ` +
+        `Open the page in Notion → Click "..." → "Add connections" → Select your integration`
+      );
+    }
+    // Re-throw with original message for other errors
+    throw error;
+  }
 }
 
 // ---------- Routes ----------
@@ -409,7 +511,10 @@ router.get('/:provider/callback', async (req, res) => {
       const accessToken = tokenResponse.access_token;
       const expiresIn = tokenResponse.expires_in;
 
-      const { databaseId, title } = await createNotionDatabase(accessToken);
+      // Get parentPageId from state (optional - will auto-detect if not provided)
+      const parentPageId = decoded.parentPageId || null;
+
+      const { databaseId, title, databaseUrl } = await createNotionDatabase(accessToken, parentPageId);
       const tokenCiphertext = encryptToken(tokenResponse);
 
       await upsertIntegration({
@@ -431,6 +536,7 @@ router.get('/:provider/callback', async (req, res) => {
         success: true,
         provider: 'notion',
         externalTargetId: databaseId,
+        redirectUrl: databaseUrl,
       });
     }
 
@@ -487,20 +593,8 @@ router.post('/:provider/sync', async (req, res) => {
       return res.status(400).json({ error: `Integration is ${integration.status}. Please reconnect.` });
     }
 
-    // Store completed assignment IDs in integration config if provided
-    if (completedAssignmentIds && Array.isArray(completedAssignmentIds)) {
-      const supabase = getSupabaseClient();
-      const currentConfig = integration.target_config || {};
-      await supabase
-        .from('integrations')
-        .update({
-          target_config: {
-            ...currentConfig,
-            completedAssignmentIds: completedAssignmentIds,
-          },
-        })
-        .eq('id', integration.id);
-    }
+    // Completion status is now stored in Supabase assignment entities (single source of truth)
+    // No need to store completedAssignmentIds in integration config anymore
 
     // Run sync for this specific integration
     try {
@@ -515,7 +609,9 @@ router.post('/:provider/sync', async (req, res) => {
     if (provider === 'google') {
       redirectUrl = `https://docs.google.com/spreadsheets/d/${integration.external_target_id}`;
     } else if (provider === 'notion') {
-      redirectUrl = `https://notion.so/${integration.external_target_id}`;
+      // Notion database URL format: https://www.notion.so/{databaseIdWithoutDashes}
+      const databaseIdWithoutDashes = integration.external_target_id.replace(/-/g, '');
+      redirectUrl = `https://www.notion.so/${databaseIdWithoutDashes}`;
     }
 
     res.json({ 

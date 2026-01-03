@@ -1,9 +1,0 @@
-{
-	"id": "3YzTQu2yCA1tLb9",
-	"json": "{\"id\":\"3YzTQu2yCA1tLb9\",\"url\":\"https://canvas.colorado.edu/courses/123160/modules/items/6721306\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/pages/about-professor-burnes?module_item_id=6721306\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/modules/items/6721306\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-04T06:14:00.118Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123160/modules/items/6721306",
-	"url": "https://canvas.colorado.edu/courses/123160/modules/items/6721306"
-}

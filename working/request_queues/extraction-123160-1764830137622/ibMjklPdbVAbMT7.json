@@ -1,9 +1,0 @@
-{
-	"id": "ibMjklPdbVAbMT7",
-	"json": "{\"id\":\"ibMjklPdbVAbMT7\",\"url\":\"https://canvas.colorado.edu/courses/123160/pages/lilys\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/pages/lilys\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/pages/lilys\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:37:42.652Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123160/pages/lilys",
-	"url": "https://canvas.colorado.edu/courses/123160/pages/lilys"
-}

@@ -7,7 +7,6 @@ const fs = require('fs');
 
 const overridesRoutes = require('./src/core/overrides');
 const assignmentsRoutes = require('./src/core/assignments');
-const vncAuthRoutes = require('./src/routes/vnc-auth');
 const streamingAuthRoutes = require('./src/routes/streaming-auth');
 const fileOrganizationRoutes = require('./src/routes/file-organization');
 
@@ -81,7 +80,6 @@ app.use('/socket.io', (req, res) => {
 
 app.use('/api/overrides', overridesRoutes);
 app.use('/api/assignments', assignmentsRoutes);
-app.use('/api/vnc-auth', vncAuthRoutes);
 app.use('/api/streaming-auth', streamingAuthRoutes);
 app.use('/api', fileOrganizationRoutes);
 

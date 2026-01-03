@@ -54,7 +54,7 @@ export default function Login() {
     }
 
     if (!validateEmail(email)) {
-      setError('Please enter a valid Colorado email (xxxx1235@colorado.edu)');
+      setError('Please enter a valid Colorado email (xxxx1234@colorado.edu)');
       return;
     }
 
@@ -342,7 +342,7 @@ export default function Login() {
             <Input
               id="email"
               type="email"
-              placeholder="xxxx1235@colorado.edu"
+              placeholder="xxxx1234@colorado.edu"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyPress={handleKeyPress}

@@ -68,17 +68,20 @@ async function syncGoogleSheet({ integration, token, assignments, supabase }) {
         : '';
       
       // Check if assignment is completed
-      // Completed if: isCompleted flag is set, or submissionStatus === "yes", or workflow_state is "submitted"/"graded"
-      // Also check submissionStatusText for "Submitted" or "Graded"
+      // The isCompleted flag is already set by the sync orchestrator, which includes:
+      // - User-marked completions (from completedAssignmentIds in integration config)
+      // - Canvas submission status (submissionStatus === "yes" or workflow_state is "submitted"/"graded")
+      // User-marked completions take precedence and persist through updates
+      // We also check submission status directly as a fallback for safety
       const submissionStatus = assignment.submission_status || assignment.submissionStatus;
       const submissionStatusText = assignment.submissionStatusText || assignment.submission_status_text;
       const workflowState = assignment.workflow_state || assignment.workflowState;
       
       const isCompleted = 
-        assignment.isCompleted === true ||
-        submissionStatus === "yes" ||
-        workflowState === "submitted" ||
-        workflowState === "graded" ||
+        assignment.isCompleted === true || // From sync orchestrator (includes user-marked + Canvas status)
+        submissionStatus === "yes" || // Fallback check
+        workflowState === "submitted" || // Fallback check
+        workflowState === "graded" || // Fallback check
         (submissionStatusText && (
           submissionStatusText.toLowerCase().includes('submitted') ||
           submissionStatusText.toLowerCase().includes('graded') ||

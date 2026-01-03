@@ -35,6 +35,17 @@ const UPDATE_TEST_DATASET_DIR = path.normalize(path.join(STORAGE_DIR, 'update te
 const DATE_TOLERANCE_HOURS = Number(process.env.UPDATE_DATE_TOLERANCE_HOURS) || 24;
 const TITLE_SIMILARITY_THRESHOLD = Number(process.env.UPDATE_TITLE_SIMILARITY_THRESHOLD) || 0.8;
 const AUTO_UPLOAD_TO_SUPABASE = (process.env.AUTO_UPLOAD_TO_SUPABASE || 'true').toLowerCase() !== 'false';
+const AUTO_SYNC_INTEGRATIONS = (process.env.AUTO_SYNC_INTEGRATIONS || 'true').toLowerCase() !== 'false';
+
+// Optional integrations sync - don't crash if module is not available
+let runAllSyncs = null;
+try {
+  const syncOrchestrator = require('../src/services/integrations/sync-orchestrator');
+  runAllSyncs = syncOrchestrator.runAllSyncs;
+} catch (error) {
+  console.warn('⚠️  Integrations sync module not available:', error.message);
+  console.warn('   Integration syncs will be skipped');
+}
 
 // Import extractors
 const { extractAssignment } = require('../src/crawler/extractors/assignment-extractor.js');
@@ -2704,6 +2715,41 @@ async function uploadToSupabase(extractionFolder, summary) {
 }
 
 /**
+ * Trigger integration syncs after assignment updates
+ */
+async function triggerIntegrationSyncs() {
+  if (!AUTO_SYNC_INTEGRATIONS) {
+    console.log('💤 Auto-sync integrations is disabled (set AUTO_SYNC_INTEGRATIONS=true to enable)\n');
+    return { success: false, skipped: true };
+  }
+
+  if (!runAllSyncs) {
+    console.log('💤 Integration sync module not available, skipping sync\n');
+    return { success: false, skipped: true };
+  }
+
+  console.log('🔄 Syncing integrations (Google Sheets, Notion, Google Calendar)...\n');
+  
+  try {
+    const result = await runAllSyncs();
+    if (result.ran > 0) {
+      console.log(`✅ Successfully synced ${result.success || 0}/${result.ran} integration(s)\n`);
+      return { success: true, ...result };
+    } else {
+      console.log('ℹ️  No active integrations to sync\n');
+      return { success: true, ran: 0 };
+    }
+  } catch (error) {
+    console.error(`❌ Integration sync failed: ${error.message}\n`);
+    if (error.stack) {
+      console.error(error.stack);
+    }
+    // Don't fail the entire update process if sync fails
+    return { success: false, error: error.message };
+  }
+}
+
+/**
  * Get stored extracted data for a course from summary file
  */
 function getStoredExtractedDataFromSummary(summary, courseId) {
@@ -3391,7 +3437,20 @@ async function main() {
           
           // Auto-upload to Supabase if enabled
           if (updatedSummary) {
-            await uploadToSupabase(extractionFolder, updatedSummary);
+            const uploadResult = await uploadToSupabase(extractionFolder, updatedSummary);
+            
+            // Trigger integration syncs after successful upload (only if assignments were updated)
+            const hasAssignmentUpdates = diffReport.courses.some(course => 
+              course.assignments?.hasUpdates && (
+                (course.assignments.newItems?.length || 0) > 0 ||
+                (course.assignments.changedItems?.length || 0) > 0 ||
+                (course.assignments.removedItems?.length || 0) > 0
+              )
+            );
+            
+            if (uploadResult.success && hasAssignmentUpdates) {
+              await triggerIntegrationSyncs();
+            }
           }
         } else {
           console.error('⚠️  Some changes may not have been applied. Check the logs above.\n');
@@ -3416,7 +3475,10 @@ async function main() {
       console.log('📊 No updates found, but ensuring Supabase is synced with latest data...\n');
       const summary = loadExtractionSummary(extractionFolder);
       if (summary) {
-        await uploadToSupabase(extractionFolder, summary);
+        const uploadResult = await uploadToSupabase(extractionFolder, summary);
+        
+        // Note: We don't trigger syncs here since no updates were detected
+        // Syncs will happen on the next update cycle or via manual sync
       }
     }
     

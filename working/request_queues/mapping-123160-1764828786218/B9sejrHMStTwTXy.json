@@ -1,9 +1,0 @@
-{
-	"id": "B9sejrHMStTwTXy",
-	"json": "{\"id\":\"B9sejrHMStTwTXy\",\"url\":\"https://canvas.colorado.edu/courses/123160/external_tools/47323?files%5B%5D=%7B%7B+content_id+%7D%7D&launch_type=file_menu\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/external_tools/47323?files%5B%5D=%7B%7B+content_id+%7D%7D&launch_type=file_menu\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":2,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":2,\"enqueueStrategy\":\"same-hostname\",\"state\":4}},\"handledAt\":\"2025-12-04T06:29:18.049Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123160/external_tools/47323?files%5B%5D=%7B%7B+content_id+%7D%7D&launch_type=file_menu",
-	"url": "https://canvas.colorado.edu/courses/123160/external_tools/47323?files%5B%5D=%7B%7B+content_id+%7D%7D&launch_type=file_menu"
-}

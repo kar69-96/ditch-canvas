@@ -1,9 +1,0 @@
-{
-	"id": "yp7x0DpTFYntNp8",
-	"json": "{\"id\":\"yp7x0DpTFYntNp8\",\"url\":\"https://canvas.colorado.edu/courses/123160/pages/nflx\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123160/pages/nflx\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123160/pages/nflx\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-04T06:37:43.654Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123160/pages/nflx",
-	"url": "https://canvas.colorado.edu/courses/123160/pages/nflx"
-}

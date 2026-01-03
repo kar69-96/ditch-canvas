@@ -150,47 +150,9 @@ const Calendar = () => {
     setCurrentDate(newDate);
   };
 
-  // Handle export integration
-  const handleExport = async (provider: "google" | "notion") => {
+  // Start OAuth flow
+  const startOAuthFlow = async (provider: "google" | "notion") => {
     try {
-      // First, check if integration already exists
-      const integrations = await listIntegrations();
-      const existingIntegration = integrations.find(i => i.provider === provider);
-      
-      if (existingIntegration && existingIntegration.status === 'active') {
-        // Integration exists - just sync and open the sheet
-        toast({
-          title: "Syncing assignments...",
-          description: `Updating your ${provider === "google" ? "Google Sheet" : "Notion database"}...`,
-        });
-        
-        try {
-          const result = await syncIntegration(provider);
-          
-          toast({
-            title: "Sync complete",
-            description: `Your assignments have been synced.`,
-          });
-          
-          // Open the sheet/database
-          if (result.redirectUrl) {
-            window.open(result.redirectUrl, '_blank');
-          } else if (provider === 'google' && existingIntegration.external_target_id) {
-            // Construct Google Sheets URL from stored ID
-            window.open(`https://docs.google.com/spreadsheets/d/${existingIntegration.external_target_id}`, '_blank');
-          }
-        } catch (syncError) {
-          console.error('Sync error:', syncError);
-          toast({
-            title: "Sync failed",
-            description: syncError instanceof Error ? syncError.message : "Failed to sync assignments.",
-            variant: "destructive",
-          });
-        }
-        return;
-      }
-      
-      // No integration exists - start OAuth flow
       const authUrl = await connectIntegration(provider);
       // Open OAuth flow in a new window
       const popup = window.open(
@@ -224,22 +186,26 @@ const Calendar = () => {
         if (event.data.type === 'integration-success') {
           window.removeEventListener('message', messageHandler);
           
+          const providerName = provider === "google" ? "Google Sheets" : "Notion";
           toast({
             title: "Integration connected",
-            description: `Your assignments will now sync to ${provider === "google" ? "Google Sheets" : "Notion"}.`,
+            description: `Your assignments will now sync to ${providerName}.`,
           });
           
-          // If there's a redirect URL (Google Sheets), open it
+          // If there's a redirect URL, open it (Google Sheets or Notion database)
           if (event.data.redirectUrl) {
             // Try to open in new tab
             const newWindow = window.open(event.data.redirectUrl, '_blank');
             if (!newWindow) {
               // Popup blocked - show toast with link
+              const linkText = provider === "google" ? "Click here to open your spreadsheet" : 
+                              "Click here to open your Notion database";
+              const titleText = provider === "google" ? "Spreadsheet ready" : "Database ready";
               toast({
-                title: "Spreadsheet ready",
+                title: titleText,
                 description: (
                   <a href={event.data.redirectUrl} target="_blank" rel="noopener noreferrer" className="underline">
-                    Click here to open your spreadsheet
+                    {linkText}
                   </a>
                 ),
               });
@@ -280,6 +246,168 @@ const Calendar = () => {
       });
     }
   };
+
+  // Handle CSV export
+  const handleExportCSV = () => {
+    if (!canvasData || !canvasData.assignments || canvasData.assignments.length === 0) {
+      toast({
+        title: "No assignments",
+        description: "There are no assignments to export.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Prepare CSV data
+    const headers = [
+      "Title",
+      "Course Code",
+      "Course Name",
+      "Due Date",
+      "Due Time",
+      "Points",
+      "Status",
+      "Completed",
+      "Type",
+      "URL"
+    ];
+
+    const rows = canvasData.assignments.map(assignment => {
+      const course = canvasData.courses.find(c => c.id === assignment.courseId);
+      const dueDate = assignment.dueAt ? new Date(assignment.dueAt) : null;
+      const isQuiz = assignment.isQuiz || assignment.submissionTypes?.some(type => type.includes("quiz")) || false;
+      const isCompleted = completedAssignments.has(assignment.id) || assignment.submissionStatus === "yes";
+      
+      // Format due date
+      let dueDateStr = "";
+      let dueTimeStr = "";
+      if (dueDate && !isNaN(dueDate.getTime())) {
+        dueDateStr = dueDate.toLocaleDateString("en-US", { 
+          month: "short", 
+          day: "numeric", 
+          year: "numeric" 
+        });
+        dueTimeStr = dueDate.toLocaleTimeString("en-US", { 
+          hour: "numeric", 
+          minute: "2-digit" 
+        });
+      }
+
+      // Determine status
+      let status = "pending";
+      if (assignment.workflowState === "submitted") {
+        status = "submitted";
+      } else if (assignment.workflowState === "graded") {
+        status = "graded";
+      }
+
+      return [
+        assignment.title || "",
+        assignment.courseCode || "",
+        course?.name || assignment.courseName || "",
+        dueDateStr,
+        dueTimeStr,
+        assignment.pointsPossible?.toString() || "",
+        status,
+        isCompleted ? "Yes" : "No",
+        isQuiz ? "Quiz" : "Assignment",
+        assignment.url || ""
+      ];
+    });
+
+    // Escape CSV values (handle commas, quotes, newlines)
+    const escapeCSV = (value: string): string => {
+      if (value === null || value === undefined) return "";
+      const stringValue = String(value);
+      // If value contains comma, quote, or newline, wrap in quotes and escape quotes
+      if (stringValue.includes(",") || stringValue.includes('"') || stringValue.includes("\n")) {
+        return `"${stringValue.replace(/"/g, '""')}"`;
+      }
+      return stringValue;
+    };
+
+    // Build CSV content
+    const csvContent = [
+      headers.map(escapeCSV).join(","),
+      ...rows.map(row => row.map(escapeCSV).join(","))
+    ].join("\n");
+
+    // Create blob and download
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute("href", url);
+    link.setAttribute("download", `assignments_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = "hidden";
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "CSV exported",
+      description: `Exported ${canvasData.assignments.length} assignments to CSV.`,
+    });
+  };
+
+  // Handle export integration
+  const handleExport = async (provider: "google" | "notion") => {
+    try {
+      // First, check if integration already exists
+      const integrations = await listIntegrations();
+      console.log('[handleExport] Fetched integrations:', integrations);
+      const existingIntegration = integrations.find(i => i.provider === provider);
+      console.log('[handleExport] Existing integration for', provider, ':', existingIntegration);
+      
+      if (existingIntegration && existingIntegration.status === 'active') {
+        console.log('[handleExport] Integration exists, attempting sync...');
+        // Integration exists - just sync and open the sheet/database
+        const providerName = provider === "google" ? "Google Sheet" : "Notion database";
+        toast({
+          title: "Syncing assignments...",
+          description: `Updating your ${providerName}...`,
+        });
+        
+        try {
+          const result = await syncIntegration(provider);
+          
+          toast({
+            title: "Sync complete",
+            description: `Your assignments have been synced.`,
+          });
+          
+          // Open the sheet/database
+          if (result.redirectUrl) {
+            window.open(result.redirectUrl, '_blank');
+          } else if (provider === 'google' && existingIntegration.external_target_id) {
+            // Construct Google Sheets URL from stored ID
+            window.open(`https://docs.google.com/spreadsheets/d/${existingIntegration.external_target_id}`, '_blank');
+          }
+        } catch (syncError) {
+          console.error('Sync error:', syncError);
+          toast({
+            title: "Sync failed",
+            description: syncError instanceof Error ? syncError.message : "Failed to sync assignments.",
+            variant: "destructive",
+          });
+        }
+        return;
+      }
+      
+      // No integration exists - start OAuth flow immediately (same for both Google and Notion)
+      console.log('[handleExport] No integration found, starting OAuth flow for', provider);
+      await startOAuthFlow(provider);
+    } catch (error) {
+      console.error(`Failed to connect ${provider}:`, error);
+      toast({
+        title: "Connection failed",
+        description: error instanceof Error ? error.message : `Failed to connect ${provider} integration.`,
+        variant: "destructive",
+      });
+    }
+  };
+
 
   // Get title based on view
   const getTitle = () => {
@@ -840,96 +968,99 @@ const Calendar = () => {
           <div className="px-5 sm:px-8 pb-10">
         {/* Header */}
         <header className="py-6 sm:py-8 border-b border-border">
-          {/* Header with title and description */}
-          <div className="mb-6">
-            <h1 className="page-header">{monthName}</h1>
-            <p className="page-header-subtitle">Plan your academic journey</p>
-          </div>
-
-          {/* Controls Row */}
-          <div className="flex items-center justify-between">
-            {/* Left side - empty for now */}
-            <div className="flex-1"></div>
-
-            {/* Center - Calendar navigation (only show in grid view) */}
-            {!isListView && (
-              <div className="flex items-center gap-2">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="glass-button "
-                  onClick={handlePrevious}
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </Button>
-                <Select value={calendarView} onValueChange={(value) => setCalendarView(value as "day" | "week" | "month")}>
-                  <SelectTrigger className="glass-button  w-[120px] border-none bg-white/5 hover:bg-white/10">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="day">Day</SelectItem>
-                    <SelectItem value="week">Week</SelectItem>
-                    <SelectItem value="month">Month</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="glass-button "
-                  onClick={handleNext}
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
+          <div className="flex items-start justify-between gap-4">
+            {/* Left side - Title, subtitle, and month selector */}
+            <div className="flex flex-col gap-4">
+              <div>
+                <h1 className="page-header">{monthName}</h1>
+                <p className="page-header-subtitle">Plan your academic journey</p>
               </div>
-            )}
+
+              {/* Calendar navigation (only show in grid view) */}
+              {!isListView && (
+                <div className="flex items-center gap-2">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="glass-button "
+                    onClick={handlePrevious}
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </Button>
+                  <Select value={calendarView} onValueChange={(value) => setCalendarView(value as "day" | "week" | "month")}>
+                    <SelectTrigger className="glass-button  w-[120px] border-none bg-white/5 hover:bg-white/10">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="day">Day</SelectItem>
+                      <SelectItem value="week">Week</SelectItem>
+                      <SelectItem value="month">Month</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="glass-button "
+                    onClick={handleNext}
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </div>
+              )}
+            </div>
 
             {/* Right side - Export and View Toggle */}
-            <div className="flex-1 flex justify-end">
-              <div className="flex flex-col items-end gap-2">
-                {/* Export Dropdown */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="exposed-card glass-card flex items-center gap-2 px-3 py-2"
-                    >
-                      <Download className="w-4 h-4 text-foreground/80" />
-                      <span className="text-sm">Export</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-popover border border-border">
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onSelect={() => handleExport("google")}
-                    >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Google Sheets
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onSelect={() => handleExport("notion")}
-                    >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Notion
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+            <div className="flex flex-col items-end gap-2 mt-2">
+              {/* Export Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="exposed-card glass-card flex items-center gap-2 px-3 py-2"
+                  >
+                    <Download className="w-4 h-4 text-foreground/80" />
+                    <span className="text-sm">Export</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-popover border border-border">
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onSelect={() => handleExportCSV()}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onSelect={() => handleExport("google")}
+                  >
+                    <FileText className="w-4 h-4 mr-2" />
+                    Google Sheets
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onSelect={() => handleExport("notion")}
+                  >
+                    <FileText className="w-4 h-4 mr-2" />
+                    Notion
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-                {/* View Toggle (icons only) */}
-                <div className="exposed-card glass-card flex items-center gap-2 px-3 py-2">
-                  <CalendarIcon className={`w-4 h-4 ${isGridView ? 'text-primary' : 'text-foreground/60'}`} />
-                  <Switch
-                    checked={isListView}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        navigate('/calendar/list');
-                      } else {
-                        navigate('/calendar');
-                      }
-                    }}
-                  />
-                  <List className={`w-4 h-4 ${isListView ? 'text-primary' : 'text-foreground/60'}`} />
-                </div>
+              {/* View Toggle (icons only) */}
+              <div className="exposed-card glass-card flex items-center gap-2 px-3 py-2">
+                <CalendarIcon className={`w-4 h-4 ${isGridView ? 'text-primary' : 'text-foreground/60'}`} />
+                <Switch
+                  checked={isListView}
+                  onCheckedChange={(checked) => {
+                    if (checked) {
+                      navigate('/calendar/list');
+                    } else {
+                      navigate('/calendar');
+                    }
+                  }}
+                />
+                <List className={`w-4 h-4 ${isListView ? 'text-primary' : 'text-foreground/60'}`} />
               </div>
             </div>
           </div>

@@ -1,9 +1,0 @@
-{
-	"id": "J9loSw7oOssaSTk",
-	"json": "{\"id\":\"J9loSw7oOssaSTk\",\"url\":\"https://canvas.colorado.edu/courses/124722/assignments/2423313/lti/resource/85f2025a-b493-47c0-a7be-6ac9c81927c4?display=borderless\",\"loadedUrl\":\"https://api.turnitin.com/api/lti/1p0/similarity/report?custom_sourcedid=107720000002423313-107720000154925925-81851408\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/124722/assignments/2423313/lti/resource/85f2025a-b493-47c0-a7be-6ac9c81927c4?display=borderless\",\"method\":\"GET\",\"noRetry\":true,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"depth\":3,\"label\":\"course-link\",\"__crawlee\":{\"crawlDepth\":3,\"enqueueStrategy\":\"same-hostname\",\"state\":7}},\"handledAt\":\"2025-12-04T06:16:33.247Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/124722/assignments/2423313/lti/resource/85f2025a-b493-47c0-a7be-6ac9c81927c4?display=borderless",
-	"url": "https://canvas.colorado.edu/courses/124722/assignments/2423313/lti/resource/85f2025a-b493-47c0-a7be-6ac9c81927c4?display=borderless"
-}
