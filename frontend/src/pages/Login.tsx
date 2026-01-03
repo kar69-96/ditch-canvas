@@ -120,9 +120,7 @@ export default function Login() {
               return; // Continue polling
             }
             
-            if (extractionResult.success && extractionResult.username) {
-              extractionCompleted = true;
-              
+            if (extractionResult.success) {
               // Check if cookies are invalid (requires re-auth)
               if (extractionResult.requiresReauth) {
                 clearInterval(checkInterval);
@@ -147,6 +145,8 @@ export default function Login() {
                 return;
               }
               
+              extractionCompleted = true;
+              
               // Close popup if still open
               if (!popup.closed) {
                 popup.close();
@@ -155,17 +155,21 @@ export default function Login() {
               // Wait a moment for any final processing
               await new Promise(resolve => setTimeout(resolve, 1000));
               
-              // Verify username matches email
-              setStatus('Verifying authentication...');
-              const verifyResult = await verifyLogin(email, extractionResult.username);
-              
-              if (!verifyResult.success || !verifyResult.isValid) {
-                clearInterval(checkInterval);
-                setPopupWindow(null);
-                setError(`Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`);
-                setLoading(false);
-                await stopStreamingAuth(email);
-                return;
+              // Verify username matches email (optional - only if username was extracted)
+              if (extractionResult.username) {
+                setStatus('Verifying authentication...');
+                const verifyResult = await verifyLogin(email, extractionResult.username);
+                
+                if (!verifyResult.success || !verifyResult.isValid) {
+                  clearInterval(checkInterval);
+                  setPopupWindow(null);
+                  setError(`Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`);
+                  setLoading(false);
+                  await stopStreamingAuth(email);
+                  return;
+                }
+              } else {
+                console.log('[Login] Username not extracted, skipping verification (cookies are valid)');
               }
 
               // Only get user from database if cookies are valid AND username matches
@@ -219,7 +223,7 @@ export default function Login() {
               return;
             }
             
-            if (extractionResult.success && extractionResult.username) {
+            if (extractionResult.success) {
               // Check if cookies are invalid (requires re-auth)
               if (extractionResult.requiresReauth) {
                 await stopStreamingAuth(email);
@@ -239,25 +243,34 @@ export default function Login() {
                 return;
               }
               
-              // Extraction completed, verify and login
-              setStatus('Verifying authentication...');
-              const verifyResult = await verifyLogin(email, extractionResult.username);
-              
-              if (verifyResult.success && verifyResult.isValid) {
-                // Only get user from database if cookies are valid AND username matches
-                setStatus('Loading user data...');
-                const user = await userDatabase.getUserByEmail(email);
+              // Extraction completed, verify username if available, then login
+              if (extractionResult.username) {
+                setStatus('Verifying authentication...');
+                const verifyResult = await verifyLogin(email, extractionResult.username);
                 
-                if (user) {
-                  await sessionStorage.setSession(user.id, 7, email);
-                  setStatus('Login successful! Redirecting...');
+                if (!verifyResult.success || !verifyResult.isValid) {
+                  setError(`Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`);
+                  setLoading(false);
                   await stopStreamingAuth(email);
-                  
-                  setTimeout(() => {
-                    navigate('/');
-                  }, 1000);
                   return;
                 }
+              } else {
+                console.log('[Login] Username not extracted, skipping verification (cookies are valid)');
+              }
+              
+              // Only get user from database if cookies are valid (username verification optional)
+              setStatus('Loading user data...');
+              const user = await userDatabase.getUserByEmail(email);
+              
+              if (user) {
+                await sessionStorage.setSession(user.id, 7, email);
+                setStatus('Login successful! Redirecting...');
+                await stopStreamingAuth(email);
+                
+                setTimeout(() => {
+                  navigate('/');
+                }, 1000);
+                return;
               }
             }
             
@@ -352,7 +365,7 @@ export default function Login() {
           </div>
 
           <Button
-            onClick={handleContinue}
+            onClick={() => handleContinue()}
             disabled={loading || !email.trim()}
             className="w-full"
           >
