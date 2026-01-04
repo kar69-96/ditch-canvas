@@ -1,9 +1,0 @@
-{
-	"id": "s2oZkRB3e1IXft3",
-	"json": "{\"id\":\"s2oZkRB3e1IXft3\",\"url\":\"https://canvas.colorado.edu/courses/121531/modules/progressions\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/121531/modules/progressions\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/121531/modules/progressions\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"module\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-01T05:46:55.978Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/121531/modules/progressions",
-	"url": "https://canvas.colorado.edu/courses/121531/modules/progressions"
-}

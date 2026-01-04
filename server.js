@@ -8,6 +8,7 @@ const fs = require('fs');
 const overridesRoutes = require('./src/core/overrides');
 const assignmentsRoutes = require('./src/core/assignments');
 const streamingAuthRoutes = require('./src/routes/streaming-auth');
+const onboardingRoutes = require('./src/routes/onboarding');
 
 // Optional integrations - don't crash if dependencies are missing
 let integrationsRoutes = null;
@@ -80,6 +81,7 @@ app.use('/socket.io', (req, res) => {
 app.use('/api/overrides', overridesRoutes);
 app.use('/api/assignments', assignmentsRoutes);
 app.use('/api/streaming-auth', streamingAuthRoutes);
+app.use('/api/onboarding', onboardingRoutes);
 
 // Only add integrations routes if module is available
 if (integrationsRoutes) {

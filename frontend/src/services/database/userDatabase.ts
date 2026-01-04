@@ -65,12 +65,18 @@ function supabaseRowToUser(row: any): User {
   // Use the stored numeric_id if available, otherwise hash the email
   const numericId = row.numeric_id || (row.email ? emailToNumericId(row.email) : parseInt(row.id.replace(/-/g, '').substring(0, 10), 16));
   
+  // Include phone_number in profileData if it exists
+  const profileData = row.profile_data || {};
+  if (row.phone_number && !profileData.phoneNumber) {
+    profileData.phoneNumber = row.phone_number;
+  }
+  
   return {
     id: numericId,
     name: row.name,
     email: row.email,
     avatarUrl: row.avatar_url || undefined,
-    profileData: row.profile_data || {},
+    profileData,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -80,13 +86,22 @@ function supabaseRowToUser(row: any): User {
  * Convert User type to Supabase insert/update format
  */
 function userToSupabaseRow(user: User): any {
+  // Extract phone_number from profileData if it exists
+  const phoneNumber = user.profileData?.phoneNumber || null;
+  const profileData = { ...user.profileData };
+  // Remove phoneNumber from profileData since we store it in a separate column
+  if (profileData.phoneNumber) {
+    delete profileData.phoneNumber;
+  }
+  
   return {
     id: user.id.toString(), // Store as string, Supabase will handle UUID generation if needed
     numeric_id: user.id, // Store numeric ID for easy lookup
     name: user.name,
     email: user.email?.toLowerCase().trim(),
     avatar_url: user.avatarUrl || null,
-    profile_data: user.profileData || {},
+    profile_data: profileData,
+    phone_number: phoneNumber,
     updated_at: user.updatedAt,
   };
 }
@@ -214,13 +229,22 @@ export const userDatabase = {
       const email = user.email?.toLowerCase().trim() || '';
       const numericId = email ? emailToNumericId(email) : Date.now() % 2_147_483_647;
       
+      // Extract phone_number from profileData if it exists
+      const phoneNumber = user.profileData?.phoneNumber || null;
+      const profileData = { ...(user.profileData || {}) };
+      // Remove phoneNumber from profileData since we store it in a separate column
+      if (profileData.phoneNumber) {
+        delete profileData.phoneNumber;
+      }
+      
       const insertData = {
         id: numericId.toString(), // Use numeric ID as string for Supabase
         numeric_id: numericId, // Store numeric ID for queries
         name: user.name,
         email: email,
         avatar_url: user.avatarUrl || null,
-        profile_data: user.profileData || {},
+        profile_data: profileData,
+        phone_number: phoneNumber,
         created_at: now,
         updated_at: now,
       };
@@ -284,11 +308,20 @@ export const userDatabase = {
     }
 
     try {
+      // Extract phone_number from profileData if it exists
+      const phoneNumber = user.profileData?.phoneNumber || null;
+      const profileData = { ...user.profileData };
+      // Remove phoneNumber from profileData since we store it in a separate column
+      if (profileData.phoneNumber) {
+        delete profileData.phoneNumber;
+      }
+      
       const updateData = {
         name: user.name,
         email: user.email?.toLowerCase().trim(),
         avatar_url: user.avatarUrl || null,
-        profile_data: user.profileData || {},
+        profile_data: profileData,
+        phone_number: phoneNumber,
         updated_at: new Date().toISOString(),
       };
 
@@ -350,13 +383,22 @@ export const userDatabase = {
       const email = user.email?.toLowerCase().trim() || '';
       const numericId = user.id || (email ? emailToNumericId(email) : Date.now() % 2_147_483_647);
       
+      // Extract phone_number from profileData if it exists
+      const phoneNumber = user.profileData?.phoneNumber || null;
+      const profileData = { ...(user.profileData || {}) };
+      // Remove phoneNumber from profileData since we store it in a separate column
+      if (profileData.phoneNumber) {
+        delete profileData.phoneNumber;
+      }
+      
       const upsertData = {
         id: numericId.toString(),
         numeric_id: numericId,
         name: user.name,
         email: email,
         avatar_url: user.avatarUrl || null,
-        profile_data: user.profileData || {},
+        profile_data: profileData,
+        phone_number: phoneNumber,
         updated_at: now,
         created_at: now, // Will be ignored on update if using upsert
       };

@@ -1,9 +1,0 @@
-{
-	"id": "vuhHwRcgp0cBDip",
-	"json": "{\"id\":\"vuhHwRcgp0cBDip\",\"url\":\"https://canvas.colorado.edu/courses/124722/pages/assigned-readings-and-schedule\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/124722/pages/assigned-readings-and-schedule\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/124722/pages/assigned-readings-and-schedule\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-01T05:28:16.726Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/124722/pages/assigned-readings-and-schedule",
-	"url": "https://canvas.colorado.edu/courses/124722/pages/assigned-readings-and-schedule"
-}

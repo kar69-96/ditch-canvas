@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { FileText, BookOpen, Bell, Clock, MessageCircle, Send, Bot, Loader2, Maximize2, ChevronLeft, ChevronRight, ExternalLink, Plus } from "lucide-react";
+import { FileText, BookOpen, Bell, Clock, MessageCircle, Send, Bot, Loader2, Maximize2, ChevronLeft, ChevronRight, ExternalLink, Plus, Download } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import {
@@ -24,6 +24,7 @@ import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { getFileSignedUrl } from "@/services/api/supabaseDataLoader";
+import JSZip from "jszip";
 
 const getUserBucketName = (email: string) =>
   'user-' + email.toLowerCase().trim()
@@ -404,6 +405,142 @@ const ClassDetail = () => {
       topic.name
     );
   }, [handleOpenFile]);
+
+  // Download module as ZIP - must be defined before it's used
+  const downloadModuleAsZip = useCallback(async (module: {
+    week: string;
+    title: string;
+    position: number;
+    topics: Array<{
+      name: string;
+      hasPdf: boolean;
+      itemId?: number | string | null;
+      itemType?: string | null;
+      storagePath?: string | null;
+      storageBucket?: string | null;
+      url?: string | null;
+      originalUrl?: string | null;
+      mimeType?: string | null;
+      fileName?: string | null;
+      size?: number | null;
+      fileExtension?: string | null;
+    }>;
+  }) => {
+    if (!course) return;
+
+    // Filter out items that don't have downloadable content
+    const downloadableItems = module.topics.filter(topic => 
+      topic.hasPdf && (topic.storagePath || topic.url || topic.originalUrl)
+    );
+
+    if (downloadableItems.length === 0) {
+      toast({
+        title: "No files to download",
+        description: "This module doesn't contain any downloadable files.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const zip = new JSZip();
+      let downloadedCount = 0;
+      let failedCount = 0;
+
+      // Show loading toast
+      const loadingToast = toast({
+        title: "Preparing download...",
+        description: `Downloading ${downloadableItems.length} file(s) from ${module.title}`,
+      });
+
+      // Download each file and add to ZIP
+      for (const item of downloadableItems) {
+        try {
+          // Resolve file URL
+          const fileUrl = await resolveFileUrl({
+            id: item.itemId ?? item.name,
+            fileName: item.fileName || item.name,
+            url: item.url,
+            storageBucket: item.storageBucket,
+            storagePath: item.storagePath,
+            originalUrl: item.originalUrl,
+            mimeType: item.mimeType,
+            size: item.size ?? null,
+              fileExtension: item.fileExtension ?? ((item.fileName || item.name)?.split('.').pop()?.toLowerCase() || null),
+          }, 3600);
+
+          // If we couldn't resolve a URL, try using originalUrl directly
+          const finalUrl = fileUrl || item.originalUrl || item.url;
+          
+          if (!finalUrl) {
+            console.warn(`[ClassDetail] No URL available for item: ${item.name}`);
+            failedCount++;
+            continue;
+          }
+
+          // Fetch the file
+          const response = await fetch(finalUrl);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch file: ${response.statusText}`);
+          }
+
+          const blob = await response.blob();
+          const fileName = item.fileName || item.name || `file-${item.itemId || downloadedCount}`;
+          
+          // Add to ZIP
+          zip.file(fileName, blob);
+          downloadedCount++;
+        } catch (error) {
+          console.error(`[ClassDetail] Error downloading file ${item.name}:`, error);
+          failedCount++;
+        }
+      }
+
+      if (downloadedCount === 0) {
+        toast({
+          title: "Download failed",
+          description: "Unable to download any files from this module.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Generate ZIP file
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      
+      // Create download link
+      const url = URL.createObjectURL(zipBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      
+      // Sanitize filename: "{Course Name}: {Module Name}"
+      const courseName = course.name || course.code || "Course";
+      const moduleName = module.title || "Module";
+      const zipFileName = `${courseName}: ${moduleName}.zip`;
+      
+      // Remove invalid characters for filenames
+      const sanitizedFileName = zipFileName.replace(/[<>:"/\\|?*]/g, '_');
+      
+      link.download = sanitizedFileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      // Show success toast
+      toast({
+        title: "Download complete",
+        description: `Downloaded ${downloadedCount} file(s)${failedCount > 0 ? ` (${failedCount} failed)` : ''}`,
+      });
+    } catch (error) {
+      console.error('[ClassDetail] Error creating ZIP:', error);
+      toast({
+        title: "Download failed",
+        description: "An error occurred while creating the ZIP file.",
+        variant: "destructive",
+      });
+    }
+  }, [course, resolveFileUrl, toast]);
 
   // Memoized data computations - must be before early returns
   const courseFilesRaw = useMemo(() => {
@@ -1181,7 +1318,7 @@ const ClassDetail = () => {
                         className="border-none bg-white/5 overflow-hidden"
                       >
                         <AccordionTrigger className="px-4 py-3 slide-in-button border border-foreground/20 text-foreground hover:no-underline">
-                          <div className="flex items-center gap-3 text-left">
+                          <div className="flex items-center gap-3 text-left flex-1">
                             <span className="text-xs text-muted-foreground w-6">
                               {String(index + 1).padStart(2, "0")}
                             </span>
@@ -1190,6 +1327,19 @@ const ClassDetail = () => {
                               <p className="text-sm font-medium text-foreground/90">{module.title}</p>
                             </div>
                           </div>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="module-download-btn h-8 w-8 p-0 hover:opacity-70 transition-opacity flex-shrink-0 mr-2"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              downloadModuleAsZip(module);
+                            }}
+                            title={`Download ${module.title}`}
+                          >
+                            <Download className="w-4 h-4" />
+                          </Button>
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4">
                           <ul 
@@ -1252,6 +1402,24 @@ const ClassDetail = () => {
 
               {/* Sidebar */}
               <div className="space-y-6">
+                {/* Chat */}
+                <GlassCard hover={false} className="p-0">
+                  <div className="px-5 py-4 border-b border-border">
+                    <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                      Chat
+                    </h2>
+                  </div>
+                  <div className="p-5">
+                    <button
+                      onClick={() => navigate(`/courses/${course.id}/chat`)}
+                      className="slide-in-button border border-foreground/20 w-full px-4 py-2 text-sm font-medium text-foreground flex items-center justify-center gap-2"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span className="relative z-10">Chat with Class</span>
+                    </button>
+                  </div>
+                </GlassCard>
+
                 {/* Announcements */}
                 {announcements.length > 0 && (
                   <GlassCard hover={false} className="p-0">

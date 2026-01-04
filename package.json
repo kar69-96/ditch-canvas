@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npm run dev:server",
     "dev:server": "nodemon server.js",
+    "dev:all": "concurrently \"npm run dev:server\" \"cd frontend && npm run dev\" --names \"backend,frontend\" --prefix-colors \"blue,green\"",
     "start": "node server.js",
     "test": "mocha 'tests/**/*.test.js' --recursive --timeout 10000",
     "test:watch": "mocha 'tests/**/*.test.js' --recursive --watch",
@@ -23,7 +24,8 @@
         "aws:setup-streaming": "bash scripts/aws/setup-streaming-aws-cli.sh",
     "compare:metrics": "node scripts/utils/compare-metrics.js",
     "update": "node scripts/utils/update.js",
-        "aws:update": "node scripts/aws/run-aws-update.js"
+        "aws:update": "node scripts/aws/run-aws-update.js",
+    "seed:chat": "node scripts/utils/seed-chat-data.js"
   },
   "dependencies": {
     "@aws-sdk/client-cloudwatch": "^3.939.0",

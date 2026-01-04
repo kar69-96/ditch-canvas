@@ -25,18 +25,18 @@ export async function checkEmailExists(email: string) {
   return handleResponse(res);
 }
 
-export async function startStreamingAuth(email: string) {
+export async function startStreamingAuth(email: string, context: 'login' | 'onboarding' = 'login') {
   try {
   // Check if we need to force re-authentication (e.g., after logout)
   const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
     
     const apiUrl = `${API_BASE}/api/streaming-auth/start`;
-    console.log('[API] Starting streaming auth:', { email, forceReauth, url: apiUrl, API_BASE });
+    console.log('[API] Starting streaming auth:', { email, forceReauth, context, url: apiUrl, API_BASE });
   
   const res = await fetch(apiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, forceReauth }),
+    body: JSON.stringify({ email, forceReauth, context }),
   });
   
   // Clear the flag after starting auth (it will be handled by backend)

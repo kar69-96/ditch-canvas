@@ -1,9 +1,0 @@
-{
-	"id": "n4rFNsdCdmR8H1s",
-	"json": "{\"id\":\"n4rFNsdCdmR8H1s\",\"url\":\"https://canvas.colorado.edu/courses/123249/pages/welcome-to-fnce-3030\",\"loadedUrl\":\"https://canvas.colorado.edu/courses/123249/pages/welcome-to-fnce-3030\",\"uniqueKey\":\"https://canvas.colorado.edu/courses/123249/pages/welcome-to-fnce-3030\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"type\":\"page\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-01T05:42:40.212Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://canvas.colorado.edu/courses/123249/pages/welcome-to-fnce-3030",
-	"url": "https://canvas.colorado.edu/courses/123249/pages/welcome-to-fnce-3030"
-}

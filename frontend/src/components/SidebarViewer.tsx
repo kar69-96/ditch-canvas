@@ -4,9 +4,10 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { PostDetail } from "@/components/chat/PostDetail";
 
 // Types for sidebar items
-export type SidebarItemType = "assignment" | "announcement" | "file";
+export type SidebarItemType = "assignment" | "announcement" | "file" | "chat";
 
 export interface LinkedFile {
   id: string;
@@ -36,6 +37,7 @@ export interface SidebarItem {
   fileSize?: number;
   fileExtension?: string;
   metadata?: Record<string, any>;
+  postId?: string; // For chat posts
 }
 
 interface SidebarTab {
@@ -611,6 +613,15 @@ interface SidebarContentProps {
 function SidebarContent({ item, toggleComplete, openItem }: SidebarContentProps) {
   const { toggleFullscreen, isFullscreen } = useSidebar();
   const Icon = item.type === "assignment" ? FileText : item.type === "announcement" ? Bell : FileText;
+
+  // Handle chat type - render PostDetail component
+  if (item.type === "chat" && item.postId) {
+    return (
+      <div className="p-6">
+        <PostDetail postId={item.postId} />
+      </div>
+    );
+  }
 
   // For file type, show rich previews
   if (item.type === "file") {

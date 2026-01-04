@@ -199,7 +199,7 @@ export default function Login() {
               
               // Redirect to dashboard
               setTimeout(() => {
-                navigate('/');
+                navigate('/dashboard');
               }, 1000);
               
               return;
@@ -268,7 +268,7 @@ export default function Login() {
                 await stopStreamingAuth(email);
                 
                 setTimeout(() => {
-                  navigate('/');
+                  navigate('/dashboard');
                 }, 1000);
                 return;
               }

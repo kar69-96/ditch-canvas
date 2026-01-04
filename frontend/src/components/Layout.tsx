@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Calendar, BookOpen, LogOut } from "lucide-react";
+import { Home, Calendar, BookOpen, LogOut, Bot } from "lucide-react";
 import { useCourses } from "@/hooks/useCanvasData";
 import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { logout } from "@/services/mockApi/auth";
@@ -47,9 +47,10 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
   };
 
   const navItems = [
-    { path: "/", icon: Home, label: "Dashboard" },
+    { path: "/dashboard", icon: Home, label: "Dashboard" },
     { path: "/calendar", icon: Calendar, label: "Calendar" },
     { path: "/courses", icon: BookOpen, label: "Classes", hasDropdown: true },
+    { path: "/assistant", icon: Bot, label: "Tabus" },
   ];
 
   // Find active nav item index
@@ -58,6 +59,10 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
       return location.pathname.startsWith("/courses");
     } else if (item.path === "/calendar") {
       return location.pathname.startsWith("/calendar");
+    } else if (item.path === "/assistant") {
+      return location.pathname.startsWith("/assistant");
+    } else if (item.path === "/dashboard") {
+      return location.pathname === "/dashboard";
     }
     return location.pathname === item.path;
   });
@@ -168,6 +173,10 @@ const Layout = ({ children, constrainNav = false }: { children: React.ReactNode;
                 ? location.pathname.startsWith("/courses")
                 : item.path === "/calendar"
                 ? location.pathname.startsWith("/calendar")
+                : item.path === "/assistant"
+                ? location.pathname.startsWith("/assistant")
+                : item.path === "/dashboard"
+                ? location.pathname === "/dashboard"
                 : location.pathname === item.path;
               const hasDropdown = (item as any).hasDropdown;
 

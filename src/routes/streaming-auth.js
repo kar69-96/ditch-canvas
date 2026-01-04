@@ -28,6 +28,8 @@ const activeStreamingProcesses = new Map();
 const extractionResults = new Map();
 // Store session start times by email
 const sessionStartTimes = new Map();
+// Store context (login/onboarding) for each email
+const extractionContext = new Map(); // 'login' or 'onboarding'
 // Store active AWS update processes to prevent multiple simultaneous runs
 const activeAwsUpdateProcesses = new Set();
 
@@ -39,12 +41,48 @@ const supabaseConfig = getSupabaseConfig();
 const supabase = createClient(supabaseConfig.url, supabaseConfig.serviceKey);
 
 /**
+ * Save cookies to Supabase user record
+ * @param {string} email - User email
+ * @param {Array} cookies - Array of cookie objects
+ * @returns {Promise<void>}
+ */
+async function saveCookiesToSupabase(email, cookies) {
+  const normalizedEmail = email.toLowerCase().trim();
+  
+  // Find user by email
+  const { data: user, error: findError } = await supabase
+    .from('users')
+    .select('id, numeric_id')
+    .eq('email', normalizedEmail)
+    .single();
+  
+  if (findError || !user) {
+    throw new Error(`User not found: ${normalizedEmail}`);
+  }
+  
+  // Update user record with new cookies
+  const { error: updateError } = await supabase
+    .from('users')
+    .update({
+      cookies: cookies,
+      updated_at: new Date().toISOString()
+    })
+    .eq('id', user.id);
+  
+  if (updateError) {
+    throw new Error(`Failed to update cookies in Supabase: ${updateError.message}`);
+  }
+  
+  console.log(`[streaming-auth] ✅ Updated cookies in Supabase for user: ${normalizedEmail}`);
+}
+
+/**
  * POST /api/streaming-auth/start
  * Starts the streaming server and returns a proxied URL on port 3000
  */
 router.post('/start', async (req, res) => {
   try {
-    const { email, forceReauth } = req.body;
+    const { email, forceReauth, context } = req.body; // context: 'login' or 'onboarding'
     
     if (!email) {
       return res.status(400).json({ 
@@ -54,10 +92,12 @@ router.post('/start', async (req, res) => {
     }
 
     const normalizedEmail = email.toLowerCase().trim();
+    const extractionContextValue = context || 'login'; // Default to 'login' for backward compatibility
 
     // Clear any old extraction results and session data for this email
     extractionResults.delete(normalizedEmail);
     sessionStartTimes.set(normalizedEmail, Date.now());
+    extractionContext.set(normalizedEmail, extractionContextValue); // Store context
     
     // Delete old cookie file for this email
     const cookieFile = getCookieFilename(normalizedEmail);
@@ -140,11 +180,13 @@ router.post('/start', async (req, res) => {
       }
       
       activeStreamingProcesses.delete(normalizedEmail);
+      extractionContext.delete(normalizedEmail); // Clean up context on exit
     });
 
     childProcess.on('error', (error) => {
       console.error(`[streaming] Failed to start process:`, error);
       activeStreamingProcesses.delete(normalizedEmail);
+      extractionContext.delete(normalizedEmail); // Clean up context on error
     });
 
     // Wait for server to start
@@ -259,11 +301,13 @@ router.post('/stop', async (req, res) => {
     if (process && !process.killed) {
       process.kill();
       activeStreamingProcesses.delete(normalizedEmail);
+      extractionContext.delete(normalizedEmail); // Clean up context
       res.json({
         success: true,
         message: 'Streaming server stopped'
       });
     } else {
+      extractionContext.delete(normalizedEmail); // Clean up context even if process not found
       res.json({
         success: true,
         message: 'No active streaming server found'
@@ -714,8 +758,10 @@ function runAwsUpdateInBackground() {
 function checkAndStoreExtractionResults(email) {
   const normalizedEmail = email.toLowerCase().trim();
   const outputFile = getCookieFilename(normalizedEmail);
+  const context = extractionContext.get(normalizedEmail) || 'login'; // Default to 'login'
   
   console.log('[streaming-auth] Checking extraction results for:', normalizedEmail);
+  console.log('[streaming-auth]    Context:', context);
   console.log('[streaming-auth]    Looking for file:', outputFile);
   console.log('[streaming-auth]    File exists:', fs.existsSync(outputFile));
   
@@ -742,21 +788,43 @@ function checkAndStoreExtractionResults(email) {
         console.log(`[streaming-auth] ✅ Stored extraction results for ${normalizedEmail} (username not extracted, but cookies are valid)`);
       }
       
-      // Copy cookies to main file for AWS update script compatibility
-      console.log('[streaming-auth] Starting cookie copy process...');
-      const copied = copyCookiesToMainFile(normalizedEmail);
-      
-      if (copied) {
-        console.log('[streaming-auth] ✅ Cookies copied successfully, triggering AWS update...');
-        // Trigger AWS update script in background after successful cookie extraction
-        // Only if username exists (AWS update might need it)
-        if (username) {
-          runAwsUpdateInBackground();
-        } else {
-          console.warn('[streaming-auth] ⚠️  Username not found, skipping AWS update (but cookies are saved)');
-        }
+      // Only run AWS update for login context, not for onboarding
+      if (context === 'login') {
+        // Save cookies to Supabase user record (primary storage)
+        console.log('[streaming-auth] Saving cookies to Supabase for login...');
+        saveCookiesToSupabase(normalizedEmail, cookieData.cookies)
+          .then(() => {
+            console.log('[streaming-auth] ✅ Cookies saved to Supabase');
+            
+            // Copy cookies to main file for AWS update script compatibility
+            console.log('[streaming-auth] Copying cookies to main file for AWS update script...');
+            const copied = copyCookiesToMainFile(normalizedEmail);
+            
+            if (copied) {
+              console.log('[streaming-auth] ✅ Cookies copied to main file, triggering AWS update...');
+              // Trigger AWS update script in background after successful cookie extraction
+              // Only if username exists (AWS update might need it)
+              if (username) {
+                runAwsUpdateInBackground();
+              } else {
+                console.warn('[streaming-auth] ⚠️  Username not found, skipping AWS update (but cookies are saved)');
+              }
+            } else {
+              console.error('[streaming-auth] ❌ Failed to copy cookies to main file, AWS update will not run');
+            }
+          })
+          .catch((error) => {
+            console.error('[streaming-auth] ❌ Error saving cookies to Supabase:', error);
+            // Still try to copy to main file for AWS update even if Supabase save fails
+            const copied = copyCookiesToMainFile(normalizedEmail);
+            if (copied && username) {
+              runAwsUpdateInBackground();
+            }
+          });
       } else {
-        console.error('[streaming-auth] ❌ Failed to copy cookies, AWS update will not run');
+        // For onboarding, just extract and store cookies - no AWS update
+        // (Cookies are saved to Supabase in the onboarding complete endpoint)
+        console.log('[streaming-auth] ✅ Cookies extracted for onboarding (no AWS update will be run)');
       }
     } catch (error) {
       console.error('[streaming-auth] ❌ Error parsing extraction results:', error);

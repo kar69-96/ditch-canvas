@@ -17,6 +17,16 @@ import NotFound from "./pages/NotFound";
 import Learn from "./pages/Learn";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
+import Assistant from "./pages/Assistant";
+import ComingSoon from "./pages/ComingSoon";
+import ChatForumPage from "./pages/ChatForumPage";
+import SubscribePage from "./pages/SubscribePage";
+import Landing from "./pages/Landing";
+import OnboardingInfo from "./pages/OnboardingInfo";
+import OnboardingInvite from "./pages/OnboardingInvite";
+import WaitlistConfirmation from "./pages/WaitlistConfirmation";
+import OnboardingSync from "./pages/OnboardingSync";
+import OnboardingComplete from "./pages/OnboardingComplete";
 
 // Redirect component for dynamic routes
 const ClassesRedirect = () => {
@@ -48,19 +58,24 @@ const AppContent = () => {
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfUse />} />
           
+          {/* Onboarding routes (public) */}
+          <Route path="/onboarding/info" element={<OnboardingInfo />} />
+          <Route path="/onboarding/invite" element={<OnboardingInvite />} />
+          <Route path="/onboarding/waitlist-confirmation" element={<WaitlistConfirmation />} />
+          <Route path="/onboarding/sync" element={<OnboardingSync />} />
+          <Route path="/onboarding/complete" element={<OnboardingComplete />} />
+          
           {/* Protected routes */}
-          <Route path="/" element={
+          <Route path="/dashboard" element={
             <RouteGuard>
               <Dashboard />
             </RouteGuard>
           } />
-          
-          {/* Redirects for old URLs */}
-          <Route path="/dashboard" element={<Navigate to="/" replace />} />
           <Route path="/calendar/grid" element={<Navigate to="/calendar" replace />} />
           <Route path="/classes" element={<Navigate to="/courses" replace />} />
           <Route path="/classes/:id" element={<ClassesRedirect />} />
@@ -90,9 +105,29 @@ const AppContent = () => {
               <Learn />
             </RouteGuard>
           } />
+          <Route path="/courses/:id/chat" element={
+            <RouteGuard>
+              <ChatForumPage />
+            </RouteGuard>
+          } />
+          <Route path="/courses/:id/chat/subscribe" element={
+            <RouteGuard>
+              <SubscribePage />
+            </RouteGuard>
+          } />
           <Route path="/assignments" element={
             <RouteGuard>
               <Assignments />
+            </RouteGuard>
+          } />
+          <Route path="/assistant" element={
+            <RouteGuard>
+              <Assistant />
+            </RouteGuard>
+          } />
+          <Route path="/assistant/signup" element={
+            <RouteGuard>
+              <ComingSoon />
             </RouteGuard>
           } />
           

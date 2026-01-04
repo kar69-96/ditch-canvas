@@ -330,6 +330,53 @@ button.slide-in-button:hover.text-foreground {
   stroke: hsl(var(--background)) !important;
 }
 
+/* Override hover styles for download button inside slide-in-button */
+.slide-in-button:hover .module-download-btn,
+.slide-in-button.active .module-download-btn {
+  background-color: transparent !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.slide-in-button:hover .module-download-btn:hover {
+  background-color: transparent !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Override all SVG elements in download button */
+.slide-in-button:hover .module-download-btn svg,
+.slide-in-button.active .module-download-btn svg {
+  color: hsl(var(--foreground)) !important;
+  stroke: hsl(var(--foreground)) !important;
+}
+
+/* Override all SVG path elements (arrow and line) */
+.slide-in-button:hover .module-download-btn svg path,
+.slide-in-button.active .module-download-btn svg path {
+  stroke: hsl(var(--foreground)) !important;
+  fill: none !important;
+}
+
+/* Override all other SVG elements (line, circle, rect, etc.) */
+.slide-in-button:hover .module-download-btn svg line,
+.slide-in-button.active .module-download-btn svg line,
+.slide-in-button:hover .module-download-btn svg circle,
+.slide-in-button.active .module-download-btn svg circle,
+.slide-in-button:hover .module-download-btn svg rect,
+.slide-in-button.active .module-download-btn svg rect,
+.slide-in-button:hover .module-download-btn svg polyline,
+.slide-in-button.active .module-download-btn svg polyline,
+.slide-in-button:hover .module-download-btn svg polygon,
+.slide-in-button.active .module-download-btn svg polygon {
+  stroke: hsl(var(--foreground)) !important;
+  fill: none !important;
+}
+
+/* Override any SVG elements with currentColor */
+.slide-in-button:hover .module-download-btn svg [stroke="currentColor"],
+.slide-in-button.active .module-download-btn svg [stroke="currentColor"] {
+  stroke: hsl(var(--foreground)) !important;
+}
+
 /* Sidebar Viewer Styles */
 .sidebar-viewer-enter {
   transform: translateX(100%);
