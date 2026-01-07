@@ -221,7 +221,7 @@ export function PostDetail({ postId, onEdit }: PostDetailProps) {
         {postData.responses && postData.responses.length > 0 ? (
           <ResponseList
             post={postData}
-            responses={postData.responses}
+            responses={postData.responses.map(r => ({ ...r, attachments: [] }))}
             onRespond={() => {
               replyTextareaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
               replyTextareaRef.current?.focus();

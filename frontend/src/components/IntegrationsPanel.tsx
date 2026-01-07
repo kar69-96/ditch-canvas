@@ -99,7 +99,7 @@ export function IntegrationsPanel() {
           const lastSync = integ?.last_sync_at
             ? new Date(integ.last_sync_at).toLocaleString()
             : "—";
-          const targetName = integ?.target_display_name || integ?.external_target_id;
+          const targetName = integ?.target_display_name || undefined;
 
           return (
             <div

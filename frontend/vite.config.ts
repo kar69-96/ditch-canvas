@@ -5,6 +5,15 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  build: {
+    rollupOptions: {
+      input: path.resolve(__dirname, 'index.html'),
+      external: [
+        /.*\.test\.(ts|tsx|js|jsx)$/,
+        /.*\/tests?\/.*/,
+      ],
+    },
+  },
   server: {
     host: "0.0.0.0", // Listen on all network interfaces
     port: 5173,

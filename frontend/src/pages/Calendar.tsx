@@ -845,6 +845,7 @@ const Calendar = () => {
           points: assignment.pointsPossible,
           isQuiz,
           isCompleted: completedAssignments.has(assignment.id),
+          url: assignment.url,
         };
       })
       .sort((a, b) => a.due.getTime() - b.due.getTime());

@@ -437,7 +437,9 @@ const Dashboard = () => {
                     />
                     <DueToday 
                       assignments={dueToday} 
-                      onToggleComplete={toggleAssignmentComplete}
+                      onToggleComplete={(assignmentId, e) => {
+                        toggleAssignmentComplete(assignmentId, undefined, e);
+                      }}
                       onOpenAssignment={(assignment) => {
                         openSidebarItem({
                           id: String(assignment.id),

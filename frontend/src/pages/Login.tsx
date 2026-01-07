@@ -330,7 +330,7 @@ export default function Login() {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Welcome</CardTitle>
           <CardDescription>
-            Enter your Colorado email to continue
+            Enter your .edu email to continue
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -355,7 +355,7 @@ export default function Login() {
             <Input
               id="email"
               type="email"
-              placeholder="xxxx1234@colorado.edu"
+              placeholder="xxxx1234@university.edu"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyPress={handleKeyPress}

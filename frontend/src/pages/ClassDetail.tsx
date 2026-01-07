@@ -458,15 +458,10 @@ const ClassDetail = () => {
         try {
           // Resolve file URL
           const fileUrl = await resolveFileUrl({
-            id: item.itemId ?? item.name,
-            fileName: item.fileName || item.name,
             url: item.url,
             storageBucket: item.storageBucket,
             storagePath: item.storagePath,
             originalUrl: item.originalUrl,
-            mimeType: item.mimeType,
-            size: item.size ?? null,
-              fileExtension: item.fileExtension ?? ((item.fileName || item.name)?.split('.').pop()?.toLowerCase() || null),
           }, 3600);
 
           // If we couldn't resolve a URL, try using originalUrl directly

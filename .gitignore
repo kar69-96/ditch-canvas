@@ -79,3 +79,5 @@ puppeteer_canvas_data/
 
 
 
+.vercel
+.env*.local

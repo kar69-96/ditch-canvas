@@ -41,57 +41,58 @@ export function useUserPreferences() {
 
       const user = await userStorage.getUser(session.userId);
       if (!user?.profileData) {
-      // Try localStorage as fallback
-      const bg = localStorage.getItem('preferredBackground');
-      const font = localStorage.getItem('preferredFont');
-      const style = localStorage.getItem('stylePreferences');
-      
-      const colorMode = localStorage.getItem('colorMode') as 'light' | 'dark' | 'system' | null;
-      if (colorMode && ['light', 'dark', 'system'].includes(colorMode)) {
-        applyColorMode(colorMode);
+        // Try localStorage as fallback
+        const bg = localStorage.getItem('preferredBackground');
+        const font = localStorage.getItem('preferredFont');
+        const style = localStorage.getItem('stylePreferences');
+        
+        const colorMode = localStorage.getItem('colorMode') as 'light' | 'dark' | 'system' | null;
+        if (colorMode && ['light', 'dark', 'system'].includes(colorMode)) {
+          applyColorMode(colorMode);
+        }
+        if (bg) applyBackground(bg);
+        if (font) applyFont(font);
+        if (style) {
+          try {
+            applyStyle(JSON.parse(style));
+          } catch (e) {
+            console.error('Error parsing style preferences:', e);
+          }
+        }
+        return;
       }
-      if (bg) applyBackground(bg);
-      if (font) applyFont(font);
+
+      const { background, font, style, colorMode } = user.profileData;
+
+      // Apply color mode
+      if (colorMode) {
+        applyColorMode(colorMode);
+      } else {
+        // Check localStorage fallback
+        const savedMode = localStorage.getItem('colorMode') as 'light' | 'dark' | 'system' | null;
+        if (savedMode && ['light', 'dark', 'system'].includes(savedMode)) {
+          applyColorMode(savedMode);
+        }
+      }
+
+      // Apply background
+      if (background) {
+        applyBackground(background);
+      }
+
+      // Apply font
+      if (font) {
+        applyFont(font);
+      }
+
+      // Apply style preferences
       if (style) {
         try {
-          applyStyle(JSON.parse(style));
+          const stylePrefs = JSON.parse(style);
+          applyStyle(stylePrefs);
         } catch (e) {
           console.error('Error parsing style preferences:', e);
         }
-      }
-      return;
-    }
-
-    const { background, font, style, colorMode } = user.profileData;
-
-    // Apply color mode
-    if (colorMode) {
-      applyColorMode(colorMode);
-    } else {
-      // Check localStorage fallback
-      const savedMode = localStorage.getItem('colorMode') as 'light' | 'dark' | 'system' | null;
-      if (savedMode && ['light', 'dark', 'system'].includes(savedMode)) {
-        applyColorMode(savedMode);
-      }
-    }
-
-    // Apply background
-    if (background) {
-      applyBackground(background);
-    }
-
-    // Apply font
-    if (font) {
-      applyFont(font);
-    }
-
-    // Apply style preferences
-    if (style) {
-      try {
-        const stylePrefs = JSON.parse(style);
-        applyStyle(stylePrefs);
-      } catch (e) {
-        console.error('Error parsing style preferences:', e);
       }
     }
     
