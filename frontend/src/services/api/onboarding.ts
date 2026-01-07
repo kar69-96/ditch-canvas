@@ -1,6 +1,5 @@
-// Default to localhost:3000 in development if VITE_API_BASE_URL is not set
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 
-  (import.meta.env.DEV ? 'http://localhost:3000' : '');
+// Use relative URLs for production (empty API_BASE means same-origin requests)
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 async function handleResponse(response: Response) {
   const data = await response.json().catch(() => ({}));
@@ -91,7 +90,7 @@ export async function submitPersonalInfo(data: PersonalInfo): Promise<PersonalIn
   } catch (error: any) {
     console.error('[Onboarding API] Network error:', error);
     if (error.message?.includes('Failed to fetch') || error.message?.includes('Could not connect')) {
-      throw new Error(`Cannot connect to backend server at ${API_BASE || 'http://localhost:3000'}. Please ensure the backend server is running.`);
+      throw new Error(`Cannot connect to backend server at ${API_BASE || window.location.origin}. Please ensure the backend server is running.`);
     }
     throw error;
   }

@@ -125,7 +125,7 @@ export async function updateAssignmentCompletion(
   }
 
   const API_BASE =
-    import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:3000/api";
+    import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, "") || "/api";
 
   const res = await fetch(`${API_BASE}/assignments/${assignmentId}/complete`, {
     method: "PATCH",

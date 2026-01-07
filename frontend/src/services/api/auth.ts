@@ -54,7 +54,7 @@ export async function startStreamingAuth(email: string, context: 'login' | 'onbo
     
     // Check for common network errors
     if (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError')) {
-      const backendUrl = API_BASE || 'http://localhost:3000';
+      const backendUrl = API_BASE || window.location.origin;
       errorMessage = `Cannot connect to backend server at ${backendUrl}. Please ensure the backend server is running.`;
     } else if (error.message?.includes('CORS')) {
       errorMessage = 'CORS error: The backend server may not be configured to allow requests from this origin.';

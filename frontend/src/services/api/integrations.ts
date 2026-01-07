@@ -1,7 +1,7 @@
 import { getCurrentUser } from "../mockApi/auth";
 
 const API_BASE =
-  import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:3000/api";
+  import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, "") || "/api";
 
 async function ensureUserEmail(): Promise<string> {
   const user = await getCurrentUser();
