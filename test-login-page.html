@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login Page</title>
+</head>
+<body>
+    <h1>Testing ditchcanvas.com Login</h1>
+    <div id="results"></div>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        // Test 1: Check if site loads
+        fetch('https://ditchcanvas.com/login')
+            .then(res => {
+                results.innerHTML += `<p>✅ Site loads: HTTP ${res.status}</p>`;
+                return fetch('https://ditchcanvas.com/api/health');
+            })
+            .then(res => res.json())
+            .then(data => {
+                results.innerHTML += `<p>✅ API Health: ${JSON.stringify(data)}</p>`;
+                return fetch('https://ditchcanvas.com/api/streaming-auth/check-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: 'test@colorado.edu' })
+                });
+            })
+            .then(res => res.json())
+            .then(data => {
+                results.innerHTML += `<p>✅ Check Email API: ${JSON.stringify(data)}</p>`;
+                results.innerHTML += `<p><strong>All tests passed! The API is working.</strong></p>`;
+                results.innerHTML += `<p>If you still see "Load failed", it might be:</p>`;
+                results.innerHTML += `<ul>
+                    <li>Browser cache - try hard refresh (Cmd+Shift+R or Ctrl+Shift+R)</li>
+                    <li>Check browser console for specific error messages</li>
+                    <li>The frontend might be trying to access a different endpoint</li>
+                </ul>`;
+            })
+            .catch(err => {
+                results.innerHTML += `<p>❌ Error: ${err.message}</p>`;
+            });
+    </script>
+</body>
+</html>
+

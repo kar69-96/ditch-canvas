@@ -1,3 +1,4 @@
+// Use relative URLs for production (empty API_BASE means same-origin requests)
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 async function handleResponse(response: Response) {
