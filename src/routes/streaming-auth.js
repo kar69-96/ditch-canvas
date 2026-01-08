@@ -109,10 +109,10 @@ router.post('/start', async (req, res) => {
     // Check if streaming server is already running
     if (activeStreamingProcesses.size > 0) {
       // Reuse existing streaming server
-      // Determine base URL: Vercel provides VERCEL_URL, or use BACKEND_URL, or fallback to production/localhost
+      // Determine base URL: Use custom domain in production, or Vercel URL, or localhost
       const baseUrl = process.env.BACKEND_URL || 
+        (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' :
         (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-        (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' : 
         `http://localhost:${process.env.PORT || 3000}`));
         return res.json({
           success: true,
@@ -197,10 +197,10 @@ router.post('/start', async (req, res) => {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     // Return proxied URL - use production URL on Vercel
-    // Determine base URL: Vercel provides VERCEL_URL, or use BACKEND_URL, or fallback to production/localhost
+    // Determine base URL: Use custom domain in production, or Vercel URL, or localhost
     const baseUrl = process.env.BACKEND_URL || 
+      (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' :
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-      (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' : 
       `http://localhost:${process.env.PORT || 3000}`));
     res.json({
       success: true,
