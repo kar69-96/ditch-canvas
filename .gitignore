@@ -5,6 +5,14 @@
 .env.development
 .env.backend
 .env.frontend
+.env.bak
+.env.*.bak
+
+# Security files (SSH keys, certificates)
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Logs
 logs
@@ -38,6 +46,7 @@ comprehensive-file-discovery-results.json
 fast-all-courses-mapping-results.json
 file-extraction-test-results.json
 canvas-debug-screenshot.png
+test-*.html
 
 # Temp Puppeteer profiles
 puppeteer_map_*
