@@ -117,26 +117,29 @@ router.post('/start', async (req, res) => {
       console.log(`[streaming-auth] Cleared old cookie file for ${normalizedEmail}`);
     }
 
-    // Check if streaming server is already running
+    // In production (Vercel), use external streaming server
+    const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+    if (isProduction && process.env.STREAMING_SERVER_URL) {
+      // Production: return external streaming server URL directly
+      console.log('[streaming-auth] Production mode: using external streaming server');
+      return res.json({
+        success: true,
+        url: process.env.STREAMING_SERVER_URL,
+        message: 'Using external streaming server'
+      });
+    }
+
+    // Check if streaming server is already running (localhost only)
     if (activeStreamingProcesses.size > 0) {
       // Reuse existing streaming server
-      // Determine base URL: Use custom domain in production, or Vercel URL, or localhost
       const baseUrl = process.env.BACKEND_URL ||
-        (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' :
-        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
-        `http://localhost:${process.env.PORT || 3000}`));
+        `http://localhost:${process.env.PORT || 3000}`;
 
-        // In production, if streaming server is external (EC2), return direct URL
-        const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
-        const streamingUrl = (isProduction && process.env.STREAMING_SERVER_URL)
-          ? process.env.STREAMING_SERVER_URL
-          : `${baseUrl}/api/streaming-auth/viewer`;
-
-        return res.json({
-          success: true,
-        url: streamingUrl,
-          message: 'Streaming server already running'
-        });
+      return res.json({
+        success: true,
+        url: `${baseUrl}/api/streaming-auth/viewer`,
+        message: 'Streaming server already running'
+      });
     }
 
     // Path to the streaming script
