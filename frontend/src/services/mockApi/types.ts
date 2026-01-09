@@ -6,6 +6,7 @@ export interface User {
   id: number;
   name: string;
   email?: string;
+  student?: string; // CU Boulder identikey (e.g., kare6625)
   avatarUrl?: string;
   profileData?: {
     preferredName?: string;

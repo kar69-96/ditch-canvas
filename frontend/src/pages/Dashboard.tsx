@@ -69,10 +69,11 @@ const Dashboard = () => {
         const currentUser = await userStorage.getUser(session.userId);
         if (currentUser) {
           setUser(currentUser);
-          // Get firstName from profileData.firstName, or extract from name field
-          const firstName = currentUser.profileData?.firstName || 
-                           (currentUser.name ? currentUser.name.split(' ')[0] : 'Student');
-          setUserName(firstName);
+          // Use student identikey if available, otherwise fall back to firstName or name
+          const displayName = currentUser.student ||
+                             currentUser.profileData?.firstName ||
+                             (currentUser.name ? currentUser.name.split(' ')[0] : 'Student');
+          setUserName(displayName);
         } else {
           // User not found - RouteGuard will handle showing auth message
           console.warn('[Dashboard] User not found for session');

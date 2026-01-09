@@ -64,17 +64,18 @@ function shouldFallbackForError(error: any): boolean {
 function supabaseRowToUser(row: any): User {
   // Use the stored numeric_id if available, otherwise hash the email
   const numericId = row.numeric_id || (row.email ? emailToNumericId(row.email) : parseInt(row.id.replace(/-/g, '').substring(0, 10), 16));
-  
+
   // Include phone_number in profileData if it exists
   const profileData = row.profile_data || {};
   if (row.phone_number && !profileData.phoneNumber) {
     profileData.phoneNumber = row.phone_number;
   }
-  
+
   return {
     id: numericId,
     name: row.name,
     email: row.email,
+    student: row.student || undefined, // CU Boulder identikey
     avatarUrl: row.avatar_url || undefined,
     profileData,
     createdAt: row.created_at,
@@ -93,12 +94,13 @@ function userToSupabaseRow(user: User): any {
   if (profileData.phoneNumber) {
     delete profileData.phoneNumber;
   }
-  
+
   return {
     id: user.id.toString(), // Store as string, Supabase will handle UUID generation if needed
     numeric_id: user.id, // Store numeric ID for easy lookup
     name: user.name,
     email: user.email?.toLowerCase().trim(),
+    student: user.student || null, // CU Boulder identikey
     avatar_url: user.avatarUrl || null,
     profile_data: profileData,
     phone_number: phoneNumber,
@@ -211,6 +213,7 @@ export const userDatabase = {
         id: numericId,
         name: user.name,
         email,
+        student: user.student,
         avatarUrl: user.avatarUrl,
         profileData: user.profileData || {},
         createdAt: now,
@@ -242,6 +245,7 @@ export const userDatabase = {
         numeric_id: numericId, // Store numeric ID for queries
         name: user.name,
         email: email,
+        student: user.student || null, // CU Boulder identikey
         avatar_url: user.avatarUrl || null,
         profile_data: profileData,
         phone_number: phoneNumber,
@@ -319,6 +323,7 @@ export const userDatabase = {
       const updateData = {
         name: user.name,
         email: user.email?.toLowerCase().trim(),
+        student: user.student || null, // CU Boulder identikey
         avatar_url: user.avatarUrl || null,
         profile_data: profileData,
         phone_number: phoneNumber,
@@ -365,6 +370,7 @@ export const userDatabase = {
         id: numericId,
         name: user.name || existing?.name || 'User',
         email,
+        student: user.student ?? existing?.student,
         avatarUrl: user.avatarUrl ?? existing?.avatarUrl,
         profileData: user.profileData || existing?.profileData || {},
         createdAt: existing?.createdAt || now,
@@ -396,6 +402,7 @@ export const userDatabase = {
         numeric_id: numericId,
         name: user.name,
         email: email,
+        student: user.student || null, // CU Boulder identikey
         avatar_url: user.avatarUrl || null,
         profile_data: profileData,
         phone_number: phoneNumber,
