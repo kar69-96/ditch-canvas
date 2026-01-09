@@ -14,9 +14,20 @@ const {
 
 const router = express.Router();
 
+// Determine streaming server target based on environment
+const getStreamingTarget = () => {
+  // In production (Vercel), use external streaming server if configured
+  const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+  if (isProduction && process.env.STREAMING_SERVER_URL) {
+    return process.env.STREAMING_SERVER_URL;
+  }
+  // Otherwise use localhost
+  return `http://localhost:${process.env.STREAMING_PORT || 3002}`;
+};
+
 // Create proxy instance for streaming server
 const streamingProxy = httpProxy.createProxyServer({
-  target: `http://localhost:${process.env.STREAMING_PORT || 3002}`,
+  target: getStreamingTarget(),
   ws: true, // Enable WebSocket proxying
   changeOrigin: true,
   ignorePath: true // Ignore the incoming path and use target path
@@ -110,13 +121,20 @@ router.post('/start', async (req, res) => {
     if (activeStreamingProcesses.size > 0) {
       // Reuse existing streaming server
       // Determine base URL: Use custom domain in production, or Vercel URL, or localhost
-      const baseUrl = process.env.BACKEND_URL || 
+      const baseUrl = process.env.BACKEND_URL ||
         (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' :
-        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
         `http://localhost:${process.env.PORT || 3000}`));
+
+        // In production, if streaming server is external (EC2), return direct URL
+        const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+        const streamingUrl = (isProduction && process.env.STREAMING_SERVER_URL)
+          ? process.env.STREAMING_SERVER_URL
+          : `${baseUrl}/api/streaming-auth/viewer`;
+
         return res.json({
           success: true,
-        url: `${baseUrl}/api/streaming-auth/viewer`,
+        url: streamingUrl,
           message: 'Streaming server already running'
         });
     }
@@ -198,13 +216,20 @@ router.post('/start', async (req, res) => {
 
     // Return proxied URL - use production URL on Vercel
     // Determine base URL: Use custom domain in production, or Vercel URL, or localhost
-    const baseUrl = process.env.BACKEND_URL || 
+    const baseUrl = process.env.BACKEND_URL ||
       (process.env.VERCEL_ENV === 'production' ? 'https://ditchcanvas.com' :
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
       `http://localhost:${process.env.PORT || 3000}`));
+
+    // In production, if streaming server is external (EC2), return direct URL
+    const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+    const streamingUrl = (isProduction && process.env.STREAMING_SERVER_URL)
+      ? process.env.STREAMING_SERVER_URL
+      : `${baseUrl}/api/streaming-auth/viewer`;
+
     res.json({
       success: true,
-      url: `${baseUrl}/api/streaming-auth/viewer`,
+      url: streamingUrl,
       message: 'Streaming server started'
     });
 

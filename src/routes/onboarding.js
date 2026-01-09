@@ -296,7 +296,7 @@ router.post('/sync', async (req, res) => {
 
 /**
  * POST /api/onboarding/complete
- * Create user in users table after successful cookie extraction
+ * Add user to pending_extractions queue after successful cookie extraction
  */
 router.post('/complete', async (req, res) => {
   try {
@@ -312,15 +312,15 @@ router.post('/complete', async (req, res) => {
     const normalizedEmail = email.toLowerCase().trim();
     const normalizedCode = inviteCode.toUpperCase().trim();
 
-    // Check if user already exists
-    const { data: existingUser, error: checkError } = await supabase
+    // Check if user already exists in users table
+    const { data: existingUser, error: checkUserError } = await supabase
       .from('users')
       .select('id, email')
       .eq('email', normalizedEmail)
       .single();
 
-    if (checkError && checkError.code !== 'PGRST116') {
-      console.error('[onboarding] Error checking existing user:', checkError);
+    if (checkUserError && checkUserError.code !== 'PGRST116') {
+      console.error('[onboarding] Error checking existing user:', checkUserError);
       return res.status(500).json({
         success: false,
         error: 'Error checking existing user'
@@ -334,49 +334,79 @@ router.post('/complete', async (req, res) => {
       });
     }
 
+    // Check if user already in pending_extractions
+    const { data: existingPending, error: checkPendingError } = await supabase
+      .from('pending_extractions')
+      .select('id, user_email')
+      .eq('user_email', normalizedEmail)
+      .single();
+
+    if (checkPendingError && checkPendingError.code !== 'PGRST116') {
+      console.error('[onboarding] Error checking pending extractions:', checkPendingError);
+      return res.status(500).json({
+        success: false,
+        error: 'Error checking extraction queue'
+      });
+    }
+
+    if (existingPending) {
+      return res.json({
+        success: true,
+        message: 'User already in extraction queue',
+        data: {
+          email: normalizedEmail,
+          queuePosition: 'pending'
+        }
+      });
+    }
+
     // Get cookies from cookie file
     const cookieFile = getCookieFilename(normalizedEmail);
     let cookies = null;
-    
+
     if (fs.existsSync(cookieFile)) {
       try {
         const cookieData = JSON.parse(fs.readFileSync(cookieFile, 'utf8'));
         cookies = cookieData.cookies || null;
       } catch (error) {
         console.error('[onboarding] Error reading cookie file:', error);
-        // Continue without cookies - they can be added later
+        return res.status(500).json({
+          success: false,
+          error: 'Cookie extraction failed. Please try again.'
+        });
       }
     }
 
-    // Generate numeric ID from email
-    const numericId = emailToNumericId(normalizedEmail);
+    if (!cookies) {
+      return res.status(400).json({
+        success: false,
+        error: 'No cookies found. Please complete authentication first.'
+      });
+    }
 
-    // Create user in users table
-    const { data: newUser, error: createError } = await supabase
-      .from('users')
+    // Add user to pending_extractions table
+    const { data: pendingEntry, error: insertError } = await supabase
+      .from('pending_extractions')
       .insert({
-        id: numericId.toString(),
-        numeric_id: numericId,
-        email: normalizedEmail,
-        name: firstName,
+        user_email: normalizedEmail,
+        user_name: firstName,
         school: school,
         cookies: cookies,
         invite_code_used: normalizedCode,
-        onboarding_completed_at: new Date().toISOString()
+        status: 'pending'
       })
       .select()
       .single();
 
-    if (createError) {
-      console.error('[onboarding] Error creating user:', createError);
+    if (insertError) {
+      console.error('[onboarding] Error adding to pending_extractions:', insertError);
       return res.status(500).json({
         success: false,
-        error: 'Failed to create user account'
+        error: 'Failed to add to extraction queue'
       });
     }
 
     // Increment invite code usage
-    // First get current count
     const { data: codeData, error: fetchError } = await supabase
       .from('invite_codes')
       .select('current_users')
@@ -394,16 +424,18 @@ router.post('/complete', async (req, res) => {
 
       if (updateCodeError) {
         console.error('[onboarding] Error updating invite code usage:', updateCodeError);
-        // Don't fail the request - user is created, just log the error
+        // Don't fail the request - user is queued, just log the error
       }
     }
 
+    console.log(`[onboarding] Added ${normalizedEmail} to pending_extractions queue`);
+
     return res.json({
       success: true,
-      message: 'User account created successfully',
+      message: 'Added to extraction queue. You will receive an email within 24 hours.',
       data: {
-        userId: newUser.id,
-        email: newUser.email
+        email: normalizedEmail,
+        queueId: pendingEntry.id
       }
     });
 
