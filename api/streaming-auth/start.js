@@ -15,32 +15,38 @@ module.exports = async (req, res) => {
   
   try {
     const { email } = req.body;
-    
+
     if (!email) {
       return res.status(400).json({ success: false, error: 'Email is required' });
     }
-    
-    // In production, return external streaming server URL
+
+    // Verify external streaming server is configured
     const streamingUrl = process.env.STREAMING_SERVER_URL;
-    
+
     if (!streamingUrl) {
-      return res.status(500).json({ 
-        success: false, 
-        error: 'Streaming server not configured' 
+      return res.status(500).json({
+        success: false,
+        error: 'Streaming server not configured'
       });
     }
-    
+
+    // Return proxied URL through ditchcanvas.com (NOT raw EC2 IP!)
+    // This ensures users never see the backend infrastructure
+    const productionUrl = 'https://ditchcanvas.com';
+    const proxyUrl = `${productionUrl}/api/streaming-auth/viewer?email=${encodeURIComponent(email)}`;
+
     return res.json({
       success: true,
-      url: streamingUrl,
-      message: 'Using external streaming server'
+      url: proxyUrl,
+      streamingServerUrl: streamingUrl, // EC2 server URL for polling extraction status
+      message: 'Streaming server ready'
     });
-    
+
   } catch (error) {
     console.error('Streaming auth start error:', error);
-    return res.status(500).json({ 
-      success: false, 
-      error: error.message 
+    return res.status(500).json({
+      success: false,
+      error: error.message
     });
   }
 };

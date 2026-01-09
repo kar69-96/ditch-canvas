@@ -225,8 +225,8 @@ router.post('/start', async (req, res) => {
       `http://localhost:${process.env.PORT || 3000}`));
 
     // In production, if streaming server is external (EC2), return direct URL
-    const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
-    const streamingUrl = (isProduction && process.env.STREAMING_SERVER_URL)
+    const isProd = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+    const streamingUrl = (isProd && process.env.STREAMING_SERVER_URL)
       ? process.env.STREAMING_SERVER_URL
       : `${baseUrl}/api/streaming-auth/viewer`;
 

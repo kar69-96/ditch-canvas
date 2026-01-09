@@ -93,7 +93,7 @@ export default function OnboardingSync() {
         try {
           // Check for extraction results periodically
           if (!extractionCompleted) {
-            const extractionResult = await getExtractionResult(onboardingData.email);
+            const extractionResult = await getExtractionResult(onboardingData.email, startResult.streamingServerUrl);
 
             // Skip if still pending (extraction in progress)
             if (extractionResult.pending) {
@@ -170,7 +170,7 @@ export default function OnboardingSync() {
             await new Promise(resolve => setTimeout(resolve, 3000));
 
             // Final check for extraction results
-            const extractionResult = await getExtractionResult(onboardingData.email);
+            const extractionResult = await getExtractionResult(onboardingData.email, startResult.streamingServerUrl);
 
             if (extractionResult.pending) {
               // Continue waiting

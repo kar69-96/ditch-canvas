@@ -72,7 +72,7 @@ export default function Login() {
         console.log('[Login] Checking email:', email);
       const emailCheck = await checkEmailExists(email);
         console.log('[Login] Email check result:', emailCheck);
-      
+
       if (!emailCheck.exists) {
         setError('Email not found. Sign up flow coming soon.');
         setLoading(false);
@@ -113,7 +113,7 @@ export default function Login() {
         try {
           // Check for extraction results periodically (even if popup is still open)
           if (!extractionCompleted) {
-            const extractionResult = await getExtractionResult(email);
+            const extractionResult = await getExtractionResult(email, startResult.streamingServerUrl);
             
             // Skip if still pending (extraction in progress)
             if (extractionResult.pending) {
@@ -213,9 +213,9 @@ export default function Login() {
             
             // Wait a moment to see if extraction completed
             await new Promise(resolve => setTimeout(resolve, 3000));
-            
+
             // Final check for extraction results
-            const extractionResult = await getExtractionResult(email);
+            const extractionResult = await getExtractionResult(email, startResult.streamingServerUrl);
             
             // Skip if still pending (extraction in progress)
             if (extractionResult.pending) {

@@ -73,8 +73,13 @@ export async function stopStreamingAuth(email: string) {
   return handleResponse(res);
 }
 
-export async function getExtractionResult(email: string) {
-  const res = await fetch(`${API_BASE}/api/streaming-auth/extraction-result/${encodeURIComponent(email)}`);
+export async function getExtractionResult(email: string, streamingServerUrl?: string) {
+  // Use streaming server URL directly if provided (for EC2), otherwise use API_BASE (legacy)
+  const url = streamingServerUrl
+    ? `${streamingServerUrl}/extraction-result/${encodeURIComponent(email)}`
+    : `${API_BASE}/api/streaming-auth/extraction-result/${encodeURIComponent(email)}`;
+
+  const res = await fetch(url);
   return handleResponse(res);
 }
 
