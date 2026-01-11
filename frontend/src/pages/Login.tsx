@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,7 +17,7 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [popupWindow, setPopupWindow] = useState<Window | null>(null);
-  const [checkedUser, setCheckedUser] = useState<any>(null); // Store user from email check
+  const checkedUserRef = useRef<any>(null); // Use ref to avoid stale closure in setInterval
   const navigate = useNavigate();
 
   const validateEmail = (email: string): boolean => {
@@ -101,7 +101,7 @@ export default function Login() {
 
       // Store user data from email check (backend returns full user with service key)
       if (emailCheck.user) {
-        setCheckedUser(emailCheck.user);
+        checkedUserRef.current = emailCheck.user;
 
         // Check if forced re-auth is required (e.g., after logout)
         const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
@@ -232,7 +232,7 @@ export default function Login() {
 
               // Use stored user from email check (avoids RLS issues with anon key)
               setStatus('Loading user data...');
-              const user = checkedUser;
+              const user = checkedUserRef.current;
 
               if (!user) {
                 clearInterval(checkInterval);
@@ -329,7 +329,7 @@ export default function Login() {
               
               // Use stored user from email check (avoids RLS issues with anon key)
               setStatus('Loading user data...');
-              const user = checkedUser;
+              const user = checkedUserRef.current;
 
               if (user) {
                 // Transform and save user to localStorage
