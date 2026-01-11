@@ -62,6 +62,36 @@ if (!fs.existsSync(outputDir)) {
 let browserContext = null;
 let page = null;
 let extractionComplete = false;
+let browserStarting = false; // Flag to prevent restart during startup
+
+// Status stages for frontend feedback
+const STATUS_STAGES = {
+  CONNECTING: 'connecting',
+  BROWSER_LAUNCHING: 'browser_launching',
+  BROWSER_READY: 'browser_ready',
+  SCREENCAST_STARTING: 'screencast_starting',
+  NAVIGATING: 'navigating',
+  READY_FOR_LOGIN: 'ready_for_login',
+  LOGIN_DETECTED: 'login_detected',
+  EXTRACTING_COOKIES: 'extracting_cookies',
+  COMPLETE: 'complete',
+  ERROR: 'error'
+};
+
+let currentStage = STATUS_STAGES.CONNECTING;
+
+function emitStatus(stage, message, details = {}) {
+  currentStage = stage;
+  io.emit('status', { stage, message, timestamp: Date.now(), ...details });
+  console.log(`[streaming] Status: ${stage} - ${message}`);
+}
+
+// Timeout constants
+const TIMEOUTS = {
+  BROWSER_LAUNCH: 15000,  // 15 seconds
+  SCREENCAST: 5000,       // 5 seconds
+  NAVIGATION: 30000       // 30 seconds
+};
 
 /**
  * Serve the streaming viewer HTML page (minimal UI, fullscreen)
@@ -76,16 +106,13 @@ app.get('/', (req, res) => {
   <title>Canvas Login</title>
   <script src="/socket.io/socket.io.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
       background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
     #canvas {
       display: block;
@@ -94,14 +121,15 @@ app.get('/', (req, res) => {
       cursor: pointer;
       object-fit: contain;
     }
-    .loading {
+    .status-container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
       color: #666;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 400px;
+      padding: 40px;
     }
     .spinner {
       border: 4px solid #f3f3f3;
@@ -110,19 +138,102 @@ app.get('/', (req, res) => {
       width: 50px;
       height: 50px;
       animation: spin 1s linear infinite;
-      margin: 0 auto 15px;
+      margin: 0 auto 20px;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .hidden { display: none; }
+    .status-text {
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #333;
+    }
+    .progress-steps {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0.3;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .step.active { opacity: 1; transform: scale(1.1); }
+    .step.complete { opacity: 1; }
+    .step.complete .step-icon { background: #22c55e; }
+    .step.error .step-icon { background: #dc2626; }
+    .step-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #667eea;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .step-label { font-size: 11px; margin-top: 6px; color: #666; }
+    .error-container {
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+    }
+    .error-icon { font-size: 40px; margin-bottom: 15px; }
+    .error-title { color: #dc2626; font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+    .error-message { color: #991b1b; font-size: 14px; margin-bottom: 8px; }
+    .error-suggestion { color: #666; font-size: 13px; margin-bottom: 20px; }
+    .retry-button {
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .retry-button:hover { background: #5a67d8; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <p>Loading Canvas...</p>
+  <div class="status-container" id="status-container">
+    <div class="spinner" id="spinner"></div>
+    <p class="status-text" id="status-text">Connecting...</p>
+    <div class="progress-steps" id="progress-steps">
+      <div class="step" id="step-connect" data-step="connect">
+        <span class="step-icon">1</span>
+        <span class="step-label">Connect</span>
+      </div>
+      <div class="step" id="step-browser" data-step="browser">
+        <span class="step-icon">2</span>
+        <span class="step-label">Browser</span>
+      </div>
+      <div class="step" id="step-canvas" data-step="canvas">
+        <span class="step-icon">3</span>
+        <span class="step-label">Canvas</span>
+      </div>
+      <div class="step" id="step-login" data-step="login">
+        <span class="step-icon">4</span>
+        <span class="step-label">Login</span>
+      </div>
+    </div>
+    <div class="error-container hidden" id="error-container">
+      <div class="error-icon">⚠️</div>
+      <p class="error-title" id="error-title">Something went wrong</p>
+      <p class="error-message" id="error-message"></p>
+      <p class="error-suggestion" id="error-suggestion"></p>
+      <button class="retry-button" onclick="window.location.reload()">Try Again</button>
+    </div>
   </div>
   <canvas id="canvas" class="hidden"></canvas>
 
@@ -130,13 +241,74 @@ app.get('/', (req, res) => {
     const socket = io();
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d', { alpha: false });
-    const loading = document.getElementById('loading');
+    const statusContainer = document.getElementById('status-container');
+    const statusText = document.getElementById('status-text');
+    const spinner = document.getElementById('spinner');
+    const progressSteps = document.getElementById('progress-steps');
+    const errorContainer = document.getElementById('error-container');
+    const errorTitle = document.getElementById('error-title');
+    const errorMessage = document.getElementById('error-message');
+    const errorSuggestion = document.getElementById('error-suggestion');
+
     let isConnected = false;
     let canvasReady = false;
+    let connectionTimeout = null;
+
+    // Connection timeout - 10 seconds
+    connectionTimeout = setTimeout(() => {
+      if (!isConnected) {
+        showError('Connection Timeout', 'Could not connect to the authentication server.', 'Please close this window and try again.');
+      }
+    }, 10000);
 
     socket.on('connect', () => {
       console.log('Connected to streaming server');
       isConnected = true;
+      clearTimeout(connectionTimeout);
+      updateStep('connect', 'complete');
+      statusText.textContent = 'Connected, starting browser...';
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from server');
+      if (!canvasReady && !errorContainer.classList.contains('hidden') === false) {
+        showError('Connection Lost', 'Lost connection to the server.', 'Please close this window and try again.');
+      }
+    });
+
+    socket.on('status', (data) => {
+      console.log('Status:', data);
+      statusText.textContent = data.message;
+
+      switch(data.stage) {
+        case 'browser_launching':
+          updateStep('connect', 'complete');
+          updateStep('browser', 'active');
+          break;
+        case 'browser_ready':
+          updateStep('browser', 'complete');
+          break;
+        case 'screencast_starting':
+        case 'navigating':
+          updateStep('browser', 'complete');
+          updateStep('canvas', 'active');
+          break;
+        case 'ready_for_login':
+          updateStep('canvas', 'complete');
+          updateStep('login', 'active');
+          break;
+        case 'login_detected':
+        case 'extracting_cookies':
+          updateStep('login', 'complete');
+          statusText.textContent = 'Login successful! Saving credentials...';
+          break;
+        case 'complete':
+          statusText.textContent = 'Complete! This window will close...';
+          break;
+        case 'error':
+          showError('Error', data.message, data.suggestion || 'Please close this window and try again.');
+          break;
+      }
     });
 
     socket.on('frame', (data) => {
@@ -146,9 +318,8 @@ app.get('/', (req, res) => {
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
 
-        // Show canvas on first frame
         if (!canvasReady) {
-          loading.classList.add('hidden');
+          statusContainer.classList.add('hidden');
           canvas.classList.remove('hidden');
           canvasReady = true;
         }
@@ -157,78 +328,94 @@ app.get('/', (req, res) => {
     });
 
     socket.on('extraction-complete', () => {
+      if (canvasReady) {
+        // Show brief success overlay
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(34,197,94,0.9);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:bold;z-index:9999;';
+        overlay.innerHTML = '✓ Login Successful!';
+        document.body.appendChild(overlay);
+      }
       setTimeout(() => window.close(), 1500);
     });
 
     socket.on('error', (message) => {
-      loading.innerHTML = '<p style="color: #c33;">Error: ' + message + '</p>';
+      showError('Error', message, 'Please close this window and try again.');
     });
 
-    // Mouse events with proper coordinate mapping
+    function updateStep(stepName, state) {
+      const stepEl = document.getElementById('step-' + stepName);
+      if (!stepEl) return;
+      stepEl.classList.remove('active', 'complete', 'error');
+      if (state) stepEl.classList.add(state);
+    }
+
+    function showError(title, message, suggestion) {
+      spinner.classList.add('hidden');
+      statusText.classList.add('hidden');
+      progressSteps.classList.add('hidden');
+      errorContainer.classList.remove('hidden');
+      errorTitle.textContent = title;
+      errorMessage.textContent = message;
+      errorSuggestion.textContent = suggestion || '';
+    }
+
+    // Mouse events
     canvas.addEventListener('mousemove', (e) => {
       if (!isConnected || !canvasReady) return;
-
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
-      const x = Math.round((e.clientX - rect.left) * scaleX);
-      const y = Math.round((e.clientY - rect.top) * scaleY);
-
-      socket.emit('mouse-move', { x, y });
+      socket.emit('mouse-move', {
+        x: Math.round((e.clientX - rect.left) * scaleX),
+        y: Math.round((e.clientY - rect.top) * scaleY)
+      });
     });
 
     canvas.addEventListener('mousedown', (e) => {
       if (!isConnected || !canvasReady) return;
       e.preventDefault();
-
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
-      const x = Math.round((e.clientX - rect.left) * scaleX);
-      const y = Math.round((e.clientY - rect.top) * scaleY);
-
-      socket.emit('mouse-down', { x, y, button: e.button === 2 ? 'right' : 'left' });
+      socket.emit('mouse-down', {
+        x: Math.round((e.clientX - rect.left) * scaleX),
+        y: Math.round((e.clientY - rect.top) * scaleY),
+        button: e.button === 2 ? 'right' : 'left'
+      });
     });
 
     canvas.addEventListener('mouseup', (e) => {
       if (!isConnected || !canvasReady) return;
       e.preventDefault();
-
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
-      const x = Math.round((e.clientX - rect.left) * scaleX);
-      const y = Math.round((e.clientY - rect.top) * scaleY);
-
-      socket.emit('mouse-up', { x, y, button: e.button === 2 ? 'right' : 'left' });
+      socket.emit('mouse-up', {
+        x: Math.round((e.clientX - rect.left) * scaleX),
+        y: Math.round((e.clientY - rect.top) * scaleY),
+        button: e.button === 2 ? 'right' : 'left'
+      });
     });
 
     canvas.addEventListener('click', (e) => {
       if (!isConnected || !canvasReady) return;
       e.preventDefault();
-
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
-      const x = Math.round((e.clientX - rect.left) * scaleX);
-      const y = Math.round((e.clientY - rect.top) * scaleY);
-
-      socket.emit('mouse-click', { x, y, button: 'left' });
+      socket.emit('mouse-click', {
+        x: Math.round((e.clientX - rect.left) * scaleX),
+        y: Math.round((e.clientY - rect.top) * scaleY),
+        button: 'left'
+      });
     });
 
-    canvas.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-    });
+    canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
-    // Keyboard events
     document.addEventListener('keydown', (e) => {
       if (!isConnected || !canvasReady) return;
       socket.emit('key-down', { key: e.key, code: e.code });
-
-      // Prevent default for most keys to avoid browser shortcuts
-      if (e.key !== 'F5' && e.key !== 'F12') {
-        e.preventDefault();
-      }
+      if (e.key !== 'F5' && e.key !== 'F12') e.preventDefault();
     });
 
     document.addEventListener('keyup', (e) => {
@@ -236,13 +423,10 @@ app.get('/', (req, res) => {
       socket.emit('key-up', { key: e.key, code: e.code });
     });
 
-    // Handle input events for text fields
     document.addEventListener('input', (e) => {
       if (!isConnected || !canvasReady) return;
       const text = e.data || e.target.value;
-      if (text) {
-        socket.emit('type-text', { text });
-      }
+      if (text) socket.emit('type-text', { text });
     });
   </script>
 </body>
@@ -336,13 +520,16 @@ async function restartBrowser() {
 io.on('connection', (socket) => {
   console.log('[streaming] Client connected:', socket.id);
 
-  // Restart browser on new connection to ensure fresh session
-  if (page && !extractionComplete) {
-    console.log('[streaming] Browser already in use, restarting for fresh session...');
+  // Only restart browser if it's not currently starting up
+  // This prevents killing the browser during initial navigation
+  if (page && !extractionComplete && !browserStarting) {
+    console.log('[streaming] Browser already in use and ready, restarting for fresh session...');
     restartBrowser().catch(err => {
       console.error('[streaming] Failed to restart browser:', err);
       socket.emit('error', 'Failed to initialize browser');
     });
+  } else if (browserStarting) {
+    console.log('[streaming] Browser is starting up, skipping restart');
   }
 
   socket.on('mouse-move', async (data) => {
@@ -426,8 +613,8 @@ async function extractCookies() {
   let username = null;
   try {
     if (page) {
-      // Wait a moment for the page to fully render
-      await page.waitForTimeout(2000);
+      // Wait briefly for the page to fully render (reduced from 2000ms)
+      await page.waitForTimeout(500);
 
       console.log('[streaming] Attempting to extract username from Canvas page...');
 
@@ -539,22 +726,29 @@ async function monitorLoginCompletion() {
     console.log('[streaming] Page navigated to:', url);
 
     // Check if we're on Canvas (not fedauth)
-    // Accept root URL or any Canvas page
     if (url.includes('canvas.colorado.edu') && !url.includes('fedauth')) {
       console.log('[streaming] ✅ Login complete! User reached Canvas');
       console.log('[streaming]    Current URL:', url);
 
-      // Wait for page to fully load and cookies to settle
-      await page.waitForTimeout(3000);
+      // Emit login detected status
+      emitStatus(STATUS_STAGES.LOGIN_DETECTED, 'Login successful! Extracting credentials...');
+
+      // Wait briefly for cookies to settle
+      await page.waitForTimeout(1000);
 
       // Extract cookies
       try {
+        emitStatus(STATUS_STAGES.EXTRACTING_COOKIES, 'Saving authentication data...');
+
         console.log('[streaming] Extracting cookies and username...');
         const cookieData = await extractCookies();
 
         console.log('[streaming] ✅ Cookie extraction completed');
         console.log('[streaming]    Username:', cookieData.username || 'not extracted');
         console.log('[streaming]    Cookies:', cookieData.cookies.length);
+
+        // Emit completion status
+        emitStatus(STATUS_STAGES.COMPLETE, 'Authentication complete!');
 
         // Notify clients
         io.emit('extraction-complete', {
@@ -576,7 +770,9 @@ async function monitorLoginCompletion() {
         }, 3000);
       } catch (err) {
         console.error('[streaming] Error extracting cookies:', err);
-        // Still notify clients even if there was an error
+        emitStatus(STATUS_STAGES.ERROR, 'Failed to save credentials', {
+          suggestion: 'Please try logging in again.'
+        });
         io.emit('error', err.message);
       }
     }
@@ -588,33 +784,56 @@ async function monitorLoginCompletion() {
  */
 async function startStreaming() {
   try {
+    // Set flag to prevent restart during startup
+    browserStarting = true;
+
     console.log('[streaming] Starting browser...');
     console.log('[streaming]    Port:', PORT);
     console.log('[streaming]    Canvas URL:', CANVAS_URL);
     console.log('[streaming]    Extraction email:', EXTRACTION_EMAIL);
     console.log('[streaming]    Output file:', COOKIE_OUTPUT_FILE);
 
-    // Launch browser with Chrome
-    // Use headless mode for server environments (CDP screencast works in headless)
-    const browser = await chromium.launch({
+    // Emit browser launching status
+    emitStatus(STATUS_STAGES.BROWSER_LAUNCHING, 'Starting secure browser...');
+
+    // Launch browser with Playwright's bundled Chromium
+    const launchOptions = {
       headless: true,
-      executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-blink-features=AutomationControlled',
-        '--disable-features=IsolateOrigins,site-per-process' // Fix for stale request issues
+        '--disable-features=IsolateOrigins,site-per-process'
       ]
-    });
+    };
 
-    // Create a fresh browser context with cleared state to avoid "Stale Request" errors
+    if (process.env.CHROME_PATH) {
+      launchOptions.executablePath = process.env.CHROME_PATH;
+    }
+
+    // Browser launch with timeout
+    let browser;
+    try {
+      const launchPromise = chromium.launch(launchOptions);
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Browser launch timeout')), TIMEOUTS.BROWSER_LAUNCH)
+      );
+      browser = await Promise.race([launchPromise, timeoutPromise]);
+    } catch (launchErr) {
+      emitStatus(STATUS_STAGES.ERROR, 'Failed to start browser', {
+        suggestion: 'The browser may not be installed. Try running: npx playwright install chromium'
+      });
+      throw launchErr;
+    }
+
+    emitStatus(STATUS_STAGES.BROWSER_READY, 'Browser started successfully');
+
+    // Create browser context
     browserContext = await browser.newContext({
       viewport: { width: 1280, height: 720 },
       userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      // Clear all storage to ensure fresh session
       storageState: undefined,
-      // Disable cache to avoid stale data
       bypassCSP: false,
       ignoreHTTPSErrors: false
     });
@@ -622,38 +841,69 @@ async function startStreaming() {
     page = await browserContext.newPage();
 
     // Enable CDP session for screencast
+    emitStatus(STATUS_STAGES.SCREENCAST_STARTING, 'Preparing screen capture...');
+
     const cdpSession = await page.context().newCDPSession(page);
 
-    // Start screencast with optimized settings for lower latency
-    await cdpSession.send('Page.startScreencast', {
-      format: 'jpeg',
-      quality: 50, // Lower quality for faster encoding/transmission
-      maxWidth: 1280,
-      maxHeight: 720,
-      everyNthFrame: 1 // Capture every frame for smoother experience
-    });
+    // Start screencast with timeout
+    try {
+      const screencastPromise = cdpSession.send('Page.startScreencast', {
+        format: 'jpeg',
+        quality: 50,
+        maxWidth: 1280,
+        maxHeight: 720,
+        everyNthFrame: 1
+      });
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Screencast start timeout')), TIMEOUTS.SCREENCAST)
+      );
+      await Promise.race([screencastPromise, timeoutPromise]);
+    } catch (screencastErr) {
+      emitStatus(STATUS_STAGES.ERROR, 'Failed to start screen capture', {
+        suggestion: 'Please try again. If the problem persists, contact support.'
+      });
+      await browserContext?.close();
+      throw screencastErr;
+    }
 
-    console.log('[streaming] ✅ Screencast started (optimized for low latency)');
+    console.log('[streaming] ✅ Screencast started');
 
     // Listen for screencast frames
     cdpSession.on('Page.screencastFrame', async (frame) => {
-      // Broadcast frame to all connected clients
       io.emit('frame', frame.data);
-
-      // Acknowledge the frame immediately to request next frame
       await cdpSession.send('Page.screencastFrameAck', { sessionId: frame.sessionId });
     });
 
-    // Navigate to Canvas login
-    console.log('[streaming] Navigating to Canvas...');
-    await page.goto(CANVAS_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    // Navigate to Canvas login with timeout
+    emitStatus(STATUS_STAGES.NAVIGATING, 'Loading Canvas login page...');
+
+    try {
+      await page.goto(CANVAS_URL, { waitUntil: 'domcontentloaded', timeout: TIMEOUTS.NAVIGATION });
+    } catch (navErr) {
+      browserStarting = false; // Clear flag on error
+      emitStatus(STATUS_STAGES.ERROR, 'Failed to load Canvas', {
+        suggestion: 'Please check your network connection and try again.'
+      });
+      await browserContext?.close();
+      throw navErr;
+    }
+
+    // Browser is ready - clear the startup flag
+    browserStarting = false;
+    emitStatus(STATUS_STAGES.READY_FOR_LOGIN, 'Ready - please log in to Canvas');
 
     // Start monitoring for login completion
     monitorLoginCompletion();
 
   } catch (err) {
+    browserStarting = false; // Clear flag on error
     console.error('[streaming] Error starting browser:', err);
-    io.emit('error', err.message);
+    // Only emit error if not already emitted
+    if (currentStage !== STATUS_STAGES.ERROR) {
+      emitStatus(STATUS_STAGES.ERROR, err.message || 'An unexpected error occurred', {
+        suggestion: 'Please close this window and try again.'
+      });
+    }
     process.exit(1);
   }
 }
@@ -663,13 +913,11 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(`[streaming] 🚀 Streaming server started on port ${PORT}`);
   console.log(`[streaming]    View at: http://localhost:${PORT}`);
 
-  // Start browser after server is ready
-  setTimeout(() => {
-    startStreaming().catch(err => {
-      console.error('[streaming] Failed to start streaming:', err);
-      process.exit(1);
-    });
-  }, 1000);
+  // Start browser immediately (removed delay)
+  startStreaming().catch(err => {
+    console.error('[streaming] Failed to start streaming:', err);
+    process.exit(1);
+  });
 });
 
 // Cleanup on exit

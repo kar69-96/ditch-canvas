@@ -2,6 +2,7 @@ const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
 const httpProxy = require('http-proxy');
 const { createClient } = require('@supabase/supabase-js');
 const { getSupabaseConfig } = require('../core/config');
@@ -43,6 +44,10 @@ const sessionStartTimes = new Map();
 const extractionContext = new Map(); // 'login' or 'onboarding'
 // Store active AWS update processes to prevent multiple simultaneous runs
 const activeAwsUpdateProcesses = new Set();
+// Track last AWS update time to prevent excessive updates
+let lastAwsUpdateTime = null;
+// AWS update cooldown period in milliseconds (default: 1 hour)
+const AWS_UPDATE_COOLDOWN = parseInt(process.env.AWS_UPDATE_COOLDOWN_MINUTES || '60') * 60 * 1000;
 
 // Default streaming port (internal)
 const STREAMING_PORT = process.env.STREAMING_PORT || 3002;
@@ -63,7 +68,7 @@ async function saveCookiesToSupabase(email, cookies) {
   // Find user by email
   const { data: user, error: findError } = await supabase
     .from('users')
-    .select('id, numeric_id')
+    .select('id')
     .eq('email', normalizedEmail)
     .single();
   
@@ -75,7 +80,8 @@ async function saveCookiesToSupabase(email, cookies) {
   const { error: updateError } = await supabase
     .from('users')
     .update({
-      cookies: cookies,
+      canvas_cookies: cookies,
+      canvas_cookies_updated_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     })
     .eq('id', user.id);
@@ -214,8 +220,54 @@ router.post('/start', async (req, res) => {
       extractionContext.delete(normalizedEmail); // Clean up context on error
     });
 
-    // Wait for server to start
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    // Wait for server to start with health check
+    console.log('[streaming-auth] Waiting for server to be ready...');
+
+    // Health check function
+    const checkServerHealth = () => {
+      return new Promise((resolve) => {
+        const req = http.request({
+          hostname: 'localhost',
+          port: STREAMING_PORT,
+          path: '/health',
+          method: 'GET',
+          timeout: 1000
+        }, (res) => {
+          resolve(res.statusCode === 200);
+        });
+        req.on('error', () => resolve(false));
+        req.on('timeout', () => {
+          req.destroy();
+          resolve(false);
+        });
+        req.end();
+      });
+    };
+
+    // Try health check up to 10 times (5 seconds total)
+    let serverReady = false;
+    for (let i = 0; i < 10; i++) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      serverReady = await checkServerHealth();
+      if (serverReady) {
+        console.log(`[streaming-auth] Server ready after ${(i + 1) * 500}ms`);
+        break;
+      }
+      console.log(`[streaming-auth] Health check ${i + 1}/10 - server not ready yet...`);
+    }
+
+    if (!serverReady) {
+      console.error('[streaming-auth] Server failed to start within 5 seconds');
+      // Kill the process if it exists
+      if (childProcess && !childProcess.killed) {
+        childProcess.kill();
+        activeStreamingProcesses.delete(normalizedEmail);
+      }
+      return res.status(500).json({
+        success: false,
+        error: 'Streaming server failed to start. Please try again.'
+      });
+    }
 
     // Return proxied URL - use production URL on Vercel
     // Determine base URL: Use custom domain in production, or Vercel URL, or localhost
@@ -365,20 +417,41 @@ router.post('/stop', async (req, res) => {
 router.delete('/cookies/:email', async (req, res) => {
   try {
     const { email } = req.params;
-    
+
     if (!email) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'Email is required' 
+        error: 'Email is required'
       });
     }
 
     const normalizedEmail = email.toLowerCase().trim();
-    
-    // Delete email-specific cookie file
-    const cookieFile = getCookieFilename(normalizedEmail);
     let deleted = false;
-    
+
+    // 1. Delete cookies from Supabase database
+    try {
+      const { error: updateError } = await supabase
+        .from('users')
+        .update({
+          canvas_cookies: null,
+          canvas_cookies_updated_at: null,
+          updated_at: new Date().toISOString()
+        })
+        .eq('email', normalizedEmail);
+
+      if (updateError) {
+        console.error(`[streaming-auth] Error clearing cookies in Supabase:`, updateError);
+      } else {
+        deleted = true;
+        console.log(`[streaming-auth] Cleared cookies in Supabase for ${normalizedEmail}`);
+      }
+    } catch (dbError) {
+      console.error(`[streaming-auth] Supabase error:`, dbError);
+    }
+
+    // 2. Delete email-specific cookie file (local backup)
+    const cookieFile = getCookieFilename(normalizedEmail);
+
     if (fs.existsSync(cookieFile)) {
       try {
         fs.unlinkSync(cookieFile);
@@ -388,18 +461,18 @@ router.delete('/cookies/:email', async (req, res) => {
         console.error(`[streaming-auth] Error deleting cookie file:`, deleteError);
       }
     }
-    
-    // Clear from memory
+
+    // 3. Clear from memory
     extractionResults.delete(normalizedEmail);
     sessionStartTimes.delete(normalizedEmail);
-    
-    // Stop any active streaming process for this email
+
+    // 4. Stop any active streaming process for this email
     const process = activeStreamingProcesses.get(normalizedEmail);
     if (process && !process.killed) {
       process.kill();
       activeStreamingProcesses.delete(normalizedEmail);
     }
-    
+
     res.json({
       success: true,
       message: deleted ? 'Cookies deleted successfully' : 'No cookies found to delete',
@@ -407,9 +480,9 @@ router.delete('/cookies/:email', async (req, res) => {
     });
   } catch (error) {
     console.error('Delete cookies error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: error.message || 'Failed to delete cookies' 
+      error: error.message || 'Failed to delete cookies'
     });
   }
 });
@@ -422,6 +495,30 @@ router.get('/status', (req, res) => {
   res.json({
     success: true,
     activeProcesses: activeStreamingProcesses.size,
+    port: STREAMING_PORT
+  });
+});
+
+/**
+ * GET /api/streaming-auth/status/:email
+ * Get detailed streaming status for a specific email session
+ */
+router.get('/status/:email', (req, res) => {
+  const { email } = req.params;
+  const normalizedEmail = email.toLowerCase().trim();
+
+  const process = activeStreamingProcesses.get(normalizedEmail);
+  const hasSession = sessionStartTimes.has(normalizedEmail);
+  const sessionStart = sessionStartTimes.get(normalizedEmail);
+  const hasResult = extractionResults.has(normalizedEmail);
+
+  res.json({
+    success: true,
+    email: normalizedEmail,
+    hasActiveProcess: !!process && !process.killed,
+    hasSession,
+    sessionAge: hasSession ? Date.now() - sessionStart : null,
+    extractionComplete: hasResult,
     port: STREAMING_PORT
   });
 });
@@ -726,21 +823,32 @@ function runAwsUpdateInBackground() {
     console.log('[streaming-auth] AWS update script already running, skipping duplicate run');
     return;
   }
-  
+
+  // Check cooldown period - prevent too frequent updates
+  const now = Date.now();
+  if (lastAwsUpdateTime && (now - lastAwsUpdateTime) < AWS_UPDATE_COOLDOWN) {
+    const minutesRemaining = Math.ceil((AWS_UPDATE_COOLDOWN - (now - lastAwsUpdateTime)) / 60000);
+    console.log(`[streaming-auth] AWS update cooldown active (${minutesRemaining}min remaining), skipping update`);
+    return;
+  }
+
   const awsUpdateScript = path.join(__dirname, '..', '..', 'scripts', 'aws', 'run-aws-update.js');
-  
+
   if (!fs.existsSync(awsUpdateScript)) {
     console.warn('[streaming-auth] AWS update script not found at:', awsUpdateScript);
     console.warn('[streaming-auth] Skipping background update');
     return;
   }
-  
+
   // Check if AWS_INSTANCE_ID is configured
   if (!process.env.AWS_INSTANCE_ID) {
     console.warn('[streaming-auth] AWS_INSTANCE_ID not configured, skipping AWS update');
     console.warn('[streaming-auth] Set AWS_INSTANCE_ID environment variable to enable automatic updates');
     return;
   }
+
+  // Update the last run time
+  lastAwsUpdateTime = now;
   
   console.log('[streaming-auth] ✅ Starting AWS update script in background...');
   console.log('[streaming-auth]    AWS Instance ID:', process.env.AWS_INSTANCE_ID);

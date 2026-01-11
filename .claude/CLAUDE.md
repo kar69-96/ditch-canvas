@@ -4,11 +4,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-YAY_FINAL is a full-stack Canvas LMS data extraction and management system consisting of:
-- **Backend**: Node.js/Express server that extracts Canvas data using Browserbase cloud browsers and Playwright
+YAY_FINAL is a full-stack Canvas LMS data management and daily sync platform consisting of:
+- **Backend**: Node.js/Express API server for Canvas data updates, integrations, and user management
 - **Frontend**: React 18 + TypeScript dashboard with Vite, Tailwind CSS, and shadcn/ui components
 
-The system extracts assignments, courses, files, and modules from Canvas LMS and provides a modern web interface for viewing and managing the data.
+The system provides a modern web interface for viewing and managing Canvas data, with daily updates and integrations to Google Sheets and Notion.
+
+**Note**: Initial Canvas data extraction is handled by the separate `canvas-extraction` repository. This repository focuses on daily operations, updates, and user-facing features.
+
+## Preferences
+- Keep the repository lean. Simplify code and find efficient ways to execute
+- Organize all files in an intuitive sense. Reduce bloat where possible
+- For one-time use scripts (e.g., Supabase migration scripts), create them, execute, then delete
+- Use existing CLIs where possible (supabase, vercel, aws) and download others if needed
+- Do not create summary markdown files after long tasks unless specifically requested. Use bullet point summaries in chat instead
+- Test the repository on ditchcanvas.com, not on localhost
+
+### AWS EC2 Management
+- **Always use AWS CLI** to search for instances comprehensively before assuming instance IDs
+- Use `aws ec2 describe-instances --query '...' --output table` to list all instances
+- **Hibernate instances after use** to reduce costs (don't leave running unnecessarily)
+- Current streaming server instance: `i-020212a83e2089bf9` (verify with AWS CLI before use)
+- SSH key location: `Canvas-Wrapper.pem` in project root
+- Region: `us-east-1`
+
+**AWS Commands Reference:**
+```bash
+# List all instances with status
+aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].{InstanceId:InstanceId,State:State.Name,PublicIP:PublicIpAddress,Name:Tags[?Key==`Name`].Value|[0]}' --output table
+
+# Start instance
+aws ec2 start-instances --instance-ids <instance-id>
+
+# Hibernate instance (preferred over stop for faster resume)
+aws ec2 stop-instances --instance-ids <instance-id> --hibernate
+
+# Get instance public IP after starting
+aws ec2 describe-instances --instance-ids <instance-id> --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+```
+
 
 ## Key Architecture Patterns
 
@@ -16,24 +50,24 @@ The system extracts assignments, courses, files, and modules from Canvas LMS and
 
 The backend is structured around three main concerns:
 
-1. **Cookie Authentication Flow** (`src/core/extract-cookies.js`, `extract-cookies-streaming.js`)
-   - Uses Browserbase cloud browsers to authenticate with Canvas
-   - Stores encrypted cookies for subsequent API requests
-   - Two modes: standard extraction and streaming with real-time viewer
-   - Streaming server runs on separate port (default 3002) with Socket.IO for real-time updates
+1. **Daily Update System** (`scripts/utils/update.js`)
+   - Incremental Canvas data updates
+   - Runs daily to sync new assignments, files, and course changes
+   - Updates existing records and adds new content
+   - Lightweight compared to full extraction
 
-2. **Canvas Data Extraction** (`src/crawler/canvas-crawler.js`)
-   - Multi-layered content discovery system
-   - Crawlee-based scraper with parallel processing
-   - Extractors in `src/crawler/extractors/` for different Canvas content types
-   - Downloads files to local storage for offline access
-
-3. **API Server** (`server.js`)
+2. **API Server** (`server.js`)
    - Express server with CORS configuration
    - Routes in `src/routes/` and `src/core/`
-   - HTTP proxy setup for streaming authentication server
+   - HTTP proxy setup for streaming authentication server (used during onboarding)
    - WebSocket support for Socket.IO connections
    - Serves built frontend from `client/dist` in production
+
+3. **Integration Services** (`src/services/`)
+   - Google Sheets sync (export assignments to spreadsheets)
+   - Notion sync (create assignment databases)
+   - Sync orchestrator for managing multiple integrations
+   - OAuth token management and refresh
 
 ### Frontend Architecture
 
@@ -132,45 +166,17 @@ npm run test:unit
 npm run test:integration
 ```
 
-### Canvas Data Extraction
+### Daily Updates
 
 ```bash
-# Extract Canvas authentication cookies
-npm run auth:extract-cookies
+# Run daily Canvas data update (incremental sync)
+npm run update
 
-# Extract with streaming viewer (real-time browser view)
-npm run auth:extract-cookies:streaming:local
+# Compare metrics before and after update
+npm run compare:metrics
 
-# Local authentication mode
-npm run auth:extract-cookies:local
-
-# Run Canvas data extraction
-npm run crawl:canvas
-
-# Map Canvas structure only (no downloads)
-npm run crawl:map
-
-# Full extraction with file downloads
-npm run crawl:extract
-```
-
-### AWS Operations
-
-```bash
-# Check AWS configuration
-npm run aws:check
-
-# Run extraction on AWS EC2
-npm run aws:extract
-
-# Deploy streaming authentication to AWS
-npm run aws:deploy-streaming
-
-# Setup streaming infrastructure
-npm run aws:setup-streaming
-
-# Update Canvas data via AWS
-npm run aws:update
+# Seed chat data (utility)
+npm run seed:chat
 ```
 
 ### Supabase Operations
@@ -178,9 +184,20 @@ npm run aws:update
 ```bash
 cd frontend
 
-# Push database migrations
+# Apply database migrations (authenticated via CLI)
+npx supabase db push
+# Or use the npm script:
 npm run supabase:push
-npm run supabase:migrate  # Alternative
+
+# If migrations have syntax errors with nested dollar quotes, temporarily move problematic ones:
+mkdir -p supabase/migrations/.temp
+mv supabase/migrations/<problematic-migration>.sql supabase/migrations/.temp/
+npx supabase db push --yes
+mv supabase/migrations/.temp/* supabase/migrations/
+rmdir supabase/migrations/.temp
+
+# List applied migrations (verify what's in the database)
+npx supabase migration list
 
 # Upload extraction data to Supabase
 npm run supabase:upload-data
@@ -192,20 +209,89 @@ npm run supabase:status
 npm run supabase:link
 ```
 
-## Web Verification with Playwright MCP
+## Web Verification
 
-This project has Playwright MCP installed for browser-based verification. Use it to:
+For browser-based testing and verification, use the Claude Chrome extension instead of Playwright MCP.
 
-- Test the frontend UI in a real browser
-- Verify authentication flows work correctly
-- Check responsive design across viewports
-- Validate deployed applications
+The Chrome extension provides:
+- Real-time browser interaction and testing
+- Visual verification of UI components
+- Authentication flow testing
+- Responsive design validation
 
-Example usage:
+This approach provides better integration and more reliable testing results.
+
+## Supabase Schema Architecture (Updated Jan 2026)
+
+### Unified Extraction Data Storage
+
+All Canvas extraction data (courses, assignments, files, modules, pages, quizzes, etc.) is stored in a single **`extraction_data`** table:
+
+**Schema:**
+- `user_email` - User identifier (FK to users.email)
+- `entity_type` - Type: 'course', 'assignment', 'file', 'module', 'page', 'quiz', 'announcement'
+- `entity_id` - Canvas entity ID
+- `course_id` - Course grouping (optional)
+- `data` - JSONB column storing all entity data
+- `metadata` - JSONB column for user preferences and extraction metadata
+- `file_storage_path`, `file_size`, `file_mime_type` - For file entities
+- `organized_path` - File organization path
+- Comprehensive indexes on user_email, entity_type, course_id, and JSONB fields
+
+**Benefits:**
+- Single table instead of per-user tables (no unbounded growth)
+- User isolation via `user_email` column with RLS policies
+- Flexible JSONB `data` and `metadata` columns for rapid iteration
+- Proper indexes for fast queries
+- Easier to maintain and backup
+
+### Standard Field Names
+
+See `frontend/supabase/FIELD_NAMING_STANDARDS.md` for complete field naming conventions.
+
+**Key Standards:**
+- Use camelCase for all JSONB field names (e.g., `dueAt`, `pointsPossible`)
+- Use ISO 8601 format for all dates (e.g., `"2026-01-09T16:30:00.000Z"`)
+- Consistent field names across entity types reduce transformation logic
+
+### Querying Extraction Data
+
+**Get entities for a user:**
+```javascript
+const { data, error } = await supabase.rpc('get_user_entities', {
+  user_email: 'user@colorado.edu',
+  entity_type_filter: 'assignment',  // Optional: filter by type
+  course_id_filter: '123456'         // Optional: filter by course
+});
 ```
-use playwright mcp to navigate to http://localhost:5173 and verify the login page loads
-use playwright mcp to test the calendar page displays assignments correctly
+
+**Upsert entity data:**
+```javascript
+const { data, error } = await supabase.rpc('upsert_user_entity', {
+  user_email: 'user@colorado.edu',
+  entity_type: 'assignment',
+  entity_id: '789',
+  course_id: '123456',
+  entity_data: { title: 'Assignment 1', dueAt: '2026-01-15T23:59:00.000Z', ... },
+  entity_metadata: { userMarkedComplete: false, extractedAt: '2026-01-09T12:00:00.000Z' }
+});
 ```
+
+### Other Key Tables
+
+- **users** - User accounts with email, name, school, cookies, invite code
+- **sessions** - User sessions with expiration
+- **chat_posts**, **chat_responses**, **chat_votes** - Anonymous discussion forum
+- **integrations**, **integration_item_mappings** - Google Sheets/Notion syncing
+- **pending_extractions**, **completed_extractions** - Extraction queue tracking
+- **waitlist**, **invite_codes** - Onboarding flow
+
+### Migration Notes
+
+- Old per-user tables (`user_{email}_data`) are deprecated as of Jan 2026
+- Data has been migrated to unified `extraction_data` table
+- Old RPC functions still work but point to new table
+- Chat tables have RLS disabled (app-level auth by design)
 
 ## Environment Variables
 
@@ -239,12 +325,12 @@ use playwright mcp to test the calendar page displays assignments correctly
 3. Update navigation in sidebar component if needed
 4. Use TanStack Query for data fetching via services
 
-### Working with Canvas API
+### Working with Daily Updates
 
-1. Authentication cookies are stored encrypted in `data/auth/` (or `OUTPUT_DIR`)
-2. Use `extract-cookies.js` or `extract-cookies-streaming.js` to refresh cookies
-3. Canvas crawler uses these cookies for authenticated API requests
-4. Extractors in `src/crawler/extractors/` handle specific Canvas content types
+1. Daily updates run via `scripts/utils/update.js`
+2. Updates fetch new assignments, courses, and files incrementally
+3. User cookies are managed during onboarding and stored in Supabase
+4. For initial extraction, use the `canvas-extraction` repository
 
 ### Proxy Configuration
 
@@ -266,8 +352,9 @@ Both HTTP and WebSocket connections are proxied. The streaming server must be ru
 
 ### Important Production Notes
 
-- Streaming authentication requires separate server infrastructure (not available in Vercel serverless)
-- Use Browserbase API token for cloud browser automation
+- Streaming authentication requires separate server infrastructure (used during onboarding, not available in Vercel serverless)
+- Initial extraction is handled by `canvas-extraction` repository
+- Daily updates run via `npm run update` (can be scheduled via cron or similar)
 - Ensure `COOKIE_ENCRYPTION_KEY` is securely generated and stored
 - Set `NODE_ENV=production` for production builds
 - Custom domain configuration in `frontend/src/lib/auth.ts` prioritizes custom domains over Vercel URLs
@@ -317,13 +404,6 @@ Located in `frontend/src/`:
 1. Verify `CLIENT_ORIGIN` is set correctly in backend `.env`
 2. Check CORS middleware configuration in `server.js`
 3. Ensure frontend is making requests to correct backend URL
-
-### Canvas Cookie Extraction Failing
-
-1. Check Browserbase API token is valid
-2. Verify `CANVAS_URL` matches your institution
-3. Try streaming mode for debugging: `npm run auth:extract-cookies:streaming:local`
-4. Check browser console for error messages in streaming viewer
 
 ### Build Failures
 

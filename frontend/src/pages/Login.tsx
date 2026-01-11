@@ -5,7 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { checkEmailExists, startStreamingAuth, getExtractionResult, verifyLogin, stopStreamingAuth } from '@/services/api/auth';
 import { sessionStorage } from '@/storage/session';
+import { userStorage } from '@/storage/user';
 import { userDatabase } from '@/services/database/userDatabase';
+import type { User } from '@/services/mockApi/types';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -15,12 +17,30 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [popupWindow, setPopupWindow] = useState<Window | null>(null);
+  const [checkedUser, setCheckedUser] = useState<any>(null); // Store user from email check
   const navigate = useNavigate();
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._-]+@colorado\.edu$/i;
     return emailRegex.test(email);
   };
+
+  // Transform Supabase user (snake_case) to frontend User (camelCase)
+  const transformUserFromSupabase = (supabaseUser: any): User => ({
+    id: supabaseUser.id,
+    email: supabaseUser.email,
+    firstName: supabaseUser.first_name || '',
+    student: supabaseUser.student || '',
+    school: supabaseUser.school || '',
+    canvasCookies: supabaseUser.canvas_cookies,
+    canvasCookiesUpdatedAt: supabaseUser.canvas_cookies_updated_at,
+    lastLoginAt: supabaseUser.last_login_at,
+    inviteCodeUsed: supabaseUser.invite_code_used,
+    onboardingCompletedAt: supabaseUser.onboarding_completed_at,
+    profilePreferences: supabaseUser.profile_preferences,
+    createdAt: supabaseUser.created_at,
+    updatedAt: supabaseUser.updated_at,
+  });
 
   const calculateSimilarity = (str1: string, str2: string): number => {
     const s1 = str1.toLowerCase();
@@ -77,7 +97,45 @@ export default function Login() {
         setError('Email not found. Sign up flow coming soon.');
         setLoading(false);
         return;
+      }
+
+      // Store user data from email check (backend returns full user with service key)
+      if (emailCheck.user) {
+        setCheckedUser(emailCheck.user);
+
+        // Check if forced re-auth is required (e.g., after logout)
+        const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
+
+        // Check if user has valid cookies (less than 24 hours old)
+        const cookiesUpdatedAt = emailCheck.user.canvas_cookies_updated_at;
+        const hasValidCookies = emailCheck.user.canvas_cookies?.length > 0 && cookiesUpdatedAt;
+
+        if (hasValidCookies && !isReauth && !forceReauth) {
+          const cookieAge = Date.now() - new Date(cookiesUpdatedAt).getTime();
+          const hoursOld = cookieAge / (1000 * 60 * 60);
+
+          if (hoursOld < 24) {
+            console.log('[Login] User has valid cookies, skipping streaming auth');
+            setStatus('Login successful! Redirecting...');
+
+            // Transform and save user to localStorage
+            const frontendUser = transformUserFromSupabase(emailCheck.user);
+            await userStorage.setUser(frontendUser);
+
+            // Create session directly
+            await sessionStorage.setSession(emailCheck.user.id, 7, email);
+
+            setTimeout(() => {
+              navigate('/dashboard');
+            }, 1000);
+
+            setLoading(false);
+            return;
+          }
+        } else if (forceReauth) {
+          console.log('[Login] Force re-auth flag set, requiring new Canvas authentication');
         }
+      }
       }
 
       setStatus('Starting authentication...');
@@ -172,19 +230,30 @@ export default function Login() {
                 console.log('[Login] Username not extracted, skipping verification (cookies are valid)');
               }
 
-              // Only get user from database if cookies are valid AND username matches
-              // (cookies were already validated in extraction result, username verified above)
+              // Use stored user from email check (avoids RLS issues with anon key)
               setStatus('Loading user data...');
-              const user = await userDatabase.getUserByEmail(email);
-              
+              const user = checkedUser;
+
               if (!user) {
                 clearInterval(checkInterval);
                 setPopupWindow(null);
-                setError('User not found in database');
+                setError('User not found. Please sign up first.');
                 setLoading(false);
                 await stopStreamingAuth(email);
                 return;
               }
+
+              // Update last login timestamp (cookies already saved by backend)
+              // Wrapped in try-catch as RLS may block updates with anon key
+              try {
+                await userDatabase.updateLastLogin(user.id);
+              } catch (updateErr) {
+                console.log('[Login] Could not update last login (RLS), continuing...');
+              }
+
+              // Transform and save user to localStorage
+              const frontendUser = transformUserFromSupabase(user);
+              await userStorage.setUser(frontendUser);
 
               // Create session
               await sessionStorage.setSession(user.id, 7, email);
@@ -258,15 +327,19 @@ export default function Login() {
                 console.log('[Login] Username not extracted, skipping verification (cookies are valid)');
               }
               
-              // Only get user from database if cookies are valid (username verification optional)
+              // Use stored user from email check (avoids RLS issues with anon key)
               setStatus('Loading user data...');
-              const user = await userDatabase.getUserByEmail(email);
-              
+              const user = checkedUser;
+
               if (user) {
+                // Transform and save user to localStorage
+                const frontendUser = transformUserFromSupabase(user);
+                await userStorage.setUser(frontendUser);
+
                 await sessionStorage.setSession(user.id, 7, email);
                 setStatus('Login successful! Redirecting...');
                 await stopStreamingAuth(email);
-                
+
                 setTimeout(() => {
                   navigate('/dashboard');
                 }, 1000);
@@ -285,7 +358,7 @@ export default function Login() {
         }
       }, 2000); // Check every 2 seconds
 
-      // Timeout after 10 minutes
+      // Timeout after 5 minutes
       setTimeout(() => {
         if (!popup.closed) {
           clearInterval(checkInterval);
@@ -295,7 +368,7 @@ export default function Login() {
           setLoading(false);
           stopStreamingAuth(email);
         }
-      }, 10 * 60 * 1000);
+      }, 5 * 60 * 1000);
 
     } catch (err: any) {
       console.error('[Login] Canvas login error:', err);
