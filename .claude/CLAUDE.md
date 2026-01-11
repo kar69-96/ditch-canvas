@@ -28,6 +28,19 @@ The system provides a modern web interface for viewing and managing Canvas data,
 - SSH key location: `Canvas-Wrapper.pem` in project root
 - Region: `us-east-1`
 
+**Streaming Server Setup:**
+- Cloudflare Tunnel provides HTTPS (required for production)
+- PM2 manages the Node.js streaming server process
+- **After EC2 restart**: The Cloudflare tunnel URL changes! Update Vercel env var:
+  ```bash
+  # SSH in and get new tunnel URL
+  ssh -i Canvas-Wrapper.pem ec2-user@<IP> "grep trycloudflare /var/log/cloudflared.log | tail -1"
+  # Update Vercel
+  vercel env rm STREAMING_SERVER_URL production -y
+  echo -n "https://<new-url>.trycloudflare.com" | vercel env add STREAMING_SERVER_URL production
+  vercel --prod --yes
+  ```
+
 **AWS Commands Reference:**
 ```bash
 # List all instances with status
