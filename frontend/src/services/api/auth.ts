@@ -98,3 +98,35 @@ export async function deleteCookies(email: string) {
   });
   return handleResponse(res);
 }
+
+/**
+ * Trigger background Canvas data update
+ * Runs after login to sync latest Canvas data
+ */
+export async function startBackgroundUpdate(email: string) {
+  try {
+    const res = await fetch(`${API_BASE}/api/update/start`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    return handleResponse(res);
+  } catch (error: any) {
+    console.error('[API] Failed to start background update:', error);
+    // Don't throw - update is non-blocking, user can still use the app
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Check status of background update
+ */
+export async function getUpdateStatus(email: string) {
+  try {
+    const res = await fetch(`${API_BASE}/api/update/status/${encodeURIComponent(email)}`);
+    return handleResponse(res);
+  } catch (error: any) {
+    console.error('[API] Failed to get update status:', error);
+    return { hasActiveUpdate: false, error: error.message };
+  }
+}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { checkEmailExists, startStreamingAuth, getExtractionResult, verifyLogin, stopStreamingAuth } from '@/services/api/auth';
+import { checkEmailExists, startStreamingAuth, getExtractionResult, verifyLogin, stopStreamingAuth, startBackgroundUpdate } from '@/services/api/auth';
 import { sessionStorage } from '@/storage/session';
 import { userStorage } from '@/storage/user';
 import { userDatabase } from '@/services/database/userDatabase';
@@ -124,6 +124,14 @@ export default function Login() {
 
             // Create session directly
             await sessionStorage.setSession(emailCheck.user.id, 7, email);
+
+            // Start background update (non-blocking - user can interact with old data)
+            console.log('[Login] Starting background Canvas data update...');
+            startBackgroundUpdate(email).then(result => {
+              console.log('[Login] Background update started:', result);
+            }).catch(err => {
+              console.warn('[Login] Background update failed to start:', err);
+            });
 
             setTimeout(() => {
               navigate('/dashboard');
@@ -257,20 +265,28 @@ export default function Login() {
 
               // Create session
               await sessionStorage.setSession(user.id, 7, email);
-              
+
               setStatus('Login successful! Redirecting...');
-              
+
               // Stop streaming server
               await stopStreamingAuth(email);
-              
+
               clearInterval(checkInterval);
               setPopupWindow(null);
-              
+
+              // Start background update (non-blocking - user can interact with old data)
+              console.log('[Login] Starting background Canvas data update...');
+              startBackgroundUpdate(email).then(result => {
+                console.log('[Login] Background update started:', result);
+              }).catch(err => {
+                console.warn('[Login] Background update failed to start:', err);
+              });
+
               // Redirect to dashboard
               setTimeout(() => {
                 navigate('/dashboard');
               }, 1000);
-              
+
               return;
             }
           }
@@ -339,6 +355,14 @@ export default function Login() {
                 await sessionStorage.setSession(user.id, 7, email);
                 setStatus('Login successful! Redirecting...');
                 await stopStreamingAuth(email);
+
+                // Start background update (non-blocking - user can interact with old data)
+                console.log('[Login] Starting background Canvas data update...');
+                startBackgroundUpdate(email).then(result => {
+                  console.log('[Login] Background update started:', result);
+                }).catch(err => {
+                  console.warn('[Login] Background update failed to start:', err);
+                });
 
                 setTimeout(() => {
                   navigate('/dashboard');
