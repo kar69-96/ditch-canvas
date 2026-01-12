@@ -1,19 +1,19 @@
 /**
- * Auth API using Supabase
- * Handles user authentication and session management
+ * Auth API using localStorage
+ * User data is stored in localStorage during login (from backend with service key)
+ * Supabase queries with anon key are blocked by RLS, so we use localStorage
  */
 
 import { sessionStorage } from '@/storage/session';
 import { userStorage } from '@/storage/user';
-import { userDatabase } from '@/services/database/userDatabase';
 import { clearCacheForUser } from '@/services/api/canvasApi';
 import type { User } from './types';
 
 /**
  * Check if a valid session exists
- * Looks up user in Supabase database
+ * Uses localStorage for user lookup (user data saved during login)
  */
-export async function checkSession(): Promise<{ userId: number; user: User } | null> {
+export async function checkSession(): Promise<{ userId: string; user: User } | null> {
   try {
     const session = await sessionStorage.getSession();
     if (!session) {
@@ -26,29 +26,19 @@ export async function checkSession(): Promise<{ userId: number; user: User } | n
       return null;
     }
 
-    // Try to get user from Supabase first (by email if available, then by ID)
-    let user: User | null = null;
-    
-    if (session.email) {
-      user = await userDatabase.getUserByEmail(session.email);
-    }
-    
-    if (!user) {
-      user = await userDatabase.getUser(session.userId);
-    }
-    
-    // Fallback to localStorage if Supabase lookup fails
-    if (!user) {
-      user = await userStorage.getUser(session.userId);
+    // Get user from localStorage (saved during login from backend)
+    let user: User | null = await userStorage.getUser(session.userId);
+
+    // Try by email if not found by ID
+    if (!user && session.email) {
+      user = await userStorage.getUserByEmail(session.email);
     }
 
     if (!user) {
+      console.warn('[auth] User not found in localStorage for session');
       await sessionStorage.clearSession();
       return null;
     }
-
-    // Sync to localStorage for compatibility
-    await userStorage.setUser(user);
 
     return {
       userId: session.userId,
@@ -66,10 +56,11 @@ export async function checkSession(): Promise<{ userId: number; user: User } | n
  */
 export async function logout(): Promise<void> {
   try {
-    // Get user email before clearing session (so we can clear their cache and cookies)
+    // Get user info before clearing session
     const session = await sessionStorage.getSession();
     const userEmail = session?.email || sessionStorage.getEmail();
-    
+    const userId = session?.userId;
+
     // Delete cookies on backend if we have an email
     if (userEmail) {
       try {
@@ -81,19 +72,25 @@ export async function logout(): Promise<void> {
         // Continue with logout even if cookie deletion fails
       }
     }
-    
+
     // Set flag to force re-authentication on next login
     localStorage.setItem('canvas_force_reauth', 'true');
-    
+
     // Clear session
     await sessionStorage.clearSession();
-    
+
+    // Clear user from localStorage
+    if (userId) {
+      await userStorage.deleteUser(userId);
+      console.log('[auth] Deleted user from localStorage:', userId);
+    }
+
     // Clear Canvas API cache for this user
     if (userEmail) {
       clearCacheForUser(userEmail);
       console.log('[auth] Cleared cache for user:', userEmail);
     }
-    
+
     console.log('[auth] Logout complete - all session data and cookies cleared, re-auth required');
   } catch (error) {
     console.error('[auth] Error in logout:', error);
@@ -109,7 +106,7 @@ export async function logout(): Promise<void> {
 
 /**
  * Get current user from session
- * Looks up user in Supabase database first, falls back to localStorage
+ * Uses localStorage (user data is saved during login from backend)
  */
 export async function getCurrentUser(): Promise<User | null> {
   try {
@@ -123,35 +120,23 @@ export async function getCurrentUser(): Promise<User | null> {
       return null;
     }
 
-    // If session has email, use that for lookup in Supabase (most reliable)
-    if (session.email) {
-      const userByEmail = await userDatabase.getUserByEmail(session.email);
-      if (userByEmail) {
-        // Also sync to localStorage for compatibility
-        await userStorage.setUser(userByEmail);
-        return userByEmail;
-      }
+    // Get user from localStorage (saved during login from backend)
+    let user: User | null = await userStorage.getUser(session.userId);
+
+    // Try by email if not found by ID
+    if (!user && session.email) {
+      user = await userStorage.getUserByEmail(session.email);
     }
-    
-    // Fallback to email from localStorage
-    const storedEmail = sessionStorage.getEmail();
-    if (storedEmail) {
-      const userByStoredEmail = await userDatabase.getUserByEmail(storedEmail);
-      if (userByStoredEmail) {
-        await userStorage.setUser(userByStoredEmail);
-        return userByStoredEmail;
+
+    // Try by stored email
+    if (!user) {
+      const storedEmail = sessionStorage.getEmail();
+      if (storedEmail) {
+        user = await userStorage.getUserByEmail(storedEmail);
       }
     }
 
-    // Last resort: lookup by user ID in Supabase
-    const userById = await userDatabase.getUser(session.userId);
-    if (userById) {
-      await userStorage.setUser(userById);
-      return userById;
-    }
-
-    // Final fallback: check localStorage
-    return await userStorage.getUser(session.userId);
+    return user;
   } catch (error) {
     console.error('[auth] Error getting current user:', error);
     return null;
