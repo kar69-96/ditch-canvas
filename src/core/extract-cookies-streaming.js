@@ -7,19 +7,21 @@
  * Allows users to interact with the browser remotely while cookies are extracted.
  */
 
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const { chromium } = require('playwright-core');
-const fs = require('fs');
-const path = require('path');
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+const { chromium } = require("playwright-core");
+const fs = require("fs");
+const path = require("path");
+const { createClient } = require("@supabase/supabase-js");
+require("dotenv").config();
 
 // Configuration
-const PORT = parseInt(process.env.STREAMING_PORT || '3002');
-const CANVAS_URL = process.env.CANVAS_URL || 'https://canvas.colorado.edu';
-const COOKIE_OUTPUT_FILE = process.env.COOKIE_OUTPUT_FILE || path.join(__dirname, '../../data/auth/canvas-cookies.json');
+const PORT = parseInt(process.env.STREAMING_PORT || "3002");
+const CANVAS_URL = process.env.CANVAS_URL || "https://canvas.colorado.edu";
+const COOKIE_OUTPUT_FILE =
+  process.env.COOKIE_OUTPUT_FILE ||
+  path.join(__dirname, "../../data/auth/canvas-cookies.json");
 const EXTRACTION_EMAIL = process.env.EXTRACTION_EMAIL;
 
 // Initialize Express app
@@ -27,11 +29,11 @@ const app = express();
 
 // Add CORS middleware for all routes
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
@@ -41,15 +43,15 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
-    methods: ['GET', 'POST']
+    origin: "*",
+    methods: ["GET", "POST"],
   },
   // Optimize for low latency
   pingInterval: 10000,
   pingTimeout: 5000,
-  transports: ['websocket', 'polling'],
+  transports: ["websocket", "polling"],
   allowUpgrades: true,
-  perMessageDeflate: false // Disable compression for lower latency
+  perMessageDeflate: false, // Disable compression for lower latency
 });
 
 // Ensure output directory exists
@@ -67,37 +69,37 @@ let exitTimeout = null; // Timeout for delayed exit after extraction
 
 // Status stages for frontend feedback
 const STATUS_STAGES = {
-  CONNECTING: 'connecting',
-  BROWSER_LAUNCHING: 'browser_launching',
-  BROWSER_READY: 'browser_ready',
-  SCREENCAST_STARTING: 'screencast_starting',
-  NAVIGATING: 'navigating',
-  READY_FOR_LOGIN: 'ready_for_login',
-  LOGIN_DETECTED: 'login_detected',
-  EXTRACTING_COOKIES: 'extracting_cookies',
-  COMPLETE: 'complete',
-  ERROR: 'error'
+  CONNECTING: "connecting",
+  BROWSER_LAUNCHING: "browser_launching",
+  BROWSER_READY: "browser_ready",
+  SCREENCAST_STARTING: "screencast_starting",
+  NAVIGATING: "navigating",
+  READY_FOR_LOGIN: "ready_for_login",
+  LOGIN_DETECTED: "login_detected",
+  EXTRACTING_COOKIES: "extracting_cookies",
+  COMPLETE: "complete",
+  ERROR: "error",
 };
 
 let currentStage = STATUS_STAGES.CONNECTING;
 
 function emitStatus(stage, message, details = {}) {
   currentStage = stage;
-  io.emit('status', { stage, message, timestamp: Date.now(), ...details });
+  io.emit("status", { stage, message, timestamp: Date.now(), ...details });
   console.log(`[streaming] Status: ${stage} - ${message}`);
 }
 
 // Timeout constants
 const TIMEOUTS = {
-  BROWSER_LAUNCH: 15000,  // 15 seconds
-  SCREENCAST: 5000,       // 5 seconds
-  NAVIGATION: 30000       // 30 seconds
+  BROWSER_LAUNCH: 15000, // 15 seconds
+  SCREENCAST: 5000, // 5 seconds
+  NAVIGATION: 30000, // 30 seconds
 };
 
 /**
  * Serve the streaming viewer HTML page (minimal UI, fullscreen)
  */
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -254,6 +256,7 @@ app.get('/', (req, res) => {
     let isConnected = false;
     let canvasReady = false;
     let connectionTimeout = null;
+    let loginDetected = false; // Flag to stop processing frames after login
 
     // Connection timeout - 10 seconds
     connectionTimeout = setTimeout(() => {
@@ -300,8 +303,9 @@ app.get('/', (req, res) => {
           break;
         case 'login_detected':
         case 'extracting_cookies':
-          updateStep('login', 'complete');
-          statusText.textContent = 'Login successful! Saving credentials...';
+          // Close popup immediately - don't show any Canvas content
+          loginDetected = true;
+          window.close();
           break;
         case 'complete':
           statusText.textContent = 'Complete! This window will close...';
@@ -313,8 +317,14 @@ app.get('/', (req, res) => {
     });
 
     socket.on('frame', (data) => {
+      // Stop processing frames after login is detected
+      if (loginDetected) return;
+
       const img = new Image();
       img.onload = () => {
+        // Double-check loginDetected in case it changed during image load
+        if (loginDetected) return;
+
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
@@ -329,22 +339,16 @@ app.get('/', (req, res) => {
     });
 
     // Close popup immediately when server signals login detected
-    // This hides the profile page navigation from the user
     socket.on('close-popup', () => {
       console.log('Received close-popup signal - closing immediately');
+      loginDetected = true;
       window.close();
     });
 
     socket.on('extraction-complete', () => {
-      // This may not be reached since close-popup fires first
-      // But keep as fallback
-      if (canvasReady) {
-        const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(34,197,94,0.9);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:bold;z-index:9999;';
-        overlay.innerHTML = '✓ Login Successful!';
-        document.body.appendChild(overlay);
-      }
-      setTimeout(() => window.close(), 500);
+      // Close immediately (fallback in case status event was missed)
+      loginDetected = true;
+      window.close();
     });
 
     socket.on('error', (message) => {
@@ -446,19 +450,19 @@ app.get('/', (req, res) => {
 /**
  * Health check endpoint
  */
-app.get('/health', (req, res) => {
+app.get("/health", (req, res) => {
   res.json({
-    status: 'ok',
+    status: "ok",
     port: PORT,
     extractionComplete,
-    email: EXTRACTION_EMAIL
+    email: EXTRACTION_EMAIL,
   });
 });
 
 /**
  * Extraction result endpoint
  */
-app.get('/extraction-result/:email', (req, res) => {
+app.get("/extraction-result/:email", (req, res) => {
   const { email } = req.params;
 
   // Check if extraction is complete
@@ -468,27 +472,29 @@ app.get('/extraction-result/:email', (req, res) => {
 
     if (fs.existsSync(outputFile)) {
       try {
-        const cookieData = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
+        const cookieData = JSON.parse(fs.readFileSync(outputFile, "utf8"));
 
-        console.log('[streaming] Extraction result fetched by frontend');
+        console.log("[streaming] Extraction result fetched by frontend");
 
         // Result was fetched - exit sooner (2 seconds to allow response to complete)
         if (exitTimeout) {
           clearTimeout(exitTimeout);
           exitTimeout = setTimeout(() => {
-            console.log('[streaming] Exiting after result fetch');
+            console.log("[streaming] Exiting after result fetch");
             process.exit(0);
           }, 2000);
         }
 
         return res.json({
           success: true,
-          username: cookieData.username || cookieData.metadata?.username || null,
+          username:
+            cookieData.username || cookieData.metadata?.username || null,
           cookies: cookieData.cookies || [],
-          extractedAt: cookieData.metadata?.extractedAt || new Date().toISOString()
+          extractedAt:
+            cookieData.metadata?.extractedAt || new Date().toISOString(),
         });
       } catch (err) {
-        console.error('[streaming] Error reading cookie file:', err);
+        console.error("[streaming] Error reading cookie file:", err);
       }
     }
   }
@@ -498,15 +504,16 @@ app.get('/extraction-result/:email', (req, res) => {
     return res.json({
       success: false,
       pending: true,
-      message: 'Authentication in progress. Please complete login in the popup window.'
+      message:
+        "Authentication in progress. Please complete login in the popup window.",
     });
   }
 
   // No active session
   return res.json({
     success: false,
-    error: 'No authentication session found',
-    requiresReauth: true
+    error: "No authentication session found",
+    requiresReauth: true,
   });
 });
 
@@ -514,15 +521,15 @@ app.get('/extraction-result/:email', (req, res) => {
  * Restart browser to ensure fresh session (fixes "Stale Request" errors)
  */
 async function restartBrowser() {
-  console.log('[streaming] Restarting browser for fresh session...');
+  console.log("[streaming] Restarting browser for fresh session...");
 
   // Close existing browser if any
   if (browserContext) {
     try {
       await browserContext.close();
-      console.log('[streaming] Previous browser closed');
+      console.log("[streaming] Previous browser closed");
     } catch (err) {
-      console.error('[streaming] Error closing browser:', err.message);
+      console.error("[streaming] Error closing browser:", err.message);
     }
   }
 
@@ -537,85 +544,93 @@ async function restartBrowser() {
 /**
  * Socket.IO connection handler
  */
-io.on('connection', (socket) => {
-  console.log('[streaming] Client connected:', socket.id);
+io.on("connection", (socket) => {
+  console.log("[streaming] Client connected:", socket.id);
 
   // Only restart browser if it's not currently starting up
   // This prevents killing the browser during initial navigation
   if (page && !extractionComplete && !browserStarting) {
-    console.log('[streaming] Browser already in use and ready, restarting for fresh session...');
-    restartBrowser().catch(err => {
-      console.error('[streaming] Failed to restart browser:', err);
-      socket.emit('error', 'Failed to initialize browser');
+    console.log(
+      "[streaming] Browser already in use and ready, restarting for fresh session...",
+    );
+    restartBrowser().catch((err) => {
+      console.error("[streaming] Failed to restart browser:", err);
+      socket.emit("error", "Failed to initialize browser");
     });
   } else if (browserStarting) {
-    console.log('[streaming] Browser is starting up, skipping restart');
+    console.log("[streaming] Browser is starting up, skipping restart");
   }
 
-  socket.on('mouse-move', async (data) => {
+  socket.on("mouse-move", async (data) => {
     if (page) {
-      await page.mouse.move(data.x, data.y).catch(err => {
-        console.error('[streaming] Mouse move error:', err.message);
+      await page.mouse.move(data.x, data.y).catch((err) => {
+        console.error("[streaming] Mouse move error:", err.message);
       });
     }
   });
 
-  socket.on('mouse-down', async (data) => {
+  socket.on("mouse-down", async (data) => {
     if (page) {
-      await page.mouse.down({
-        button: data.button === 'right' ? 'right' : 'left'
-      }).catch(err => {
-        console.error('[streaming] Mouse down error:', err.message);
+      await page.mouse
+        .down({
+          button: data.button === "right" ? "right" : "left",
+        })
+        .catch((err) => {
+          console.error("[streaming] Mouse down error:", err.message);
+        });
+    }
+  });
+
+  socket.on("mouse-up", async (data) => {
+    if (page) {
+      await page.mouse
+        .up({
+          button: data.button === "right" ? "right" : "left",
+        })
+        .catch((err) => {
+          console.error("[streaming] Mouse up error:", err.message);
+        });
+    }
+  });
+
+  socket.on("mouse-click", async (data) => {
+    if (page) {
+      await page.mouse
+        .click(data.x, data.y, {
+          button: data.button === "right" ? "right" : "left",
+        })
+        .catch((err) => {
+          console.error("[streaming] Mouse click error:", err.message);
+        });
+    }
+  });
+
+  socket.on("key-down", async (data) => {
+    if (page) {
+      await page.keyboard.down(data.key).catch((err) => {
+        console.error("[streaming] Key down error:", err.message);
       });
     }
   });
 
-  socket.on('mouse-up', async (data) => {
+  socket.on("key-up", async (data) => {
     if (page) {
-      await page.mouse.up({
-        button: data.button === 'right' ? 'right' : 'left'
-      }).catch(err => {
-        console.error('[streaming] Mouse up error:', err.message);
+      await page.keyboard.up(data.key).catch((err) => {
+        console.error("[streaming] Key up error:", err.message);
       });
     }
   });
 
-  socket.on('mouse-click', async (data) => {
-    if (page) {
-      await page.mouse.click(data.x, data.y, {
-        button: data.button === 'right' ? 'right' : 'left'
-      }).catch(err => {
-        console.error('[streaming] Mouse click error:', err.message);
-      });
-    }
-  });
-
-  socket.on('key-down', async (data) => {
-    if (page) {
-      await page.keyboard.down(data.key).catch(err => {
-        console.error('[streaming] Key down error:', err.message);
-      });
-    }
-  });
-
-  socket.on('key-up', async (data) => {
-    if (page) {
-      await page.keyboard.up(data.key).catch(err => {
-        console.error('[streaming] Key up error:', err.message);
-      });
-    }
-  });
-
-  socket.on('type-text', async (data) => {
+  socket.on("type-text", async (data) => {
     if (page && data.text) {
-      await page.keyboard.type(data.text).catch(err => {
-        console.error('[streaming] Type text error:', err.message);
+      await page.keyboard.type(data.text).catch((err) => {
+        console.error("[streaming] Type text error:", err.message);
       });
     }
   });
 
-  socket.on('disconnect', () => {
-    console.log('[streaming] Client disconnected:', socket.id);
+  socket.on("disconnect", () => {
+    console.log("[streaming] Client disconnected:", socket.id);
   });
 });
 
@@ -624,7 +639,7 @@ io.on('connection', (socket) => {
  */
 async function extractCookies() {
   if (!browserContext) {
-    throw new Error('Browser context not initialized');
+    throw new Error("Browser context not initialized");
   }
 
   const cookies = await browserContext.cookies();
@@ -636,13 +651,15 @@ async function extractCookies() {
       // Wait briefly for the page to fully render (reduced from 2000ms)
       await page.waitForTimeout(500);
 
-      console.log('[streaming] Attempting to extract username from Canvas page...');
+      console.log(
+        "[streaming] Attempting to extract username from Canvas page...",
+      );
 
       // Method 1: Try to extract from user settings/profile page
       try {
         // Navigate to profile/settings to get the actual username
         const currentUrl = page.url();
-        console.log('[streaming] Current URL before navigation:', currentUrl);
+        console.log("[streaming] Current URL before navigation:", currentUrl);
 
         // Try to get user ID from any Canvas page and construct settings URL
         const userId = await page.evaluate(() => {
@@ -651,35 +668,49 @@ async function extractCookies() {
         });
 
         if (userId) {
-          console.log('[streaming] Found user ID:', userId);
-          await page.goto(`https://canvas.colorado.edu/profile/settings`, { waitUntil: 'networkidle', timeout: 10000 });
+          console.log("[streaming] Found user ID:", userId);
+          await page.goto(`https://canvas.colorado.edu/profile/settings`, {
+            waitUntil: "networkidle",
+            timeout: 10000,
+          });
           await page.waitForTimeout(1000);
 
           // Try to find login/username field
-          const loginInput = await page.$('input[name="user[short_name]"], input[name="user[name]"], #user_short_name');
+          const loginInput = await page.$(
+            'input[name="user[short_name]"], input[name="user[name]"], #user_short_name',
+          );
           if (loginInput) {
-            username = await loginInput.evaluate(el => el.value);
-            console.log('[streaming] Extracted username from profile settings:', username);
+            username = await loginInput.evaluate((el) => el.value);
+            console.log(
+              "[streaming] Extracted username from profile settings:",
+              username,
+            );
           }
         }
       } catch (navErr) {
-        console.log('[streaming] Could not navigate to settings:', navErr.message);
+        console.log(
+          "[streaming] Could not navigate to settings:",
+          navErr.message,
+        );
       }
 
       // Method 2: Try to extract from page content/title
       if (!username) {
         try {
           const pageTitle = await page.title();
-          console.log('[streaming] Page title:', pageTitle);
+          console.log("[streaming] Page title:", pageTitle);
 
           // Sometimes Canvas includes username in title
           const titleMatch = pageTitle.match(/([a-z]{4}\d{4})/i);
           if (titleMatch) {
             username = titleMatch[1];
-            console.log('[streaming] Extracted username from page title:', username);
+            console.log(
+              "[streaming] Extracted username from page title:",
+              username,
+            );
           }
         } catch (titleErr) {
-          console.log('[streaming] Could not extract from title');
+          console.log("[streaming] Could not extract from title");
         }
       }
 
@@ -690,25 +721,30 @@ async function extractCookies() {
           const urlMatch = url.match(/\/users\/\d+/);
           if (urlMatch) {
             // Try to get username from profile page
-            await page.waitForSelector('body', { timeout: 2000 });
-            const profileText = await page.textContent('body');
+            await page.waitForSelector("body", { timeout: 2000 });
+            const profileText = await page.textContent("body");
             const usernameMatch = profileText.match(/([a-z]{4}\d{4})/i);
             if (usernameMatch) {
               username = usernameMatch[1];
-              console.log('[streaming] Extracted username from profile:', username);
+              console.log(
+                "[streaming] Extracted username from profile:",
+                username,
+              );
             }
           }
         } catch (urlErr) {
-          console.log('[streaming] Could not extract from URL');
+          console.log("[streaming] Could not extract from URL");
         }
       }
 
       if (!username) {
-        console.log('[streaming] Could not extract username - will need manual verification');
+        console.log(
+          "[streaming] Could not extract username - will need manual verification",
+        );
       }
     }
   } catch (err) {
-    console.warn('[streaming] Error extracting username:', err.message);
+    console.warn("[streaming] Error extracting username:", err.message);
   }
 
   // Save cookies to file
@@ -718,14 +754,14 @@ async function extractCookies() {
     metadata: {
       extractedAt: new Date().toISOString(),
       url: CANVAS_URL,
-      email: EXTRACTION_EMAIL
-    }
+      email: EXTRACTION_EMAIL,
+    },
   };
 
   fs.writeFileSync(COOKIE_OUTPUT_FILE, JSON.stringify(cookieData, null, 2));
-  console.log('[streaming] ✅ Cookies saved to:', COOKIE_OUTPUT_FILE);
-  console.log('[streaming]    Username:', username || 'not extracted');
-  console.log('[streaming]    Cookie count:', cookies.length);
+  console.log("[streaming] ✅ Cookies saved to:", COOKIE_OUTPUT_FILE);
+  console.log("[streaming]    Username:", username || "not extracted");
+  console.log("[streaming]    Cookie count:", cookies.length);
 
   return cookieData;
 }
@@ -736,64 +772,69 @@ async function extractCookies() {
 async function monitorLoginCompletion() {
   if (!page) return;
 
-  console.log('[streaming] Monitoring for login completion...');
+  console.log("[streaming] Monitoring for login completion...");
 
   // Listen for URL changes
-  page.on('framenavigated', async (frame) => {
+  page.on("framenavigated", async (frame) => {
     if (frame !== page.mainFrame()) return;
 
     const url = page.url();
-    console.log('[streaming] Page navigated to:', url);
+    console.log("[streaming] Page navigated to:", url);
 
     // Check if we're on Canvas (not fedauth)
-    if (url.includes('canvas.colorado.edu') && !url.includes('fedauth')) {
-      console.log('[streaming] ✅ Login complete! User reached Canvas');
-      console.log('[streaming]    Current URL:', url);
+    if (url.includes("canvas.colorado.edu") && !url.includes("fedauth")) {
+      console.log("[streaming] ✅ Login complete! User reached Canvas");
+      console.log("[streaming]    Current URL:", url);
 
       // Emit login detected status
-      emitStatus(STATUS_STAGES.LOGIN_DETECTED, 'Login successful!');
+      emitStatus(STATUS_STAGES.LOGIN_DETECTED, "Login successful!");
 
       // FIRST: Stop screencast to prevent any more frames being sent
-      console.log('[streaming] Stopping screencast...');
+      console.log("[streaming] Stopping screencast...");
       try {
         const cdpSession = await page.context().newCDPSession(page);
-        await cdpSession.send('Page.stopScreencast');
-        console.log('[streaming] Screencast stopped');
+        await cdpSession.send("Page.stopScreencast");
+        console.log("[streaming] Screencast stopped");
       } catch (err) {
-        console.log('[streaming] Could not stop screencast:', err.message);
+        console.log("[streaming] Could not stop screencast:", err.message);
       }
 
       // THEN: Tell frontend to close popup (after screencast is stopped)
-      console.log('[streaming] Sending close-popup signal...');
-      io.emit('close-popup');
+      console.log("[streaming] Sending close-popup signal...");
+      io.emit("close-popup");
 
       // Wait for popup to close before navigating to profile page
       await page.waitForTimeout(300);
 
       // Extract cookies HEADLESSLY (user won't see profile page navigation)
       try {
-        console.log('[streaming] Extracting cookies and username headlessly...');
+        console.log(
+          "[streaming] Extracting cookies and username headlessly...",
+        );
         const cookieData = await extractCookies();
 
-        console.log('[streaming] ✅ Cookie extraction completed');
-        console.log('[streaming]    Username:', cookieData.username || 'not extracted');
-        console.log('[streaming]    Cookies:', cookieData.cookies.length);
+        console.log("[streaming] ✅ Cookie extraction completed");
+        console.log(
+          "[streaming]    Username:",
+          cookieData.username || "not extracted",
+        );
+        console.log("[streaming]    Cookies:", cookieData.cookies.length);
 
         // Emit completion status
-        emitStatus(STATUS_STAGES.COMPLETE, 'Authentication complete!');
+        emitStatus(STATUS_STAGES.COMPLETE, "Authentication complete!");
 
         // Notify clients
-        io.emit('extraction-complete', {
+        io.emit("extraction-complete", {
           success: true,
           username: cookieData.username,
-          cookieCount: cookieData.cookies.length
+          cookieCount: cookieData.cookies.length,
         });
 
-        console.log('[streaming] ✅ Notified clients of extraction completion');
+        console.log("[streaming] ✅ Notified clients of extraction completion");
         extractionComplete = true;
 
         // Close browser to free resources (but keep server running for HTTP polling)
-        console.log('[streaming] Closing browser...');
+        console.log("[streaming] Closing browser...");
         if (browserContext) {
           await browserContext.close();
           browserContext = null;
@@ -802,17 +843,19 @@ async function monitorLoginCompletion() {
 
         // Keep server alive for 30 seconds to allow frontend to fetch extraction result via HTTP
         // The frontend polls /extraction-result/:email and needs the server to respond
-        console.log('[streaming] Server will exit in 30 seconds (waiting for result fetch)...');
+        console.log(
+          "[streaming] Server will exit in 30 seconds (waiting for result fetch)...",
+        );
         exitTimeout = setTimeout(() => {
-          console.log('[streaming] Exiting after timeout');
+          console.log("[streaming] Exiting after timeout");
           process.exit(0);
         }, 30000);
       } catch (err) {
-        console.error('[streaming] Error extracting cookies:', err);
-        emitStatus(STATUS_STAGES.ERROR, 'Failed to save credentials', {
-          suggestion: 'Please try logging in again.'
+        console.error("[streaming] Error extracting cookies:", err);
+        emitStatus(STATUS_STAGES.ERROR, "Failed to save credentials", {
+          suggestion: "Please try logging in again.",
         });
-        io.emit('error', err.message);
+        io.emit("error", err.message);
       }
     }
   });
@@ -826,25 +869,25 @@ async function startStreaming() {
     // Set flag to prevent restart during startup
     browserStarting = true;
 
-    console.log('[streaming] Starting browser...');
-    console.log('[streaming]    Port:', PORT);
-    console.log('[streaming]    Canvas URL:', CANVAS_URL);
-    console.log('[streaming]    Extraction email:', EXTRACTION_EMAIL);
-    console.log('[streaming]    Output file:', COOKIE_OUTPUT_FILE);
+    console.log("[streaming] Starting browser...");
+    console.log("[streaming]    Port:", PORT);
+    console.log("[streaming]    Canvas URL:", CANVAS_URL);
+    console.log("[streaming]    Extraction email:", EXTRACTION_EMAIL);
+    console.log("[streaming]    Output file:", COOKIE_OUTPUT_FILE);
 
     // Emit browser launching status
-    emitStatus(STATUS_STAGES.BROWSER_LAUNCHING, 'Starting secure browser...');
+    emitStatus(STATUS_STAGES.BROWSER_LAUNCHING, "Starting secure browser...");
 
     // Launch browser with Playwright's bundled Chromium
     const launchOptions = {
       headless: true,
       args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-blink-features=AutomationControlled',
-        '--disable-features=IsolateOrigins,site-per-process'
-      ]
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-blink-features=AutomationControlled",
+        "--disable-features=IsolateOrigins,site-per-process",
+      ],
     };
 
     if (process.env.CHROME_PATH) {
@@ -856,72 +899,89 @@ async function startStreaming() {
     try {
       const launchPromise = chromium.launch(launchOptions);
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Browser launch timeout')), TIMEOUTS.BROWSER_LAUNCH)
+        setTimeout(
+          () => reject(new Error("Browser launch timeout")),
+          TIMEOUTS.BROWSER_LAUNCH,
+        ),
       );
       browser = await Promise.race([launchPromise, timeoutPromise]);
     } catch (launchErr) {
-      emitStatus(STATUS_STAGES.ERROR, 'Failed to start browser', {
-        suggestion: 'The browser may not be installed. Try running: npx playwright install chromium'
+      emitStatus(STATUS_STAGES.ERROR, "Failed to start browser", {
+        suggestion:
+          "The browser may not be installed. Try running: npx playwright install chromium",
       });
       throw launchErr;
     }
 
-    emitStatus(STATUS_STAGES.BROWSER_READY, 'Browser started successfully');
+    emitStatus(STATUS_STAGES.BROWSER_READY, "Browser started successfully");
 
     // Create browser context
     browserContext = await browser.newContext({
       viewport: { width: 1280, height: 720 },
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      userAgent:
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       storageState: undefined,
       bypassCSP: false,
-      ignoreHTTPSErrors: false
+      ignoreHTTPSErrors: false,
     });
 
     page = await browserContext.newPage();
 
     // Enable CDP session for screencast
-    emitStatus(STATUS_STAGES.SCREENCAST_STARTING, 'Preparing screen capture...');
+    emitStatus(
+      STATUS_STAGES.SCREENCAST_STARTING,
+      "Preparing screen capture...",
+    );
 
     const cdpSession = await page.context().newCDPSession(page);
 
     // Start screencast with timeout
     try {
-      const screencastPromise = cdpSession.send('Page.startScreencast', {
-        format: 'jpeg',
+      const screencastPromise = cdpSession.send("Page.startScreencast", {
+        format: "jpeg",
         quality: 50,
         maxWidth: 1280,
         maxHeight: 720,
-        everyNthFrame: 1
+        everyNthFrame: 1,
       });
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Screencast start timeout')), TIMEOUTS.SCREENCAST)
+        setTimeout(
+          () => reject(new Error("Screencast start timeout")),
+          TIMEOUTS.SCREENCAST,
+        ),
       );
       await Promise.race([screencastPromise, timeoutPromise]);
     } catch (screencastErr) {
-      emitStatus(STATUS_STAGES.ERROR, 'Failed to start screen capture', {
-        suggestion: 'Please try again. If the problem persists, contact support.'
+      emitStatus(STATUS_STAGES.ERROR, "Failed to start screen capture", {
+        suggestion:
+          "Please try again. If the problem persists, contact support.",
       });
       await browserContext?.close();
       throw screencastErr;
     }
 
-    console.log('[streaming] ✅ Screencast started');
+    console.log("[streaming] ✅ Screencast started");
 
     // Listen for screencast frames
-    cdpSession.on('Page.screencastFrame', async (frame) => {
-      io.emit('frame', frame.data);
-      await cdpSession.send('Page.screencastFrameAck', { sessionId: frame.sessionId });
+    cdpSession.on("Page.screencastFrame", async (frame) => {
+      io.emit("frame", frame.data);
+      await cdpSession.send("Page.screencastFrameAck", {
+        sessionId: frame.sessionId,
+      });
     });
 
     // Navigate to Canvas login with timeout
-    emitStatus(STATUS_STAGES.NAVIGATING, 'Loading Canvas login page...');
+    emitStatus(STATUS_STAGES.NAVIGATING, "Loading Canvas login page...");
 
     try {
-      await page.goto(CANVAS_URL, { waitUntil: 'domcontentloaded', timeout: TIMEOUTS.NAVIGATION });
+      await page.goto(CANVAS_URL, {
+        waitUntil: "domcontentloaded",
+        timeout: TIMEOUTS.NAVIGATION,
+      });
     } catch (navErr) {
       browserStarting = false; // Clear flag on error
-      emitStatus(STATUS_STAGES.ERROR, 'Failed to load Canvas', {
-        suggestion: 'Please check your network connection and try again.'
+      emitStatus(STATUS_STAGES.ERROR, "Failed to load Canvas", {
+        suggestion: "Please check your network connection and try again.",
       });
       await browserContext?.close();
       throw navErr;
@@ -929,47 +989,53 @@ async function startStreaming() {
 
     // Browser is ready - clear the startup flag
     browserStarting = false;
-    emitStatus(STATUS_STAGES.READY_FOR_LOGIN, 'Ready - please log in to Canvas');
+    emitStatus(
+      STATUS_STAGES.READY_FOR_LOGIN,
+      "Ready - please log in to Canvas",
+    );
 
     // Start monitoring for login completion
     monitorLoginCompletion();
-
   } catch (err) {
     browserStarting = false; // Clear flag on error
-    console.error('[streaming] Error starting browser:', err);
+    console.error("[streaming] Error starting browser:", err);
     // Only emit error if not already emitted
     if (currentStage !== STATUS_STAGES.ERROR) {
-      emitStatus(STATUS_STAGES.ERROR, err.message || 'An unexpected error occurred', {
-        suggestion: 'Please close this window and try again.'
-      });
+      emitStatus(
+        STATUS_STAGES.ERROR,
+        err.message || "An unexpected error occurred",
+        {
+          suggestion: "Please close this window and try again.",
+        },
+      );
     }
     process.exit(1);
   }
 }
 
 // Start the server
-server.listen(PORT, '0.0.0.0', () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`[streaming] 🚀 Streaming server started on port ${PORT}`);
   console.log(`[streaming]    View at: http://localhost:${PORT}`);
 
   // Start browser immediately (removed delay)
-  startStreaming().catch(err => {
-    console.error('[streaming] Failed to start streaming:', err);
+  startStreaming().catch((err) => {
+    console.error("[streaming] Failed to start streaming:", err);
     process.exit(1);
   });
 });
 
 // Cleanup on exit
-process.on('SIGINT', async () => {
-  console.log('\n[streaming] Shutting down...');
+process.on("SIGINT", async () => {
+  console.log("\n[streaming] Shutting down...");
   if (browserContext) {
     await browserContext.close();
   }
   process.exit(0);
 });
 
-process.on('SIGTERM', async () => {
-  console.log('\n[streaming] Shutting down...');
+process.on("SIGTERM", async () => {
+  console.log("\n[streaming] Shutting down...");
   if (browserContext) {
     await browserContext.close();
   }
