@@ -27,11 +27,16 @@ export default function Landing() {
 
       {/* Hero text - positioned in top 2/3 of page */}
       <div className="absolute top-[15vh] left-1/2 transform -translate-x-1/2 relative z-10 text-center px-4">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-4 whitespace-nowrap">
-          Focus on{" "}
-          <span className="italic bg-[hsl(40,30%,96%)] px-2">Learning</span>
-        </h1>
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold whitespace-nowrap">
+        {/* Mobile: stack vertically with spacing. Desktop: inline */}
+        <div className="flex flex-col sm:flex-row sm:justify-center sm:items-baseline gap-1 sm:gap-0 mb-3 sm:mb-4">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+            Focus on
+          </h1>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold italic bg-[hsl(40,30%,96%)] px-2 sm:ml-3">
+            Learning
+          </h1>
+        </div>
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
           Not on <span className="italic">Canvas</span>
         </h1>
       </div>
