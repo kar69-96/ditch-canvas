@@ -753,12 +753,8 @@ async function monitorLoginCompletion() {
       // Emit login detected status
       emitStatus(STATUS_STAGES.LOGIN_DETECTED, 'Login successful!');
 
-      // IMMEDIATELY stop screencast and tell frontend to close popup
-      // This hides the profile page navigation from the user
-      console.log('[streaming] Stopping screencast and closing popup...');
-      io.emit('close-popup'); // Tell frontend to close popup immediately
-
-      // Stop sending frames by disconnecting screencast
+      // FIRST: Stop screencast to prevent any more frames being sent
+      console.log('[streaming] Stopping screencast...');
       try {
         const cdpSession = await page.context().newCDPSession(page);
         await cdpSession.send('Page.stopScreencast');
@@ -767,8 +763,12 @@ async function monitorLoginCompletion() {
         console.log('[streaming] Could not stop screencast:', err.message);
       }
 
-      // Wait briefly for cookies to settle
-      await page.waitForTimeout(500);
+      // THEN: Tell frontend to close popup (after screencast is stopped)
+      console.log('[streaming] Sending close-popup signal...');
+      io.emit('close-popup');
+
+      // Wait for popup to close before navigating to profile page
+      await page.waitForTimeout(300);
 
       // Extract cookies HEADLESSLY (user won't see profile page navigation)
       try {
