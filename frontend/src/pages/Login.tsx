@@ -5,9 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { checkEmailExists, startStreamingAuth, getExtractionResult, verifyLogin, stopStreamingAuth, startBackgroundUpdate } from '@/services/api/auth';
 import { sessionStorage } from '@/storage/session';
-import { userStorage } from '@/storage/user';
 import { userDatabase } from '@/services/database/userDatabase';
-import type { User } from '@/services/mockApi/types';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -24,23 +22,6 @@ export default function Login() {
     const emailRegex = /^[a-zA-Z0-9._-]+@colorado\.edu$/i;
     return emailRegex.test(email);
   };
-
-  // Transform Supabase user (snake_case) to frontend User (camelCase)
-  const transformUserFromSupabase = (supabaseUser: any): User => ({
-    id: supabaseUser.id,
-    email: supabaseUser.email,
-    firstName: supabaseUser.first_name || '',
-    student: supabaseUser.student || '',
-    school: supabaseUser.school || '',
-    canvasCookies: supabaseUser.canvas_cookies,
-    canvasCookiesUpdatedAt: supabaseUser.canvas_cookies_updated_at,
-    lastLoginAt: supabaseUser.last_login_at,
-    inviteCodeUsed: supabaseUser.invite_code_used,
-    onboardingCompletedAt: supabaseUser.onboarding_completed_at,
-    profilePreferences: supabaseUser.profile_preferences,
-    createdAt: supabaseUser.created_at,
-    updatedAt: supabaseUser.updated_at,
-  });
 
   const calculateSimilarity = (str1: string, str2: string): number => {
     const s1 = str1.toLowerCase();
@@ -118,11 +99,7 @@ export default function Login() {
             console.log('[Login] User has valid cookies, skipping streaming auth');
             setStatus('Login successful! Redirecting...');
 
-            // Transform and save user to localStorage
-            const frontendUser = transformUserFromSupabase(emailCheck.user);
-            await userStorage.setUser(frontendUser);
-
-            // Create session directly
+            // Create session directly (user data fetched from Supabase on demand)
             await sessionStorage.setSession(emailCheck.user.id, 7, email);
 
             // Start background update (non-blocking - user can interact with old data)
@@ -252,18 +229,13 @@ export default function Login() {
               }
 
               // Update last login timestamp (cookies already saved by backend)
-              // Wrapped in try-catch as RLS may block updates with anon key
               try {
                 await userDatabase.updateLastLogin(user.id);
               } catch (updateErr) {
-                console.log('[Login] Could not update last login (RLS), continuing...');
+                console.log('[Login] Could not update last login:', updateErr);
               }
 
-              // Transform and save user to localStorage
-              const frontendUser = transformUserFromSupabase(user);
-              await userStorage.setUser(frontendUser);
-
-              // Create session
+              // Create session (user data fetched from Supabase on demand)
               await sessionStorage.setSession(user.id, 7, email);
 
               setStatus('Login successful! Redirecting...');
@@ -348,10 +320,7 @@ export default function Login() {
               const user = checkedUserRef.current;
 
               if (user) {
-                // Transform and save user to localStorage
-                const frontendUser = transformUserFromSupabase(user);
-                await userStorage.setUser(frontendUser);
-
+                // Create session (user data fetched from Supabase on demand)
                 await sessionStorage.setSession(user.id, 7, email);
                 setStatus('Login successful! Redirecting...');
                 await stopStreamingAuth(email);

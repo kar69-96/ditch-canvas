@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { sessionStorage } from '@/storage/session';
-import { userStorage } from '@/storage/user';
+import { userDatabase } from '@/services/database/userDatabase';
 import { applyBackgroundColor } from '@/lib/preferences';
 
 // Default theme values (previously from backgrounds)
@@ -16,21 +16,22 @@ const DEFAULT_THEME = {
 
 /**
  * Hook to apply user preferences (background, font, style) to the app
+ * Fetches preferences from Supabase via backend API
  */
 export function useUserPreferences() {
   useEffect(() => {
     async function loadPreferences() {
       // Apply custom background color first if set
       applyBackgroundColor();
-      
+
       // Apply default color mode first (dark)
       const root = document.documentElement;
       if (!root.hasAttribute('data-color-mode')) {
         root.setAttribute('data-color-mode', 'dark');
       }
-      
+
       const session = await sessionStorage.getSession();
-      if (!session) {
+      if (!session?.email) {
         // Try localStorage fallback for color mode
         const colorMode = localStorage.getItem('colorMode') as 'light' | 'dark' | 'system' | null;
         if (colorMode && ['light', 'dark', 'system'].includes(colorMode)) {
@@ -39,13 +40,16 @@ export function useUserPreferences() {
         return;
       }
 
-      const user = await userStorage.getUser(session.userId);
-      if (!user?.profileData) {
+      // Get user from Supabase via backend API
+      const user = await userDatabase.getUserByEmail(session.email);
+      const profilePrefs = user?.profilePreferences as any;
+
+      if (!profilePrefs) {
         // Try localStorage as fallback
         const bg = localStorage.getItem('preferredBackground');
         const font = localStorage.getItem('preferredFont');
         const style = localStorage.getItem('stylePreferences');
-        
+
         const colorMode = localStorage.getItem('colorMode') as 'light' | 'dark' | 'system' | null;
         if (colorMode && ['light', 'dark', 'system'].includes(colorMode)) {
           applyColorMode(colorMode);
@@ -62,7 +66,7 @@ export function useUserPreferences() {
         return;
       }
 
-      const { background, font, style, colorMode } = user.profileData;
+      const { background, font, style, colorMode } = profilePrefs;
 
       // Apply color mode
       if (colorMode) {
@@ -95,7 +99,7 @@ export function useUserPreferences() {
         }
       }
     }
-    
+
     loadPreferences();
   }, []);
 }
@@ -103,7 +107,7 @@ export function useUserPreferences() {
 function applyBackground(backgroundId: string) {
   // Use default theme values (background images are not used)
   const theme = DEFAULT_THEME;
-  
+
   // Apply to body::before pseudo-element via style tag
   let styleTag = document.getElementById('user-bg-style');
   if (!styleTag) {
@@ -111,9 +115,9 @@ function applyBackground(backgroundId: string) {
     styleTag.id = 'user-bg-style';
     document.head.appendChild(styleTag);
   }
-  
+
   const root = document.documentElement;
-  
+
   // Apply theme CSS variables
   root.style.setProperty('--theme-primary', theme.primaryColor);
   root.style.setProperty('--theme-text', theme.textColor);
@@ -123,37 +127,37 @@ function applyBackground(backgroundId: string) {
   if (theme.accentColor) {
     root.style.setProperty('--theme-accent', theme.accentColor);
   }
-  
+
   // Create enhanced gradient colors for better visibility on dark cards
   // Parse HSL and enhance lightness for better contrast
   const enhanceGradientColor = (hslColor: string, isDark: boolean): string => {
     const match = hslColor.match(/(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%/);
     if (!match) return hslColor;
-    
+
     const [, h, s, l] = match;
     const lightness = parseFloat(l);
-    
+
     // For dark backgrounds: increase lightness to 85-90% for maximum visibility
     // For light backgrounds: keep darker but ensure minimum 50% for visibility
-    const enhancedLightness = isDark 
+    const enhancedLightness = isDark
       ? Math.min(90, Math.max(85, lightness + 10)) // Brighten for dark backgrounds
       : Math.max(50, Math.min(60, lightness)); // Ensure visibility on light backgrounds
-    
+
     return `${h} ${s}% ${enhancedLightness}%`;
   };
-  
+
   // Set enhanced gradient colors
   const gradientPrimary = enhanceGradientColor(theme.primaryColor, theme.type === 'dark');
-  const gradientAccent = theme.accentColor 
+  const gradientAccent = theme.accentColor
     ? enhanceGradientColor(theme.accentColor, theme.type === 'dark')
     : enhanceGradientColor(theme.primaryColor, theme.type === 'dark');
-  
+
   root.style.setProperty('--gradient-primary-color', gradientPrimary);
   root.style.setProperty('--gradient-accent-color', gradientAccent);
-  
+
   // Set data attribute for theme type to enable CSS targeting
   root.setAttribute('data-theme-type', theme.type);
-  
+
   // Don't apply background images - use beige background instead
   // Clear any existing background styles
   styleTag.textContent = `
@@ -213,23 +217,22 @@ function applyStyle(stylePrefs: { glassEffect?: boolean; animations?: boolean; c
 
 function applyColorMode(mode: 'light' | 'dark' | 'system') {
   const root = document.documentElement;
-  
+
   if (mode === 'system') {
     // Use OS preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     root.setAttribute('data-color-mode', prefersDark ? 'dark' : 'light');
-    
+
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       const newPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       root.setAttribute('data-color-mode', newPrefersDark ? 'dark' : 'light');
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
     // Note: We don't clean up this listener, but that's okay for a global preference
   } else {
     root.setAttribute('data-color-mode', mode);
   }
 }
-

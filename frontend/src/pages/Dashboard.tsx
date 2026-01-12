@@ -11,7 +11,7 @@ import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { useCanvasData } from "@/hooks/useCanvasData";
 import { useAssignmentCompletion } from "@/hooks/useAssignmentCompletion";
 import { sessionStorage } from "@/storage/session";
-import { userStorage } from "@/storage/user";
+import { userDatabase } from "@/services/database/userDatabase";
 import { getPreferences, applyTheme, applyFont } from "@/lib/preferences";
 import type { User } from "@/services/mockApi/types";
 import { cn } from "@/lib/utils";
@@ -66,13 +66,21 @@ const Dashboard = () => {
       }
 
       if (session) {
-        const currentUser = await userStorage.getUser(session.userId);
+        // Get user from Supabase via backend API (not localStorage)
+        let currentUser = null;
+        if (session.email) {
+          currentUser = await userDatabase.getUserByEmail(session.email);
+        }
+        if (!currentUser) {
+          currentUser = await userDatabase.getUser(session.userId);
+        }
+
         if (currentUser) {
           setUser(currentUser);
-          // Use student identikey if available, otherwise fall back to firstName or name
-          const displayName = currentUser.student ||
-                             currentUser.profileData?.firstName ||
-                             (currentUser.name ? currentUser.name.split(' ')[0] : 'Student');
+          // Use first name from sign-up, fallback to student identikey if needed
+          const displayName = currentUser.firstName ||
+                             currentUser.student ||
+                             'Student';
           setUserName(displayName);
         } else {
           // User not found - RouteGuard will handle showing auth message

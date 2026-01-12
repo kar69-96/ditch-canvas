@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/popover";
 import { useState, useEffect } from "react";
 import { sessionStorage } from "@/storage/session";
-import { userStorage } from "@/storage/user";
+import { userDatabase } from "@/services/database/userDatabase";
 
 type ColorMode = 'light' | 'dark' | 'system';
 
@@ -20,9 +20,9 @@ export function ThemeToggle() {
       setMounted(true);
       // Load color mode preference
       const session = await sessionStorage.getSession();
-      if (session) {
-        const user = await userStorage.getUser(session.userId);
-        const savedMode = user?.profileData?.colorMode || localStorage.getItem('colorMode') as ColorMode;
+      if (session?.email) {
+        const user = await userDatabase.getUserByEmail(session.email);
+        const savedMode = (user?.profilePreferences as any)?.colorMode || localStorage.getItem('colorMode') as ColorMode;
         if (savedMode && ['light', 'dark', 'system'].includes(savedMode)) {
           setColorMode(savedMode);
           applyColorMode(savedMode);
@@ -35,13 +35,13 @@ export function ThemeToggle() {
         }
       }
     }
-    
+
     loadColorMode();
   }, []);
 
   const applyColorMode = (mode: ColorMode) => {
     const root = document.documentElement;
-    
+
     if (mode === 'system') {
       // Use OS preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -54,22 +54,21 @@ export function ThemeToggle() {
   const handleColorModeChange = async (mode: ColorMode) => {
     setColorMode(mode);
     applyColorMode(mode);
-    
-    // Save to user profile
+
+    // Save to user profile in Supabase
     const session = await sessionStorage.getSession();
-    if (session) {
-      const user = await userStorage.getUser(session.userId);
+    if (session?.email) {
+      const user = await userDatabase.getUserByEmail(session.email);
       if (user) {
-        if (!user.profileData) {
-          user.profileData = {};
-        }
-        user.profileData.colorMode = mode;
-        user.updatedAt = new Date().toISOString();
-        await userStorage.setUser(user);
+        const updatedPreferences = {
+          ...(user.profilePreferences || {}),
+          colorMode: mode
+        };
+        await userDatabase.updateUser(user.id, { profilePreferences: updatedPreferences });
       }
     }
-    
-    // Also save to localStorage for fallback
+
+    // Also save to localStorage for immediate fallback
     localStorage.setItem('colorMode', mode);
   };
 
@@ -153,4 +152,3 @@ export function ThemeToggle() {
     </Popover>
   );
 }
-
