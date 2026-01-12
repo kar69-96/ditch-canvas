@@ -2,7 +2,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+} from "react-router-dom";
 import { RouteGuard } from "@/components/RouteGuard";
 import { SidebarProvider } from "@/components/SidebarViewer";
 import { useEffect } from "react";
@@ -62,75 +68,117 @@ const AppContent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfUse />} />
-          
+
           {/* Onboarding routes (public) */}
           <Route path="/onboarding/info" element={<OnboardingInfo />} />
           <Route path="/onboarding/invite" element={<OnboardingInvite />} />
-          <Route path="/onboarding/waitlist-confirmation" element={<WaitlistConfirmation />} />
+          <Route
+            path="/onboarding/waitlist-confirmation"
+            element={<WaitlistConfirmation />}
+          />
           <Route path="/onboarding/sync" element={<OnboardingSync />} />
           <Route path="/onboarding/complete" element={<OnboardingComplete />} />
-          
+
           {/* Protected routes */}
-          <Route path="/dashboard" element={
-            <RouteGuard>
-              <Dashboard />
-            </RouteGuard>
-          } />
-          <Route path="/calendar/grid" element={<Navigate to="/calendar" replace />} />
+          <Route
+            path="/dashboard"
+            element={
+              <RouteGuard>
+                <Dashboard />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/calendar/grid"
+            element={<Navigate to="/calendar" replace />}
+          />
           <Route path="/classes" element={<Navigate to="/courses" replace />} />
           <Route path="/classes/:id" element={<ClassesRedirect />} />
-          
-          <Route path="/calendar" element={
-            <RouteGuard>
-              <Calendar />
-            </RouteGuard>
-          } />
-          <Route path="/calendar/list" element={
-            <RouteGuard>
-              <Calendar />
-            </RouteGuard>
-          } />
-          <Route path="/courses" element={
-            <RouteGuard>
-              <Classes />
-            </RouteGuard>
-          } />
-          <Route path="/courses/:id" element={
-            <RouteGuard>
-              <ClassDetail />
-            </RouteGuard>
-          } />
-          <Route path="/courses/:id/learn" element={
-            <RouteGuard>
-              <Learn />
-            </RouteGuard>
-          } />
-          <Route path="/courses/:id/chat" element={
-            <RouteGuard>
-              <ChatForumPage />
-            </RouteGuard>
-          } />
-          <Route path="/courses/:id/chat/subscribe" element={
-            <RouteGuard>
-              <SubscribePage />
-            </RouteGuard>
-          } />
-          <Route path="/assignments" element={
-            <RouteGuard>
-              <Assignments />
-            </RouteGuard>
-          } />
-          <Route path="/assistant" element={
-            <RouteGuard>
-              <Assistant />
-            </RouteGuard>
-          } />
-          <Route path="/assistant/signup" element={
-            <RouteGuard>
-              <ComingSoon />
-            </RouteGuard>
-          } />
-          
+
+          <Route
+            path="/calendar"
+            element={
+              <RouteGuard>
+                <Calendar />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/calendar/list"
+            element={
+              <RouteGuard>
+                <Calendar />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/courses"
+            element={
+              <RouteGuard>
+                <Classes />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/courses/:id"
+            element={
+              <RouteGuard>
+                <ClassDetail />
+              </RouteGuard>
+            }
+          />
+          {/* Learn route - only available in development */}
+          {import.meta.env.DEV && (
+            <Route
+              path="/courses/:id/learn"
+              element={
+                <RouteGuard>
+                  <Learn />
+                </RouteGuard>
+              }
+            />
+          )}
+          <Route
+            path="/courses/:id/chat"
+            element={
+              <RouteGuard>
+                <ChatForumPage />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/courses/:id/chat/subscribe"
+            element={
+              <RouteGuard>
+                <SubscribePage />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/assignments"
+            element={
+              <RouteGuard>
+                <Assignments />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/assistant"
+            element={
+              <RouteGuard>
+                <Assistant />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/assistant/signup"
+            element={
+              <RouteGuard>
+                <ComingSoon />
+              </RouteGuard>
+            }
+          />
+
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
