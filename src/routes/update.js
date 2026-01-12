@@ -6,6 +6,7 @@
 const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 const router = express.Router();
 
 // Track active update processes per user
@@ -39,8 +40,28 @@ router.post('/start', async (req, res) => {
 
   console.log(`[update] Starting background update for ${email} (${updateId})`);
 
-  // Spawn the update script as a background process
+  // Check if the update script and its dependencies exist
   const updateScript = path.join(__dirname, '../../scripts/utils/update.js');
+  const extractorPath = path.join(__dirname, '../../src/crawler/extractors/assignment-extractor.js');
+
+  if (!fs.existsSync(updateScript)) {
+    console.warn(`[update] Update script not found: ${updateScript}`);
+    return res.json({
+      success: false,
+      message: 'Update functionality not available - script not found'
+    });
+  }
+
+  if (!fs.existsSync(extractorPath)) {
+    console.warn(`[update] Extractors not found - update requires canvas-extraction modules`);
+    return res.json({
+      success: true,
+      message: 'Update skipped - extractor modules not available (requires canvas-extraction repo)',
+      updateId,
+      startedAt,
+      skipped: true
+    });
+  }
 
   const updateProcess = spawn('node', [updateScript], {
     cwd: path.join(__dirname, '../..'),
