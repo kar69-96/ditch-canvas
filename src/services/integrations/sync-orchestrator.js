@@ -6,17 +6,14 @@ const syncNotion = require('./notion-sync');
 
 async function fetchActiveIntegrations() {
   const supabase = getSupabaseClient();
-  const { data, error } = await supabase
-    .from('integrations')
-    .select('*')
-    .eq('status', 'active');
+  const { data, error } = await supabase.from('integrations').select('*').eq('status', 'active');
   if (error) throw new Error(`Failed to fetch integrations: ${error.message}`);
   return data || [];
 }
 
 async function fetchAssignments(userEmail) {
   const supabase = getSupabaseClient();
-  
+
   // Try flexible storage first (new schema-less system)
   try {
     const { data: entities, error: entitiesError } = await supabase.rpc('get_user_entities', {
@@ -31,23 +28,22 @@ async function fetchAssignments(userEmail) {
         const data = entity.data || {};
         const metadata = entity.metadata || {};
         const internalId = data.id?.toString() || entity.entity_id;
-        
+
         // Check if assignment is completed
         // Priority: userMarkedComplete (from Supabase) > Canvas submission status
         // userMarkedComplete is stored in metadata.userMarkedComplete or data.userMarkedComplete
-        const userMarkedComplete = metadata.userMarkedComplete === true || data.userMarkedComplete === true;
-        
+        const userMarkedComplete =
+          metadata.userMarkedComplete === true || data.userMarkedComplete === true;
+
         // Canvas submission status (from Canvas data)
         const submissionStatus = data.submissionStatus || data.submission_status;
         const workflowState = data.workflowState || data.workflow_state;
-        const isCanvasComplete = 
-          submissionStatus === "yes" || 
-          workflowState === "submitted" ||
-          workflowState === "graded";
-        
+        const isCanvasComplete =
+          submissionStatus === 'yes' || workflowState === 'submitted' || workflowState === 'graded';
+
         // Final completion status: user-marked takes precedence, fallback to Canvas status
         const isCompleted = userMarkedComplete || isCanvasComplete;
-        
+
         return {
           assignment_id: data.id?.toString(),
           id: data.id,
@@ -70,6 +66,7 @@ async function fetchAssignments(userEmail) {
             points_possible: data.pointsPossible || data.points_possible,
             workflow_state: data.workflowState || data.workflow_state,
             url: data.url,
+            isCompleted,
           }),
         };
       });
@@ -86,7 +83,7 @@ async function fetchAssignments(userEmail) {
     )
     .eq('user_email', userEmail)
     .order('due_date', { ascending: true, nullsFirst: false });
-  
+
   if (error) throw new Error(`Failed to fetch assignments: ${error.message}`);
 
   // Include ALL assignments (pending, submitted, graded, completed)
@@ -196,4 +193,3 @@ async function runAllSyncs() {
 module.exports = {
   runAllSyncs,
 };
-

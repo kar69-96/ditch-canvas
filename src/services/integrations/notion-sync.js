@@ -18,8 +18,16 @@ function buildProperties(assignment) {
   const course = assignment.course_code || assignment.courseCode || '';
   const due = assignment.due_date || assignment.dueDate || null;
   const points = assignment.points_possible ?? assignment.pointsPossible ?? null;
-  const status = assignment.workflow_state || assignment.workflowState || 'pending';
   const url = assignment.url || null;
+
+  // Determine status from isCompleted flag (set by sync-orchestrator from user-marked or Canvas submission)
+  // Available options in Notion database: 'pending', 'submitted', 'graded'
+  let status = 'pending';
+  if (assignment.isCompleted) {
+    // Check if it was graded (Canvas submission status) vs just submitted/marked complete
+    const workflowState = assignment.workflow_state || assignment.workflowState;
+    status = workflowState === 'graded' ? 'graded' : 'submitted';
+  }
 
   return {
     Name: {
@@ -83,7 +91,3 @@ async function syncNotion({ integration, token, assignments, supabase }) {
 }
 
 module.exports = syncNotion;
-
-
-
-

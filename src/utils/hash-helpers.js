@@ -8,7 +8,7 @@ const crypto = require('crypto');
 /**
  * Hash assignment data to detect changes
  * Uses stable fields that represent assignment content
- * 
+ *
  * @param {Object} assignment - Assignment object with flexible field names
  * @returns {string} SHA-256 hash of assignment content
  */
@@ -20,6 +20,7 @@ function hashAssignment(assignment) {
     pointsPossible: assignment.points_possible ?? assignment.pointsPossible ?? null,
     workflowState: assignment.workflow_state || assignment.workflowState || '',
     url: assignment.url || '',
+    isCompleted: assignment.isCompleted ?? false,
   };
   return crypto.createHash('sha256').update(JSON.stringify(payload)).digest('hex');
 }
@@ -27,4 +28,3 @@ function hashAssignment(assignment) {
 module.exports = {
   hashAssignment,
 };
-
