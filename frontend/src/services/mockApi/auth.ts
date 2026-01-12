@@ -4,16 +4,19 @@
  * All user data is fetched from Supabase via backend API (no localStorage)
  */
 
-import { sessionStorage } from '@/storage/session';
-import { userDatabase } from '@/services/database/userDatabase';
-import { clearCacheForUser } from '@/services/api/canvasApi';
-import type { User } from './types';
+import { sessionStorage } from "@/storage/session";
+import { userDatabase } from "@/services/database/userDatabase";
+import { clearCacheForUser } from "@/services/api/canvasApi";
+import type { User } from "./types";
 
 /**
  * Check if a valid session exists
  * Looks up user in Supabase database via backend API
  */
-export async function checkSession(): Promise<{ userId: number; user: User } | null> {
+export async function checkSession(): Promise<{
+  userId: string;
+  user: User;
+} | null> {
   try {
     const session = await sessionStorage.getSession();
     if (!session) {
@@ -38,7 +41,7 @@ export async function checkSession(): Promise<{ userId: number; user: User } | n
     }
 
     if (!user) {
-      console.warn('[auth] User not found in Supabase for session');
+      console.warn("[auth] User not found in Supabase for session");
       await sessionStorage.clearSession();
       return null;
     }
@@ -48,7 +51,7 @@ export async function checkSession(): Promise<{ userId: number; user: User } | n
       user,
     };
   } catch (error) {
-    console.error('[auth] Error checking session:', error);
+    console.error("[auth] Error checking session:", error);
     return null;
   }
 }
@@ -66,17 +69,17 @@ export async function logout(): Promise<void> {
     // Delete cookies on backend if we have an email
     if (userEmail) {
       try {
-        const { deleteCookies } = await import('@/services/api/auth');
+        const { deleteCookies } = await import("@/services/api/auth");
         await deleteCookies(userEmail);
-        console.log('[auth] Deleted cookies for user:', userEmail);
+        console.log("[auth] Deleted cookies for user:", userEmail);
       } catch (cookieError) {
-        console.error('[auth] Error deleting cookies:', cookieError);
+        console.error("[auth] Error deleting cookies:", cookieError);
         // Continue with logout even if cookie deletion fails
       }
     }
 
     // Set flag to force re-authentication on next login
-    localStorage.setItem('canvas_force_reauth', 'true');
+    localStorage.setItem("canvas_force_reauth", "true");
 
     // Clear session
     await sessionStorage.clearSession();
@@ -84,18 +87,20 @@ export async function logout(): Promise<void> {
     // Clear Canvas API cache for this user
     if (userEmail) {
       clearCacheForUser(userEmail);
-      console.log('[auth] Cleared cache for user:', userEmail);
+      console.log("[auth] Cleared cache for user:", userEmail);
     }
 
-    console.log('[auth] Logout complete - all session data and cookies cleared, re-auth required');
+    console.log(
+      "[auth] Logout complete - all session data and cookies cleared, re-auth required",
+    );
   } catch (error) {
-    console.error('[auth] Error in logout:', error);
+    console.error("[auth] Error in logout:", error);
     // Still try to clear session even if other operations fail
     try {
       await sessionStorage.clearSession();
-      localStorage.setItem('canvas_force_reauth', 'true');
+      localStorage.setItem("canvas_force_reauth", "true");
     } catch (clearError) {
-      console.error('[auth] Error clearing session:', clearError);
+      console.error("[auth] Error clearing session:", clearError);
     }
   }
 }
@@ -139,10 +144,10 @@ export async function getCurrentUser(): Promise<User | null> {
       return userById;
     }
 
-    console.warn('[auth] User not found in Supabase');
+    console.warn("[auth] User not found in Supabase");
     return null;
   } catch (error) {
-    console.error('[auth] Error getting current user:', error);
+    console.error("[auth] Error getting current user:", error);
     return null;
   }
 }
