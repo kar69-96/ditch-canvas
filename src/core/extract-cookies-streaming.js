@@ -63,6 +63,7 @@ let browserContext = null;
 let page = null;
 let extractionComplete = false;
 let browserStarting = false; // Flag to prevent restart during startup
+let exitTimeout = null; // Timeout for delayed exit after extraction
 
 // Status stages for frontend feedback
 const STATUS_STAGES = {
@@ -469,6 +470,17 @@ app.get('/extraction-result/:email', (req, res) => {
       try {
         const cookieData = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
 
+        console.log('[streaming] Extraction result fetched by frontend');
+
+        // Result was fetched - exit sooner (2 seconds to allow response to complete)
+        if (exitTimeout) {
+          clearTimeout(exitTimeout);
+          exitTimeout = setTimeout(() => {
+            console.log('[streaming] Exiting after result fetch');
+            process.exit(0);
+          }, 2000);
+        }
+
         return res.json({
           success: true,
           username: cookieData.username || cookieData.metadata?.username || null,
@@ -780,12 +792,21 @@ async function monitorLoginCompletion() {
         console.log('[streaming] ✅ Notified clients of extraction completion');
         extractionComplete = true;
 
-        // Close browser immediately (no delay needed since popup is already closed)
+        // Close browser to free resources (but keep server running for HTTP polling)
         console.log('[streaming] Closing browser...');
         if (browserContext) {
           await browserContext.close();
+          browserContext = null;
+          page = null;
         }
-        process.exit(0);
+
+        // Keep server alive for 30 seconds to allow frontend to fetch extraction result via HTTP
+        // The frontend polls /extraction-result/:email and needs the server to respond
+        console.log('[streaming] Server will exit in 30 seconds (waiting for result fetch)...');
+        exitTimeout = setTimeout(() => {
+          console.log('[streaming] Exiting after timeout');
+          process.exit(0);
+        }, 30000);
       } catch (err) {
         console.error('[streaming] Error extracting cookies:', err);
         emitStatus(STATUS_STAGES.ERROR, 'Failed to save credentials', {
