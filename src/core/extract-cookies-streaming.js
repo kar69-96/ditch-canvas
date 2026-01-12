@@ -327,15 +327,23 @@ app.get('/', (req, res) => {
       img.src = 'data:image/jpeg;base64,' + data;
     });
 
+    // Close popup immediately when server signals login detected
+    // This hides the profile page navigation from the user
+    socket.on('close-popup', () => {
+      console.log('Received close-popup signal - closing immediately');
+      window.close();
+    });
+
     socket.on('extraction-complete', () => {
+      // This may not be reached since close-popup fires first
+      // But keep as fallback
       if (canvasReady) {
-        // Show brief success overlay
         const overlay = document.createElement('div');
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(34,197,94,0.9);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:bold;z-index:9999;';
         overlay.innerHTML = '✓ Login Successful!';
         document.body.appendChild(overlay);
       }
-      setTimeout(() => window.close(), 1500);
+      setTimeout(() => window.close(), 500);
     });
 
     socket.on('error', (message) => {
@@ -731,16 +739,28 @@ async function monitorLoginCompletion() {
       console.log('[streaming]    Current URL:', url);
 
       // Emit login detected status
-      emitStatus(STATUS_STAGES.LOGIN_DETECTED, 'Login successful! Extracting credentials...');
+      emitStatus(STATUS_STAGES.LOGIN_DETECTED, 'Login successful!');
+
+      // IMMEDIATELY stop screencast and tell frontend to close popup
+      // This hides the profile page navigation from the user
+      console.log('[streaming] Stopping screencast and closing popup...');
+      io.emit('close-popup'); // Tell frontend to close popup immediately
+
+      // Stop sending frames by disconnecting screencast
+      try {
+        const cdpSession = await page.context().newCDPSession(page);
+        await cdpSession.send('Page.stopScreencast');
+        console.log('[streaming] Screencast stopped');
+      } catch (err) {
+        console.log('[streaming] Could not stop screencast:', err.message);
+      }
 
       // Wait briefly for cookies to settle
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(500);
 
-      // Extract cookies
+      // Extract cookies HEADLESSLY (user won't see profile page navigation)
       try {
-        emitStatus(STATUS_STAGES.EXTRACTING_COOKIES, 'Saving authentication data...');
-
-        console.log('[streaming] Extracting cookies and username...');
+        console.log('[streaming] Extracting cookies and username headlessly...');
         const cookieData = await extractCookies();
 
         console.log('[streaming] ✅ Cookie extraction completed');
@@ -760,14 +780,12 @@ async function monitorLoginCompletion() {
         console.log('[streaming] ✅ Notified clients of extraction completion');
         extractionComplete = true;
 
-        // Close browser after a delay
-        setTimeout(async () => {
-          console.log('[streaming] Closing browser...');
-          if (browserContext) {
-            await browserContext.close();
-          }
-          process.exit(0);
-        }, 3000);
+        // Close browser immediately (no delay needed since popup is already closed)
+        console.log('[streaming] Closing browser...');
+        if (browserContext) {
+          await browserContext.close();
+        }
+        process.exit(0);
       } catch (err) {
         console.error('[streaming] Error extracting cookies:', err);
         emitStatus(STATUS_STAGES.ERROR, 'Failed to save credentials', {
