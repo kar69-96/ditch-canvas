@@ -1,16 +1,29 @@
-import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { checkEmailExists, startStreamingAuth, getExtractionResult, verifyLogin, stopStreamingAuth, startBackgroundUpdate } from '@/services/api/auth';
-import { sessionStorage } from '@/storage/session';
-import { userDatabase } from '@/services/database/userDatabase';
-import { Loader2, AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  checkEmailExists,
+  startStreamingAuth,
+  getExtractionResult,
+  verifyLogin,
+  stopStreamingAuth,
+  startBackgroundUpdate,
+} from "@/services/api/auth";
+import { sessionStorage } from "@/storage/session";
+import { userDatabase } from "@/services/database/userDatabase";
+import { Loader2, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -26,14 +39,14 @@ export default function Login() {
   const calculateSimilarity = (str1: string, str2: string): number => {
     const s1 = str1.toLowerCase();
     const s2 = str2.toLowerCase();
-    
+
     // If one contains the other, it's a strong match
     if (s1.includes(s2) || s2.includes(s1)) {
       const shorter = s1.length < s2.length ? s1 : s2;
       const longer = s1.length >= s2.length ? s1 : s2;
       return (shorter.length / longer.length) * 100;
     }
-    
+
     // Calculate character overlap
     const set1 = new Set(s1);
     const set2 = new Set(s2);
@@ -44,111 +57,159 @@ export default function Login() {
     return (common / Math.max(set1.size, set2.size)) * 100;
   };
 
-  const handleContinue = async (isReauth = false) => {
+  const handleContinue = async (
+    isReauth = false,
+    preOpenedWindow?: Window | null,
+  ) => {
     setError(null);
     setStatus(null);
 
     // Validate email format
     if (!email.trim()) {
-      setError('Please enter your email');
+      setError("Please enter your email");
       return;
     }
 
     if (!validateEmail(email)) {
-      setError('Please enter a valid Colorado email (xxxx1234@colorado.edu)');
+      setError("Please enter a valid Colorado email (xxxx1234@colorado.edu)");
       return;
     }
 
+    // Detect mobile devices
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // On mobile, open window IMMEDIATELY to preserve user gesture
+    // We'll navigate it to the auth URL after API calls complete
+    let popup: Window | null = preOpenedWindow || null;
+    if (isMobile && !preOpenedWindow) {
+      popup = window.open("about:blank", "_blank");
+      if (popup) {
+        popup.document.write(
+          "<html><body style='background:#1a1a2e;color:white;font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0'><p>Loading Canvas login...</p></body></html>",
+        );
+      }
+    }
+
     setLoading(true);
-    
+
     if (isReauth) {
-      setStatus('Cookies expired. Re-authenticating...');
+      setStatus("Cookies expired. Re-authenticating...");
     } else {
-    setStatus('Checking email...');
+      setStatus("Checking email...");
     }
 
     try {
       // Check if email exists in Supabase (skip on re-auth)
       if (!isReauth) {
-        console.log('[Login] Checking email:', email);
-      const emailCheck = await checkEmailExists(email);
-        console.log('[Login] Email check result:', emailCheck);
+        console.log("[Login] Checking email:", email);
+        const emailCheck = await checkEmailExists(email);
+        console.log("[Login] Email check result:", emailCheck);
 
-      if (!emailCheck.exists) {
-        setError('Email not found. Sign up flow coming soon.');
-        setLoading(false);
-        return;
-      }
+        if (!emailCheck.exists) {
+          if (popup) popup.close();
+          setError("Email not found. Sign up flow coming soon.");
+          setLoading(false);
+          return;
+        }
 
-      // Store user data from email check (backend returns full user with service key)
-      if (emailCheck.user) {
-        checkedUserRef.current = emailCheck.user;
+        // Store user data from email check (backend returns full user with service key)
+        if (emailCheck.user) {
+          checkedUserRef.current = emailCheck.user;
 
-        // Check if forced re-auth is required (e.g., after logout)
-        const forceReauth = localStorage.getItem('canvas_force_reauth') === 'true';
+          // Check if forced re-auth is required (e.g., after logout)
+          const forceReauth =
+            localStorage.getItem("canvas_force_reauth") === "true";
 
-        // Check if user has valid cookies (less than 24 hours old)
-        const cookiesUpdatedAt = emailCheck.user.canvas_cookies_updated_at;
-        const hasValidCookies = emailCheck.user.canvas_cookies?.length > 0 && cookiesUpdatedAt;
+          // Check if user has valid cookies (less than 24 hours old)
+          const cookiesUpdatedAt = emailCheck.user.canvas_cookies_updated_at;
+          const hasValidCookies =
+            emailCheck.user.canvas_cookies?.length > 0 && cookiesUpdatedAt;
 
-        if (hasValidCookies && !isReauth && !forceReauth) {
-          const cookieAge = Date.now() - new Date(cookiesUpdatedAt).getTime();
-          const hoursOld = cookieAge / (1000 * 60 * 60);
+          if (hasValidCookies && !isReauth && !forceReauth) {
+            const cookieAge = Date.now() - new Date(cookiesUpdatedAt).getTime();
+            const hoursOld = cookieAge / (1000 * 60 * 60);
 
-          if (hoursOld < 24) {
-            console.log('[Login] User has valid cookies, skipping streaming auth');
-            setStatus('Login successful! Redirecting...');
+            if (hoursOld < 24) {
+              console.log(
+                "[Login] User has valid cookies, skipping streaming auth",
+              );
+              if (popup) popup.close();
+              setStatus("Login successful! Redirecting...");
 
-            // Create session directly (user data fetched from Supabase on demand)
-            await sessionStorage.setSession(emailCheck.user.id, 7, email);
+              // Create session directly (user data fetched from Supabase on demand)
+              await sessionStorage.setSession(emailCheck.user.id, 7, email);
 
-            // Start background update (non-blocking - user can interact with old data)
-            console.log('[Login] Starting background Canvas data update...');
-            startBackgroundUpdate(email).then(result => {
-              console.log('[Login] Background update started:', result);
-            }).catch(err => {
-              console.warn('[Login] Background update failed to start:', err);
-            });
+              // Start background update (non-blocking - user can interact with old data)
+              console.log("[Login] Starting background Canvas data update...");
+              startBackgroundUpdate(email)
+                .then((result) => {
+                  console.log("[Login] Background update started:", result);
+                })
+                .catch((err) => {
+                  console.warn(
+                    "[Login] Background update failed to start:",
+                    err,
+                  );
+                });
 
-            setTimeout(() => {
-              navigate('/dashboard');
-            }, 1000);
+              setTimeout(() => {
+                navigate("/dashboard");
+              }, 1000);
 
-            setLoading(false);
-            return;
+              setLoading(false);
+              return;
+            }
+          } else if (forceReauth) {
+            console.log(
+              "[Login] Force re-auth flag set, requiring new Canvas authentication",
+            );
           }
-        } else if (forceReauth) {
-          console.log('[Login] Force re-auth flag set, requiring new Canvas authentication');
         }
       }
-      }
 
-      setStatus('Starting authentication...');
-      console.log('[Login] Starting streaming auth for:', email);
+      setStatus("Starting authentication...");
+      console.log("[Login] Starting streaming auth for:", email);
 
       // Start streaming server
       const startResult = await startStreamingAuth(email);
-      console.log('[Login] Streaming auth start result:', startResult);
-      
+      console.log("[Login] Streaming auth start result:", startResult);
+
       if (!startResult.success || !startResult.url) {
-        throw new Error('Failed to start authentication server');
+        if (popup) popup.close();
+        throw new Error("Failed to start authentication server");
       }
 
-      setStatus('Opening authentication window...');
+      setStatus("Opening authentication window...");
 
-      // Open pop-up window
-      const popup = window.open(
-        startResult.url,
-        'Canvas Authentication',
-        'width=1200,height=800,scrollbars=yes,resizable=yes'
-      );
+      // On mobile, navigate the pre-opened window to auth URL (with mobile flag)
+      // On desktop, open as popup with specific dimensions
+      if (isMobile && popup) {
+        const mobileUrl =
+          startResult.url +
+          (startResult.url.includes("?") ? "&" : "?") +
+          "mobile=1";
+        popup.location.href = mobileUrl;
+      } else if (!isMobile) {
+        popup = window.open(
+          startResult.url,
+          "Canvas Authentication",
+          "width=1200,height=800,scrollbars=yes,resizable=yes",
+        );
+      }
 
-      if (!popup) {
-        throw new Error('Please allow pop-ups for this site to continue');
+      // Check if popup was blocked - give user-friendly message about popup blockers
+      if (!popup || popup.closed) {
+        throw new Error(
+          "Pop-up blocked! Please allow pop-ups for this site and try again.",
+        );
       }
 
       setPopupWindow(popup);
-      setStatus('Please complete Canvas login in the pop-up window...');
+      setStatus(
+        isMobile
+          ? "Complete Canvas login in the new tab, then return here..."
+          : "Please complete Canvas login in the pop-up window...",
+      );
 
       // Monitor the popup and extraction
       let extractionCompleted = false;
@@ -156,13 +217,16 @@ export default function Login() {
         try {
           // Check for extraction results periodically (even if popup is still open)
           if (!extractionCompleted) {
-            const extractionResult = await getExtractionResult(email, startResult.streamingServerUrl);
-            
+            const extractionResult = await getExtractionResult(
+              email,
+              startResult.streamingServerUrl,
+            );
+
             // Skip if still pending (extraction in progress)
             if (extractionResult.pending) {
               return; // Continue polling
             }
-            
+
             if (extractionResult.success) {
               // Check if cookies are invalid (requires re-auth)
               if (extractionResult.requiresReauth) {
@@ -172,57 +236,66 @@ export default function Login() {
                 }
                 setPopupWindow(null);
                 await stopStreamingAuth(email);
-                
+
                 // Show status message and automatically restart authentication
-                setStatus(`Cookies invalid: ${extractionResult.reason || 'Authentication expired'}. Restarting authentication...`);
-                
+                setStatus(
+                  `Cookies invalid: ${extractionResult.reason || "Authentication expired"}. Restarting authentication...`,
+                );
+
                 // Wait a moment to show the message, then restart
                 setTimeout(() => {
                   handleContinue(true).catch((err: any) => {
-                    console.error('Re-auth error:', err);
-                    setError(err.message || 'Failed to restart authentication');
+                    console.error("Re-auth error:", err);
+                    setError(err.message || "Failed to restart authentication");
                     setLoading(false);
                   });
                 }, 2000);
-                
+
                 return;
               }
-              
+
               extractionCompleted = true;
-              
+
               // Close popup if still open
               if (!popup.closed) {
                 popup.close();
               }
-              
+
               // Wait a moment for any final processing
-              await new Promise(resolve => setTimeout(resolve, 1000));
-              
+              await new Promise((resolve) => setTimeout(resolve, 1000));
+
               // Verify username matches email (optional - only if username was extracted)
               if (extractionResult.username) {
-                setStatus('Verifying authentication...');
-                const verifyResult = await verifyLogin(email, extractionResult.username);
-                
+                setStatus("Verifying authentication...");
+                const verifyResult = await verifyLogin(
+                  email,
+                  extractionResult.username,
+                );
+
                 if (!verifyResult.success || !verifyResult.isValid) {
                   clearInterval(checkInterval);
                   setPopupWindow(null);
-                  setError(`Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`);
+                  setError(
+                    `Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`,
+                  );
                   setLoading(false);
                   await stopStreamingAuth(email);
                   return;
                 }
               } else {
-                console.log('[Login] Username not extracted, skipping verification (cookies are valid)');
+                console.log(
+                  "[Login] Username not extracted, skipping verification (cookies are valid)",
+                );
               }
 
               // Use stored user from email check (avoids RLS issues with anon key)
-              setStatus('Loading user data...');
+              setStatus("Loading user data...");
               const user = checkedUserRef.current;
 
               if (!user) {
                 clearInterval(checkInterval);
                 setPopupWindow(null);
-                setError('User not found. Please sign up first.');
+                setError("User not found. Please sign up first.");
                 setLoading(false);
                 await stopStreamingAuth(email);
                 return;
@@ -232,13 +305,13 @@ export default function Login() {
               try {
                 await userDatabase.updateLastLogin(user.id);
               } catch (updateErr) {
-                console.log('[Login] Could not update last login:', updateErr);
+                console.log("[Login] Could not update last login:", updateErr);
               }
 
               // Create session (user data fetched from Supabase on demand)
               await sessionStorage.setSession(user.id, 7, email);
 
-              setStatus('Login successful! Redirecting...');
+              setStatus("Login successful! Redirecting...");
 
               // Stop streaming server
               await stopStreamingAuth(email);
@@ -247,130 +320,158 @@ export default function Login() {
               setPopupWindow(null);
 
               // Start background update (non-blocking - user can interact with old data)
-              console.log('[Login] Starting background Canvas data update...');
-              startBackgroundUpdate(email).then(result => {
-                console.log('[Login] Background update started:', result);
-              }).catch(err => {
-                console.warn('[Login] Background update failed to start:', err);
-              });
+              console.log("[Login] Starting background Canvas data update...");
+              startBackgroundUpdate(email)
+                .then((result) => {
+                  console.log("[Login] Background update started:", result);
+                })
+                .catch((err) => {
+                  console.warn(
+                    "[Login] Background update failed to start:",
+                    err,
+                  );
+                });
 
               // Redirect to dashboard
               setTimeout(() => {
-                navigate('/dashboard');
+                navigate("/dashboard");
               }, 1000);
 
               return;
             }
           }
-          
+
           // Check if popup is closed (user closed it manually)
           if (popup.closed && !extractionCompleted) {
             clearInterval(checkInterval);
             setPopupWindow(null);
-            
+
             // Wait a moment to see if extraction completed
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise((resolve) => setTimeout(resolve, 3000));
 
             // Final check for extraction results
-            const extractionResult = await getExtractionResult(email, startResult.streamingServerUrl);
-            
+            const extractionResult = await getExtractionResult(
+              email,
+              startResult.streamingServerUrl,
+            );
+
             // Skip if still pending (extraction in progress)
             if (extractionResult.pending) {
               // Continue waiting - extraction might complete soon
               return;
             }
-            
+
             if (extractionResult.success) {
               // Check if cookies are invalid (requires re-auth)
               if (extractionResult.requiresReauth) {
                 await stopStreamingAuth(email);
-                
+
                 // Show status message and automatically restart authentication
-                setStatus(`Cookies invalid: ${extractionResult.reason || 'Authentication expired'}. Restarting authentication...`);
-                
+                setStatus(
+                  `Cookies invalid: ${extractionResult.reason || "Authentication expired"}. Restarting authentication...`,
+                );
+
                 // Wait a moment to show the message, then restart
                 setTimeout(() => {
                   handleContinue(true).catch((err: any) => {
-                    console.error('Re-auth error:', err);
-                    setError(err.message || 'Failed to restart authentication');
+                    console.error("Re-auth error:", err);
+                    setError(err.message || "Failed to restart authentication");
                     setLoading(false);
                   });
                 }, 2000);
-                
+
                 return;
               }
-              
+
               // Extraction completed, verify username if available, then login
               if (extractionResult.username) {
-                setStatus('Verifying authentication...');
-                const verifyResult = await verifyLogin(email, extractionResult.username);
-                
+                setStatus("Verifying authentication...");
+                const verifyResult = await verifyLogin(
+                  email,
+                  extractionResult.username,
+                );
+
                 if (!verifyResult.success || !verifyResult.isValid) {
-                  setError(`Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`);
+                  setError(
+                    `Username verification failed. Match: ${verifyResult.matchPercentage?.toFixed(1)}% (required: 30%)`,
+                  );
                   setLoading(false);
                   await stopStreamingAuth(email);
                   return;
                 }
               } else {
-                console.log('[Login] Username not extracted, skipping verification (cookies are valid)');
+                console.log(
+                  "[Login] Username not extracted, skipping verification (cookies are valid)",
+                );
               }
-              
+
               // Use stored user from email check (avoids RLS issues with anon key)
-              setStatus('Loading user data...');
+              setStatus("Loading user data...");
               const user = checkedUserRef.current;
 
               if (user) {
                 // Create session (user data fetched from Supabase on demand)
                 await sessionStorage.setSession(user.id, 7, email);
-                setStatus('Login successful! Redirecting...');
+                setStatus("Login successful! Redirecting...");
                 await stopStreamingAuth(email);
 
                 // Start background update (non-blocking - user can interact with old data)
-                console.log('[Login] Starting background Canvas data update...');
-                startBackgroundUpdate(email).then(result => {
-                  console.log('[Login] Background update started:', result);
-                }).catch(err => {
-                  console.warn('[Login] Background update failed to start:', err);
-                });
+                console.log(
+                  "[Login] Starting background Canvas data update...",
+                );
+                startBackgroundUpdate(email)
+                  .then((result) => {
+                    console.log("[Login] Background update started:", result);
+                  })
+                  .catch((err) => {
+                    console.warn(
+                      "[Login] Background update failed to start:",
+                      err,
+                    );
+                  });
 
                 setTimeout(() => {
-                  navigate('/dashboard');
+                  navigate("/dashboard");
                 }, 1000);
                 return;
               }
             }
-            
+
             // If we get here, extraction didn't complete
-            setError('Authentication was cancelled or incomplete. Please try again.');
+            setError(
+              "Authentication was cancelled or incomplete. Please try again.",
+            );
             setLoading(false);
             await stopStreamingAuth(email);
           }
         } catch (err: any) {
-          console.error('Error monitoring extraction:', err);
+          console.error("Error monitoring extraction:", err);
           // Don't set error here immediately, let the user complete the flow
         }
       }, 2000); // Check every 2 seconds
 
       // Timeout after 5 minutes
-      setTimeout(() => {
-        if (!popup.closed) {
-          clearInterval(checkInterval);
-          popup.close();
-          setPopupWindow(null);
-          setError('Authentication timeout. Please try again.');
-          setLoading(false);
-          stopStreamingAuth(email);
-        }
-      }, 5 * 60 * 1000);
-
+      setTimeout(
+        () => {
+          if (!popup.closed) {
+            clearInterval(checkInterval);
+            popup.close();
+            setPopupWindow(null);
+            setError("Authentication timeout. Please try again.");
+            setLoading(false);
+            stopStreamingAuth(email);
+          }
+        },
+        5 * 60 * 1000,
+      );
     } catch (err: any) {
-      console.error('[Login] Canvas login error:', err);
-      console.error('[Login] Error details:', {
+      console.error("[Login] Canvas login error:", err);
+      console.error("[Login] Error details:", {
         message: err.message,
         stack: err.stack,
-        name: err.name
+        name: err.name,
       });
-      setError(err.message || 'An error occurred during login');
+      setError(err.message || "An error occurred during login");
       setLoading(false);
       if (popupWindow && !popupWindow.closed) {
         popupWindow.close();
@@ -379,13 +480,13 @@ export default function Login() {
       try {
         await stopStreamingAuth(email);
       } catch (stopErr) {
-        console.error('[Login] Error stopping streaming auth:', stopErr);
+        console.error("[Login] Error stopping streaming auth:", stopErr);
       }
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !loading) {
+    if (e.key === "Enter" && !loading) {
       handleContinue();
     }
   };
@@ -395,9 +496,7 @@ export default function Login() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Welcome</CardTitle>
-          <CardDescription>
-            Enter your .edu email to continue
-          </CardDescription>
+          <CardDescription>Enter your .edu email to continue</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {error && (
@@ -406,7 +505,7 @@ export default function Login() {
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-          
+
           {status && (
             <Alert>
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -441,7 +540,7 @@ export default function Login() {
                 Processing...
               </>
             ) : (
-              'Continue'
+              "Continue"
             )}
           </Button>
         </CardContent>
@@ -449,5 +548,3 @@ export default function Login() {
     </div>
   );
 }
-
-

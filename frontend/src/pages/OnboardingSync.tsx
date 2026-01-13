@@ -1,17 +1,27 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { startStreamingAuth, getExtractionResult, stopStreamingAuth } from '@/services/api/auth';
-import { submitIdentikey, completeOnboarding } from '@/services/api/onboarding';
-import { Loader2, AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  startStreamingAuth,
+  getExtractionResult,
+  stopStreamingAuth,
+} from "@/services/api/auth";
+import { submitIdentikey, completeOnboarding } from "@/services/api/onboarding";
+import { Loader2, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function OnboardingSync() {
   const navigate = useNavigate();
-  const [identikey, setIdentikey] = useState('');
+  const [identikey, setIdentikey] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -20,10 +30,10 @@ export default function OnboardingSync() {
 
   useEffect(() => {
     // Load onboarding data from sessionStorage
-    const stored = sessionStorage.getItem('onboarding_data');
+    const stored = sessionStorage.getItem("onboarding_data");
     if (!stored) {
       // No data found - redirect back to info step
-      navigate('/onboarding/info');
+      navigate("/onboarding/info");
       return;
     }
     setOnboardingData(JSON.parse(stored));
@@ -34,17 +44,38 @@ export default function OnboardingSync() {
     setStatus(null);
 
     if (!identikey.trim()) {
-      setError('Please enter your identikey');
+      setError("Please enter your identikey");
       return;
     }
 
-    if (!onboardingData || !onboardingData.email || !onboardingData.firstName || !onboardingData.school || !onboardingData.inviteCode) {
-      setError('Missing onboarding data. Please start over.');
+    if (
+      !onboardingData ||
+      !onboardingData.email ||
+      !onboardingData.firstName ||
+      !onboardingData.school ||
+      !onboardingData.inviteCode
+    ) {
+      setError("Missing onboarding data. Please start over.");
       return;
+    }
+
+    // Detect mobile devices
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // On mobile, open window IMMEDIATELY to preserve user gesture
+    // We'll navigate it to the auth URL after API calls complete
+    let popup: Window | null = null;
+    if (isMobile) {
+      popup = window.open("about:blank", "_blank");
+      if (popup) {
+        popup.document.write(
+          "<html><body style='background:#1a1a2e;color:white;font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0'><p>Loading Canvas login...</p></body></html>",
+        );
+      }
     }
 
     setLoading(true);
-    setStatus('Preparing authentication...');
+    setStatus("Preparing authentication...");
 
     try {
       // Submit identikey first
@@ -53,39 +84,60 @@ export default function OnboardingSync() {
         onboardingData.email,
         onboardingData.firstName,
         onboardingData.school,
-        onboardingData.inviteCode
+        onboardingData.inviteCode,
       );
 
       if (!syncResult.success) {
-        setError(syncResult.error || 'Failed to prepare sync');
+        if (popup) popup.close();
+        setError(syncResult.error || "Failed to prepare sync");
         setLoading(false);
         return;
       }
 
-      setStatus('Starting authentication...');
+      setStatus("Starting authentication...");
 
       // Start streaming auth for onboarding (no AWS update will run)
-      const startResult = await startStreamingAuth(onboardingData.email, 'onboarding');
-
-      if (!startResult.success || !startResult.url) {
-        throw new Error('Failed to start authentication server');
-      }
-
-      setStatus('Opening authentication window...');
-
-      // Open pop-up window
-      const popup = window.open(
-        startResult.url,
-        'Canvas Authentication',
-        'width=1200,height=800,scrollbars=yes,resizable=yes'
+      const startResult = await startStreamingAuth(
+        onboardingData.email,
+        "onboarding",
       );
 
-      if (!popup) {
-        throw new Error('Please allow pop-ups for this site to continue');
+      if (!startResult.success || !startResult.url) {
+        if (popup) popup.close();
+        throw new Error("Failed to start authentication server");
+      }
+
+      setStatus("Opening authentication window...");
+
+      // On mobile, navigate the pre-opened window to auth URL (with mobile flag)
+      // On desktop, open as popup with specific dimensions
+      if (isMobile && popup) {
+        const mobileUrl =
+          startResult.url +
+          (startResult.url.includes("?") ? "&" : "?") +
+          "mobile=1";
+        popup.location.href = mobileUrl;
+      } else if (!isMobile) {
+        popup = window.open(
+          startResult.url,
+          "Canvas Authentication",
+          "width=1200,height=800,scrollbars=yes,resizable=yes",
+        );
+      }
+
+      // Check if popup was blocked - give user-friendly message about popup blockers
+      if (!popup || popup.closed) {
+        throw new Error(
+          "Pop-up blocked! Please allow pop-ups for this site and try again.",
+        );
       }
 
       setPopupWindow(popup);
-      setStatus('Please complete Canvas login in the pop-up window...');
+      setStatus(
+        isMobile
+          ? "Complete Canvas login in the new tab, then return here..."
+          : "Please complete Canvas login in the pop-up window...",
+      );
 
       // Monitor the popup and extraction
       let extractionCompleted = false;
@@ -93,7 +145,10 @@ export default function OnboardingSync() {
         try {
           // Check for extraction results periodically
           if (!extractionCompleted) {
-            const extractionResult = await getExtractionResult(onboardingData.email, startResult.streamingServerUrl);
+            const extractionResult = await getExtractionResult(
+              onboardingData.email,
+              startResult.streamingServerUrl,
+            );
 
             // Skip if still pending (extraction in progress)
             if (extractionResult.pending) {
@@ -109,9 +164,9 @@ export default function OnboardingSync() {
               }
 
               // Wait a moment for any final processing
-              await new Promise(resolve => setTimeout(resolve, 1000));
+              await new Promise((resolve) => setTimeout(resolve, 1000));
 
-              setStatus('Completing setup...');
+              setStatus("Completing setup...");
 
               // Complete onboarding - create user account
               const completeResult = await completeOnboarding(
@@ -119,13 +174,13 @@ export default function OnboardingSync() {
                 onboardingData.firstName,
                 onboardingData.school,
                 onboardingData.inviteCode,
-                identikey.trim()
+                identikey.trim(),
               );
 
               if (!completeResult.success) {
                 clearInterval(checkInterval);
                 setPopupWindow(null);
-                setError(completeResult.error || 'Failed to complete setup');
+                setError(completeResult.error || "Failed to complete setup");
                 setLoading(false);
                 await stopStreamingAuth(onboardingData.email);
                 return;
@@ -138,13 +193,13 @@ export default function OnboardingSync() {
               setPopupWindow(null);
 
               // Clear onboarding data from sessionStorage
-              sessionStorage.removeItem('onboarding_data');
+              sessionStorage.removeItem("onboarding_data");
 
-              setStatus('Setup complete! Redirecting...');
+              setStatus("Setup complete! Redirecting...");
 
               // Redirect to completion page
               setTimeout(() => {
-                navigate('/onboarding/complete');
+                navigate("/onboarding/complete");
               }, 1000);
 
               return;
@@ -154,7 +209,7 @@ export default function OnboardingSync() {
             if (extractionResult.error) {
               clearInterval(checkInterval);
               setPopupWindow(null);
-              setError(extractionResult.error || 'Cookie extraction failed');
+              setError(extractionResult.error || "Cookie extraction failed");
               setLoading(false);
               await stopStreamingAuth(onboardingData.email);
               return;
@@ -167,10 +222,13 @@ export default function OnboardingSync() {
             setPopupWindow(null);
 
             // Wait a moment to see if extraction completed
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise((resolve) => setTimeout(resolve, 3000));
 
             // Final check for extraction results
-            const extractionResult = await getExtractionResult(onboardingData.email, startResult.streamingServerUrl);
+            const extractionResult = await getExtractionResult(
+              onboardingData.email,
+              startResult.streamingServerUrl,
+            );
 
             if (extractionResult.pending) {
               // Continue waiting
@@ -180,38 +238,38 @@ export default function OnboardingSync() {
             if (extractionResult.success) {
               // Same success handling as above
               extractionCompleted = true;
-              setStatus('Completing setup...');
+              setStatus("Completing setup...");
 
               const completeResult = await completeOnboarding(
                 onboardingData.email,
                 onboardingData.firstName,
                 onboardingData.school,
                 onboardingData.inviteCode,
-                identikey.trim()
+                identikey.trim(),
               );
 
               if (!completeResult.success) {
-                setError(completeResult.error || 'Failed to complete setup');
+                setError(completeResult.error || "Failed to complete setup");
                 setLoading(false);
                 await stopStreamingAuth(onboardingData.email);
                 return;
               }
 
               await stopStreamingAuth(onboardingData.email);
-              sessionStorage.removeItem('onboarding_data');
-              setStatus('Setup complete! Redirecting...');
+              sessionStorage.removeItem("onboarding_data");
+              setStatus("Setup complete! Redirecting...");
 
               setTimeout(() => {
-                navigate('/onboarding/complete');
+                navigate("/onboarding/complete");
               }, 1000);
             } else {
-              setError('Cookie extraction was cancelled or failed');
+              setError("Cookie extraction was cancelled or failed");
               setLoading(false);
               await stopStreamingAuth(onboardingData.email);
             }
           }
         } catch (err: any) {
-          console.error('[OnboardingSync] Error in extraction check:', err);
+          console.error("[OnboardingSync] Error in extraction check:", err);
           // Don't clear interval on error - let it retry
         }
       }, 2000); // Check every 2 seconds
@@ -224,8 +282,8 @@ export default function OnboardingSync() {
         }
       };
     } catch (err: any) {
-      console.error('[OnboardingSync] Error:', err);
-      setError(err.message || 'An error occurred. Please try again.');
+      console.error("[OnboardingSync] Error:", err);
+      setError(err.message || "An error occurred. Please try again.");
       setLoading(false);
     }
   };
@@ -239,7 +297,9 @@ export default function OnboardingSync() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Sync with Canvas</CardTitle>
-          <CardDescription>Enter your identikey to sync with Canvas</CardDescription>
+          <CardDescription>
+            Enter your identikey to sync with Canvas
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -269,18 +329,14 @@ export default function OnboardingSync() {
               </Alert>
             )}
 
-            <Button
-              onClick={handleSync}
-              className="w-full"
-              disabled={loading}
-            >
+            <Button onClick={handleSync} className="w-full" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {status || 'Processing...'}
+                  {status || "Processing..."}
                 </>
               ) : (
-                'Sync with Canvas'
+                "Sync with Canvas"
               )}
             </Button>
           </div>
@@ -289,4 +345,3 @@ export default function OnboardingSync() {
     </div>
   );
 }
-
