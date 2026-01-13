@@ -106,7 +106,7 @@ export default function Login() {
         console.log("[Login] Email check result:", emailCheck);
 
         if (!emailCheck.exists) {
-          if (popup) popup.close();
+          if (popup) popup?.close();
           setError("Email not found. Sign up flow coming soon.");
           setLoading(false);
           return;
@@ -133,7 +133,7 @@ export default function Login() {
               console.log(
                 "[Login] User has valid cookies, skipping streaming auth",
               );
-              if (popup) popup.close();
+              if (popup) popup?.close();
               setStatus("Login successful! Redirecting...");
 
               // Create session directly (user data fetched from Supabase on demand)
@@ -175,7 +175,7 @@ export default function Login() {
       console.log("[Login] Streaming auth start result:", startResult);
 
       if (!startResult.success || !startResult.url) {
-        if (popup) popup.close();
+        if (popup) popup?.close();
         throw new Error("Failed to start authentication server");
       }
 
@@ -197,19 +197,24 @@ export default function Login() {
         );
       }
 
-      // Check if popup was blocked - give user-friendly message about popup blockers
-      if (!popup || popup.closed) {
-        throw new Error(
-          "Pop-up blocked! Please allow pop-ups for this site and try again.",
+      // Check if popup was blocked - warn but don't fail (some browsers return null but still open)
+      if (!popup || popup?.closed) {
+        console.warn(
+          "[Login] Popup reference is null/closed, but popup may have opened",
+        );
+        setStatus(
+          "If you don't see a pop-up window, please allow pop-ups for this site and try again.",
+        );
+        // Continue anyway - the popup might have opened despite null reference
+        // We'll still try to monitor for extraction results
+      } else {
+        setPopupWindow(popup);
+        setStatus(
+          isMobile
+            ? "Complete Canvas login in the new tab, then return here..."
+            : "Please complete Canvas login in the pop-up window...",
         );
       }
-
-      setPopupWindow(popup);
-      setStatus(
-        isMobile
-          ? "Complete Canvas login in the new tab, then return here..."
-          : "Please complete Canvas login in the pop-up window...",
-      );
 
       // Monitor the popup and extraction
       let extractionCompleted = false;
@@ -231,8 +236,8 @@ export default function Login() {
               // Check if cookies are invalid (requires re-auth)
               if (extractionResult.requiresReauth) {
                 clearInterval(checkInterval);
-                if (!popup.closed) {
-                  popup.close();
+                if (!popup?.closed) {
+                  popup?.close();
                 }
                 setPopupWindow(null);
                 await stopStreamingAuth(email);
@@ -257,8 +262,8 @@ export default function Login() {
               extractionCompleted = true;
 
               // Close popup if still open
-              if (!popup.closed) {
-                popup.close();
+              if (!popup?.closed) {
+                popup?.close();
               }
 
               // Wait a moment for any final processing
@@ -342,7 +347,8 @@ export default function Login() {
           }
 
           // Check if popup is closed (user closed it manually)
-          if (popup.closed && !extractionCompleted) {
+          // Note: popup might be null if browser didn't return a reference
+          if (popup?.closed && !extractionCompleted) {
             clearInterval(checkInterval);
             setPopupWindow(null);
 
@@ -453,9 +459,9 @@ export default function Login() {
       // Timeout after 5 minutes
       setTimeout(
         () => {
-          if (!popup.closed) {
+          if (!popup?.closed) {
             clearInterval(checkInterval);
-            popup.close();
+            popup?.close();
             setPopupWindow(null);
             setError("Authentication timeout. Please try again.");
             setLoading(false);
