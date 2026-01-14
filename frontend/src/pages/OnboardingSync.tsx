@@ -344,6 +344,27 @@ export default function OnboardingSync() {
                 "Sync with Canvas"
               )}
             </Button>
+
+            <p className="text-xs text-muted-foreground text-center mt-3">
+              By continuing, you agree to the{" "}
+              <a
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground"
+              >
+                Privacy Policy
+              </a>
+            </p>
           </div>
         </CardContent>
       </Card>

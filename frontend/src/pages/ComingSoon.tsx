@@ -14,7 +14,7 @@ const ComingSoon = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!phoneNumber.trim()) {
       toast({
         title: "Error",
@@ -38,13 +38,8 @@ const ComingSoon = () => {
       }
 
       // Update user with phone number
-      // The userDatabase.updateUser will handle storing phone_number in both profileData and the phone_number column
-      await userDatabase.updateUser({
-        ...user,
-        profileData: {
-          ...user.profileData,
-          phoneNumber: phoneNumber.trim(),
-        },
+      await userDatabase.updateUser(user.id, {
+        phoneNumber: phoneNumber.trim(),
       });
 
       toast({
@@ -83,11 +78,7 @@ const ComingSoon = () => {
               className="text-center"
               disabled={isSubmitting}
             />
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full"
-            >
+            <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           </form>
@@ -98,4 +89,3 @@ const ComingSoon = () => {
 };
 
 export default ComingSoon;
-

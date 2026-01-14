@@ -96,6 +96,19 @@ npm start             # Start backend server
 - **[Backend Documentation](docs/BACKEND.md)** - Canvas extraction, Browserbase setup, AWS deployment
 - **[Frontend Documentation](docs/FRONTEND.md)** - React app, Supabase integration, UI components
 
+## 📊 Monitoring
+
+A Google Sheets dashboard provides live monitoring of user signups and extraction status:
+- **Users** - All registered users (name, email, phone, school, last cookie refresh)
+- **Pending Extractions** - Users waiting in the extraction queue
+- **Completed Extractions** - Successfully processed users
+
+Setup instructions are in the [canvas-extraction](../canvas-extraction) repository under `docs/google-sheets-sync.md`.
+
+## 🔗 Related Repositories
+
+- **canvas-extraction** - Handles initial full extraction for new user signups. See `../canvas-extraction/README.md`
+
 ## 🛠️ Technology Stack
 
 ### Backend
@@ -121,6 +134,7 @@ MIT License
 ---
 
 **Made for students who want to take control of their Canvas data** 🎓
+
 
 
 

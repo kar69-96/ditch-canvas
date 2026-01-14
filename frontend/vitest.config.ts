@@ -7,17 +7,25 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './tests/setup.ts',
+    setupFiles: './test-setup.ts',
+    include: ['src/**/*.test.{ts,tsx}'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'html', 'lcov'],
+      all: true,
+      include: ['src/**/*.{ts,tsx}'],
       exclude: [
-        'node_modules/',
-        'tests/',
         '**/*.test.{ts,tsx}',
         '**/*.spec.{ts,tsx}',
-        '**/ui/**', // Exclude shadcn/ui components
+        '**/node_modules/**',
+        'src/components/ui/**', // Exclude shadcn/ui components
       ],
+      thresholds: {
+        branches: 80,
+        functions: 80,
+        lines: 80,
+        statements: 80,
+      },
     },
   },
   resolve: {

@@ -1,20 +1,37 @@
 /**
- * Simple user types for frontend-only app
+ * User type - matches simplified Supabase schema
  */
 
 export interface User {
-  id: number;
-  name: string;
-  email?: string;
-  student?: string; // CU Boulder identikey (e.g., kare6625)
-  avatarUrl?: string;
-  profileData?: {
-    preferredName?: string;
-    theme?: string;
+  // Identity
+  id: string; // UUID (not number!)
+  email: string;
+
+  // Profile (from sign-up)
+  firstName: string;
+  student: string; // CU Boulder identikey (e.g., "kare6625")
+  school: string; // "University of Colorado - Boulder"
+
+  // Authentication
+  canvasCookies?: any[];
+  canvasCookiesUpdatedAt?: string;
+  lastLoginAt?: string;
+
+  // Onboarding
+  inviteCodeUsed?: string;
+  onboardingCompletedAt?: string;
+
+  // Contact
+  phoneNumber?: string;
+
+  // Preferences
+  profilePreferences?: {
+    theme?: "light" | "dark" | "system";
     font?: string;
-    colorMode?: 'light' | 'dark' | 'system';
     [key: string]: any;
   };
+
+  // System
   createdAt: string;
   updatedAt: string;
 }

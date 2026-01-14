@@ -3,12 +3,11 @@
  * Handles all database operations for the anonymous class discussion forum
  */
 
-import { supabase } from '@/lib/supabase';
-import { uploadAttachment, getAttachmentUrls } from './chatStorage';
+import { supabase } from "@/lib/supabase";
+import { uploadAttachment, getAttachmentUrls } from "./chatStorage";
 import type {
   Post,
   Response,
-  Vote,
   Attachment,
   PostWithResponses,
   ResponseWithDetails,
@@ -20,34 +19,21 @@ import type {
   CreateResponseData,
   EditResponseData,
   VoteData,
-  UserUnlockCredits,
-  ThreadAccessTracking,
   UserOnboardingState,
-} from '@/types/chat';
-import { getCurrentUser } from '../mockApi/auth';
+} from "@/types/chat";
+import { getCurrentUser } from "../mockApi/auth";
 
 /**
  * Helper: Get current user's Supabase user ID
- * Looks up user in Supabase by email
+ * Returns the user ID from the authenticated user
  */
 export async function getCurrentUserId(): Promise<string> {
   const user = await getCurrentUser();
-  if (!user?.email) {
-    throw new Error('User not authenticated');
+  if (!user?.id) {
+    throw new Error("User not authenticated");
   }
 
-  // Look up user in Supabase by email
-  const { data, error } = await supabase
-    .from('users')
-    .select('id')
-    .eq('email', user.email.toLowerCase().trim())
-    .single();
-
-  if (error || !data) {
-    throw new Error(`Failed to get user ID: ${error?.message || 'User not found'}`);
-  }
-
-  return data.id;
+  return user.id;
 }
 
 /**
@@ -59,14 +45,14 @@ function calculateSortScore(post: Post): number {
   const daysSinceCreation = (now - postTime) / (1000 * 60 * 60 * 24);
 
   // Recency score: More recent = higher (inverse of days, normalized 0-1)
-  const recencyScore = Math.max(0, 1 - (daysSinceCreation / 30)); // 30 day window
+  const recencyScore = Math.max(0, 1 - daysSinceCreation / 30); // 30 day window
 
   // Response count score: Normalized 0-1 (max assumed 50 responses)
   const maxResponses = 50;
   const responseScore = Math.min(1, post.response_count / maxResponses);
 
   // Weighted combination
-  const finalScore = (0.5 * recencyScore) + (0.5 * responseScore);
+  const finalScore = 0.5 * recencyScore + 0.5 * responseScore;
 
   return finalScore;
 }
@@ -77,40 +63,41 @@ function calculateSortScore(post: Post): number {
 export async function getPosts(
   courseId: number,
   filters: Filters = {},
-  sort: SortMode = 'default',
+  sort: SortMode = "default",
   page: number = 1,
-  pageSize: number = 20
+  pageSize: number = 20,
 ): Promise<Post[]> {
   const userId = await getCurrentUserId();
 
-  let query = supabase
-    .from('chat_posts')
-    .select('*')
-    .eq('course_id', courseId);
+  let query = supabase.from("chat_posts").select("*").eq("course_id", courseId);
 
   // Apply tag filter
   if (filters.tag && filters.tag.length > 0) {
-    query = query.in('tag', filters.tag);
+    query = query.in("tag", filters.tag);
   }
 
   // Apply search filter (full-text search on title)
   if (filters.search && filters.search.trim()) {
-    query = query.textSearch('title', filters.search.trim(), {
-      type: 'websearch',
-      config: 'english',
+    query = query.textSearch("title", filters.search.trim(), {
+      type: "websearch",
+      config: "english",
     });
   }
 
   // Apply sorting
-  if (sort === 'newest') {
-    query = query.order('created_at', { ascending: false });
-  } else if (sort === 'responses') {
-    query = query.order('response_count', { ascending: false }).order('created_at', { ascending: false });
-  } else if (sort === 'score') {
-    query = query.order('net_score', { ascending: false }).order('created_at', { ascending: false });
+  if (sort === "newest") {
+    query = query.order("created_at", { ascending: false });
+  } else if (sort === "responses") {
+    query = query
+      .order("response_count", { ascending: false })
+      .order("created_at", { ascending: false });
+  } else if (sort === "score") {
+    query = query
+      .order("net_score", { ascending: false })
+      .order("created_at", { ascending: false });
   } else {
     // Default: Sort by created_at first, then we'll sort by score in JS
-    query = query.order('created_at', { ascending: false });
+    query = query.order("created_at", { ascending: false });
   }
 
   // Pagination
@@ -130,17 +117,18 @@ export async function getPosts(
 
   // Get user's votes on all posts
   const postIds = data.map((p) => p.id);
-  const { data: votes } = postIds.length > 0
-    ? await supabase
-        .from('chat_votes')
-        .select('target_id, vote_type')
-        .eq('user_id', userId)
-        .in('target_id', postIds)
-        .eq('target_type', 'post')
-    : { data: [] };
+  const { data: votes } =
+    postIds.length > 0
+      ? await supabase
+          .from("chat_votes")
+          .select("target_id, vote_type")
+          .eq("user_id", userId)
+          .in("target_id", postIds)
+          .eq("target_type", "post")
+      : { data: [] };
 
   const voteMap = new Map(
-    (votes || []).map((v) => [v.target_id, v.vote_type as 'up' | 'down'])
+    (votes || []).map((v) => [v.target_id, v.vote_type as "up" | "down"]),
   );
 
   // Attach user votes to posts
@@ -150,7 +138,7 @@ export async function getPosts(
   }));
 
   // For default sort, calculate scores and sort
-  if (sort === 'default') {
+  if (sort === "default") {
     const postsWithScores = postsWithVotes.map((post) => ({
       post,
       score: calculateSortScore(post as Post),
@@ -170,22 +158,24 @@ export async function getPost(postId: string): Promise<PostWithResponses> {
 
   // Fetch post
   const { data: postData, error: postError } = await supabase
-    .from('chat_posts')
-    .select('*')
-    .eq('id', postId)
+    .from("chat_posts")
+    .select("*")
+    .eq("id", postId)
     .single();
 
   if (postError || !postData) {
-    throw new Error(`Failed to fetch post: ${postError?.message || 'Post not found'}`);
+    throw new Error(
+      `Failed to fetch post: ${postError?.message || "Post not found"}`,
+    );
   }
 
   // Fetch responses (sorted by net_score DESC)
   const { data: responsesData, error: responsesError } = await supabase
-    .from('chat_responses')
-    .select('*')
-    .eq('post_id', postId)
-    .order('net_score', { ascending: false })
-    .order('created_at', { ascending: true }); // Tie-breaker: older first
+    .from("chat_responses")
+    .select("*")
+    .eq("post_id", postId)
+    .order("net_score", { ascending: false })
+    .order("created_at", { ascending: true }); // Tie-breaker: older first
 
   if (responsesError) {
     throw new Error(`Failed to fetch responses: ${responsesError.message}`);
@@ -193,50 +183,59 @@ export async function getPost(postId: string): Promise<PostWithResponses> {
 
   // Fetch attachments for post
   const { data: postAttachments } = await supabase
-    .from('chat_attachments')
-    .select('*')
-    .eq('post_id', postId)
-    .order('display_order', { ascending: true });
+    .from("chat_attachments")
+    .select("*")
+    .eq("post_id", postId)
+    .order("display_order", { ascending: true });
 
   // Fetch attachments for responses
   const responseIds = (responsesData || []).map((r) => r.id);
-  const { data: responseAttachments } = responseIds.length > 0
-    ? await supabase
-        .from('chat_attachments')
-        .select('*')
-        .in('response_id', responseIds)
-        .order('display_order', { ascending: true })
-    : { data: [] };
+  const { data: responseAttachments } =
+    responseIds.length > 0
+      ? await supabase
+          .from("chat_attachments")
+          .select("*")
+          .in("response_id", responseIds)
+          .order("display_order", { ascending: true })
+      : { data: [] };
 
   // Get user's vote on the post
   const { data: postVote } = await supabase
-    .from('chat_votes')
-    .select('vote_type')
-    .eq('user_id', userId)
-    .eq('target_id', postId)
-    .eq('target_type', 'post')
+    .from("chat_votes")
+    .select("vote_type")
+    .eq("user_id", userId)
+    .eq("target_id", postId)
+    .eq("target_type", "post")
     .single();
 
   // Get user's votes on responses
-  const { data: responseVotes } = responseIds.length > 0
-    ? await supabase
-        .from('chat_votes')
-        .select('target_id, vote_type')
-        .eq('user_id', userId)
-        .in('target_id', responseIds)
-        .eq('target_type', 'response')
-    : { data: [] };
+  const { data: responseVotes } =
+    responseIds.length > 0
+      ? await supabase
+          .from("chat_votes")
+          .select("target_id, vote_type")
+          .eq("user_id", userId)
+          .in("target_id", responseIds)
+          .eq("target_type", "response")
+      : { data: [] };
 
   const voteMap = new Map(
-    (responseVotes || []).map((v) => [v.target_id, v.vote_type as 'up' | 'down'])
+    (responseVotes || []).map((v) => [
+      v.target_id,
+      v.vote_type as "up" | "down",
+    ]),
   );
 
   // Attach attachments and votes to responses
-  const responsesWithDetails: ResponseWithDetails[] = (responsesData || []).map((response) => ({
-    ...response,
-    attachments: (responseAttachments || []).filter((a) => a.response_id === response.id),
-    user_vote: voteMap.get(response.id) || null,
-  })) as ResponseWithDetails[];
+  const responsesWithDetails: ResponseWithDetails[] = (responsesData || []).map(
+    (response) => ({
+      ...response,
+      attachments: (responseAttachments || []).filter(
+        (a) => a.response_id === response.id,
+      ),
+      user_vote: voteMap.get(response.id) || null,
+    }),
+  ) as ResponseWithDetails[];
 
   // Get signed URLs for attachments
   const postAttachmentsWithUrls = postAttachments
@@ -247,14 +246,14 @@ export async function getPost(postId: string): Promise<PostWithResponses> {
     responsesWithDetails.map(async (response) => ({
       ...response,
       attachments: await getAttachmentUrls(response.attachments),
-    }))
+    })),
   );
 
   return {
     ...(postData as Post),
     responses: responsesWithUrls,
     attachments: postAttachmentsWithUrls,
-    user_vote: (postVote?.vote_type as 'up' | 'down') || null,
+    user_vote: (postVote?.vote_type as "up" | "down") || null,
   };
 }
 
@@ -266,29 +265,36 @@ export async function createPost(data: CreatePostData): Promise<Post> {
 
   // Validate inputs
   if (data.title.length < 3 || data.title.length > 200) {
-    throw new Error('Title must be between 3 and 200 characters');
+    throw new Error("Title must be between 3 and 200 characters");
   }
   if (data.body.length < 10 || data.body.length > 5000) {
-    throw new Error('Body must be between 10 and 5000 characters');
+    throw new Error("Body must be between 10 and 5000 characters");
   }
-  if (!['problem', 'discussion', 'other'].includes(data.tag)) {
-    throw new Error('Invalid tag');
+  if (!["problem", "discussion", "other"].includes(data.tag)) {
+    throw new Error("Invalid tag");
   }
 
   // Generate fruit name using database function
-  const { data: fruitData, error: fruitError } = await supabase.rpc('generate_fruit_name');
+  const { data: fruitData, error: fruitError } = await supabase.rpc(
+    "generate_fruit_name",
+  );
   if (fruitError || !fruitData) {
-    throw new Error(`Failed to generate fruit name: ${fruitError?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to generate fruit name: ${fruitError?.message || "Unknown error"}`,
+    );
   }
   const fruitName = fruitData as string;
 
   // Upload attachments if provided
-  const attachmentRecords: Omit<Attachment, 'id' | 'created_at' | 'signed_url'>[] = [];
+  const attachmentRecords: Omit<
+    Attachment,
+    "id" | "created_at" | "signed_url"
+  >[] = [];
   if (data.attachments && data.attachments.length > 0) {
     for (let i = 0; i < data.attachments.length; i++) {
       const file = data.attachments[i];
       const { path, signedUrl } = await uploadAttachment(file, data.courseId);
-      
+
       attachmentRecords.push({
         post_id: null, // Will be set after post creation
         response_id: null,
@@ -303,7 +309,7 @@ export async function createPost(data: CreatePostData): Promise<Post> {
 
   // Create post
   const { data: postData, error: postError } = await supabase
-    .from('chat_posts')
+    .from("chat_posts")
     .insert({
       course_id: data.courseId,
       user_id: userId,
@@ -316,7 +322,9 @@ export async function createPost(data: CreatePostData): Promise<Post> {
     .single();
 
   if (postError || !postData) {
-    throw new Error(`Failed to create post: ${postError?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to create post: ${postError?.message || "Unknown error"}`,
+    );
   }
 
   // Create attachment records
@@ -327,28 +335,17 @@ export async function createPost(data: CreatePostData): Promise<Post> {
     }));
 
     const { error: attachError } = await supabase
-      .from('chat_attachments')
+      .from("chat_attachments")
       .insert(attachmentsToInsert);
 
     if (attachError) {
-      console.error('Failed to create attachment records:', attachError);
+      console.error("Failed to create attachment records:", attachError);
       // Don't throw - post was created successfully
     }
   }
 
-  // Create thread_access_tracking record with has_contributed = true
-  const { error: trackingError } = await supabase
-    .from('thread_access_tracking')
-    .insert({
-      user_id: userId,
-      post_id: postData.id,
-      has_contributed: true,
-    });
-
-  if (trackingError) {
-    console.error('Failed to create access tracking:', trackingError);
-    // Don't throw - post was created successfully
-  }
+  // Note: thread_access_tracking table has been deprecated
+  // Access is now always granted, no tracking needed
 
   return postData as Post;
 }
@@ -356,22 +353,25 @@ export async function createPost(data: CreatePostData): Promise<Post> {
 /**
  * Edit an existing post (only by owner)
  */
-export async function editPost(postId: string, data: EditPostData): Promise<Post> {
+export async function editPost(
+  postId: string,
+  data: EditPostData,
+): Promise<Post> {
   const userId = await getCurrentUserId();
 
   // First verify user owns the post
   const { data: existingPost, error: checkError } = await supabase
-    .from('chat_posts')
-    .select('user_id')
-    .eq('id', postId)
+    .from("chat_posts")
+    .select("user_id")
+    .eq("id", postId)
     .single();
 
   if (checkError || !existingPost) {
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   if (existingPost.user_id !== userId) {
-    throw new Error('Unauthorized: You can only edit your own posts');
+    throw new Error("Unauthorized: You can only edit your own posts");
   }
 
   const updateData: Partial<Post> = {
@@ -381,35 +381,37 @@ export async function editPost(postId: string, data: EditPostData): Promise<Post
 
   if (data.title !== undefined) {
     if (data.title.length < 3 || data.title.length > 200) {
-      throw new Error('Title must be between 3 and 200 characters');
+      throw new Error("Title must be between 3 and 200 characters");
     }
     updateData.title = data.title;
   }
 
   if (data.body !== undefined) {
     if (data.body.length < 10 || data.body.length > 5000) {
-      throw new Error('Body must be between 10 and 5000 characters');
+      throw new Error("Body must be between 10 and 5000 characters");
     }
     updateData.body = data.body;
   }
 
   if (data.tag !== undefined) {
-    if (!['problem', 'discussion', 'other'].includes(data.tag)) {
-      throw new Error('Invalid tag');
+    if (!["problem", "discussion", "other"].includes(data.tag)) {
+      throw new Error("Invalid tag");
     }
     updateData.tag = data.tag;
   }
 
   const { data: postData, error: postError } = await supabase
-    .from('chat_posts')
+    .from("chat_posts")
     .update(updateData)
-    .eq('id', postId)
-    .eq('user_id', userId) // Double-check ownership in update query
+    .eq("id", postId)
+    .eq("user_id", userId) // Double-check ownership in update query
     .select()
     .single();
 
   if (postError || !postData) {
-    throw new Error(`Failed to edit post: ${postError?.message || 'Post not found or unauthorized'}`);
+    throw new Error(
+      `Failed to edit post: ${postError?.message || "Post not found or unauthorized"}`,
+    );
   }
 
   return postData as Post;
@@ -418,23 +420,25 @@ export async function editPost(postId: string, data: EditPostData): Promise<Post
 /**
  * Create a response to a post
  */
-export async function createResponse(data: CreateResponseData): Promise<Response> {
+export async function createResponse(
+  data: CreateResponseData,
+): Promise<Response> {
   const userId = await getCurrentUserId();
 
   // Validate body
   if (data.body.length < 10 || data.body.length > 5000) {
-    throw new Error('Body must be between 10 and 5000 characters');
+    throw new Error("Body must be between 10 and 5000 characters");
   }
 
   // Get the post to check if user authored it (for fruit name inheritance)
   const { data: postData } = await supabase
-    .from('chat_posts')
-    .select('user_id, anonymous_thread_id')
-    .eq('id', data.postId)
+    .from("chat_posts")
+    .select("user_id, anonymous_thread_id")
+    .eq("id", data.postId)
     .single();
 
   if (!postData) {
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   // Determine fruit name: inherit if same user, generate new if different
@@ -444,31 +448,43 @@ export async function createResponse(data: CreateResponseData): Promise<Response
     fruitName = postData.anonymous_thread_id;
   } else {
     // Different user: generate new fruit name
-    const { data: fruitData, error: fruitError } = await supabase.rpc('generate_fruit_name');
+    const { data: fruitData, error: fruitError } = await supabase.rpc(
+      "generate_fruit_name",
+    );
     if (fruitError || !fruitData) {
-      throw new Error(`Failed to generate fruit name: ${fruitError?.message || 'Unknown error'}`);
+      throw new Error(
+        `Failed to generate fruit name: ${fruitError?.message || "Unknown error"}`,
+      );
     }
     fruitName = fruitData as string;
   }
 
   // Get course_id from post for attachment upload
   const { data: courseData } = await supabase
-    .from('chat_posts')
-    .select('course_id')
-    .eq('id', data.postId)
+    .from("chat_posts")
+    .select("course_id")
+    .eq("id", data.postId)
     .single();
 
   if (!courseData) {
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   // Upload attachments if provided
-  const attachmentRecords: Omit<Attachment, 'id' | 'created_at' | 'signed_url'>[] = [];
+  const attachmentRecords: Omit<
+    Attachment,
+    "id" | "created_at" | "signed_url"
+  >[] = [];
   if (data.attachments && data.attachments.length > 0) {
     for (let i = 0; i < data.attachments.length; i++) {
       const file = data.attachments[i];
-      const { path } = await uploadAttachment(file, courseData.course_id, undefined, undefined);
-      
+      const { path } = await uploadAttachment(
+        file,
+        courseData.course_id,
+        undefined,
+        undefined,
+      );
+
       attachmentRecords.push({
         post_id: null,
         response_id: null, // Will be set after response creation
@@ -483,7 +499,7 @@ export async function createResponse(data: CreateResponseData): Promise<Response
 
   // Create response
   const { data: responseData, error: responseError } = await supabase
-    .from('chat_responses')
+    .from("chat_responses")
     .insert({
       post_id: data.postId,
       user_id: userId,
@@ -494,7 +510,9 @@ export async function createResponse(data: CreateResponseData): Promise<Response
     .single();
 
   if (responseError || !responseData) {
-    throw new Error(`Failed to create response: ${responseError?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to create response: ${responseError?.message || "Unknown error"}`,
+    );
   }
 
   // Create attachment records
@@ -505,28 +523,16 @@ export async function createResponse(data: CreateResponseData): Promise<Response
     }));
 
     const { error: attachError } = await supabase
-      .from('chat_attachments')
+      .from("chat_attachments")
       .insert(attachmentsToInsert);
 
     if (attachError) {
-      console.error('Failed to create attachment records:', attachError);
+      console.error("Failed to create attachment records:", attachError);
     }
   }
 
-  // Update thread_access_tracking with has_contributed = true
-  const { error: trackingError } = await supabase
-    .from('thread_access_tracking')
-    .upsert({
-      user_id: userId,
-      post_id: data.postId,
-      has_contributed: true,
-    }, {
-      onConflict: 'user_id,post_id',
-    });
-
-  if (trackingError) {
-    console.error('Failed to update access tracking:', trackingError);
-  }
+  // Note: thread_access_tracking table has been deprecated
+  // Access is now always granted, no tracking needed
 
   return responseData as Response;
 }
@@ -539,11 +545,11 @@ export async function vote(data: VoteData): Promise<{ netScore: number }> {
 
   // Check if user already voted
   const { data: existingVote } = await supabase
-    .from('chat_votes')
-    .select('id, vote_type')
-    .eq('user_id', userId)
-    .eq('target_id', data.targetId)
-    .eq('target_type', data.targetType)
+    .from("chat_votes")
+    .select("id, vote_type")
+    .eq("user_id", userId)
+    .eq("target_id", data.targetId)
+    .eq("target_type", data.targetType)
     .single();
 
   if (existingVote) {
@@ -551,9 +557,9 @@ export async function vote(data: VoteData): Promise<{ netScore: number }> {
     if (existingVote.vote_type === data.voteType) {
       // Same vote type - remove vote (toggle off)
       const { error: deleteError } = await supabase
-        .from('chat_votes')
+        .from("chat_votes")
         .delete()
-        .eq('id', existingVote.id);
+        .eq("id", existingVote.id);
 
       if (deleteError) {
         throw new Error(`Failed to remove vote: ${deleteError.message}`);
@@ -561,9 +567,9 @@ export async function vote(data: VoteData): Promise<{ netScore: number }> {
     } else {
       // Different vote type - update
       const { error: updateError } = await supabase
-        .from('chat_votes')
+        .from("chat_votes")
         .update({ vote_type: data.voteType })
-        .eq('id', existingVote.id);
+        .eq("id", existingVote.id);
 
       if (updateError) {
         throw new Error(`Failed to update vote: ${updateError.message}`);
@@ -571,51 +577,87 @@ export async function vote(data: VoteData): Promise<{ netScore: number }> {
     }
   } else {
     // New vote - insert
-    const { error: insertError } = await supabase
-      .from('chat_votes')
-      .insert({
-        user_id: userId,
-        target_id: data.targetId,
-        target_type: data.targetType,
-        vote_type: data.voteType,
-      });
+    const { error: insertError } = await supabase.from("chat_votes").insert({
+      user_id: userId,
+      target_id: data.targetId,
+      target_type: data.targetType,
+      vote_type: data.voteType,
+    });
 
     if (insertError) {
       throw new Error(`Failed to create vote: ${insertError.message}`);
     }
 
     // If this is an upvote on a response, check if we should award credit
-    if (data.targetType === 'response' && data.voteType === 'up') {
-      // Get course_id from response
+    // Note: Credits are now stored in users.forum_data JSONB
+    if (data.targetType === "response" && data.voteType === "up") {
+      // Get response to find author and post
       const { data: responseData } = await supabase
-        .from('chat_responses')
-        .select('post_id')
-        .eq('id', data.targetId)
+        .from("chat_responses")
+        .select("post_id, user_id")
+        .eq("id", data.targetId)
         .single();
 
-      if (responseData) {
+      if (responseData && responseData.user_id) {
         const { data: postData } = await supabase
-          .from('chat_posts')
-          .select('course_id')
-          .eq('id', responseData.post_id)
+          .from("chat_posts")
+          .select("course_id")
+          .eq("id", responseData.post_id)
           .single();
 
         if (postData) {
           // Check if this is the first upvote
-          const { data: upvoteCount } = await supabase
-            .from('chat_votes')
-            .select('id', { count: 'exact', head: true })
-            .eq('target_id', data.targetId)
-            .eq('target_type', 'response')
-            .eq('vote_type', 'up');
+          const { count: upvoteCount } = await supabase
+            .from("chat_votes")
+            .select("id", { count: "exact", head: true })
+            .eq("target_id", data.targetId)
+            .eq("target_type", "response")
+            .eq("vote_type", "up");
 
-          // If this is the first upvote (count = 1), award credit
-          if (upvoteCount && upvoteCount.length === 1) {
-            // Award credit via database function
-            await supabase.rpc('award_unlock_credit', {
-              response_id_param: data.targetId,
-              course_id_param: postData.course_id,
-            });
+          // If this is the first upvote (count = 1), award credit to response author
+          if (upvoteCount === 1) {
+            const authorId = responseData.user_id;
+            const courseId = String(postData.course_id);
+
+            // Get author's forum_data
+            const { data: authorData } = await supabase
+              .from("users")
+              .select("forum_data")
+              .eq("id", authorId)
+              .single();
+
+            if (authorData) {
+              const forumData = (authorData.forum_data || {}) as Record<
+                string,
+                unknown
+              >;
+              const courseStats = (
+                (forumData.courseStats || {}) as Record<string, unknown>
+              )[courseId] as
+                | {
+                    totalEarned?: number;
+                    totalUsed?: number;
+                    firstUnlockUsed?: boolean;
+                  }
+                | undefined;
+
+              // Increment totalEarned for this course
+              const newForumData = {
+                ...forumData,
+                courseStats: {
+                  ...((forumData.courseStats as Record<string, unknown>) || {}),
+                  [courseId]: {
+                    ...(courseStats || {}),
+                    totalEarned: (courseStats?.totalEarned || 0) + 1,
+                  },
+                },
+              };
+
+              await supabase
+                .from("users")
+                .update({ forum_data: newForumData })
+                .eq("id", authorId);
+            }
           }
         }
       }
@@ -623,15 +665,16 @@ export async function vote(data: VoteData): Promise<{ netScore: number }> {
   }
 
   // Get updated net score
-  const tableName = data.targetType === 'post' ? 'chat_posts' : 'chat_responses';
+  const tableName =
+    data.targetType === "post" ? "chat_posts" : "chat_responses";
   const { data: targetData } = await supabase
     .from(tableName)
-    .select('net_score')
-    .eq('id', data.targetId)
+    .select("net_score")
+    .eq("id", data.targetId)
     .single();
 
   if (!targetData) {
-    throw new Error('Failed to get updated score');
+    throw new Error("Failed to get updated score");
   }
 
   return { netScore: targetData.net_score };
@@ -655,94 +698,102 @@ export async function checkAccess(postId: string): Promise<AccessStatus> {
 
 /**
  * Apply unlock credit to a thread
+ * Note: With the new schema, unlock credits are stored in users.forum_data JSONB
+ * Format: forum_data.courseStats[courseId] = { totalEarned, totalUsed, firstUnlockUsed }
  */
 export async function applyUnlock(postId: string): Promise<boolean> {
   const userId = await getCurrentUserId();
 
   // Get post to find course_id
   const { data: postData } = await supabase
-    .from('chat_posts')
-    .select('course_id')
-    .eq('id', postId)
+    .from("chat_posts")
+    .select("course_id")
+    .eq("id", postId)
     .single();
 
   if (!postData) {
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
-  // Get user unlock credits
-  const { data: credits } = await supabase
-    .from('user_unlock_credits')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('course_id', postData.course_id)
+  const courseId = String(postData.course_id);
+
+  // Get user's forum_data
+  const { data: userData, error: userError } = await supabase
+    .from("users")
+    .select("forum_data")
+    .eq("id", userId)
     .single();
 
-  // Check if already unlocked
-  const { data: tracking } = await supabase
-    .from('thread_access_tracking')
-    .select('unlock_applied')
-    .eq('user_id', userId)
-    .eq('post_id', postId)
-    .single();
-
-  if (tracking?.unlock_applied) {
-    return true; // Already unlocked
+  if (userError || !userData) {
+    console.error("Failed to get user data:", userError);
+    return false;
   }
+
+  const forumData = (userData.forum_data || {}) as Record<string, unknown>;
+  const courseStats = (
+    (forumData.courseStats || {}) as Record<string, unknown>
+  )[courseId] as
+    | {
+        totalEarned?: number;
+        totalUsed?: number;
+        firstUnlockUsed?: boolean;
+      }
+    | undefined;
 
   // Apply first free unlock if available
-  if (!credits || !credits.first_unlock_used) {
-    // Update credits to mark first unlock as used
-    if (credits) {
-      await supabase
-        .from('user_unlock_credits')
-        .update({ first_unlock_used: true })
-        .eq('id', credits.id);
-    } else {
-      await supabase
-        .from('user_unlock_credits')
-        .insert({
-          user_id: userId,
-          course_id: postData.course_id,
-          first_unlock_used: true,
-        });
-    }
+  if (!courseStats || !courseStats.firstUnlockUsed) {
+    // Update users.forum_data to mark first unlock as used
+    const newForumData = {
+      ...forumData,
+      courseStats: {
+        ...((forumData.courseStats as Record<string, unknown>) || {}),
+        [courseId]: {
+          ...(courseStats || {}),
+          firstUnlockUsed: true,
+        },
+      },
+    };
 
-    // Update thread access tracking
-    await supabase
-      .from('thread_access_tracking')
-      .upsert({
-        user_id: userId,
-        post_id: postId,
-        unlock_applied: true,
-        unlocked_at: new Date().toISOString(),
-      }, {
-        onConflict: 'user_id,post_id',
-      });
+    const { error: updateError } = await supabase
+      .from("users")
+      .update({ forum_data: newForumData })
+      .eq("id", userId);
+
+    if (updateError) {
+      console.error("Failed to update forum_data:", updateError);
+      return false;
+    }
 
     return true;
   }
 
   // Apply earned credit if available
-  const availableCredits = credits.total_earned - credits.total_used;
-  if (availableCredits > 0) {
-    // Update credits
-    await supabase
-      .from('user_unlock_credits')
-      .update({ total_used: credits.total_used + 1 })
-      .eq('id', credits.id);
+  const totalEarned = courseStats.totalEarned || 0;
+  const totalUsed = courseStats.totalUsed || 0;
+  const availableCredits = totalEarned - totalUsed;
 
-    // Update thread access tracking
-    await supabase
-      .from('thread_access_tracking')
-      .upsert({
-        user_id: userId,
-        post_id: postId,
-        unlock_applied: true,
-        unlocked_at: new Date().toISOString(),
-      }, {
-        onConflict: 'user_id,post_id',
-      });
+  if (availableCredits > 0) {
+    // Update users.forum_data with incremented totalUsed
+    const newForumData = {
+      ...forumData,
+      courseStats: {
+        ...((forumData.courseStats as Record<string, unknown>) || {}),
+        [courseId]: {
+          ...courseStats,
+          totalUsed: totalUsed + 1,
+        },
+      },
+    };
+
+    const { error: updateError } = await supabase
+      .from("users")
+      .update({ forum_data: newForumData })
+      .eq("id", userId);
+
+    if (updateError) {
+      console.error("Failed to update forum_data:", updateError);
+      return false;
+    }
 
     return true;
   }
@@ -752,43 +803,97 @@ export async function applyUnlock(postId: string): Promise<boolean> {
 
 /**
  * Check if user has seen onboarding for a course
+ * Note: With the new schema, onboarding state is stored in users.forum_data JSONB
+ * Format: forum_data.courseStats[courseId].hasSeenOnboarding
  */
-export async function getOnboardingState(courseId: number): Promise<UserOnboardingState | null> {
+export async function getOnboardingState(
+  courseId: number,
+): Promise<UserOnboardingState | null> {
   const userId = await getCurrentUserId();
+  const courseIdStr = String(courseId);
 
-  const { data, error } = await supabase
-    .from('user_onboarding_state')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('course_id', courseId)
+  const { data: userData, error } = await supabase
+    .from("users")
+    .select("forum_data")
+    .eq("id", userId)
     .single();
 
-  if (error && error.code !== 'PGRST116') { // PGRST116 = not found
+  if (error && error.code !== "PGRST116") {
+    // PGRST116 = not found
     throw new Error(`Failed to get onboarding state: ${error.message}`);
   }
 
-  return data as UserOnboardingState | null;
+  if (!userData) {
+    return null;
+  }
+
+  const forumData = (userData.forum_data || {}) as Record<string, unknown>;
+  const courseStats = (
+    (forumData.courseStats || {}) as Record<string, unknown>
+  )[courseIdStr] as
+    | {
+        hasSeenOnboarding?: boolean;
+      }
+    | undefined;
+
+  if (!courseStats || !courseStats.hasSeenOnboarding) {
+    return null;
+  }
+
+  // Return in the expected format for backward compatibility
+  return {
+    user_id: userId,
+    course_id: courseId,
+    has_seen_onboarding: true,
+    seen_at: null,
+  } as UserOnboardingState;
 }
 
 /**
  * Mark onboarding as seen for a course
+ * Note: With the new schema, onboarding state is stored in users.forum_data JSONB
  */
 export async function markOnboardingSeen(courseId: number): Promise<void> {
   const userId = await getCurrentUserId();
+  const courseIdStr = String(courseId);
 
-  const { error } = await supabase
-    .from('user_onboarding_state')
-    .upsert({
-      user_id: userId,
-      course_id: courseId,
-      has_seen_onboarding: true,
-      seen_at: new Date().toISOString(),
-    }, {
-      onConflict: 'user_id,course_id',
-    });
+  // Get current forum_data
+  const { data: userData, error: fetchError } = await supabase
+    .from("users")
+    .select("forum_data")
+    .eq("id", userId)
+    .single();
 
-  if (error) {
-    throw new Error(`Failed to mark onboarding as seen: ${error.message}`);
+  if (fetchError) {
+    throw new Error(`Failed to get user data: ${fetchError.message}`);
+  }
+
+  const forumData = (userData?.forum_data || {}) as Record<string, unknown>;
+  const courseStats =
+    ((forumData.courseStats || {}) as Record<string, unknown>)[courseIdStr] ||
+    {};
+
+  // Update forum_data with hasSeenOnboarding
+  const newForumData = {
+    ...forumData,
+    courseStats: {
+      ...((forumData.courseStats as Record<string, unknown>) || {}),
+      [courseIdStr]: {
+        ...(courseStats as Record<string, unknown>),
+        hasSeenOnboarding: true,
+      },
+    },
+  };
+
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({ forum_data: newForumData })
+    .eq("id", userId);
+
+  if (updateError) {
+    throw new Error(
+      `Failed to mark onboarding as seen: ${updateError.message}`,
+    );
   }
 }
 
@@ -800,25 +905,25 @@ export async function deletePost(postId: string): Promise<void> {
 
   // First verify user owns the post
   const { data: postData, error: checkError } = await supabase
-    .from('chat_posts')
-    .select('user_id')
-    .eq('id', postId)
+    .from("chat_posts")
+    .select("user_id")
+    .eq("id", postId)
     .single();
 
   if (checkError || !postData) {
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   if (postData.user_id !== userId) {
-    throw new Error('Unauthorized: You can only delete your own posts');
+    throw new Error("Unauthorized: You can only delete your own posts");
   }
 
   // Delete the post (cascade will handle related records)
   const { error: deleteError } = await supabase
-    .from('chat_posts')
+    .from("chat_posts")
     .delete()
-    .eq('id', postId)
-    .eq('user_id', userId);
+    .eq("id", postId)
+    .eq("user_id", userId);
 
   if (deleteError) {
     throw new Error(`Failed to delete post: ${deleteError.message}`);
@@ -828,38 +933,41 @@ export async function deletePost(postId: string): Promise<void> {
 /**
  * Edit a response (only by owner)
  */
-export async function editResponse(responseId: string, data: EditResponseData): Promise<Response> {
+export async function editResponse(
+  responseId: string,
+  data: EditResponseData,
+): Promise<Response> {
   const userId = await getCurrentUserId();
 
   // Validate body
   if (data.body.length < 10 || data.body.length > 5000) {
-    throw new Error('Body must be between 10 and 5000 characters');
+    throw new Error("Body must be between 10 and 5000 characters");
   }
 
   // Get the response to check ownership and get post_id for attachments
   const { data: responseData } = await supabase
-    .from('chat_responses')
-    .select('user_id, post_id')
-    .eq('id', responseId)
+    .from("chat_responses")
+    .select("user_id, post_id")
+    .eq("id", responseId)
     .single();
 
   if (!responseData) {
-    throw new Error('Response not found');
+    throw new Error("Response not found");
   }
 
   if (responseData.user_id !== userId) {
-    throw new Error('Unauthorized: You can only edit your own responses');
+    throw new Error("Unauthorized: You can only edit your own responses");
   }
 
   // Get course_id from post for attachment upload
   const { data: postData } = await supabase
-    .from('chat_posts')
-    .select('course_id')
-    .eq('id', responseData.post_id)
+    .from("chat_posts")
+    .select("course_id")
+    .eq("id", responseData.post_id)
     .single();
 
   if (!postData) {
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   // Handle attachments if provided
@@ -867,16 +975,24 @@ export async function editResponse(responseId: string, data: EditResponseData): 
   if (data.attachments && data.attachments.length > 0) {
     // Delete existing attachments
     await supabase
-      .from('chat_attachments')
+      .from("chat_attachments")
       .delete()
-      .eq('response_id', responseId);
+      .eq("response_id", responseId);
 
     // Upload new attachments
-    const attachmentRecords: Omit<Attachment, 'id' | 'created_at' | 'signed_url'>[] = [];
+    const attachmentRecords: Omit<
+      Attachment,
+      "id" | "created_at" | "signed_url"
+    >[] = [];
     for (let i = 0; i < data.attachments.length; i++) {
       const file = data.attachments[i];
-      const { path } = await uploadAttachment(file, postData.course_id, undefined, responseId);
-      
+      const { path } = await uploadAttachment(
+        file,
+        postData.course_id,
+        undefined,
+        responseId,
+      );
+
       attachmentRecords.push({
         post_id: null,
         response_id: responseId,
@@ -891,30 +1007,32 @@ export async function editResponse(responseId: string, data: EditResponseData): 
     // Insert new attachment records
     if (attachmentRecords.length > 0) {
       const { error: attachError } = await supabase
-        .from('chat_attachments')
+        .from("chat_attachments")
         .insert(attachmentRecords);
 
       if (attachError) {
-        console.error('Failed to create attachment records:', attachError);
+        console.error("Failed to create attachment records:", attachError);
       }
     }
   }
 
   // Update response
   const { data: updatedResponse, error: updateError } = await supabase
-    .from('chat_responses')
+    .from("chat_responses")
     .update({
       body: data.body,
       is_edited: true,
       edited_at: new Date().toISOString(),
     })
-    .eq('id', responseId)
-    .eq('user_id', userId)
+    .eq("id", responseId)
+    .eq("user_id", userId)
     .select()
     .single();
 
   if (updateError || !updatedResponse) {
-    throw new Error(`Failed to edit response: ${updateError?.message || 'Unknown error'}`);
+    throw new Error(
+      `Failed to edit response: ${updateError?.message || "Unknown error"}`,
+    );
   }
 
   return updatedResponse as Response;
@@ -928,28 +1046,27 @@ export async function deleteResponse(responseId: string): Promise<void> {
 
   // First verify user owns the response
   const { data: responseData, error: checkError } = await supabase
-    .from('chat_responses')
-    .select('user_id')
-    .eq('id', responseId)
+    .from("chat_responses")
+    .select("user_id")
+    .eq("id", responseId)
     .single();
 
   if (checkError || !responseData) {
-    throw new Error('Response not found');
+    throw new Error("Response not found");
   }
 
   if (responseData.user_id !== userId) {
-    throw new Error('Unauthorized: You can only delete your own responses');
+    throw new Error("Unauthorized: You can only delete your own responses");
   }
 
   // Delete the response (cascade will handle related records)
   const { error: deleteError } = await supabase
-    .from('chat_responses')
+    .from("chat_responses")
     .delete()
-    .eq('id', responseId)
-    .eq('user_id', userId);
+    .eq("id", responseId)
+    .eq("user_id", userId);
 
   if (deleteError) {
     throw new Error(`Failed to delete response: ${deleteError.message}`);
   }
 }
-

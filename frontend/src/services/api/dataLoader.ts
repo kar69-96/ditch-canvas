@@ -3,7 +3,8 @@
  * Supports loading from extraction-data format (Crawlee dataset structure)
  */
 
-import type { DatasetMapping } from './datasetMapper';
+import type { DatasetMapping } from "./datasetMapper";
+import { supabase } from "@/lib/supabase";
 
 export interface CanvasData {
   user: {
@@ -110,25 +111,62 @@ export interface CanvasData {
   };
 }
 
-
 /**
  * Load Canvas data for a specific user by their email
- * Tries Supabase first, then falls back to file system
+ * Looks up user ID from email, then loads data from Supabase
  */
-export async function loadCanvasDataForUser(email: string): Promise<CanvasData | null> {
+export async function loadCanvasDataForUser(
+  email: string,
+): Promise<CanvasData | null> {
   const normalizedEmail = email.toLowerCase().trim();
   console.log(`[dataLoader] Loading data for email: ${normalizedEmail}`);
-  
-  // Try Supabase first
+
+  // First, look up the user ID from the email
   try {
-    const { loadCanvasDataFromSupabase } = await import('./supabaseDataLoader');
-    const supabaseData = await loadCanvasDataFromSupabase(normalizedEmail);
-    
-    if (supabaseData && supabaseData.courses && supabaseData.courses.length > 0) {
-      console.log(`[dataLoader] ✅ Successfully loaded ${supabaseData.courses.length} courses from Supabase for ${normalizedEmail}`);
+    const { data: userData, error: userError } = await supabase
+      .from("users")
+      .select("id, first_name, email")
+      .eq("email", normalizedEmail)
+      .single();
+
+    if (userError || !userData) {
+      console.error(
+        `[dataLoader] User not found for email: ${normalizedEmail}`,
+        userError,
+      );
+      return null;
+    }
+
+    const userId = userData.id;
+    console.log(
+      `[dataLoader] Found user ID: ${userId} for email: ${normalizedEmail}`,
+    );
+
+    // Load data using the user ID
+    const { loadCanvasDataFromSupabase } = await import("./supabaseDataLoader");
+    const supabaseData = await loadCanvasDataFromSupabase(userId);
+
+    if (
+      supabaseData &&
+      supabaseData.courses &&
+      supabaseData.courses.length > 0
+    ) {
+      // Populate user info from the users table
+      supabaseData.user = {
+        id: 1, // Legacy numeric ID for compatibility
+        name: userData.first_name || normalizedEmail.split("@")[0],
+        email: userData.email,
+        avatar_url: undefined,
+      };
+
+      console.log(
+        `[dataLoader] ✅ Successfully loaded ${supabaseData.courses.length} courses from Supabase for ${normalizedEmail}`,
+      );
       return supabaseData;
     } else {
-      console.warn(`[dataLoader] ⚠️  Supabase returned empty data for ${normalizedEmail}`);
+      console.warn(
+        `[dataLoader] ⚠️  Supabase returned empty data for ${normalizedEmail}`,
+      );
       return null;
     }
   } catch (error) {

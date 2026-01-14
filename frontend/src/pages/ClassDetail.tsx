@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import GlassCard from "@/components/GlassCard";
@@ -12,33 +12,11 @@ import {
 import {
   FileText,
   BookOpen,
-  Bell,
   Clock,
   MessageCircle,
-  Send,
-  Bot,
-  Loader2,
-  Maximize2,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  Plus,
   Download,
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuCheckboxItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useCanvasData } from "@/hooks/useCanvasData";
 import { useSidebar, SidebarViewer } from "@/components/SidebarViewer";
 import { toast } from "@/hooks/use-toast";
@@ -107,28 +85,6 @@ const ClassDetail = () => {
   const { data: mockCanvasData, loading } = useCanvasData();
   const courseId = id ? parseInt(id) : null;
 
-  // Chatbot state
-  const [chatMessages, setChatMessages] = useState<
-    Array<{
-      id: string;
-      role: "user" | "assistant";
-      content: string;
-      timestamp: Date;
-    }>
-  >([]);
-  const [chatInput, setChatInput] = useState("");
-  const [isLoadingResponse, setIsLoadingResponse] = useState(false);
-  const chatEndRef = useRef<HTMLDivElement>(null);
-  const [isPopoutActive, setIsPopoutActive] = useState(false);
-
-  // Chat configuration state
-  const [selectedModules, setSelectedModules] = useState<Set<string>>(
-    new Set(),
-  );
-  const [selectedModel, setSelectedModel] = useState<
-    "auto" | "chatgpt" | "gemini" | "claude"
-  >("auto");
-
   // Hover state for outline snapping animations
   const [hoveredAnnouncementIndex, setHoveredAnnouncementIndex] = useState<
     number | null
@@ -189,91 +145,6 @@ const ClassDetail = () => {
       );
     };
   }, []);
-
-  // Load chat messages from localStorage on mount
-  useEffect(() => {
-    if (!courseId) return;
-
-    const storageKey = `chat_messages_${courseId}`;
-    const stored = localStorage.getItem(storageKey);
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setChatMessages(
-          parsed.map((msg: any) => ({
-            ...msg,
-            timestamp: new Date(msg.timestamp),
-          })),
-        );
-      } catch (e) {
-        console.error("Error loading chat messages:", e);
-      }
-    }
-  }, [courseId]);
-
-  // Save chat messages to localStorage
-  useEffect(() => {
-    if (!courseId) return;
-    const storageKey = `chat_messages_${courseId}`;
-    localStorage.setItem(storageKey, JSON.stringify(chatMessages));
-  }, [chatMessages, courseId]);
-
-  // Check if popout tab is active
-  useEffect(() => {
-    const checkPopoutActive = () => {
-      if (!courseId) return;
-      const popoutKey = `chat_popout_active_${courseId}`;
-      const isActive = localStorage.getItem(popoutKey) === "true";
-      setIsPopoutActive(isActive);
-    };
-
-    checkPopoutActive();
-    const interval = setInterval(checkPopoutActive, 500);
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === `chat_popout_active_${courseId}`) {
-        setIsPopoutActive(e.newValue === "true");
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [courseId]);
-
-  const isInitialLoadRef = useRef(true);
-  const prevMessageCountRef = useRef(0);
-
-  useEffect(() => {
-    if (isInitialLoadRef.current) {
-      isInitialLoadRef.current = false;
-      prevMessageCountRef.current = chatMessages.length;
-      return;
-    }
-
-    if (!isPopoutActive && chatMessages.length > prevMessageCountRef.current) {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-    prevMessageCountRef.current = chatMessages.length;
-  }, [chatMessages, isPopoutActive]);
-
-  useEffect(() => {
-    if (!isPopoutActive) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && courseId) {
-        const popoutKey = `chat_popout_active_${courseId}`;
-        localStorage.setItem(popoutKey, "false");
-        setIsPopoutActive(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isPopoutActive, courseId]);
 
   const toggleAssignmentComplete = (
     assignmentId: number,
@@ -697,12 +568,6 @@ const ClassDetail = () => {
     return Array.from(dedupMap.values());
   }, [courseFilesRaw]);
 
-  useEffect(() => {
-    setChatMessages([]);
-    setChatInput("");
-    setIsLoadingResponse(false);
-  }, [courseId]);
-
   // Debug logging - must be before any early returns
   useEffect(() => {
     if (courseId && mockCanvasData && course) {
@@ -1007,31 +872,6 @@ const ClassDetail = () => {
   // Show all modules sequentially (no pagination)
   const modules = allModules;
 
-  // Helper functions for module selection
-  const toggleModule = (moduleId: string) => {
-    setSelectedModules((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(moduleId)) {
-        newSet.delete(moduleId);
-      } else {
-        newSet.add(moduleId);
-      }
-      return newSet;
-    });
-  };
-
-  const selectAllModules = () => {
-    const allModuleIds = modules.map((m) => m.title);
-    setSelectedModules(new Set(allModuleIds));
-  };
-
-  const deselectAllModules = () => {
-    setSelectedModules(new Set());
-  };
-
-  const areAllModulesSelected =
-    modules.length > 0 && selectedModules.size === modules.length;
-
   const coursePages = useMemo(() => {
     if (!mockCanvasData?.pages || !course) return [];
     return mockCanvasData.pages
@@ -1263,308 +1103,6 @@ const ClassDetail = () => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 {/* Main Content */}
                 <div className="space-y-4 lg:col-span-2">
-                  {/* Learn/Chat feature - only show in development */}
-                  {import.meta.env.DEV && (
-                    <GlassCard hover={false} className="p-0">
-                      {isPopoutActive ? (
-                        <div className="flex flex-col items-center justify-center py-12 text-center">
-                          <MessageCircle className="w-16 h-16 text-primary/50 mb-4" />
-                          <h3 className="text-lg font-medium text-foreground/90 mb-2">
-                            Pop-out activated
-                          </h3>
-                          <p className="text-sm text-foreground/60 mb-4">
-                            Chat is open in a new tab. Use that tab to interact
-                            with the tutor.
-                          </p>
-                          <p className="text-xs text-foreground/40">
-                            Press{" "}
-                            <kbd className="px-2 py-1 bg-white/10 text-xs">
-                              ESC
-                            </kbd>{" "}
-                            to exit pop-out mode
-                          </p>
-                        </div>
-                      ) : (
-                        <>
-                          <div className="px-5 py-4 border-b border-border flex items-center justify-between">
-                            <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                              Learn
-                            </h2>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="text-xs h-8 w-8 p-0 hover:opacity-70 transition-opacity"
-                              onClick={() => {
-                                if (courseId) {
-                                  const popoutKey = `chat_popout_active_${courseId}`;
-                                  localStorage.setItem(popoutKey, "true");
-                                  setIsPopoutActive(true);
-                                  window.open(
-                                    `/courses/${courseId}/learn`,
-                                    "_blank",
-                                    "noopener,noreferrer",
-                                  );
-                                }
-                              }}
-                              title="Open chat in new tab"
-                            >
-                              <ExternalLink className="w-4 h-4" />
-                            </Button>
-                          </div>
-
-                          <div
-                            className="h-[400px] overflow-y-auto mb-4 space-y-4 px-5 pt-5"
-                            style={{
-                              scrollbarWidth: "thin",
-                              scrollbarColor:
-                                "rgba(255,255,255,0.2) transparent",
-                            }}
-                          >
-                            {chatMessages.length === 0 ? (
-                              <div className="flex flex-col items-center justify-center h-full text-center">
-                                <Bot className="w-12 h-12 text-primary/50 mb-4" />
-                                <p className="text-sm text-foreground/60 mb-2">
-                                  Ask me anything about this course!
-                                </p>
-                                <p className="text-xs text-foreground/40">
-                                  I can help explain concepts, answer questions,
-                                  and provide study tips.
-                                </p>
-                              </div>
-                            ) : (
-                              chatMessages.map((message) => (
-                                <div
-                                  key={message.id}
-                                  className={`flex gap-3 ${
-                                    message.role === "user"
-                                      ? "justify-end"
-                                      : "justify-start"
-                                  }`}
-                                >
-                                  {message.role === "assistant" && (
-                                    <div className="w-8 h-8 bg-primary/20 flex items-center justify-center flex-shrink-0">
-                                      <Bot className="w-4 h-4 text-primary" />
-                                    </div>
-                                  )}
-                                  <div
-                                    className={`max-w-[80%] px-4 py-2 ${
-                                      message.role === "user"
-                                        ? "bg-primary/20 text-foreground/90"
-                                        : "bg-white/5 text-foreground/80"
-                                    }`}
-                                  >
-                                    <p className="text-sm whitespace-pre-wrap">
-                                      {message.content}
-                                    </p>
-                                  </div>
-                                  {message.role === "user" && (
-                                    <div className="w-8 h-8 bg-primary/20 flex items-center justify-center flex-shrink-0">
-                                      <MessageCircle className="w-4 h-4 text-primary" />
-                                    </div>
-                                  )}
-                                </div>
-                              ))
-                            )}
-                            <div ref={chatEndRef} />
-                          </div>
-
-                          <form
-                            onSubmit={async (e) => {
-                              e.preventDefault();
-                              if (!chatInput.trim() || isLoadingResponse)
-                                return;
-
-                              const userMessage = {
-                                id: Date.now().toString(),
-                                role: "user" as const,
-                                content: chatInput.trim(),
-                                timestamp: new Date(),
-                              };
-
-                              setChatMessages((prev) => [...prev, userMessage]);
-                              setChatInput("");
-                              setIsLoadingResponse(true);
-
-                              const assistantMessageId = (
-                                Date.now() + 1
-                              ).toString();
-                              const assistantMessage = {
-                                id: assistantMessageId,
-                                role: "assistant" as const,
-                                content:
-                                  "I apologize, but the AI tutor feature is currently not available.",
-                                timestamp: new Date(),
-                              };
-
-                              setTimeout(() => {
-                                setChatMessages((prev) => [
-                                  ...prev,
-                                  assistantMessage,
-                                ]);
-                                setIsLoadingResponse(false);
-                              }, 500);
-                            }}
-                            className="flex gap-2 px-5 pb-4"
-                          >
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button
-                                  type="button"
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-10 w-10 p-0 hover:opacity-70 transition-opacity border border-foreground/20"
-                                >
-                                  <Plus className="w-4 h-4" />
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent
-                                align="start"
-                                className="w-56 bg-popover border border-border"
-                              >
-                                {/* Content Selector */}
-                                <DropdownMenuLabel className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase">
-                                  Content Selector
-                                </DropdownMenuLabel>
-                                <DropdownMenuItem
-                                  className="px-3 py-2 cursor-pointer"
-                                  onSelect={(e) => {
-                                    e.preventDefault();
-                                    if (areAllModulesSelected) {
-                                      deselectAllModules();
-                                    } else {
-                                      selectAllModules();
-                                    }
-                                  }}
-                                >
-                                  <Checkbox
-                                    checked={areAllModulesSelected}
-                                    className="mr-2"
-                                    onCheckedChange={(checked) => {
-                                      if (checked) {
-                                        selectAllModules();
-                                      } else {
-                                        deselectAllModules();
-                                      }
-                                    }}
-                                    onClick={(e) => e.stopPropagation()}
-                                  />
-                                  <span className="text-sm">Select All</span>
-                                </DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <div className="max-h-[200px] overflow-y-auto">
-                                  {modules.map((module) => (
-                                    <DropdownMenuItem
-                                      key={module.title}
-                                      className="px-3 py-2 cursor-pointer"
-                                      onSelect={(e) => {
-                                        e.preventDefault();
-                                        toggleModule(module.title);
-                                      }}
-                                    >
-                                      <Checkbox
-                                        checked={selectedModules.has(
-                                          module.title,
-                                        )}
-                                        className="mr-2"
-                                        onCheckedChange={() =>
-                                          toggleModule(module.title)
-                                        }
-                                        onClick={(e) => e.stopPropagation()}
-                                      />
-                                      <span className="text-sm">
-                                        {module.title}
-                                      </span>
-                                    </DropdownMenuItem>
-                                  ))}
-                                </div>
-                                <DropdownMenuSeparator />
-
-                                {/* Model Selector */}
-                                <DropdownMenuSub>
-                                  <DropdownMenuSubTrigger className="px-3 py-2">
-                                    <span className="text-xs font-semibold text-muted-foreground uppercase">
-                                      Model
-                                    </span>
-                                    <span className="ml-auto text-xs text-foreground/60 capitalize">
-                                      {selectedModel}
-                                    </span>
-                                  </DropdownMenuSubTrigger>
-                                  <DropdownMenuSubContent className="bg-popover border border-border">
-                                    <DropdownMenuItem
-                                      className="px-3 py-2 cursor-pointer"
-                                      onSelect={() => setSelectedModel("auto")}
-                                    >
-                                      <span
-                                        className={`text-sm ${selectedModel === "auto" ? "font-medium text-primary" : ""}`}
-                                      >
-                                        Auto
-                                      </span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem
-                                      className="px-3 py-2 cursor-pointer"
-                                      onSelect={() =>
-                                        setSelectedModel("chatgpt")
-                                      }
-                                    >
-                                      <span
-                                        className={`text-sm ${selectedModel === "chatgpt" ? "font-medium text-primary" : ""}`}
-                                      >
-                                        ChatGPT
-                                      </span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem
-                                      className="px-3 py-2 cursor-pointer"
-                                      onSelect={() =>
-                                        setSelectedModel("gemini")
-                                      }
-                                    >
-                                      <span
-                                        className={`text-sm ${selectedModel === "gemini" ? "font-medium text-primary" : ""}`}
-                                      >
-                                        Gemini
-                                      </span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem
-                                      className="px-3 py-2 cursor-pointer"
-                                      onSelect={() =>
-                                        setSelectedModel("claude")
-                                      }
-                                    >
-                                      <span
-                                        className={`text-sm ${selectedModel === "claude" ? "font-medium text-primary" : ""}`}
-                                      >
-                                        Claude
-                                      </span>
-                                    </DropdownMenuItem>
-                                  </DropdownMenuSubContent>
-                                </DropdownMenuSub>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                            <Input
-                              type="text"
-                              value={chatInput}
-                              onChange={(e) => setChatInput(e.target.value)}
-                              placeholder="Ask a question about this course..."
-                              className="flex-1 bg-white/5 border-white/10 focus-visible:ring-primary/50"
-                              disabled={isLoadingResponse}
-                            />
-                            <Button
-                              type="submit"
-                              disabled={isLoadingResponse || !chatInput.trim()}
-                              className="slide-in-button border border-foreground/20 text-foreground px-4"
-                            >
-                              {isLoadingResponse ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                              ) : (
-                                <Send className="w-4 h-4" />
-                              )}
-                            </Button>
-                          </form>
-                        </>
-                      )}
-                    </GlassCard>
-                  )}
-
                   {/* Modules */}
                   <GlassCard hover={false} className="p-0">
                     <div className="px-5 py-4 border-b border-border">

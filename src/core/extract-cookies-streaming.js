@@ -14,7 +14,13 @@ const { chromium } = require("playwright-core");
 const fs = require("fs");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
-require("dotenv").config();
+
+// Load environment-specific config
+const isDev = process.env.NODE_ENV === "development";
+const envFile = isDev ? ".env.development" : ".env";
+require("dotenv").config({ path: path.join(__dirname, "../..", envFile) });
+
+console.log(`[streaming] Environment: ${isDev ? "DEVELOPMENT" : "PRODUCTION"}`);
 
 // Configuration
 const PORT = parseInt(process.env.STREAMING_PORT || "3002");
@@ -66,6 +72,8 @@ let page = null;
 let extractionComplete = false;
 let browserStarting = false; // Flag to prevent restart during startup
 let exitTimeout = null; // Timeout for delayed exit after extraction
+let isMobileClient = false; // Flag for mobile viewport
+let browserStarted = false; // Flag to track if browser has been started
 
 // Status stages for frontend feedback
 const STATUS_STAGES = {
@@ -100,6 +108,21 @@ const TIMEOUTS = {
  * Serve the streaming viewer HTML page (minimal UI, fullscreen)
  */
 app.get("/", (req, res) => {
+  // Check if mobile client
+  if (req.query.mobile === "1") {
+    isMobileClient = true;
+    console.log("[streaming] Mobile client detected, will use mobile viewport");
+  }
+
+  // Start browser on first page request (after mobile flag is set)
+  if (!browserStarted && !browserStarting) {
+    browserStarted = true;
+    console.log("[streaming] Starting browser on first client request...");
+    startStreaming().catch((err) => {
+      console.error("[streaming] Failed to start streaming:", err);
+    });
+  }
+
   res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -559,6 +582,16 @@ io.on("connection", (socket) => {
     });
   } else if (browserStarting) {
     console.log("[streaming] Browser is starting up, skipping restart");
+  } else if (!page && !browserStarting && !browserStarted) {
+    // No browser running at all - start one (handles direct Socket.IO connections from Vercel viewer)
+    console.log(
+      "[streaming] No browser running, starting fresh browser for new connection...",
+    );
+    browserStarted = true;
+    startStreaming().catch((err) => {
+      console.error("[streaming] Failed to start streaming:", err);
+      socket.emit("error", "Failed to initialize browser");
+    });
   }
 
   socket.on("mouse-move", async (data) => {
@@ -915,14 +948,27 @@ async function startStreaming() {
 
     emitStatus(STATUS_STAGES.BROWSER_READY, "Browser started successfully");
 
-    // Create browser context
+    // Create browser context - use mobile viewport if mobile client
+    const viewport = isMobileClient
+      ? { width: 390, height: 844 } // iPhone 14 Pro dimensions
+      : { width: 1280, height: 720 };
+
+    const userAgent = isMobileClient
+      ? "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+      : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+
+    console.log(
+      `[streaming] Using ${isMobileClient ? "mobile" : "desktop"} viewport: ${viewport.width}x${viewport.height}`,
+    );
+
     browserContext = await browser.newContext({
-      viewport: { width: 1280, height: 720 },
-      userAgent:
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      viewport,
+      userAgent,
       storageState: undefined,
       bypassCSP: false,
       ignoreHTTPSErrors: false,
+      isMobile: isMobileClient,
+      hasTouch: isMobileClient,
     });
 
     page = await browserContext.newPage();
@@ -935,13 +981,13 @@ async function startStreaming() {
 
     const cdpSession = await page.context().newCDPSession(page);
 
-    // Start screencast with timeout
+    // Start screencast with timeout - use mobile dimensions if mobile client
     try {
       const screencastPromise = cdpSession.send("Page.startScreencast", {
         format: "jpeg",
-        quality: 50,
-        maxWidth: 1280,
-        maxHeight: 720,
+        quality: isMobileClient ? 70 : 50, // Higher quality for mobile (smaller images)
+        maxWidth: viewport.width,
+        maxHeight: viewport.height,
         everyNthFrame: 1,
       });
       const timeoutPromise = new Promise((_, reject) =>
@@ -1017,12 +1063,8 @@ async function startStreaming() {
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`[streaming] 🚀 Streaming server started on port ${PORT}`);
   console.log(`[streaming]    View at: http://localhost:${PORT}`);
-
-  // Start browser immediately (removed delay)
-  startStreaming().catch((err) => {
-    console.error("[streaming] Failed to start streaming:", err);
-    process.exit(1);
-  });
+  console.log(`[streaming]    Browser will start when first client connects`);
+  // Browser startup is now triggered by first page request to detect mobile
 });
 
 // Cleanup on exit

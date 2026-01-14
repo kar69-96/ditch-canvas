@@ -5,7 +5,7 @@
 
 export interface SessionData {
   token: string;
-  userId: number;
+  userId: string;  // UUID string (not number)
   expiresAt: number;
   email?: string; // Store email for reliable lookup
 }
@@ -54,7 +54,7 @@ export const sessionStorage = {
   /**
    * Set/create session with email
    */
-  async setSession(userId: number, expiresInDays: number = 7, email?: string): Promise<SessionData> {
+  async setSession(userId: string, expiresInDays: number = 7, email?: string): Promise<SessionData> {
     // Clear any existing session first
     localStorage.removeItem(SESSION_KEY);
     localStorage.removeItem(USER_EMAIL_KEY);

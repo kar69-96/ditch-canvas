@@ -7,6 +7,16 @@ const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const { copyCookiesToMainFile, getCookieFilename, getMainCookieFile, ensureOutputDir } = require('../utils/cookie-helpers');
+
+// Optional Supabase client for fetching cookies
+let getSupabaseClient = null;
+try {
+  getSupabaseClient = require('../services/integrations/supabase-client').getSupabaseClient;
+} catch (e) {
+  console.warn('[update] Supabase client not available for cookie fallback');
+}
+
 const router = express.Router();
 
 // Track active update processes per user
@@ -61,6 +71,52 @@ router.post('/start', async (req, res) => {
       startedAt,
       skipped: true
     });
+  }
+
+  // Copy user-specific cookies to main cookie file for update script
+  const userCookieFile = getCookieFilename(email);
+  let cookiesReady = false;
+
+  if (fs.existsSync(userCookieFile)) {
+    const copied = copyCookiesToMainFile(email);
+    if (copied) {
+      cookiesReady = true;
+      console.log(`[update] Copied cookies from local file for ${email}`);
+    } else {
+      console.warn(`[update] Could not copy cookies for ${email}`);
+    }
+  }
+
+  // Fallback: Try to get cookies from Supabase if local file doesn't exist
+  if (!cookiesReady && getSupabaseClient) {
+    try {
+      const supabase = getSupabaseClient();
+      const { data: user, error } = await supabase
+        .from('users')
+        .select('canvas_cookies')
+        .eq('email', email.toLowerCase().trim())
+        .single();
+
+      if (!error && user?.canvas_cookies) {
+        // Write cookies to main file
+        ensureOutputDir();
+        const mainCookieFile = getMainCookieFile();
+        const cookieData = {
+          cookies: user.canvas_cookies,
+          extractedAt: new Date().toISOString(),
+          email: email.toLowerCase().trim()
+        };
+        fs.writeFileSync(mainCookieFile, JSON.stringify(cookieData, null, 2));
+        cookiesReady = true;
+        console.log(`[update] Got cookies from Supabase for ${email}`);
+      }
+    } catch (e) {
+      console.warn(`[update] Could not fetch cookies from Supabase: ${e.message}`);
+    }
+  }
+
+  if (!cookiesReady) {
+    console.warn(`[update] No cookies available for ${email}, update may fail`);
   }
 
   const updateProcess = spawn('node', [updateScript], {

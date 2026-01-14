@@ -1,26 +1,32 @@
-const { getSupabaseClient } = require('./supabase-client');
-const { decryptToken } = require('./token-crypto');
-const { hashAssignment } = require('../../utils/hash-helpers');
-const syncGoogle = require('./google-sheets-sync');
-const syncNotion = require('./notion-sync');
+const { getSupabaseClient } = require("./supabase-client");
+const { decryptToken } = require("./token-crypto");
+const { hashAssignment } = require("../../utils/hash-helpers");
+const syncGoogle = require("./google-sheets-sync");
+const syncNotion = require("./notion-sync");
 
 async function fetchActiveIntegrations() {
   const supabase = getSupabaseClient();
-  const { data, error } = await supabase.from('integrations').select('*').eq('status', 'active');
+  const { data, error } = await supabase
+    .from("integrations")
+    .select("*")
+    .eq("status", "active");
   if (error) throw new Error(`Failed to fetch integrations: ${error.message}`);
   return data || [];
 }
 
-async function fetchAssignments(userEmail) {
+async function fetchAssignments(userId) {
   const supabase = getSupabaseClient();
 
-  // Try flexible storage first (new schema-less system)
+  // Try flexible storage first (new schema uses user_id UUID)
   try {
-    const { data: entities, error: entitiesError } = await supabase.rpc('get_user_entities', {
-      user_email: userEmail,
-      entity_type_filter: 'assignment',
-      course_id_filter: null,
-    });
+    const { data: entities, error: entitiesError } = await supabase.rpc(
+      "get_user_entities",
+      {
+        p_user_id: userId,
+        p_entity_type: "assignment",
+        p_course_id: null,
+      },
+    );
 
     if (!entitiesError && entities && entities.length > 0) {
       // Map flexible storage entities to expected format
@@ -33,13 +39,17 @@ async function fetchAssignments(userEmail) {
         // Priority: userMarkedComplete (from Supabase) > Canvas submission status
         // userMarkedComplete is stored in metadata.userMarkedComplete or data.userMarkedComplete
         const userMarkedComplete =
-          metadata.userMarkedComplete === true || data.userMarkedComplete === true;
+          metadata.userMarkedComplete === true ||
+          data.userMarkedComplete === true;
 
         // Canvas submission status (from Canvas data)
-        const submissionStatus = data.submissionStatus || data.submission_status;
+        const submissionStatus =
+          data.submissionStatus || data.submission_status;
         const workflowState = data.workflowState || data.workflow_state;
         const isCanvasComplete =
-          submissionStatus === 'yes' || workflowState === 'submitted' || workflowState === 'graded';
+          submissionStatus === "yes" ||
+          workflowState === "submitted" ||
+          workflowState === "graded";
 
         // Final completion status: user-marked takes precedence, fallback to Canvas status
         const isCompleted = userMarkedComplete || isCanvasComplete;
@@ -52,11 +62,13 @@ async function fetchAssignments(userEmail) {
           course_name: data.courseName || data.course_name,
           course_id: data.courseId || data.course_id,
           due_date: data.dueAt || data.due_date || data.dueDate,
-          workflow_state: data.workflowState || data.workflow_state || 'pending',
+          workflow_state:
+            data.workflowState || data.workflow_state || "pending",
           url: data.url,
           points_possible: data.pointsPossible || data.points_possible,
           submission_status: data.submissionStatus || data.submission_status,
-          submission_status_text: data.submissionStatusText || data.submission_status_text,
+          submission_status_text:
+            data.submissionStatusText || data.submission_status_text,
           isCompleted,
           internalId,
           contentHash: hashAssignment({
@@ -72,29 +84,11 @@ async function fetchAssignments(userEmail) {
       });
     }
   } catch (flexError) {
-    console.log('[sync] Flexible storage not available, trying traditional table');
+    console.log("[sync] Error fetching assignments:", flexError);
   }
 
-  // Fallback to traditional assignments table
-  const { data, error } = await supabase
-    .from('assignments')
-    .select(
-      'assignment_id,id,title,course_code,course_name,course_id,due_date,workflow_state,url,points_possible'
-    )
-    .eq('user_email', userEmail)
-    .order('due_date', { ascending: true, nullsFirst: false });
-
-  if (error) throw new Error(`Failed to fetch assignments: ${error.message}`);
-
-  // Include ALL assignments (pending, submitted, graded, completed)
-  return (data || []).map((a) => {
-    const internalId = a.assignment_id || a.id?.toString();
-    return {
-      ...a,
-      internalId,
-      contentHash: hashAssignment(a),
-    };
-  });
+  // Return empty array if no assignments found
+  return [];
 }
 
 async function updateSyncStatus(integrationId, { status, error }) {
@@ -103,14 +97,14 @@ async function updateSyncStatus(integrationId, { status, error }) {
     last_sync_at: new Date().toISOString(),
     last_sync_status: status,
     last_sync_error: error || null,
-    status: status === 'needs_reauth' ? 'needs_reauth' : 'active',
+    status: status === "needs_reauth" ? "needs_reauth" : "active",
   };
   const { error: supabaseError } = await supabase
-    .from('integrations')
+    .from("integrations")
     .update(payload)
-    .eq('id', integrationId);
+    .eq("id", integrationId);
   if (supabaseError) {
-    console.error('[sync] failed to update sync status', supabaseError);
+    console.error("[sync] failed to update sync status", supabaseError);
   }
 }
 
@@ -120,12 +114,15 @@ async function runIntegration(integration, assignments) {
   try {
     token = decryptToken(integration.token_ciphertext);
   } catch (err) {
-    await updateSyncStatus(integration.id, { status: 'needs_reauth', error: err.message });
+    await updateSyncStatus(integration.id, {
+      status: "needs_reauth",
+      error: err.message,
+    });
     throw new Error(`Token decrypt failed: ${err.message}`);
   }
 
   if (!assignments || assignments.length === 0) {
-    await updateSyncStatus(integration.id, { status: 'success', error: null });
+    await updateSyncStatus(integration.id, { status: "success", error: null });
     return;
   }
 
@@ -134,25 +131,25 @@ async function runIntegration(integration, assignments) {
   // The isCompleted flag is already set correctly in fetchAssignments()
   // No need to merge with integration config - Supabase is the single source of truth
 
-  if (integration.provider === 'google') {
+  if (integration.provider === "google") {
     await syncGoogle({
       integration,
       token,
       assignments,
       supabase,
     });
-    await updateSyncStatus(integration.id, { status: 'success', error: null });
+    await updateSyncStatus(integration.id, { status: "success", error: null });
     return;
   }
 
-  if (integration.provider === 'notion') {
+  if (integration.provider === "notion") {
     await syncNotion({
       integration,
       token,
       assignments,
       supabase,
     });
-    await updateSyncStatus(integration.id, { status: 'success', error: null });
+    await updateSyncStatus(integration.id, { status: "success", error: null });
     return;
   }
 
@@ -163,27 +160,30 @@ async function runAllSyncs() {
   const integrations = await fetchActiveIntegrations();
   if (!integrations.length) return { ran: 0 };
 
-  // Group assignments fetch per user to reduce roundtrips
+  // Group assignments fetch per user to reduce roundtrips (using user_id UUID)
   const byUser = new Map();
   for (const integ of integrations) {
-    if (!byUser.has(integ.user_email)) {
-      byUser.set(integ.user_email, await fetchAssignments(integ.user_email));
+    if (!byUser.has(integ.user_id)) {
+      byUser.set(integ.user_id, await fetchAssignments(integ.user_id));
     }
   }
 
   let success = 0;
   for (const integration of integrations) {
     try {
-      const assignments = byUser.get(integration.user_email) || [];
+      const assignments = byUser.get(integration.user_id) || [];
       await runIntegration(integration, assignments);
       success += 1;
     } catch (err) {
-      console.error('[sync] integration failed', {
+      console.error("[sync] integration failed", {
         provider: integration.provider,
-        user: integration.user_email,
+        userId: integration.user_id,
         error: err,
       });
-      await updateSyncStatus(integration.id, { status: 'needs_reauth', error: err.message });
+      await updateSyncStatus(integration.id, {
+        status: "needs_reauth",
+        error: err.message,
+      });
     }
   }
 

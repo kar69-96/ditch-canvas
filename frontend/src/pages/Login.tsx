@@ -16,11 +16,13 @@ import {
   verifyLogin,
   stopStreamingAuth,
   startBackgroundUpdate,
+  getUpdateStatus,
 } from "@/services/api/auth";
 import { sessionStorage } from "@/storage/session";
 import { userDatabase } from "@/services/database/userDatabase";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { toast } from "@/hooks/use-toast";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -34,6 +36,44 @@ export default function Login() {
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._-]+@colorado\.edu$/i;
     return emailRegex.test(email);
+  };
+
+  // Poll for update status and show toast when complete
+  const monitorUpdateStatus = async (userEmail: string) => {
+    const maxAttempts = 60; // 60 * 5s = 5 minutes max
+    let attempts = 0;
+
+    const checkStatus = async () => {
+      attempts++;
+      try {
+        const status = await getUpdateStatus(userEmail);
+
+        if (status.status === "completed") {
+          toast({
+            title: "Sync Complete",
+            description: "Your Canvas data has been updated successfully.",
+          });
+          return;
+        } else if (status.status === "failed") {
+          toast({
+            title: "Sync Failed",
+            description:
+              status.error ||
+              "Failed to sync Canvas data. Please try again later.",
+            variant: "destructive",
+          });
+          return;
+        } else if (status.hasActiveUpdate && attempts < maxAttempts) {
+          // Still running, check again in 5 seconds
+          setTimeout(checkStatus, 5000);
+        }
+      } catch (err) {
+        console.warn("[Login] Error checking update status:", err);
+      }
+    };
+
+    // Start checking after 5 seconds
+    setTimeout(checkStatus, 5000);
   };
 
   const calculateSimilarity = (str1: string, str2: string): number => {
@@ -144,6 +184,9 @@ export default function Login() {
               startBackgroundUpdate(email)
                 .then((result) => {
                   console.log("[Login] Background update started:", result);
+                  if (result.success && !result.skipped) {
+                    monitorUpdateStatus(email);
+                  }
                 })
                 .catch((err) => {
                   console.warn(
@@ -329,6 +372,9 @@ export default function Login() {
               startBackgroundUpdate(email)
                 .then((result) => {
                   console.log("[Login] Background update started:", result);
+                  if (result.success && !result.skipped) {
+                    monitorUpdateStatus(email);
+                  }
                 })
                 .catch((err) => {
                   console.warn(
@@ -428,6 +474,9 @@ export default function Login() {
                 startBackgroundUpdate(email)
                   .then((result) => {
                     console.log("[Login] Background update started:", result);
+                    if (result.success && !result.skipped) {
+                      monitorUpdateStatus(email);
+                    }
                   })
                   .catch((err) => {
                     console.warn(

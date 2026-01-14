@@ -13,53 +13,53 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Database types
+// Database types - matches actual Supabase schema
 export interface Database {
   public: {
     Tables: {
       users: {
         Row: {
-          id: string;
-          numeric_id: number;
+          id: string;  // UUID primary key
           email: string;
-          name: string;
-          avatar_url: string | null;
-          profile_data: Record<string, any> | null;
-          phone_number: string | null;
+          first_name: string | null;
+          student: string | null;  // CU Boulder identikey
           school: string | null;
-          cookies: Record<string, any> | null;
+          canvas_cookies: any[] | null;
+          canvas_cookies_updated_at: string | null;
+          last_login_at: string | null;
           invite_code_used: string | null;
           onboarding_completed_at: string | null;
+          profile_preferences: Record<string, any> | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
-          numeric_id: number;
           email: string;
-          name: string;
-          avatar_url?: string | null;
-          profile_data?: Record<string, any> | null;
-          phone_number?: string | null;
+          first_name?: string | null;
+          student?: string | null;
           school?: string | null;
-          cookies?: Record<string, any> | null;
+          canvas_cookies?: any[] | null;
+          canvas_cookies_updated_at?: string | null;
+          last_login_at?: string | null;
           invite_code_used?: string | null;
           onboarding_completed_at?: string | null;
+          profile_preferences?: Record<string, any> | null;
           created_at?: string;
           updated_at?: string;
         };
         Update: {
           id?: string;
-          numeric_id?: number;
           email?: string;
-          name?: string;
-          avatar_url?: string | null;
-          profile_data?: Record<string, any> | null;
-          phone_number?: string | null;
+          first_name?: string | null;
+          student?: string | null;
           school?: string | null;
-          cookies?: Record<string, any> | null;
+          canvas_cookies?: any[] | null;
+          canvas_cookies_updated_at?: string | null;
+          last_login_at?: string | null;
           invite_code_used?: string | null;
           onboarding_completed_at?: string | null;
+          profile_preferences?: Record<string, any> | null;
           created_at?: string;
           updated_at?: string;
         };

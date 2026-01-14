@@ -20,7 +20,6 @@ import ClassDetail from "./pages/ClassDetail";
 import Assignments from "./pages/Assignments";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import Learn from "./pages/Learn";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import Assistant from "./pages/Assistant";
@@ -127,17 +126,6 @@ const AppContent = () => {
               </RouteGuard>
             }
           />
-          {/* Learn route - only available in development */}
-          {import.meta.env.DEV && (
-            <Route
-              path="/courses/:id/learn"
-              element={
-                <RouteGuard>
-                  <Learn />
-                </RouteGuard>
-              }
-            />
-          )}
           <Route
             path="/courses/:id/chat"
             element={
