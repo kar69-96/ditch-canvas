@@ -32,6 +32,7 @@ import OnboardingInvite from "./pages/OnboardingInvite";
 import WaitlistConfirmation from "./pages/WaitlistConfirmation";
 import OnboardingSync from "./pages/OnboardingSync";
 import OnboardingComplete from "./pages/OnboardingComplete";
+import Settings from "./pages/Settings";
 
 // Redirect component for dynamic routes
 const ClassesRedirect = () => {
@@ -163,6 +164,14 @@ const AppContent = () => {
             element={
               <RouteGuard>
                 <ComingSoon />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <RouteGuard>
+                <Settings />
               </RouteGuard>
             }
           />
