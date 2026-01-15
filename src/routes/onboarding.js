@@ -300,7 +300,14 @@ router.post("/sync", async (req, res) => {
  */
 router.post("/complete", async (req, res) => {
   try {
-    const { email, firstName, school, inviteCode, identikey } = req.body;
+    const {
+      email,
+      firstName,
+      school,
+      inviteCode,
+      identikey,
+      cookies: requestCookies,
+    } = req.body;
 
     if (!email || !firstName || !school || !inviteCode) {
       return res.status(400).json({
@@ -366,20 +373,37 @@ router.post("/complete", async (req, res) => {
       });
     }
 
-    // Get cookies from cookie file
-    const cookieFile = getCookieFilename(normalizedEmail);
+    // Get cookies - prefer from request body (production: EC2 sends to frontend, frontend sends to backend)
+    // Fall back to local cookie file (development: local streaming server saves to local file)
     let cookies = null;
 
-    if (fs.existsSync(cookieFile)) {
-      try {
-        const cookieData = JSON.parse(fs.readFileSync(cookieFile, "utf8"));
-        cookies = cookieData.cookies || null;
-      } catch (error) {
-        console.error("[onboarding] Error reading cookie file:", error);
-        return res.status(500).json({
-          success: false,
-          error: "Cookie extraction failed. Please try again.",
-        });
+    if (
+      requestCookies &&
+      Array.isArray(requestCookies) &&
+      requestCookies.length > 0
+    ) {
+      // Cookies provided from frontend (production flow)
+      cookies = requestCookies;
+      console.log(
+        `[onboarding] Using cookies from request body for ${normalizedEmail}`,
+      );
+    } else {
+      // Try local cookie file (development flow)
+      const cookieFile = getCookieFilename(normalizedEmail);
+      if (fs.existsSync(cookieFile)) {
+        try {
+          const cookieData = JSON.parse(fs.readFileSync(cookieFile, "utf8"));
+          cookies = cookieData.cookies || null;
+          console.log(
+            `[onboarding] Using cookies from local file for ${normalizedEmail}`,
+          );
+        } catch (error) {
+          console.error("[onboarding] Error reading cookie file:", error);
+          return res.status(500).json({
+            success: false,
+            error: "Cookie extraction failed. Please try again.",
+          });
+        }
       }
     }
 

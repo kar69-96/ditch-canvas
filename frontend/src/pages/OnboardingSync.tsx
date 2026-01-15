@@ -174,12 +174,14 @@ export default function OnboardingSync() {
               setStatus("Completing setup...");
 
               // Complete onboarding - create user account
+              // Pass cookies from extraction result (needed in production where EC2 extracts cookies)
               const completeResult = await completeOnboarding(
                 onboardingData.email,
                 onboardingData.firstName,
                 onboardingData.school,
                 onboardingData.inviteCode,
                 identikey.trim(),
+                extractionResult.cookies,
               );
 
               if (!completeResult.success) {
@@ -245,12 +247,14 @@ export default function OnboardingSync() {
               extractionCompleted = true;
               setStatus("Completing setup...");
 
+              // Pass cookies from extraction result (needed in production where EC2 extracts cookies)
               const completeResult = await completeOnboarding(
                 onboardingData.email,
                 onboardingData.firstName,
                 onboardingData.school,
                 onboardingData.inviteCode,
                 identikey.trim(),
+                extractionResult.cookies,
               );
 
               if (!completeResult.success) {

@@ -17,6 +17,7 @@ import {
   stopStreamingAuth,
   startBackgroundUpdate,
   getUpdateStatus,
+  saveCookiesToSupabase,
 } from "@/services/api/auth";
 import { sessionStorage } from "@/storage/session";
 import { userDatabase } from "@/services/database/userDatabase";
@@ -309,8 +310,38 @@ export default function Login() {
                 popup?.close();
               }
 
+              // Save cookies to Supabase (EC2 server doesn't have Supabase credentials)
+              if (
+                extractionResult.cookies &&
+                extractionResult.cookies.length > 0
+              ) {
+                console.log("[Login] Saving cookies to Supabase...");
+                try {
+                  const saveResult = await saveCookiesToSupabase(
+                    email,
+                    extractionResult.cookies,
+                  );
+                  if (saveResult.success) {
+                    console.log(
+                      "[Login] Cookies saved to Supabase successfully",
+                    );
+                  } else {
+                    console.warn(
+                      "[Login] Failed to save cookies to Supabase:",
+                      saveResult.error,
+                    );
+                  }
+                } catch (saveErr) {
+                  console.warn(
+                    "[Login] Error saving cookies to Supabase:",
+                    saveErr,
+                  );
+                  // Continue anyway - cookies are available for this session
+                }
+              }
+
               // Wait a moment for any final processing
-              await new Promise((resolve) => setTimeout(resolve, 1000));
+              await new Promise((resolve) => setTimeout(resolve, 500));
 
               // Verify username matches email (optional - only if username was extracted)
               if (extractionResult.username) {
@@ -349,7 +380,7 @@ export default function Login() {
                 return;
               }
 
-              // Update last login timestamp (cookies already saved by backend)
+              // Update last login timestamp (cookies saved to Supabase above)
               try {
                 await userDatabase.updateLastLogin(user.id);
               } catch (updateErr) {
@@ -398,18 +429,32 @@ export default function Login() {
             clearInterval(checkInterval);
             setPopupWindow(null);
 
-            // Wait a moment to see if extraction completed
-            await new Promise((resolve) => setTimeout(resolve, 3000));
+            // Poll for extraction results with retries (extraction may still be in progress)
+            let extractionResult = null;
+            const maxRetries = 10;
+            for (let i = 0; i < maxRetries; i++) {
+              await new Promise((resolve) => setTimeout(resolve, 2000));
 
-            // Final check for extraction results
-            const extractionResult = await getExtractionResult(
-              email,
-              startResult.streamingServerUrl,
-            );
+              extractionResult = await getExtractionResult(
+                email,
+                startResult.streamingServerUrl,
+              );
 
-            // Skip if still pending (extraction in progress)
-            if (extractionResult.pending) {
-              // Continue waiting - extraction might complete soon
+              // If not pending, we have a result (success or error)
+              if (!extractionResult.pending) {
+                break;
+              }
+
+              console.log(
+                `[Login] Extraction still pending, retry ${i + 1}/${maxRetries}...`,
+              );
+            }
+
+            // If still pending after all retries, treat as incomplete
+            if (extractionResult?.pending) {
+              setError("Authentication timed out. Please try again.");
+              setLoading(false);
+              await stopStreamingAuth(email);
               return;
             }
 

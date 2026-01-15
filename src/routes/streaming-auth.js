@@ -810,6 +810,51 @@ router.get("/extraction-result/:email", async (req, res) => {
 });
 
 /**
+ * POST /api/streaming-auth/save-cookies
+ * Save cookies to Supabase (called by frontend after extraction from EC2)
+ * This is needed in production where EC2 streaming server extracts cookies
+ * but doesn't have Supabase credentials to save them directly.
+ */
+router.post("/save-cookies", async (req, res) => {
+  try {
+    const { email, cookies } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        error: "Email is required",
+      });
+    }
+
+    if (!cookies || !Array.isArray(cookies) || cookies.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: "Valid cookies array is required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log(
+      `[streaming-auth] Saving cookies to Supabase for ${normalizedEmail} (from frontend)`,
+    );
+
+    // Save cookies to Supabase
+    await saveCookiesToSupabase(normalizedEmail, cookies);
+
+    res.json({
+      success: true,
+      message: "Cookies saved to Supabase successfully",
+    });
+  } catch (error) {
+    console.error("[streaming-auth] Error saving cookies:", error);
+    res.status(500).json({
+      success: false,
+      error: error.message || "Failed to save cookies",
+    });
+  }
+});
+
+/**
  * POST /api/streaming-auth/verify-login
  * Verify that extracted username matches email (at least 30%)
  */
