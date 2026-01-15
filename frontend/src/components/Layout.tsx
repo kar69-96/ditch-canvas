@@ -9,6 +9,63 @@ import { motion } from "framer-motion";
 import FeedbackModal from "@/components/FeedbackModal";
 import { sessionStorage } from "@/storage/session";
 import { userDatabase } from "@/services/database/userDatabase";
+import { getPreferences, ThemeOption } from "@/lib/preferences";
+
+// Animation config per theme
+const getAnimationConfig = (theme: ThemeOption) => {
+  switch (theme) {
+    case "sand":
+      return { duration: 0.2, ease: [0.4, 0, 0.2, 1] as const };
+    case "moss":
+      return { duration: 0.25, ease: [0.22, 1, 0.36, 1] as const };
+    case "carbon":
+      return { duration: 0.15, ease: [0.16, 1, 0.3, 1] as const };
+    case "paper":
+    default:
+      return { duration: 0.1, ease: "easeOut" as const };
+  }
+};
+
+// Border radius per theme
+const getBorderRadius = (theme: ThemeOption) => {
+  switch (theme) {
+    case "sand":
+      return "12px";
+    case "moss":
+      return "16px";
+    case "carbon":
+      return "12px";
+    case "paper":
+    default:
+      return "0px";
+  }
+};
+
+// Hover indicator style per theme
+// Paper: Sharp underline at bottom
+// Sand: Soft outline around entire item
+// Moss: Growing fill from bottom (partial height)
+// Carbon: Top accent line with glow
+type HoverIndicatorStyle = {
+  type: "underline" | "outline" | "grow" | "topline";
+  height?: string;
+  position?: "bottom" | "top" | "inset";
+  glow?: boolean;
+};
+
+const getHoverIndicatorStyle = (theme: ThemeOption): HoverIndicatorStyle => {
+  switch (theme) {
+    case "sand":
+      return { type: "outline", position: "inset" };
+    case "moss":
+      return { type: "grow", height: "40%", position: "bottom" };
+    case "carbon":
+      return { type: "topline", position: "top", glow: true };
+    case "paper":
+    default:
+      return { type: "underline", height: "2px", position: "bottom" };
+  }
+};
 
 const Layout = ({
   children,
@@ -27,10 +84,15 @@ const Layout = ({
   >(null);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
+  const [currentTheme, setCurrentTheme] = useState<ThemeOption>("paper");
   const navItemRefs = useRef<(HTMLLIElement | null)[]>([]);
   const ulRef = useRef<HTMLUListElement | null>(null);
 
-  // Load user info for feedback
+  // Get theme-specific values
+  const animationConfig = getAnimationConfig(currentTheme);
+  const borderRadius = getBorderRadius(currentTheme);
+
+  // Load user info and theme
   useEffect(() => {
     async function loadUserInfo() {
       const session = await sessionStorage.getSession();
@@ -43,7 +105,31 @@ const Layout = ({
       }
     }
     loadUserInfo();
-  }, []);
+
+    // Load theme
+    const prefs = getPreferences();
+    setCurrentTheme(prefs.theme);
+
+    // Listen for theme changes via storage event
+    const handleStorageChange = () => {
+      const prefs = getPreferences();
+      setCurrentTheme(prefs.theme);
+    };
+    window.addEventListener("storage", handleStorageChange);
+
+    // Also poll for changes (in case same-tab updates)
+    const interval = setInterval(() => {
+      const prefs = getPreferences();
+      if (prefs.theme !== currentTheme) {
+        setCurrentTheme(prefs.theme);
+      }
+    }, 500);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [currentTheme]);
 
   // Active fill indicator (moves on route change/click) - uses framer-motion for smooth snapping
   const [activeFillStyle, setActiveFillStyle] = useState<{
@@ -184,34 +270,60 @@ const Layout = ({
                 style={{
                   left: activeFillStyle.left,
                   width: activeFillStyle.width,
+                  borderRadius: borderRadius,
                 }}
                 initial={false}
                 transition={{
                   type: "tween",
-                  duration: 0.1,
-                  ease: "easeOut",
+                  duration: animationConfig.duration,
+                  ease: animationConfig.ease,
                 }}
               />
             )}
-            {/* Hover underline indicator - snaps on hover, always positioned */}
-            {/* Z-index: above border (z-10) and fill (z-10), but below text (z-20) */}
-            {/* Uses same snapping effect as weekly view underline */}
-            {isUnderlineInitialized && (
-              <motion.div
-                className="absolute bottom-0 h-[2px] bg-foreground pointer-events-none z-[11]"
-                animate={{
-                  left: underlineStyle.left,
-                  width: underlineStyle.width,
-                  opacity: isUnderlineVisible ? 1 : 0,
-                }}
-                initial={false}
-                transition={{
-                  type: "tween",
-                  duration: 0.1,
-                  ease: "easeOut",
-                }}
-              />
-            )}
+            {/* Hover indicator - style varies by theme */}
+            {/* Paper & Carbon: underline at bottom */}
+            {/* Sand & Moss: oval outline around entire item */}
+            {isUnderlineInitialized &&
+              (currentTheme === "paper" || currentTheme === "carbon") && (
+                <motion.div
+                  className="absolute bottom-0 h-[2px] bg-foreground pointer-events-none z-[11]"
+                  style={{
+                    borderRadius: borderRadius,
+                  }}
+                  animate={{
+                    left: underlineStyle.left,
+                    width: underlineStyle.width,
+                    opacity: isUnderlineVisible ? 1 : 0,
+                  }}
+                  initial={false}
+                  transition={{
+                    type: "tween",
+                    duration: animationConfig.duration,
+                    ease: animationConfig.ease,
+                  }}
+                />
+              )}
+            {/* Sand & Moss: outline matching nav button shape */}
+            {isUnderlineInitialized &&
+              (currentTheme === "sand" || currentTheme === "moss") && (
+                <motion.div
+                  className="absolute inset-y-0 border-2 border-foreground pointer-events-none z-[11]"
+                  style={{
+                    borderRadius: borderRadius,
+                  }}
+                  animate={{
+                    left: underlineStyle.left,
+                    width: underlineStyle.width,
+                    opacity: isUnderlineVisible ? 1 : 0,
+                  }}
+                  initial={false}
+                  transition={{
+                    type: "tween",
+                    duration: animationConfig.duration,
+                    ease: animationConfig.ease,
+                  }}
+                />
+              )}
             {navItems.map((item, index) => {
               const Icon = item.icon;
               const isActive =
@@ -249,6 +361,7 @@ const Layout = ({
                       <Link
                         to={item.path}
                         className="flex items-center gap-2 px-4 py-2 border border-border cursor-pointer relative"
+                        style={{ borderRadius }}
                       >
                         {/* Border is on the Link element (lowest layer, z-0) */}
                         {/* Fill and underline are z-10, text is z-20 */}
@@ -313,6 +426,7 @@ const Layout = ({
                   <Link
                     to={item.path}
                     className="flex items-center gap-2 px-4 py-2 border border-border cursor-pointer relative"
+                    style={{ borderRadius }}
                     onMouseEnter={() => setHoveredNavIndex(index)}
                     onMouseLeave={() => setHoveredNavIndex(null)}
                   >
@@ -354,6 +468,7 @@ const Layout = ({
             <Link
               to="/settings"
               className="relative p-2 border border-border bg-background overflow-hidden"
+              style={{ borderRadius }}
               title="Settings"
               onMouseEnter={() => setHoveredActionButton("settings")}
               onMouseLeave={() => setHoveredActionButton(null)}
@@ -362,11 +477,12 @@ const Layout = ({
                 <motion.div
                   layoutId="actionButtonFill"
                   className="absolute inset-0 bg-foreground"
+                  style={{ borderRadius }}
                   initial={false}
                   transition={{
                     type: "tween",
-                    duration: 0.15,
-                    ease: "easeOut",
+                    duration: animationConfig.duration,
+                    ease: animationConfig.ease,
                   }}
                 />
               )}
@@ -383,6 +499,7 @@ const Layout = ({
               onClick={handleLogout}
               disabled={isLoggingOut}
               className="relative p-2 border border-border bg-background disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
+              style={{ borderRadius }}
               title="Logout"
               onMouseEnter={() =>
                 !isLoggingOut && setHoveredActionButton("logout")
@@ -393,11 +510,12 @@ const Layout = ({
                 <motion.div
                   layoutId="actionButtonFill"
                   className="absolute inset-0 bg-foreground"
+                  style={{ borderRadius }}
                   initial={false}
                   transition={{
                     type: "tween",
-                    duration: 0.15,
-                    ease: "easeOut",
+                    duration: animationConfig.duration,
+                    ease: animationConfig.ease,
                   }}
                 />
               )}

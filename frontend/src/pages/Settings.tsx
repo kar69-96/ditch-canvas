@@ -22,10 +22,31 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Trash2, Loader2, AlertTriangle } from "lucide-react";
+import { Trash2, Loader2, AlertTriangle, Palette, Check } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { deleteAccount } from "@/services/api/settings";
 import { sessionStorage } from "@/storage/session";
+import {
+  ThemeOption,
+  themeDisplayNames,
+  themeDescriptions,
+  getPreferences,
+  savePreferences,
+  applyTheme,
+} from "@/lib/preferences";
+
+const themes: ThemeOption[] = ["paper", "sand", "moss", "carbon"];
+
+// Preview colors for each theme
+const themePreviewColors: Record<
+  ThemeOption,
+  { bg: string; accent: string; text: string }
+> = {
+  paper: { bg: "#f7f3ed", accent: "#2d2518", text: "#2d2518" },
+  sand: { bg: "#f5ebe0", accent: "#c67b5c", text: "#5c4a32" },
+  moss: { bg: "#f5f2eb", accent: "#6b8e6b", text: "#2d3a2d" },
+  carbon: { bg: "#121212", accent: "#e0e0e0", text: "#e0e0e0" },
+};
 
 export default function Settings() {
   const navigate = useNavigate();
@@ -34,6 +55,7 @@ export default function Settings() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [currentTheme, setCurrentTheme] = useState<ThemeOption>("paper");
 
   useEffect(() => {
     const loadUserInfo = async () => {
@@ -44,7 +66,23 @@ export default function Settings() {
       }
     };
     loadUserInfo();
+
+    // Load current theme preference
+    const prefs = getPreferences();
+    setCurrentTheme(prefs.theme);
   }, []);
+
+  const handleThemeChange = (theme: ThemeOption) => {
+    setCurrentTheme(theme);
+    applyTheme(theme);
+    const prefs = getPreferences();
+    prefs.theme = theme;
+    savePreferences(prefs);
+    toast({
+      title: "Theme updated",
+      description: `Switched to ${themeDisplayNames[theme]} theme`,
+    });
+  };
 
   const handleDeleteAccount = async () => {
     if (confirmText !== "DELETE") {
@@ -102,6 +140,118 @@ export default function Settings() {
       <div className="px-5 sm:px-8 py-8">
         <div className="max-w-2xl">
           <h1 className="text-2xl font-bold mb-6">Settings</h1>
+
+          {/* Appearance */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Palette className="w-5 h-5" />
+                Appearance
+              </CardTitle>
+              <CardDescription>
+                Customize how the app looks and feels
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-medium mb-3">Theme</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {themes.map((theme) => {
+                      const colors = themePreviewColors[theme];
+                      const isSelected = currentTheme === theme;
+
+                      return (
+                        <button
+                          key={theme}
+                          onClick={() => handleThemeChange(theme)}
+                          className={`relative p-3 border-2 transition-all ${
+                            isSelected
+                              ? "border-foreground"
+                              : "border-border hover:border-muted-foreground"
+                          }`}
+                          style={{
+                            borderRadius:
+                              theme === "paper"
+                                ? "0"
+                                : theme === "moss"
+                                  ? "16px"
+                                  : "12px",
+                          }}
+                        >
+                          {/* Theme Preview */}
+                          <div
+                            className="aspect-video mb-2 flex items-center justify-center overflow-hidden"
+                            style={{
+                              backgroundColor: colors.bg,
+                              borderRadius:
+                                theme === "paper"
+                                  ? "0"
+                                  : theme === "moss"
+                                    ? "8px"
+                                    : "6px",
+                            }}
+                          >
+                            {/* Mini preview */}
+                            <div
+                              className="w-2/3 h-2/3 flex flex-col justify-center p-1"
+                              style={{
+                                backgroundColor:
+                                  theme === "carbon" ? "#1e1e1e" : "#fff",
+                                borderRadius:
+                                  theme === "paper"
+                                    ? "0"
+                                    : theme === "moss"
+                                      ? "4px"
+                                      : "3px",
+                              }}
+                            >
+                              <div
+                                className="h-1 w-3/4 mb-0.5"
+                                style={{
+                                  backgroundColor: colors.text,
+                                  opacity: 0.6,
+                                  borderRadius: "1px",
+                                }}
+                              />
+                              <div
+                                className="h-0.5 w-full"
+                                style={{
+                                  backgroundColor: colors.text,
+                                  opacity: 0.2,
+                                  borderRadius: "1px",
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          {/* Theme name */}
+                          <p className="text-sm font-medium text-center">
+                            {themeDisplayNames[theme]}
+                          </p>
+
+                          {/* Selected indicator */}
+                          {isSelected && (
+                            <div
+                              className="absolute top-1 right-1 w-5 h-5 bg-foreground text-background flex items-center justify-center"
+                              style={{
+                                borderRadius: theme === "paper" ? "0" : "50%",
+                              }}
+                            >
+                              <Check className="w-3 h-3" />
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {themeDescriptions[currentTheme]}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Danger Zone */}
           <Card className="border-destructive/50">

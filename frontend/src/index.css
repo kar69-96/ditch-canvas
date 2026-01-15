@@ -4,32 +4,7 @@
 
 @layer base {
   :root {
-    --background: 40 86% 97%;
-    --foreground: 240 10% 3.9%;
-    --card: 40 86% 97%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 40 86% 97%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 40 20% 85%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0;
-    --progress-bg: 240 5.9% 90%;
-    --progress-fill: 240 5.9% 10%;
-  }
-
-  /* Theme: Paper */
-  .theme-paper {
+    /* Default/fallback values - Paper theme */
     --background: 40 30% 96%;
     --foreground: 30 10% 15%;
     --card: 40 30% 96%;
@@ -44,17 +19,142 @@
     --muted-foreground: 30 8% 45%;
     --accent: 40 25% 88%;
     --accent-foreground: 30 10% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
     --border: 40 15% 82%;
     --input: 40 15% 82%;
     --ring: 30 10% 15%;
+    --radius: 0px;
+    --progress-bg: 40 20% 90%;
+    --progress-fill: 30 10% 15%;
+    /* Animation timing - crisp for paper */
+    --animation-duration: 0.1s;
+    --animation-ease: ease-out;
   }
+}
+
+/* Theme definitions - outside @layer for higher specificity than :root */
+/* Theme: Paper (default light) - Sharp edges, crisp animations */
+html.theme-paper {
+  --background: 40 30% 96%;
+  --foreground: 30 10% 15%;
+  --card: 40 30% 96%;
+  --card-foreground: 30 10% 15%;
+  --popover: 40 30% 96%;
+  --popover-foreground: 30 10% 15%;
+  --primary: 30 10% 15%;
+  --primary-foreground: 40 30% 96%;
+  --secondary: 40 20% 90%;
+  --secondary-foreground: 30 10% 25%;
+  --muted: 40 15% 92%;
+  --muted-foreground: 30 8% 45%;
+  --accent: 40 25% 88%;
+  --accent-foreground: 30 10% 15%;
+  --border: 40 15% 82%;
+  --input: 40 15% 82%;
+  --ring: 30 10% 15%;
+  --radius: 0px;
+  --animation-duration: 0.1s;
+  --animation-ease: ease-out;
+}
+
+/* Theme: Sand - Desert beige with terracotta accents, warm & soft animations */
+html.theme-sand {
+  --background: 30 33% 93%; /* #f5ebe0 */
+  --foreground: 30 28% 28%; /* #5c4a32 */
+  --card: 35 50% 98%; /* #fefcf9 */
+  --card-foreground: 30 28% 28%;
+  --popover: 35 50% 98%;
+  --popover-foreground: 30 28% 28%;
+  --primary: 16 55% 57%; /* #c67b5c terracotta */
+  --primary-foreground: 35 50% 98%;
+  --secondary: 30 25% 90%; /* #ede4d8 */
+  --secondary-foreground: 30 28% 28%;
+  --muted: 30 25% 90%;
+  --muted-foreground: 30 20% 44%; /* #8b7355 */
+  --accent: 16 55% 57%; /* terracotta accent */
+  --accent-foreground: 35 50% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 40 30% 74%; /* #d5c4a1 */
+  --input: 40 30% 74%;
+  --ring: 16 55% 57%;
+  --radius: 12px;
+  --progress-bg: 30 25% 90%;
+  --progress-fill: 16 55% 57%;
+  /* Warm, relaxed animations */
+  --animation-duration: 0.2s;
+  --animation-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Theme: Moss - Cream with forest green accents, organic & gentle animations */
+html.theme-moss {
+  --background: 43 25% 94%; /* #f5f2eb */
+  --foreground: 120 13% 20%; /* #2d3a2d */
+  --card: 0 0% 100%; /* #ffffff */
+  --card-foreground: 120 13% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 120 13% 20%;
+  --primary: 120 12% 33%; /* #4a5d4a dark green */
+  --primary-foreground: 43 25% 94%;
+  --secondary: 42 20% 88%; /* #e8e4db */
+  --secondary-foreground: 120 13% 20%;
+  --muted: 42 20% 88%;
+  --muted-foreground: 120 7% 45%; /* #6b7a6b */
+  --accent: 120 15% 49%; /* #6b8e6b green accent */
+  --accent-foreground: 43 25% 94%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 44 18% 79%; /* #d4cfbf */
+  --input: 44 18% 79%;
+  --ring: 120 12% 33%;
+  --radius: 16px;
+  --progress-bg: 42 20% 88%;
+  --progress-fill: 120 15% 49%;
+  /* Organic, gentle animations */
+  --animation-duration: 0.25s;
+  --animation-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Theme: Carbon - Grayscale dark, sleek & precise animations */
+html.theme-carbon {
+  --background: 0 0% 7%; /* #121212 */
+  --foreground: 0 0% 88%; /* #e0e0e0 */
+  --card: 0 0% 12%; /* #1e1e1e */
+  --card-foreground: 0 0% 88%;
+  --popover: 0 0% 12%;
+  --popover-foreground: 0 0% 88%;
+  --primary: 0 0% 88%; /* white primary for buttons */
+  --primary-foreground: 0 0% 7%;
+  --secondary: 0 0% 17%; /* #2a2a2a */
+  --secondary-foreground: 0 0% 88%;
+  --muted: 0 0% 17%;
+  --muted-foreground: 0 0% 63%; /* #a0a0a0 */
+  --accent: 0 0% 20%;
+  --accent-foreground: 0 0% 88%;
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 20%; /* #333333 */
+  --input: 0 0% 20%;
+  --ring: 0 0% 63%;
+  --radius: 12px;
+  --progress-bg: 0 0% 17%;
+  --progress-fill: 0 0% 88%;
+  /* Sleek, precise animations */
+  --animation-duration: 0.15s;
+  --animation-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
   * {
     @apply border-border;
-    border-radius: 0 !important;
   }
+
+  /* Apply theme border-radius to most elements, but exclude SVGs to prevent icon clipping */
+  *:not(svg):not(svg *) {
+    border-radius: var(--radius);
+  }
+
   html,
   body,
   #root {
@@ -68,34 +168,54 @@
   body::after {
     display: none !important;
   }
-  
+
   /* Apply fonts globally based on font-style classes on html element */
   /* Default sans font - applied to body by default */
   html body,
   html {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
   }
-  
+
   /* Override with mono font when font-style-mono class is present */
   html.font-style-mono body,
   html.font-style-mono,
   html.font-style-mono * {
-    font-family: 'IBM Plex Mono', monospace !important;
+    font-family: "IBM Plex Mono", monospace !important;
   }
-  
+
   /* Override with serif font when font-style-serif class is present */
   html.font-style-serif body,
   html.font-style-serif,
   html.font-style-serif * {
-    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-family: "Instrument Serif", Georgia, serif !important;
   }
-  
+
   /* Override with geometric font when font-style-geometric class is present */
   html.font-style-geometric body,
   html.font-style-geometric,
   html.font-style-geometric * {
-    font-family: 'Space Grotesk', system-ui, sans-serif !important;
+    font-family: "Space Grotesk", system-ui, sans-serif !important;
   }
+}
+
+/* Theme-specific font overrides (lower specificity than font-style-* classes) */
+/* Sand theme: Source Sans 3 / Inter */
+html.theme-sand {
+  font-family: "Source Sans 3", "Inter", system-ui, sans-serif;
+}
+
+/* Moss theme: DM Sans */
+html.theme-moss {
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+/* Carbon theme: Inter */
+html.theme-carbon {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 /* Glass Card */
@@ -119,7 +239,7 @@
   border-color: hsl(var(--border)) !important;
 }
 
-/* Fill Hover Animation */
+/* Fill Hover Animation - uses theme animation variables */
 .fill-hover,
 .fill-hover-light {
   position: relative !important;
@@ -129,17 +249,18 @@
 
 .fill-hover::before,
 .fill-hover-light::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 0 !important;
   height: 100% !important;
-  transition: width 0.17s ease !important;
+  transition: width var(--animation-duration, 0.17s) var(--animation-ease, ease) !important;
   z-index: 0 !important;
   pointer-events: none !important;
   display: block !important;
   background-color: hsl(var(--foreground)) !important;
+  border-radius: inherit !important;
 }
 
 .fill-hover:hover::before,
@@ -173,26 +294,27 @@
   z-index: 1;
 }
 
-/* Vertical fill hover effect (bottom-up) */
+/* Vertical fill hover effect (bottom-up) - uses theme animation variables */
 .fill-hover-vertical {
   position: relative !important;
   overflow: hidden !important;
   background-color: hsl(var(--background)) !important;
-  transition: color 0.2s ease;
+  transition: color var(--animation-duration, 0.2s) var(--animation-ease, ease);
 }
 
 .fill-hover-vertical::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute !important;
   bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 0 !important;
   background-color: hsl(var(--foreground)) !important;
-  transition: height 0.2s ease !important;
+  transition: height var(--animation-duration, 0.2s) var(--animation-ease, ease) !important;
   z-index: 0 !important;
   pointer-events: none !important;
   display: block !important;
+  border-radius: inherit !important;
 }
 
 .fill-hover-vertical:hover::before,
@@ -221,7 +343,7 @@
 .exposed-card {
   @apply border bg-background text-card-foreground;
   box-shadow: none;
-  border-radius: 0;
+  border-radius: var(--radius, 0);
 }
 
 /* Page Headers */
@@ -233,25 +355,26 @@
   @apply text-base text-muted-foreground font-light;
 }
 
-/* Slide-in animation for buttons */
+/* Slide-in animation for buttons - uses theme animation variables */
 .slide-in-button {
   position: relative;
   overflow: hidden;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  transition: all 0.2s ease;
+  transition: all var(--animation-duration, 0.2s) var(--animation-ease, ease);
 }
 
 .slide-in-button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
   background-color: hsl(var(--foreground));
-  transition: left 0.17s ease;
+  transition: left var(--animation-duration, 0.17s) var(--animation-ease, ease);
   z-index: 0;
+  border-radius: inherit;
 }
 
 .slide-in-button:hover::before,
@@ -262,7 +385,7 @@
 .slide-in-button > * {
   position: relative;
   z-index: 1;
-  transition: color 0.3s ease;
+  transition: color var(--animation-duration, 0.3s) var(--animation-ease, ease);
 }
 
 /* Ensure button element itself changes color (affects text nodes) */
@@ -386,7 +509,9 @@ button.slide-in-button:hover.text-foreground {
 .sidebar-viewer-enter-active {
   transform: translateX(0);
   opacity: 1;
-  transition: transform 150ms ease-out, opacity 150ms ease-out;
+  transition:
+    transform 150ms ease-out,
+    opacity 150ms ease-out;
 }
 
 .sidebar-viewer-exit {
@@ -397,7 +522,9 @@ button.slide-in-button:hover.text-foreground {
 .sidebar-viewer-exit-active {
   transform: translateX(100%);
   opacity: 0;
-  transition: transform 150ms ease-in, opacity 150ms ease-in;
+  transition:
+    transform 150ms ease-in,
+    opacity 150ms ease-in;
 }
 
 /* Sidebar content transitions */
@@ -409,7 +536,9 @@ button.slide-in-button:hover.text-foreground {
 .sidebar-content-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 100ms ease-out, transform 100ms ease-out;
+  transition:
+    opacity 100ms ease-out,
+    transform 100ms ease-out;
 }
 
 /* Responsive sidebar - on mobile, show fullscreen */

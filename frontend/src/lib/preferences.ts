@@ -1,5 +1,21 @@
-export type ThemeOption = "light" | "dark" | "paper" | "ink";
+export type ThemeOption = "paper" | "sand" | "moss" | "carbon";
 export type FontOption = "sans" | "mono" | "serif" | "geometric";
+
+// Theme display names for UI
+export const themeDisplayNames: Record<ThemeOption, string> = {
+  paper: "Paper",
+  sand: "Sand",
+  moss: "Moss",
+  carbon: "Carbon",
+};
+
+// Theme descriptions for UI
+export const themeDescriptions: Record<ThemeOption, string> = {
+  paper: "Clean light theme with warm cream tones",
+  sand: "Desert warmth with terracotta accents",
+  moss: "Natural theme with forest green tones",
+  carbon: "Sleek dark grayscale theme",
+};
 
 export interface UserPreferences {
   theme: ThemeOption;
@@ -12,16 +28,33 @@ const BACKGROUND_STORAGE_KEY = "customBackgroundColor_v2";
 export const DEFAULT_BACKGROUND_COLOR = "40 86% 97%";
 
 export const defaultPreferences: UserPreferences = {
-  theme: "light",
+  theme: "paper",
   font: "sans",
   onboarded: false,
 };
+
+// Valid theme options for validation
+const validThemes: ThemeOption[] = ["paper", "sand", "moss", "carbon"];
 
 export function getPreferences(): UserPreferences {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      // Migrate old theme values to new ones
+      if (!validThemes.includes(parsed.theme)) {
+        // Map old themes to new defaults
+        if (parsed.theme === "light" || parsed.theme === "ink") {
+          parsed.theme = "paper";
+        } else if (parsed.theme === "dark") {
+          parsed.theme = "carbon";
+        } else {
+          parsed.theme = "paper";
+        }
+        // Save the migrated preferences
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      }
+      return parsed;
     }
   } catch (e) {
     console.error("Failed to load preferences", e);
@@ -39,22 +72,34 @@ export function savePreferences(prefs: UserPreferences): void {
 
 export function applyTheme(theme: ThemeOption): void {
   const root = document.documentElement;
-  
-  root.classList.remove("theme-dark", "theme-paper", "theme-ink");
-  
-  if (theme !== "light") {
-    root.classList.add(`theme-${theme}`);
-  }
-  
-  // Always ensure the global background color is applied,
-  // regardless of the selected theme or page.
-  applyBackgroundColor();
+
+  // Remove all theme classes
+  root.classList.remove(
+    "theme-paper",
+    "theme-sand",
+    "theme-moss",
+    "theme-carbon",
+  );
+
+  // Apply the selected theme class
+  root.classList.add(`theme-${theme}`);
+
+  // Clear any custom background color when switching themes
+  // so the theme's default background is used
+  localStorage.removeItem(BACKGROUND_STORAGE_KEY);
+
+  // Also clear inline style so CSS theme variables take effect
+  root.style.removeProperty("--background");
 }
 
 export function applyFont(font: FontOption): void {
   const root = document.documentElement;
-  root.classList.remove("font-style-mono", "font-style-serif", "font-style-geometric");
-  
+  root.classList.remove(
+    "font-style-mono",
+    "font-style-serif",
+    "font-style-geometric",
+  );
+
   if (font !== "sans") {
     root.classList.add(`font-style-${font}`);
   }
@@ -67,32 +112,40 @@ export function applyFont(font: FontOption): void {
  */
 export function hexToHsl(hex: string): string {
   // Remove # if present
-  hex = hex.replace('#', '');
-  
+  hex = hex.replace("#", "");
+
   // Parse RGB
   const r = parseInt(hex.substring(0, 2), 16) / 255;
   const g = parseInt(hex.substring(2, 4), 16) / 255;
   const b = parseInt(hex.substring(4, 6), 16) / 255;
-  
+
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
-  let h = 0, s = 0, l = (max + min) / 2;
-  
+  let h = 0,
+    s = 0,
+    l = (max + min) / 2;
+
   if (max !== min) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    
+
     switch (max) {
-      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-      case g: h = ((b - r) / d + 2) / 6; break;
-      case b: h = ((r - g) / d + 4) / 6; break;
+      case r:
+        h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        break;
+      case g:
+        h = ((b - r) / d + 2) / 6;
+        break;
+      case b:
+        h = ((r - g) / d + 4) / 6;
+        break;
     }
   }
-  
+
   h = Math.round(h * 360);
   s = Math.round(s * 100);
   l = Math.round(l * 100);
-  
+
   return `${h} ${s}% ${l}%`;
 }
 
@@ -124,10 +177,13 @@ export function getBackgroundColor(): string | null {
 }
 
 /**
- * Apply saved background color or use default
+ * Apply saved background color if one exists
+ * If no custom color is saved, let the theme CSS handle it
  */
 export function applyBackgroundColor(): void {
   const saved = getBackgroundColor();
-  const colorToApply = saved ? normalizeColor(saved) : DEFAULT_BACKGROUND_COLOR;
-  applyBackgroundValue(colorToApply);
+  if (saved) {
+    applyBackgroundValue(normalizeColor(saved));
+  }
+  // If no saved color, don't set inline style - let theme CSS handle it
 }

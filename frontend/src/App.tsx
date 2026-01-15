@@ -28,6 +28,7 @@ import ChatForumPage from "./pages/ChatForumPage";
 import SubscribePage from "./pages/SubscribePage";
 import Landing from "./pages/Landing";
 import OnboardingInfo from "./pages/OnboardingInfo";
+import OnboardingTheme from "./pages/OnboardingTheme";
 import OnboardingInvite from "./pages/OnboardingInvite";
 import WaitlistConfirmation from "./pages/WaitlistConfirmation";
 import OnboardingSync from "./pages/OnboardingSync";
@@ -71,6 +72,7 @@ const AppContent = () => {
 
           {/* Onboarding routes (public) */}
           <Route path="/onboarding/info" element={<OnboardingInfo />} />
+          <Route path="/onboarding/theme" element={<OnboardingTheme />} />
           <Route path="/onboarding/invite" element={<OnboardingInvite />} />
           <Route
             path="/onboarding/waitlist-confirmation"

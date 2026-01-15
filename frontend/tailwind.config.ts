@@ -2,7 +2,12 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -14,10 +19,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
-        serif: ['Instrument Serif', 'Georgia', 'serif'],
-        geometric: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ["IBM Plex Sans", "system-ui", "sans-serif"],
+        mono: ["IBM Plex Mono", "monospace"],
+        serif: ["Instrument Serif", "Georgia", "serif"],
+        geometric: ["Space Grotesk", "system-ui", "sans-serif"],
+        // Theme fonts
+        "dm-sans": ["DM Sans", "system-ui", "sans-serif"],
+        "source-sans": ["Source Sans 3", "Inter", "system-ui", "sans-serif"],
+        inter: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
