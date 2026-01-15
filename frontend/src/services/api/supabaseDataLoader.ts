@@ -81,13 +81,13 @@ export async function loadCanvasDataFromSupabase(
       avatar_url: undefined,
     };
 
-    // Convert courses
+    // Convert courses - handle both field name variations
     const coursesData = courses.map((entity) => {
       const course = entity.data as any;
       return {
-        id: parseInt(entity.entity_id) || course.id || 0,
-        code: course.code || "",
-        name: course.name || "",
+        id: parseInt(entity.entity_id) || course.courseId || course.id || 0,
+        code: course.code || course.courseCode || course.course_code || "",
+        name: course.name || course.courseName || course.course_name || "",
         instructor: course.instructor || "",
         color: course.color || "hsl(220, 45%, 48%)",
         enrollmentTermId:

@@ -19,6 +19,7 @@ The system provides a modern web interface for viewing and managing Canvas data,
 - Use existing CLIs where possible (supabase, vercel, aws) and download others if needed
 - Do not create summary markdown files after long tasks unless specifically requested. Use bullet point summaries in chat instead
 - Test the repository on ditchcanvas.com, not on localhost
+-When asked to start the server, start both the front and back end
 
 ### AWS EC2 Management
 - **Always use AWS CLI** to search for instances comprehensively before assuming instance IDs

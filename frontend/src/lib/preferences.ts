@@ -3,7 +3,7 @@ export type FontOption = "sans" | "mono" | "serif" | "geometric";
 
 // Theme display names for UI
 export const themeDisplayNames: Record<ThemeOption, string> = {
-  paper: "Paper",
+  paper: "Paper (Suggested)",
   sand: "Sand",
   moss: "Moss",
   carbon: "Carbon",
