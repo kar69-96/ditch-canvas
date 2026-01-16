@@ -522,8 +522,8 @@ app.get("/extraction-result/:email", (req, res) => {
     }
   }
 
-  // If browser is active, return pending status
-  if (page && !extractionComplete) {
+  // If browser is starting, active, or has started, return pending status
+  if (browserStarting || browserStarted || (page && !extractionComplete)) {
     return res.json({
       success: false,
       pending: true,

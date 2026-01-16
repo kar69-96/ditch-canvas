@@ -3,8 +3,14 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
 
 async function handleResponse(response: Response) {
   const data = await response.json().catch(() => ({}));
-  // Allow pending status to pass through without throwing error
-  if (!response.ok || (data?.success === false && !data?.pending)) {
+  // Allow pending status and queued (202) status to pass through without throwing error
+  if (
+    !response.ok &&
+    response.status !== 202 &&
+    data?.success === false &&
+    !data?.pending &&
+    !data?.queued
+  ) {
     const message =
       data?.error ||
       data?.message ||
@@ -172,5 +178,139 @@ export async function getUpdateStatus(email: string) {
   } catch (error: any) {
     console.error("[API] Failed to get update status:", error);
     return { hasActiveUpdate: false, error: error.message };
+  }
+}
+
+// =============================================================================
+// EC2 Manager / Queue Management
+// =============================================================================
+
+export interface StreamingAuthResult {
+  success: boolean;
+  url?: string;
+  streamingServerUrl?: string;
+  instanceId?: string;
+  requestId?: string;
+  message?: string;
+  // Queue information (when request is queued)
+  queued?: boolean;
+  position?: number;
+  estimatedWaitSeconds?: number;
+}
+
+export interface QueueStatusResult {
+  success: boolean;
+  status:
+    | "pending"
+    | "assigned"
+    | "in_progress"
+    | "completed"
+    | "failed"
+    | "timeout";
+  tunnelUrl?: string;
+  instanceId?: string;
+  position?: number;
+  estimatedWaitSeconds?: number;
+  error?: string;
+}
+
+/**
+ * Get queue status for a pending auth request
+ * Used when startStreamingAuth returns a queued response
+ *
+ * @param requestId - Request ID from startStreamingAuth
+ * @returns Queue status with tunnel URL when assigned
+ */
+export async function getQueueStatus(
+  requestId: string,
+): Promise<QueueStatusResult> {
+  try {
+    const res = await fetch(
+      `${API_BASE}/api/ec2-manager/status/${encodeURIComponent(requestId)}`,
+    );
+    return handleResponse(res);
+  } catch (error: any) {
+    console.error("[API] Failed to get queue status:", error);
+    return { success: false, status: "failed", error: error.message };
+  }
+}
+
+/**
+ * Poll for queue status until assigned or timeout
+ *
+ * @param requestId - Request ID from startStreamingAuth
+ * @param onStatusUpdate - Callback for status updates
+ * @param maxWaitMs - Maximum wait time (default 2 minutes)
+ * @param pollIntervalMs - Poll interval (default 2 seconds)
+ * @returns Final status with tunnel URL when assigned
+ */
+export async function pollQueueStatus(
+  requestId: string,
+  onStatusUpdate?: (status: QueueStatusResult) => void,
+  maxWaitMs = 120000,
+  pollIntervalMs = 2000,
+): Promise<QueueStatusResult> {
+  const startTime = Date.now();
+
+  while (Date.now() - startTime < maxWaitMs) {
+    const status = await getQueueStatus(requestId);
+
+    if (onStatusUpdate) {
+      onStatusUpdate(status);
+    }
+
+    // If assigned, return the tunnel URL
+    if (status.status === "assigned" && status.tunnelUrl) {
+      console.log(
+        "[API] Queue request assigned to instance:",
+        status.instanceId,
+      );
+      return status;
+    }
+
+    // If failed or completed, return immediately
+    if (
+      status.status === "failed" ||
+      status.status === "timeout" ||
+      status.status === "completed"
+    ) {
+      console.warn("[API] Queue request ended with status:", status.status);
+      return status;
+    }
+
+    // Wait before next poll
+    await new Promise((resolve) => setTimeout(resolve, pollIntervalMs));
+  }
+
+  // Timeout
+  console.warn("[API] Queue polling timed out");
+  return {
+    success: false,
+    status: "timeout",
+    error: "Queue polling timed out",
+  };
+}
+
+/**
+ * Release a session when auth completes (for cleanup)
+ *
+ * @param requestId - Request ID from startStreamingAuth
+ * @param status - "completed" or "failed"
+ */
+export async function releaseAuthSession(
+  requestId: string,
+  status: "completed" | "failed" = "completed",
+) {
+  try {
+    const res = await fetch(`${API_BASE}/api/ec2-manager/release`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ requestId, status }),
+    });
+    return handleResponse(res);
+  } catch (error: any) {
+    console.error("[API] Failed to release auth session:", error);
+    // Non-critical, don't throw
+    return { success: false, error: error.message };
   }
 }

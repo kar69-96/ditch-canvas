@@ -12,6 +12,7 @@ const {
   copyCookiesToMainFile,
   OUTPUT_DIR,
 } = require("../utils/cookie-helpers");
+const ec2Manager = require("../services/ec2-manager/client");
 
 const router = express.Router();
 
@@ -136,11 +137,60 @@ router.post("/start", async (req, res) => {
     const isProduction =
       process.env.VERCEL_ENV === "production" ||
       process.env.NODE_ENV === "production";
+
+    // Try EC2 Manager for dynamic instance assignment (when enabled)
+    if (isProduction && ec2Manager.isEnabled()) {
+      console.log(
+        "[streaming-auth] Production mode: using EC2 Manager for dynamic assignment",
+      );
+
+      const assignment = await ec2Manager.requestAssignment(
+        normalizedEmail,
+        extractionContextValue,
+      );
+
+      if (assignment.success && assignment.tunnelUrl) {
+        // Successfully assigned to an instance
+        console.log(
+          `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
+        );
+        return res.json({
+          success: true,
+          url: assignment.tunnelUrl,
+          streamingServerUrl: assignment.tunnelUrl,
+          instanceId: assignment.instanceId,
+          requestId: assignment.requestId,
+          message: "Assigned to streaming instance",
+        });
+      }
+
+      if (assignment.queued) {
+        // Request was queued - return queue position
+        console.log(
+          `[streaming-auth] Request queued at position ${assignment.position}`,
+        );
+        return res.status(202).json({
+          success: true,
+          queued: true,
+          requestId: assignment.requestId,
+          position: assignment.position,
+          estimatedWaitSeconds: assignment.estimatedWaitSeconds,
+          message: `Your request is queued at position ${assignment.position}. An instance is being prepared.`,
+        });
+      }
+
+      // EC2 Manager failed, fall back to static URL if available
+      console.warn(
+        "[streaming-auth] EC2 Manager assignment failed, trying fallback",
+      );
+    }
+
+    // Fallback: Use static STREAMING_SERVER_URL (legacy mode)
     if (isProduction && process.env.STREAMING_SERVER_URL) {
       // Production: return external streaming server URL directly
       // Also return streamingServerUrl for the frontend to poll extraction results
       console.log(
-        "[streaming-auth] Production mode: using external streaming server",
+        "[streaming-auth] Production mode: using static streaming server (fallback)",
       );
       return res.json({
         success: true,
