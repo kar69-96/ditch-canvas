@@ -1,0 +1,75 @@
+/* CU Boulder Buff Mascot Sprite Animation */
+
+.buff-container {
+  position: absolute;
+  bottom: -36px; /* Position below the header border */
+  left: 0;
+  right: 0;
+  height: 72px;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 10;
+}
+
+.buff-sprite {
+  width: 88px;
+  height: 72px;
+  background-image: url("../../assets/sprites/buff-sprite-sheet.png");
+  background-repeat: no-repeat;
+  background-size: 440px 72px; /* 5 frames * 88px width */
+  /* Crisp pixel art rendering */
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Running animation - 4 frames (frames 0-3) */
+.buff-running {
+  animation: buff-run 0.5s steps(4) infinite;
+}
+
+@keyframes buff-run {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -352px 0; /* 4 frames * 88px */
+  }
+}
+
+/* Standing - static frame (frame 4, the last one) */
+.buff-standing {
+  background-position: -352px 0; /* Frame 4 - standing pose */
+}
+
+/* Flip the sprite horizontally when running right */
+.buff-facing-right {
+  transform: scaleX(-1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .buff-container {
+    bottom: -28px;
+    height: 56px;
+  }
+
+  .buff-sprite {
+    width: 68px;
+    height: 56px;
+    background-size: 340px 56px; /* Scaled down proportionally */
+  }
+
+  @keyframes buff-run {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -272px 0; /* 4 frames * 68px */
+    }
+  }
+
+  .buff-standing {
+    background-position: -272px 0;
+  }
+}
