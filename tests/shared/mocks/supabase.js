@@ -18,13 +18,17 @@ class MockSupabaseClient {
       completed_extractions: [],
       waitlist: [],
       invite_codes: [],
+      // EC2 Manager tables
+      streaming_instances: [],
+      auth_requests: [],
+      instance_events: [],
     };
     this.rpcCalls = [];
   }
 
   // Reset all data
   reset() {
-    Object.keys(this.tables).forEach(table => {
+    Object.keys(this.tables).forEach((table) => {
       this.tables[table] = [];
     });
     this.rpcCalls = [];
@@ -43,7 +47,7 @@ class MockSupabaseClient {
     const table = this.tables[tableName] || [];
 
     return {
-      select: (columns = '*') => {
+      select: (columns = "*") => {
         let data = [...table];
         let error = null;
         let filters = {};
@@ -54,36 +58,36 @@ class MockSupabaseClient {
             return query;
           },
           neq: (column, value) => {
-            data = data.filter(row => row[column] !== value);
+            data = data.filter((row) => row[column] !== value);
             return query;
           },
           gt: (column, value) => {
-            data = data.filter(row => row[column] > value);
+            data = data.filter((row) => row[column] > value);
             return query;
           },
           lt: (column, value) => {
-            data = data.filter(row => row[column] < value);
+            data = data.filter((row) => row[column] < value);
             return query;
           },
           gte: (column, value) => {
-            data = data.filter(row => row[column] >= value);
+            data = data.filter((row) => row[column] >= value);
             return query;
           },
           lte: (column, value) => {
-            data = data.filter(row => row[column] <= value);
+            data = data.filter((row) => row[column] <= value);
             return query;
           },
           in: (column, values) => {
-            data = data.filter(row => values.includes(row[column]));
+            data = data.filter((row) => values.includes(row[column]));
             return query;
           },
           contains: (column, value) => {
-            data = data.filter(row => {
+            data = data.filter((row) => {
               const rowValue = row[column];
               if (Array.isArray(rowValue)) {
                 return rowValue.includes(value);
               }
-              if (typeof rowValue === 'string') {
+              if (typeof rowValue === "string") {
                 return rowValue.includes(value);
               }
               return false;
@@ -105,24 +109,24 @@ class MockSupabaseClient {
           },
           single: () => {
             // Apply filters
-            Object.keys(filters).forEach(column => {
-              data = data.filter(row => row[column] === filters[column]);
+            Object.keys(filters).forEach((column) => {
+              data = data.filter((row) => row[column] === filters[column]);
             });
 
             if (data.length === 0) {
-              error = { message: 'No rows found', code: 'PGRST116' };
+              error = { message: "No rows found", code: "PGRST116" };
               return Promise.resolve({ data: null, error });
             }
             if (data.length > 1) {
-              error = { message: 'Multiple rows found', code: 'PGRST116' };
+              error = { message: "Multiple rows found", code: "PGRST116" };
               return Promise.resolve({ data: null, error });
             }
             return Promise.resolve({ data: data[0], error: null });
           },
           then: (resolve) => {
             // Apply filters
-            Object.keys(filters).forEach(column => {
-              data = data.filter(row => row[column] === filters[column]);
+            Object.keys(filters).forEach((column) => {
+              data = data.filter((row) => row[column] === filters[column]);
             });
             return resolve({ data, error });
           },
@@ -133,7 +137,7 @@ class MockSupabaseClient {
 
       insert: (records) => {
         const recordsArray = Array.isArray(records) ? records : [records];
-        const insertedRecords = recordsArray.map(record => ({
+        const insertedRecords = recordsArray.map((record) => ({
           id: record.id || Math.random().toString(36).substring(7),
           created_at: record.created_at || new Date().toISOString(),
           updated_at: record.updated_at || new Date().toISOString(),
@@ -145,10 +149,11 @@ class MockSupabaseClient {
 
         return {
           select: () => ({
-            single: () => Promise.resolve({
-              data: insertedRecords[0],
-              error: null
-            }),
+            single: () =>
+              Promise.resolve({
+                data: insertedRecords[0],
+                error: null,
+              }),
             then: (resolve) => resolve({ data: insertedRecords, error: null }),
           }),
           then: (resolve) => resolve({ data: insertedRecords, error: null }),
@@ -167,7 +172,7 @@ class MockSupabaseClient {
             const matchingIndices = [];
             table.forEach((row, index) => {
               let matches = true;
-              Object.keys(filters).forEach(column => {
+              Object.keys(filters).forEach((column) => {
                 if (row[column] !== filters[column]) {
                   matches = false;
                 }
@@ -177,7 +182,7 @@ class MockSupabaseClient {
               }
             });
 
-            matchingIndices.forEach(index => {
+            matchingIndices.forEach((index) => {
               table[index] = {
                 ...table[index],
                 ...updates,
@@ -186,7 +191,7 @@ class MockSupabaseClient {
             });
 
             this.tables[tableName] = table;
-            const updatedRecords = matchingIndices.map(i => table[i]);
+            const updatedRecords = matchingIndices.map((i) => table[i]);
             return resolve({ data: updatedRecords, error: null });
           },
           select: () => ({
@@ -194,7 +199,7 @@ class MockSupabaseClient {
               const matchingIndices = [];
               table.forEach((row, index) => {
                 let matches = true;
-                Object.keys(filters).forEach(column => {
+                Object.keys(filters).forEach((column) => {
                   if (row[column] !== filters[column]) {
                     matches = false;
                   }
@@ -204,7 +209,7 @@ class MockSupabaseClient {
                 }
               });
 
-              matchingIndices.forEach(index => {
+              matchingIndices.forEach((index) => {
                 table[index] = {
                   ...table[index],
                   ...updates,
@@ -213,7 +218,7 @@ class MockSupabaseClient {
               });
 
               this.tables[tableName] = table;
-              const updatedRecords = matchingIndices.map(i => table[i]);
+              const updatedRecords = matchingIndices.map((i) => table[i]);
               return resolve({ data: updatedRecords, error: null });
             },
           }),
@@ -231,9 +236,9 @@ class MockSupabaseClient {
             return query;
           },
           then: (resolve) => {
-            const remainingRows = table.filter(row => {
+            const remainingRows = table.filter((row) => {
               let matches = true;
-              Object.keys(filters).forEach(column => {
+              Object.keys(filters).forEach((column) => {
                 if (row[column] !== filters[column]) {
                   matches = false;
                 }
@@ -256,40 +261,47 @@ class MockSupabaseClient {
     this.rpcCalls.push({ functionName, params });
 
     // Mock get_user_entities RPC
-    if (functionName === 'get_user_entities') {
+    if (functionName === "get_user_entities") {
       const { user_email, entity_type_filter, course_id_filter } = params;
       let data = this.tables.extraction_data.filter(
-        row => row.user_email === user_email
+        (row) => row.user_email === user_email,
       );
 
       if (entity_type_filter) {
-        data = data.filter(row => row.entity_type === entity_type_filter);
+        data = data.filter((row) => row.entity_type === entity_type_filter);
       }
 
       if (course_id_filter) {
-        data = data.filter(row => row.course_id === course_id_filter);
+        data = data.filter((row) => row.course_id === course_id_filter);
       }
 
       return Promise.resolve({ data, error: null });
     }
 
     // Mock upsert_user_entity RPC
-    if (functionName === 'upsert_user_entity') {
-      const { user_email, entity_type, entity_id, course_id, entity_data, entity_metadata } = params;
+    if (functionName === "upsert_user_entity") {
+      const {
+        user_email,
+        entity_type,
+        entity_id,
+        course_id,
+        entity_data,
+        entity_metadata,
+      } = params;
 
       const existingIndex = this.tables.extraction_data.findIndex(
-        row =>
+        (row) =>
           row.user_email === user_email &&
           row.entity_type === entity_type &&
           row.entity_id === entity_id &&
-          row.course_id === course_id
+          row.course_id === course_id,
       );
 
       const record = {
         user_email,
         entity_type,
         entity_id,
-        course_id: course_id || '',
+        course_id: course_id || "",
         data: entity_data || {},
         metadata: entity_metadata || {},
         updated_at: new Date().toISOString(),
@@ -309,28 +321,141 @@ class MockSupabaseClient {
       return Promise.resolve({ data: record, error: null });
     }
 
+    // EC2 Manager RPC functions
+
+    // find_available_instance - find a warm instance with capacity
+    if (functionName === "find_available_instance") {
+      const instances = this.tables.streaming_instances.filter(
+        (i) =>
+          (i.status === "warm" || i.status === "active") &&
+          i.current_sessions < i.max_sessions,
+      );
+
+      if (instances.length === 0) {
+        return Promise.resolve({ data: [], error: null });
+      }
+
+      // Return first available instance
+      return Promise.resolve({ data: [instances[0]], error: null });
+    }
+
+    // assign_request_to_instance - atomically assign request and increment session count
+    if (functionName === "assign_request_to_instance") {
+      const { p_request_id, p_instance_id } = params;
+
+      const instance = this.tables.streaming_instances.find(
+        (i) => i.instance_id === p_instance_id,
+      );
+
+      if (!instance || instance.current_sessions >= instance.max_sessions) {
+        return Promise.resolve({ data: false, error: null });
+      }
+
+      // Update instance
+      instance.current_sessions++;
+      instance.status = "active";
+      instance.last_activity_at = new Date().toISOString();
+
+      // Update request
+      const request = this.tables.auth_requests.find(
+        (r) => r.id === p_request_id,
+      );
+      if (request) {
+        request.status = "assigned";
+        request.assigned_instance = p_instance_id;
+        request.tunnel_url = instance.tunnel_url;
+        request.assigned_at = new Date().toISOString();
+      }
+
+      return Promise.resolve({ data: true, error: null });
+    }
+
+    // release_instance_session - release a session and decrement count
+    if (functionName === "release_instance_session") {
+      const { p_request_id, p_new_status } = params;
+
+      const request = this.tables.auth_requests.find(
+        (r) => r.id === p_request_id,
+      );
+      if (request && request.assigned_instance) {
+        const instance = this.tables.streaming_instances.find(
+          (i) => i.instance_id === request.assigned_instance,
+        );
+
+        if (instance && instance.current_sessions > 0) {
+          instance.current_sessions--;
+          if (instance.current_sessions === 0) {
+            instance.status = "warm";
+          }
+        }
+
+        request.status = p_new_status;
+        request.completed_at = new Date().toISOString();
+      }
+
+      return Promise.resolve({ data: null, error: null });
+    }
+
+    // get_queue_position - get position of request in queue
+    if (functionName === "get_queue_position") {
+      const { request_id } = params;
+
+      const pendingRequests = this.tables.auth_requests
+        .filter((r) => r.status === "pending")
+        .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
+      const position =
+        pendingRequests.findIndex((r) => r.id === request_id) + 1;
+
+      return Promise.resolve({ data: position, error: null });
+    }
+
+    // get_scaling_metrics - get current scaling metrics
+    if (functionName === "get_scaling_metrics") {
+      const instances = this.tables.streaming_instances;
+      const requests = this.tables.auth_requests;
+
+      const metrics = {
+        pending_requests: requests.filter((r) => r.status === "pending").length,
+        active_instances: instances.filter((i) => i.status === "active").length,
+        warm_instances: instances.filter((i) => i.status === "warm").length,
+        hibernated_instances: instances.filter((i) => i.status === "stopped")
+          .length,
+        total_capacity: instances
+          .filter((i) => ["warm", "active"].includes(i.status))
+          .reduce((sum, i) => sum + i.max_sessions, 0),
+        used_capacity: instances
+          .filter((i) => ["warm", "active"].includes(i.status))
+          .reduce((sum, i) => sum + i.current_sessions, 0),
+      };
+
+      return Promise.resolve({ data: [metrics], error: null });
+    }
+
     // Default: return empty result
     return Promise.resolve({ data: null, error: null });
   }
 
   // Auth mock
   auth = {
-    getSession: () => Promise.resolve({
-      data: {
-        session: {
-          user: { email: 'test@colorado.edu' },
-          access_token: 'mock-token',
+    getSession: () =>
+      Promise.resolve({
+        data: {
+          session: {
+            user: { email: "test@colorado.edu" },
+            access_token: "mock-token",
+          },
         },
-      },
-      error: null,
-    }),
-    signInWithPassword: ({ email, password }) => Promise.resolve({
-      data: {
-        user: { email },
-        session: { access_token: 'mock-token' },
-      },
-      error: null,
-    }),
+        error: null,
+      }),
+    signInWithPassword: ({ email, password }) =>
+      Promise.resolve({
+        data: {
+          user: { email },
+          session: { access_token: "mock-token" },
+        },
+        error: null,
+      }),
     signOut: () => Promise.resolve({ error: null }),
   };
 }
