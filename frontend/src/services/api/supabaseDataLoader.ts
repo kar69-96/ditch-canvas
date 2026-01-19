@@ -1,5 +1,6 @@
 /**
  * Supabase data loader - loads Canvas data from flexible JSONB storage
+ * Uses optimized RPC for performance (v2)
  */
 
 import { supabase } from "@/lib/supabase";
