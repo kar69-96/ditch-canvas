@@ -11,15 +11,42 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { submitPersonalInfo, joinWaitlist } from "@/services/api/onboarding";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Loader2, AlertCircle, Check, ChevronsUpDown } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { cn } from "@/lib/utils";
+
+const SCHOOLS = [
+  "Brown University",
+  "California State University",
+  "Columbia University",
+  "Cornell University",
+  "Dartmouth College",
+  "Harvard University",
+  "Pennsylvania State University",
+  "Princeton University",
+  "Stanford University",
+  "University of California, Berkeley",
+  "University of California, Los Angeles",
+  "University of Colorado - Boulder",
+  "University of Colorado - Denver",
+  "University of Michigan",
+  "University of Texas at Austin",
+  "Yale University",
+  "Other",
+];
 
 export default function OnboardingInfo() {
   const navigate = useNavigate();
@@ -28,6 +55,7 @@ export default function OnboardingInfo() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [schoolOpen, setSchoolOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,66 +154,54 @@ export default function OnboardingInfo() {
 
             <div className="space-y-2">
               <Label htmlFor="school">School</Label>
-              <Select
-                value={school}
-                onValueChange={setSchool}
-                disabled={loading}
-              >
-                <SelectTrigger id="school">
-                  <SelectValue placeholder="Select your school" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Brown University">
-                    Brown University
-                  </SelectItem>
-                  <SelectItem value="California State University">
-                    California State University
-                  </SelectItem>
-                  <SelectItem value="Columbia University">
-                    Columbia University
-                  </SelectItem>
-                  <SelectItem value="Cornell University">
-                    Cornell University
-                  </SelectItem>
-                  <SelectItem value="Dartmouth College">
-                    Dartmouth College
-                  </SelectItem>
-                  <SelectItem value="Harvard University">
-                    Harvard University
-                  </SelectItem>
-                  <SelectItem value="Pennsylvania State University">
-                    Pennsylvania State University
-                  </SelectItem>
-                  <SelectItem value="Princeton University">
-                    Princeton University
-                  </SelectItem>
-                  <SelectItem value="Stanford University">
-                    Stanford University
-                  </SelectItem>
-                  <SelectItem value="University of California, Berkeley">
-                    University of California, Berkeley
-                  </SelectItem>
-                  <SelectItem value="University of California, Los Angeles">
-                    University of California, Los Angeles
-                  </SelectItem>
-                  <SelectItem value="University of Colorado - Boulder">
-                    University of Colorado - Boulder
-                  </SelectItem>
-                  <SelectItem value="University of Colorado - Denver">
-                    University of Colorado - Denver
-                  </SelectItem>
-                  <SelectItem value="University of Michigan">
-                    University of Michigan
-                  </SelectItem>
-                  <SelectItem value="University of Texas at Austin">
-                    University of Texas at Austin
-                  </SelectItem>
-                  <SelectItem value="Yale University">
-                    Yale University
-                  </SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+              <Popover open={schoolOpen} onOpenChange={setSchoolOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={schoolOpen}
+                    className="w-full justify-between font-normal"
+                    disabled={loading}
+                  >
+                    {school || "Select your school..."}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+                  <Command>
+                    <CommandInput placeholder="Search schools..." />
+                    <CommandList>
+                      <CommandEmpty>No school found.</CommandEmpty>
+                      <CommandGroup>
+                        {SCHOOLS.map((s) => (
+                          <CommandItem
+                            key={s}
+                            value={s}
+                            onSelect={(currentValue) => {
+                              // cmdk lowercases the value, so find the original
+                              const selectedSchool = SCHOOLS.find(
+                                (s) =>
+                                  s.toLowerCase() ===
+                                  currentValue.toLowerCase(),
+                              );
+                              setSchool(selectedSchool || "");
+                              setSchoolOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                school === s ? "opacity-100" : "opacity-0",
+                              )}
+                            />
+                            {s}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
 
             <div className="space-y-2">
