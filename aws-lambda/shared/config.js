@@ -18,7 +18,7 @@ module.exports = {
 
   // Instance Management (optimized for 5-10 peak users)
   instances: {
-    minWarmInstances: parseInt(process.env.MIN_WARM_INSTANCES || "1", 10), // Keep 1 warm, scale on demand
+    minWarmInstances: parseInt(process.env.MIN_WARM_INSTANCES || "1", 10), // Keep 1 warm for instant login, scale to 9
     maxInstances: parseInt(process.env.MAX_INSTANCES || "3", 10), // 3 instances × 3 sessions = 9 users max
     maxSessionsPerInstance: parseInt(
       process.env.MAX_SESSIONS_PER_INSTANCE || "3",

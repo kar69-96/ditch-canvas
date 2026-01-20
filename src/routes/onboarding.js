@@ -2,6 +2,7 @@ const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
 const { getSupabaseConfig } = require("../core/config");
 const { getCookieFilename } = require("../utils/cookie-helpers");
+const { sendAdminNotification } = require("../services/email");
 const fs = require("fs");
 
 const router = express.Router();
@@ -472,6 +473,22 @@ router.post("/complete", async (req, res) => {
         success: false,
         error: "Failed to add to extraction queue",
       });
+    }
+
+    // Send admin notification (non-blocking)
+    try {
+      await sendAdminNotification({
+        userEmail: normalizedEmail,
+        userName: firstName,
+        school: school,
+        inviteCode: normalizedCode,
+      });
+    } catch (emailError) {
+      console.error(
+        "[onboarding] Failed to send admin notification:",
+        emailError,
+      );
+      // Don't fail the request if email fails
     }
 
     // Increment invite code usage

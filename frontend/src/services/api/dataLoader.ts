@@ -123,11 +123,44 @@ export async function loadCanvasDataForUser(
 
   // First, look up the user ID from the email
   try {
-    const { data: userData, error: userError } = await supabase
+    console.log(`[dataLoader] About to query Supabase users table...`);
+    console.log(
+      `[dataLoader] Supabase client:`,
+      supabase ? "initialized" : "NOT initialized",
+    );
+
+    const query = supabase
       .from("users")
       .select("id, first_name, email")
       .eq("email", normalizedEmail)
       .single();
+
+    console.log(`[dataLoader] Query built, awaiting response...`);
+
+    // Add timeout to detect hanging requests
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(
+        () => reject(new Error("Supabase query timeout after 10s")),
+        10000,
+      ),
+    );
+
+    let userData, userError;
+    try {
+      const result = (await Promise.race([query, timeoutPromise])) as any;
+      userData = result.data;
+      userError = result.error;
+    } catch (timeoutErr) {
+      console.error(`[dataLoader] Query timed out or failed:`, timeoutErr);
+      throw timeoutErr;
+    }
+
+    console.log(
+      `[dataLoader] Query complete. userData:`,
+      userData,
+      "error:",
+      userError,
+    );
 
     if (userError || !userData) {
       console.error(
@@ -166,6 +199,54 @@ export async function loadCanvasDataForUser(
     } else {
       console.warn(
         `[dataLoader] ⚠️  Supabase returned empty data for ${normalizedEmail}`,
+      );
+      return null;
+    }
+  } catch (error) {
+    console.error(`[dataLoader] ❌ Failed to load from Supabase:`, error);
+    return null;
+  }
+}
+
+/**
+ * Load Canvas data for a specific user by their ID (skip redundant Supabase user lookup)
+ * This is the preferred method when we already have the user ID from authentication
+ */
+export async function loadCanvasDataForUserId(
+  userId: string,
+  email: string,
+  firstName?: string,
+): Promise<CanvasData | null> {
+  console.log(`[dataLoader] Loading data for user ID: ${userId} (${email})`);
+
+  try {
+    // Load data directly using the user ID
+    const { loadCanvasDataFromSupabase } = await import("./supabaseDataLoader");
+    console.log(
+      `[dataLoader] Calling loadCanvasDataFromSupabase with userId: ${userId}`,
+    );
+    const supabaseData = await loadCanvasDataFromSupabase(userId);
+
+    if (
+      supabaseData &&
+      supabaseData.courses &&
+      supabaseData.courses.length > 0
+    ) {
+      // Populate user info
+      supabaseData.user = {
+        id: 1, // Legacy numeric ID for compatibility
+        name: firstName || email.split("@")[0],
+        email: email,
+        avatar_url: undefined,
+      };
+
+      console.log(
+        `[dataLoader] ✅ Successfully loaded ${supabaseData.courses.length} courses from Supabase for ${email}`,
+      );
+      return supabaseData;
+    } else {
+      console.warn(
+        `[dataLoader] ⚠️  Supabase returned empty data for ${email}`,
       );
       return null;
     }
