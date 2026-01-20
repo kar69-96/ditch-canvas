@@ -2,8 +2,24 @@ const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
 const { getSupabaseConfig } = require("../core/config");
 const { getCookieFilename } = require("../utils/cookie-helpers");
-const { sendAdminNotification } = require("../services/email");
 const fs = require("fs");
+
+// Optional email service - app works without it
+let sendAdminNotification = async () => {
+  console.log(
+    "[onboarding] Email service not available - skipping notification",
+  );
+  return { success: false, reason: "not_configured" };
+};
+
+try {
+  const emailService = require("../services/email");
+  sendAdminNotification = emailService.sendAdminNotification;
+} catch {
+  console.log(
+    "[onboarding] Email service module not found - notifications disabled",
+  );
+}
 
 const router = express.Router();
 
