@@ -1318,4 +1318,256 @@ router.post("/trigger-update", async (req, res) => {
   }
 });
 
+// =============================================================================
+// Device Trust Endpoints (for auto-login security)
+// =============================================================================
+
+/**
+ * POST /api/streaming-auth/check-device-trust
+ * Check if a device is trusted for auto-login
+ * A device is trusted if it successfully completed Canvas popup authentication
+ * within the last 24 hours on this specific browser/device
+ */
+router.post("/check-device-trust", async (req, res) => {
+  try {
+    const { email, device_id, device_hash } = req.body;
+
+    if (!email || !device_id) {
+      return res.status(400).json({
+        success: false,
+        trusted: false,
+        error: "Email and device_id are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Find user by email
+    const { data: user, error: findError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", normalizedEmail)
+      .single();
+
+    if (findError || !user) {
+      console.log(
+        `[streaming-auth] Device trust check: user not found for ${normalizedEmail}`,
+      );
+      return res.json({
+        success: true,
+        trusted: false,
+        reason: "User not found",
+      });
+    }
+
+    // Query trusted_devices for matching device_id
+    const { data: trustedDevice, error: deviceError } = await supabase
+      .from("trusted_devices")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("device_id", device_id)
+      .eq("is_active", true)
+      .single();
+
+    if (deviceError || !trustedDevice) {
+      console.log(
+        `[streaming-auth] Device trust check: device not trusted for ${normalizedEmail} (device: ${device_id.substring(0, 8)}...)`,
+      );
+      return res.json({
+        success: true,
+        trusted: false,
+        reason: "Device not registered",
+      });
+    }
+
+    // Check if last_login_at is within 24 hours
+    const lastLoginAt = new Date(trustedDevice.last_login_at).getTime();
+    const now = Date.now();
+    const hoursSinceLastLogin = (now - lastLoginAt) / (1000 * 60 * 60);
+
+    if (hoursSinceLastLogin > 24) {
+      console.log(
+        `[streaming-auth] Device trust check: device trust expired for ${normalizedEmail} (${hoursSinceLastLogin.toFixed(1)} hours old)`,
+      );
+      return res.json({
+        success: true,
+        trusted: false,
+        reason: "Device trust expired (>24 hours)",
+      });
+    }
+
+    // Optionally verify device_hash (soft fail - just log if mismatch)
+    if (device_hash && trustedDevice.device_hash) {
+      if (device_hash !== trustedDevice.device_hash) {
+        console.log(
+          `[streaming-auth] Device trust check: device hash mismatch for ${normalizedEmail} (browser fingerprint changed)`,
+        );
+        // Don't fail - hash mismatch can happen with browser updates, etc.
+        // Just log it for security monitoring
+      }
+    }
+
+    console.log(
+      `[streaming-auth] Device trust check: device trusted for ${normalizedEmail} (${hoursSinceLastLogin.toFixed(1)} hours since last login)`,
+    );
+    return res.json({
+      success: true,
+      trusted: true,
+    });
+  } catch (error) {
+    console.error("[streaming-auth] Error checking device trust:", error);
+    // On error, treat as untrusted (user will just see Canvas popup)
+    res.json({
+      success: false,
+      trusted: false,
+      error: error.message || "Failed to check device trust",
+    });
+  }
+});
+
+/**
+ * POST /api/streaming-auth/trust-device
+ * Register a device as trusted after successful Canvas popup authentication
+ * Called after the user successfully completes the Canvas login popup
+ */
+router.post("/trust-device", async (req, res) => {
+  try {
+    const { email, device_id, device_hash, user_agent } = req.body;
+
+    if (!email || !device_id) {
+      return res.status(400).json({
+        success: false,
+        error: "Email and device_id are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Find user by email
+    const { data: user, error: findError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", normalizedEmail)
+      .single();
+
+    if (findError || !user) {
+      console.warn(
+        `[streaming-auth] Trust device: user not found for ${normalizedEmail}`,
+      );
+      return res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    }
+
+    // Upsert trusted device record
+    const { error: upsertError } = await supabase
+      .from("trusted_devices")
+      .upsert(
+        {
+          user_id: user.id,
+          device_id: device_id,
+          device_hash: device_hash || null,
+          user_agent: user_agent || null,
+          last_login_at: new Date().toISOString(),
+          is_active: true,
+        },
+        {
+          onConflict: "user_id,device_id",
+        },
+      );
+
+    if (upsertError) {
+      console.error(
+        "[streaming-auth] Error upserting trusted device:",
+        upsertError,
+      );
+      return res.status(500).json({
+        success: false,
+        error: "Failed to register device trust",
+      });
+    }
+
+    console.log(
+      `[streaming-auth] Device trusted for ${normalizedEmail} (device: ${device_id.substring(0, 8)}...)`,
+    );
+    return res.json({
+      success: true,
+      message: "Device registered as trusted",
+    });
+  } catch (error) {
+    console.error("[streaming-auth] Error trusting device:", error);
+    res.status(500).json({
+      success: false,
+      error: error.message || "Failed to register device trust",
+    });
+  }
+});
+
+/**
+ * POST /api/streaming-auth/revoke-device-trust
+ * Revoke trust for a device (e.g., on explicit logout request)
+ * This is optional - normal logout doesn't need to revoke device trust
+ */
+router.post("/revoke-device-trust", async (req, res) => {
+  try {
+    const { email, device_id } = req.body;
+
+    if (!email || !device_id) {
+      return res.status(400).json({
+        success: false,
+        error: "Email and device_id are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Find user by email
+    const { data: user, error: findError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", normalizedEmail)
+      .single();
+
+    if (findError || !user) {
+      return res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    }
+
+    // Deactivate the device trust (soft delete)
+    const { error: updateError } = await supabase
+      .from("trusted_devices")
+      .update({ is_active: false })
+      .eq("user_id", user.id)
+      .eq("device_id", device_id);
+
+    if (updateError) {
+      console.error(
+        "[streaming-auth] Error revoking device trust:",
+        updateError,
+      );
+      return res.status(500).json({
+        success: false,
+        error: "Failed to revoke device trust",
+      });
+    }
+
+    console.log(
+      `[streaming-auth] Device trust revoked for ${normalizedEmail} (device: ${device_id.substring(0, 8)}...)`,
+    );
+    return res.json({
+      success: true,
+      message: "Device trust revoked",
+    });
+  } catch (error) {
+    console.error("[streaming-auth] Error revoking device trust:", error);
+    res.status(500).json({
+      success: false,
+      error: error.message || "Failed to revoke device trust",
+    });
+  }
+});
+
 module.exports = router;

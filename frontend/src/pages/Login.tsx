@@ -19,6 +19,8 @@ import {
   getUpdateStatus,
   saveCookiesToSupabase,
 } from "@/services/api/auth";
+import { checkDeviceTrust, trustDevice } from "@/services/api/deviceTrust";
+import { getDeviceId, getBrowserHash } from "@/utils/deviceId";
 import { sessionStorage } from "@/storage/session";
 import { userDatabase } from "@/services/database/userDatabase";
 import { Loader2, AlertCircle } from "lucide-react";
@@ -171,37 +173,62 @@ export default function Login() {
             const hoursOld = cookieAge / (1000 * 60 * 60);
 
             if (hoursOld < 24) {
+              // SECURITY: Check if this device is trusted before auto-login
+              // A device is trusted if it successfully completed Canvas popup auth within 24 hours
               console.log(
-                "[Login] User has valid cookies, skipping streaming auth",
+                "[Login] User has valid cookies, checking device trust...",
               );
-              if (popup) popup?.close();
-              setStatus("Login successful! Redirecting...");
 
-              // Create session directly (user data fetched from Supabase on demand)
-              await sessionStorage.setSession(emailCheck.user.id, 7, email);
+              const deviceId = getDeviceId();
+              const deviceHash = await getBrowserHash();
+              const trustCheck = await checkDeviceTrust(
+                email,
+                deviceId,
+                deviceHash,
+              );
 
-              // Start background update (non-blocking - user can interact with old data)
-              console.log("[Login] Starting background Canvas data update...");
-              startBackgroundUpdate(email)
-                .then((result) => {
-                  console.log("[Login] Background update started:", result);
-                  if (result.success && !result.skipped) {
-                    monitorUpdateStatus(email);
-                  }
-                })
-                .catch((err) => {
-                  console.warn(
-                    "[Login] Background update failed to start:",
-                    err,
-                  );
-                });
+              if (trustCheck.trusted) {
+                // Device verified - safe to auto-login
+                console.log(
+                  "[Login] Device trusted, proceeding with auto-login",
+                );
+                if (popup) popup?.close();
+                setStatus("Login successful! Redirecting...");
 
-              setTimeout(() => {
-                navigate("/dashboard");
-              }, 1000);
+                // Create session directly (user data fetched from Supabase on demand)
+                await sessionStorage.setSession(emailCheck.user.id, 7, email);
 
-              setLoading(false);
-              return;
+                // Start background update (non-blocking - user can interact with old data)
+                console.log(
+                  "[Login] Starting background Canvas data update...",
+                );
+                startBackgroundUpdate(email)
+                  .then((result) => {
+                    console.log("[Login] Background update started:", result);
+                    if (result.success && !result.skipped) {
+                      monitorUpdateStatus(email);
+                    }
+                  })
+                  .catch((err) => {
+                    console.warn(
+                      "[Login] Background update failed to start:",
+                      err,
+                    );
+                  });
+
+                setTimeout(() => {
+                  navigate("/dashboard");
+                }, 1000);
+
+                setLoading(false);
+                return;
+              } else {
+                // Device not trusted - require Canvas popup authentication
+                console.log(
+                  `[Login] Device not trusted: ${trustCheck.reason || "unknown"}. Requiring Canvas popup.`,
+                );
+                // Fall through to Canvas popup authentication
+              }
             }
           } else if (forceReauth) {
             console.log(
@@ -390,6 +417,26 @@ export default function Login() {
               // Create session (user data fetched from Supabase on demand)
               await sessionStorage.setSession(user.id, 7, email);
 
+              // Register this device as trusted after successful Canvas popup login
+              console.log("[Login] Registering device as trusted...");
+              try {
+                const deviceId = getDeviceId();
+                const deviceHash = await getBrowserHash();
+                await trustDevice(
+                  email,
+                  deviceId,
+                  deviceHash,
+                  navigator.userAgent,
+                );
+                console.log("[Login] Device registered as trusted");
+              } catch (trustErr) {
+                console.warn(
+                  "[Login] Failed to register device trust:",
+                  trustErr,
+                );
+                // Non-critical - continue with login
+              }
+
               setStatus("Login successful! Redirecting...");
 
               // Stop streaming server
@@ -509,6 +556,27 @@ export default function Login() {
               if (user) {
                 // Create session (user data fetched from Supabase on demand)
                 await sessionStorage.setSession(user.id, 7, email);
+
+                // Register this device as trusted after successful Canvas popup login
+                console.log("[Login] Registering device as trusted...");
+                try {
+                  const deviceId = getDeviceId();
+                  const deviceHash = await getBrowserHash();
+                  await trustDevice(
+                    email,
+                    deviceId,
+                    deviceHash,
+                    navigator.userAgent,
+                  );
+                  console.log("[Login] Device registered as trusted");
+                } catch (trustErr) {
+                  console.warn(
+                    "[Login] Failed to register device trust:",
+                    trustErr,
+                  );
+                  // Non-critical - continue with login
+                }
+
                 setStatus("Login successful! Redirecting...");
                 await stopStreamingAuth(email);
 
