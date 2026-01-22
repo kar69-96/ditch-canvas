@@ -24,7 +24,10 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import Assistant from "./pages/Assistant";
+import Tabus from "./pages/Tabus";
 import ComingSoon from "./pages/ComingSoon";
+import Visuals from "./pages/learn/Visuals";
+import Tutor from "./pages/learn/Tutor";
 import ChatForumPage from "./pages/ChatForumPage";
 import SubscribePage from "./pages/SubscribePage";
 import Landing from "./pages/Landing";
@@ -163,10 +166,34 @@ const AppContent = () => {
             }
           />
           <Route
+            path="/assistant/tabus"
+            element={
+              <RouteGuard>
+                <Tabus />
+              </RouteGuard>
+            }
+          />
+          <Route
             path="/assistant/signup"
             element={
               <RouteGuard>
                 <ComingSoon />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/assistant/visuals"
+            element={
+              <RouteGuard>
+                <Visuals />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/assistant/tutor"
+            element={
+              <RouteGuard>
+                <Tutor />
               </RouteGuard>
             }
           />

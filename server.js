@@ -16,6 +16,7 @@ const streamingAuthRoutes = require("./src/routes/streaming-auth");
 const onboardingRoutes = require("./src/routes/onboarding");
 const updateRoutes = require("./src/routes/update");
 const usersRoutes = require("./src/routes/users");
+const learnRoutes = require("./src/routes/learn");
 
 // Optional integrations - don't crash if dependencies are missing
 let integrationsRoutes = null;
@@ -91,6 +92,7 @@ app.use("/api/streaming-auth", streamingAuthRoutes);
 app.use("/api/onboarding", onboardingRoutes);
 app.use("/api/update", updateRoutes);
 app.use("/api/users", usersRoutes);
+app.use("/api/learn", learnRoutes);
 
 // Only add integrations routes if module is available
 if (integrationsRoutes) {
