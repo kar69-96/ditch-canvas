@@ -717,6 +717,7 @@ const ClassDetail = () => {
       .map((a) => ({
         id: a.id,
         title: a.title,
+        dueAt: a.dueAt, // Keep original for sorting
         due: new Date(a.dueAt).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
@@ -730,9 +731,11 @@ const ClassDetail = () => {
         canvasUrl: a.url,
       }))
       .sort((a, b) => {
+        // Completed assignments always go to the bottom
         if (a.isCompleted && !b.isCompleted) return 1;
         if (!a.isCompleted && b.isCompleted) return -1;
-        return 0;
+        // Same completion status: sort by due date chronologically (soonest first)
+        return new Date(a.dueAt).getTime() - new Date(b.dueAt).getTime();
       });
   }, [mockCanvasData?.assignments, course, completedAssignments]);
   const upcoming = allUpcoming;
