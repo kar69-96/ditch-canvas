@@ -27,6 +27,29 @@ export const RouteGuard = ({
     async function checkAuth() {
       if (requireAuth) {
         try {
+          // LOCALHOST BYPASS - Only for development testing
+          // This ONLY works on localhost/127.0.0.1, NEVER on production
+          const isLocalhost =
+            window.location.hostname === "localhost" ||
+            window.location.hostname === "127.0.0.1";
+
+          if (isLocalhost) {
+            console.log(
+              "[RouteGuard] LOCALHOST BYPASS - Setting up test user session",
+            );
+            // Set up test user session for local development
+            const testUserId = "df3895e6-121e-4516-b8e7-dd57400c3a30";
+            const testEmail = "tata6021@colorado.edu";
+            await sessionStorage.setSession(testUserId, 7, testEmail);
+            console.log(
+              "[RouteGuard] LOCALHOST BYPASS - Test session set for:",
+              testEmail,
+            );
+            setIsAuthenticated(true);
+            setIsChecking(false);
+            return;
+          }
+
           // Step 1: Check localStorage session exists and is not expired
           const session = await sessionStorage.getSession();
           console.log("[RouteGuard] Session check:", {
