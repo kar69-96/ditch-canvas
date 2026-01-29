@@ -95,9 +95,11 @@ module.exports = async (req, res) => {
           console.log(
             `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
           );
+          // Append email to URL for session isolation
+          const urlWithEmail = `${assignment.tunnelUrl}?email=${encodeURIComponent(normalizedEmail)}`;
           return res.json({
             success: true,
-            url: assignment.tunnelUrl,
+            url: urlWithEmail,
             streamingServerUrl: assignment.tunnelUrl,
             instanceId: assignment.instanceId,
             requestId: assignment.requestId,
@@ -143,10 +145,13 @@ module.exports = async (req, res) => {
 
     console.log("[streaming-auth] Using static streaming server URL");
 
+    // Append email to URL for session isolation
+    const urlWithEmail = `${streamingUrl}?email=${encodeURIComponent(normalizedEmail)}`;
+
     // Return the tunnel URL directly (not proxied through Vercel)
     return res.json({
       success: true,
-      url: streamingUrl,
+      url: urlWithEmail,
       streamingServerUrl: streamingUrl,
       message: "Streaming server ready",
     });
