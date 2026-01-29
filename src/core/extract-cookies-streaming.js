@@ -320,6 +320,11 @@ app.get("/", (req, res) => {
     });
   }
 
+  // Prevent browser caching to ensure fresh session token on each request
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+
   // Generate viewer HTML with email embedded for Socket.IO handshake
   res.send(`
 <!DOCTYPE html>
@@ -467,7 +472,13 @@ app.get("/", (req, res) => {
     const userEmail = '${normalizedEmail}';
 
     // Connect to Socket.IO with email AND token for secure session binding
-    const socket = io({ query: { email: userEmail, token: sessionToken } });
+    const socket = io({
+      query: { email: userEmail, token: sessionToken },
+      reconnection: true,
+      reconnectionAttempts: 3,
+      reconnectionDelay: 1000,
+      timeout: 10000
+    });
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d', { alpha: false });
     const statusContainer = document.getElementById('status-container');
@@ -499,10 +510,21 @@ app.get("/", (req, res) => {
       statusText.textContent = 'Connected, starting browser...';
     });
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected from server');
-      if (!canvasReady && !errorContainer.classList.contains('hidden') === false) {
-        showError('Connection Lost', 'Lost connection to the server.', 'Please close this window and try again.');
+    socket.on('connect_error', (err) => {
+      console.error('Socket.IO connection error:', err.message);
+      clearTimeout(connectionTimeout);
+      isConnected = false;
+      showError('Connection Failed', err.message || 'Could not connect to server.', 'Please close this window and try again.');
+    });
+
+    socket.on('disconnect', (reason) => {
+      console.log('Disconnected from server:', reason);
+      isConnected = false;
+      // Only show error if we haven't completed login and haven't already shown an error
+      if (!canvasReady && !loginDetected) {
+        if (reason === 'io server disconnect' || reason === 'transport close') {
+          showError('Session Error', 'Your session was disconnected.', 'Please close this window and try again.');
+        }
       }
     });
 
@@ -577,8 +599,11 @@ app.get("/", (req, res) => {
       window.close();
     });
 
-    socket.on('error', (message) => {
-      showError('Error', message, 'Please close this window and try again.');
+    socket.on('error', (data) => {
+      // Handle both string and structured error objects
+      const message = typeof data === 'string' ? data : (data.message || 'An error occurred');
+      const suggestion = typeof data === 'object' && data.suggestion ? data.suggestion : 'Please close this window and try again.';
+      showError('Error', message, suggestion);
     });
 
     function updateStep(stepName, state) {
@@ -927,7 +952,13 @@ io.on("connection", (socket) => {
     console.warn(
       `[streaming] Socket ${socket.id} token mismatch: expected ${tokenEmail}, got ${normalizedEmail}`,
     );
-    socket.emit("error", "Invalid session token");
+    socket.emit("error", {
+      type: "token_invalid",
+      message:
+        "Session expired or invalid. Please refresh or restart authentication.",
+      suggestion:
+        "Close this window and click 'Continue' again to start a new session.",
+    });
     socket.disconnect(true);
     return;
   }
