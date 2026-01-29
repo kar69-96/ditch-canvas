@@ -31,17 +31,27 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "127.0.0.1";
 
+// Default CORS origins for development
+const devCorsOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:8080",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
+  "http://127.0.0.1:8080",
+];
+
+// Production should always use CLIENT_ORIGIN env var
+const corsOrigins = process.env.CLIENT_ORIGIN
+  ? process.env.CLIENT_ORIGIN.split(",").map((value) => value.trim())
+  : isDev
+    ? devCorsOrigins
+    : ["https://ditchcanvas.com"]; // Fallback for production
+
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN
-      ? process.env.CLIENT_ORIGIN.split(",").map((value) => value.trim())
-      : [
-          "http://localhost:3000",
-          "http://localhost:5173",
-          "http://localhost:5174",
-          "http://127.0.0.1:5173",
-          "http://127.0.0.1:5174",
-        ],
+    origin: corsOrigins,
     credentials: true,
   }),
 );

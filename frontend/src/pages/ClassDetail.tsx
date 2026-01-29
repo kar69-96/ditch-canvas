@@ -1139,19 +1139,24 @@ const ClassDetail = () => {
                                   </p>
                                 </div>
                               </div>
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="sm"
-                                className="module-download-btn h-8 w-8 p-0 hover:opacity-70 transition-opacity flex-shrink-0 mr-2"
+                              <div
+                                role="button"
+                                tabIndex={0}
+                                className="module-download-btn h-8 w-8 p-0 hover:opacity-70 transition-opacity flex-shrink-0 mr-2 inline-flex items-center justify-center rounded-md"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   downloadModuleAsZip(module);
                                 }}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter" || e.key === " ") {
+                                    e.stopPropagation();
+                                    downloadModuleAsZip(module);
+                                  }
+                                }}
                                 title={`Download ${module.title}`}
                               >
                                 <Download className="w-4 h-4" />
-                              </Button>
+                              </div>
                             </AccordionTrigger>
                             <AccordionContent className="px-4 pb-4">
                               <ul

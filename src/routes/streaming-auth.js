@@ -34,7 +34,15 @@ const streamingProxy = httpProxy.createProxyServer({
   target: getStreamingTarget(),
   ws: true, // Enable WebSocket proxying
   changeOrigin: true,
-  ignorePath: true, // Ignore the incoming path and use target path
+});
+
+// Handle proxy request to preserve query string
+streamingProxy.on("proxyReq", (proxyReq, req) => {
+  // The req.url has already been rewritten in the viewer handler
+  // Just ensure it's set correctly on the proxy request
+  if (req.url) {
+    proxyReq.path = req.url;
+  }
 });
 
 // Store active streaming processes
@@ -154,9 +162,11 @@ router.post("/start", async (req, res) => {
         console.log(
           `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
         );
+        // Append email to URL for session isolation
+        const urlWithEmail = `${assignment.tunnelUrl}?email=${encodeURIComponent(normalizedEmail)}`;
         return res.json({
           success: true,
-          url: assignment.tunnelUrl,
+          url: urlWithEmail,
           streamingServerUrl: assignment.tunnelUrl,
           instanceId: assignment.instanceId,
           requestId: assignment.requestId,
@@ -192,9 +202,11 @@ router.post("/start", async (req, res) => {
       console.log(
         "[streaming-auth] Production mode: using static streaming server (fallback)",
       );
+      // Append email to URL for session isolation
+      const urlWithEmail = `${process.env.STREAMING_SERVER_URL}?email=${encodeURIComponent(normalizedEmail)}`;
       return res.json({
         success: true,
-        url: process.env.STREAMING_SERVER_URL,
+        url: urlWithEmail,
         streamingServerUrl: process.env.STREAMING_SERVER_URL,
         message: "Using external streaming server",
       });
@@ -207,9 +219,10 @@ router.post("/start", async (req, res) => {
         process.env.BACKEND_URL ||
         `http://localhost:${process.env.PORT || 3000}`;
 
+      // Append email to URL for session isolation
       return res.json({
         success: true,
-        url: `${baseUrl}/api/streaming-auth/viewer`,
+        url: `${baseUrl}/api/streaming-auth/viewer?email=${encodeURIComponent(normalizedEmail)}`,
         streamingServerUrl: baseUrl,
         message: "Streaming server already running",
       });
@@ -369,10 +382,13 @@ router.post("/start", async (req, res) => {
     const isProd =
       process.env.VERCEL_ENV === "production" ||
       process.env.NODE_ENV === "production";
-    const streamingUrl =
+    const streamingBaseUrl =
       isProd && process.env.STREAMING_SERVER_URL
         ? process.env.STREAMING_SERVER_URL
         : `${baseUrl}/api/streaming-auth/viewer`;
+
+    // Append email to URL for session isolation
+    const streamingUrl = `${streamingBaseUrl}?email=${encodeURIComponent(normalizedEmail)}`;
 
     res.json({
       success: true,
@@ -397,8 +413,9 @@ router.post("/start", async (req, res) => {
  * Proxies HTTP requests to the internal streaming server
  */
 router.get("/viewer", (req, res) => {
-  // Rewrite the path to root for the streaming server
-  req.url = "/";
+  // Rewrite the path to root for the streaming server, preserving query params (including email)
+  const queryString = req.url.includes("?") ? req.url.split("?")[1] : "";
+  req.url = queryString ? `/?${queryString}` : "/";
   streamingProxy.web(req, res, (error) => {
     console.error("[streaming-auth] Proxy error:", error);
     if (!res.headersSent) {
@@ -482,12 +499,50 @@ router.post("/stop", async (req, res) => {
     const process = activeStreamingProcesses.get(normalizedEmail);
 
     if (process && !process.killed) {
-      process.kill();
-      activeStreamingProcesses.delete(normalizedEmail);
-      extractionContext.delete(normalizedEmail); // Clean up context
+      // Give extraction time to complete before killing (up to 10 seconds)
+      const maxWaitMs = 10000;
+      const checkInterval = 500;
+      let waited = 0;
+
+      const waitForExtraction = async () => {
+        while (waited < maxWaitMs) {
+          // Check if extraction results are available
+          if (extractionResults.has(normalizedEmail)) {
+            console.log(
+              `[streaming-auth] Extraction complete for ${normalizedEmail}, stopping server`,
+            );
+            break;
+          }
+          // Also check if cookie file exists
+          const cookieFile = getCookieFilename(normalizedEmail);
+          if (fs.existsSync(cookieFile)) {
+            console.log(
+              `[streaming-auth] Cookie file found for ${normalizedEmail}, stopping server`,
+            );
+            checkAndStoreExtractionResults(normalizedEmail);
+            break;
+          }
+          await new Promise((resolve) => setTimeout(resolve, checkInterval));
+          waited += checkInterval;
+        }
+
+        if (waited >= maxWaitMs) {
+          console.log(
+            `[streaming-auth] Timeout waiting for extraction, force stopping for ${normalizedEmail}`,
+          );
+        }
+
+        process.kill();
+        activeStreamingProcesses.delete(normalizedEmail);
+        extractionContext.delete(normalizedEmail);
+      };
+
+      // Start waiting in background and respond immediately
+      waitForExtraction();
+
       res.json({
         success: true,
-        message: "Streaming server stopped",
+        message: "Streaming server stopping",
       });
     } else {
       extractionContext.delete(normalizedEmail); // Clean up context even if process not found
