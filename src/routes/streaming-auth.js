@@ -162,8 +162,8 @@ router.post("/start", async (req, res) => {
         console.log(
           `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
         );
-        // Append email to URL for session isolation
-        const urlWithEmail = `${assignment.tunnelUrl}?email=${encodeURIComponent(normalizedEmail)}`;
+        // Append email to URL for session isolation, and forceReauth if requested
+        const urlWithEmail = `${assignment.tunnelUrl}?email=${encodeURIComponent(normalizedEmail)}${forceReauth ? "&forceReauth=1" : ""}`;
         return res.json({
           success: true,
           url: urlWithEmail,
@@ -202,8 +202,8 @@ router.post("/start", async (req, res) => {
       console.log(
         "[streaming-auth] Production mode: using static streaming server (fallback)",
       );
-      // Append email to URL for session isolation
-      const urlWithEmail = `${process.env.STREAMING_SERVER_URL}?email=${encodeURIComponent(normalizedEmail)}`;
+      // Append email to URL for session isolation, and forceReauth if requested
+      const urlWithEmail = `${process.env.STREAMING_SERVER_URL}?email=${encodeURIComponent(normalizedEmail)}${forceReauth ? "&forceReauth=1" : ""}`;
       return res.json({
         success: true,
         url: urlWithEmail,

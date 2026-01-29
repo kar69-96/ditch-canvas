@@ -283,10 +283,26 @@ app.get("/", (req, res) => {
 
   const normalizedEmail = email.toLowerCase().trim();
   const isMobile = req.query.mobile === "1";
+  const forceReauth = req.query.forceReauth === "1";
 
   console.log(
-    `[streaming] [${normalizedEmail}] Viewer page requested (mobile: ${isMobile})`,
+    `[streaming] [${normalizedEmail}] Viewer page requested (mobile: ${isMobile}, forceReauth: ${forceReauth})`,
   );
+
+  // If forceReauth requested and session exists, restart browser for fresh state
+  const existingSession = userSessions.get(normalizedEmail);
+  if (existingSession && forceReauth) {
+    console.log(
+      `[streaming] [${normalizedEmail}] Force re-auth requested, restarting browser...`,
+    );
+    // Don't await - let it restart in the background while we serve the page
+    restartUserBrowser(normalizedEmail).catch((err) => {
+      console.error(
+        `[streaming] [${normalizedEmail}] Error during forceReauth restart:`,
+        err.message,
+      );
+    });
+  }
 
   // Get or create session for this user
   const session = getOrCreateSession(normalizedEmail, isMobile);
@@ -827,6 +843,15 @@ app.get("/extraction-result/:email", (req, res) => {
 async function restartUserBrowser(email) {
   const session = userSessions.get(email);
   if (!session) return;
+
+  // Prevent rapid consecutive restarts (10 second cooldown)
+  if (session.lastRestartTime && Date.now() - session.lastRestartTime < 10000) {
+    console.log(
+      `[streaming] [${email}] Browser restart cooldown active, skipping`,
+    );
+    return;
+  }
+  session.lastRestartTime = Date.now();
 
   console.log(`[streaming] [${email}] Restarting browser for fresh session...`);
 
@@ -1454,6 +1479,47 @@ async function monitorUserLoginCompletion(email) {
 }
 
 /**
+ * Monitor for "Stale Request" error and auto-recover by restarting browser
+ * This fixes Canvas federated authentication errors caused by expired sessions
+ * @param {string} email - User email
+ */
+async function monitorForStaleRequestError(email) {
+  const session = userSessions.get(email);
+  if (!session?.page) return;
+
+  const checkForStaleRequest = async () => {
+    const s = userSessions.get(email);
+    if (!s?.page || s.extractionComplete) return;
+
+    try {
+      const pageContent = await s.page.textContent("body").catch(() => "");
+      if (pageContent.toLowerCase().includes("stale request")) {
+        console.log(
+          `[streaming] [${email}] Detected "Stale Request" error, restarting browser...`,
+        );
+        emitUserStatus(
+          email,
+          STATUS_STAGES.BROWSER_LAUNCHING,
+          "Session expired, restarting...",
+        );
+        await restartUserBrowser(email);
+        return;
+      }
+    } catch (err) {
+      // Ignore errors - page might be navigating
+    }
+
+    // Continue checking if extraction not complete
+    if (!s?.extractionComplete) {
+      setTimeout(checkForStaleRequest, 2000);
+    }
+  };
+
+  // Start checking after initial page load (3 seconds)
+  setTimeout(checkForStaleRequest, 3000);
+}
+
+/**
  * Start streaming session for a specific user
  * @param {string} email - User email
  */
@@ -1645,6 +1711,9 @@ async function startUserSession(email) {
 
     // Start monitoring for login completion for THIS USER
     monitorUserLoginCompletion(email);
+
+    // Start monitoring for "Stale Request" errors (fedauth session expiry)
+    monitorForStaleRequestError(email);
   } catch (err) {
     session.browserStarting = false; // Clear flag on error
     console.error(`[streaming] [${email}] Error starting browser:`, err);
