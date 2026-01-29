@@ -66,14 +66,56 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
-// Store browser context
-let browserContext = null;
-let page = null;
-let extractionComplete = false;
-let browserStarting = false; // Flag to prevent restart during startup
-let exitTimeout = null; // Timeout for delayed exit after extraction
-let isMobileClient = false; // Flag for mobile viewport
-let browserStarted = false; // Flag to track if browser has been started
+// ============================================================================
+// PER-USER SESSION MANAGEMENT
+// ============================================================================
+
+/**
+ * Per-user session state - replaces global variables
+ * Each user gets their own isolated browser session
+ */
+const userSessions = new Map(); // email -> SessionState
+const socketToEmail = new Map(); // socketId -> email
+
+/**
+ * Create a new session state object for a user
+ * @param {string} email - User email
+ * @param {boolean} isMobile - Whether client is mobile
+ * @returns {Object} Session state object
+ */
+function createSession(email, isMobile = false) {
+  return {
+    email,
+    socketIds: new Set(), // All socket IDs for this user
+    browserContext: null,
+    page: null,
+    cdpSession: null,
+    extractionComplete: false,
+    browserStarting: false,
+    browserStarted: false,
+    isMobileClient: isMobile,
+    currentStage: STATUS_STAGES.CONNECTING,
+    exitTimeout: null,
+    createdAt: Date.now(),
+    lastActivity: Date.now(),
+  };
+}
+
+/**
+ * Get or create a session for a user
+ * @param {string} email - User email
+ * @param {boolean} isMobile - Whether client is mobile
+ * @returns {Object} Session state object
+ */
+function getOrCreateSession(email, isMobile = false) {
+  if (!userSessions.has(email)) {
+    userSessions.set(email, createSession(email, isMobile));
+    console.log(`[streaming] Created new session for ${email}`);
+  }
+  const session = userSessions.get(email);
+  session.lastActivity = Date.now();
+  return session;
+}
 
 // Status stages for frontend feedback
 const STATUS_STAGES = {
@@ -89,12 +131,35 @@ const STATUS_STAGES = {
   ERROR: "error",
 };
 
-let currentStage = STATUS_STAGES.CONNECTING;
+/**
+ * Emit event to a specific user's room only
+ * @param {string} email - User email
+ * @param {string} event - Event name
+ * @param {*} data - Event data
+ */
+function emitToUser(email, event, data) {
+  io.to(`user:${email}`).emit(event, data);
+}
 
-function emitStatus(stage, message, details = {}) {
-  currentStage = stage;
-  io.emit("status", { stage, message, timestamp: Date.now(), ...details });
-  console.log(`[streaming] Status: ${stage} - ${message}`);
+/**
+ * Emit status to a specific user
+ * @param {string} email - User email
+ * @param {string} stage - Status stage
+ * @param {string} message - Status message
+ * @param {Object} details - Additional details
+ */
+function emitUserStatus(email, stage, message, details = {}) {
+  const session = userSessions.get(email);
+  if (session) {
+    session.currentStage = stage;
+  }
+  emitToUser(email, "status", {
+    stage,
+    message,
+    timestamp: Date.now(),
+    ...details,
+  });
+  console.log(`[streaming] [${email}] Status: ${stage} - ${message}`);
 }
 
 // Timeout constants
@@ -106,23 +171,49 @@ const TIMEOUTS = {
 
 /**
  * Serve the streaming viewer HTML page (minimal UI, fullscreen)
+ * Requires email query parameter for session isolation
  */
 app.get("/", (req, res) => {
-  // Check if mobile client
-  if (req.query.mobile === "1") {
-    isMobileClient = true;
-    console.log("[streaming] Mobile client detected, will use mobile viewport");
+  const email = req.query.email;
+
+  // Email is required for session isolation
+  if (!email) {
+    console.log("[streaming] Request missing email parameter");
+    return res.status(400).send(`
+<!DOCTYPE html>
+<html><head><title>Error</title></head>
+<body style="font-family: sans-serif; padding: 40px; text-align: center;">
+  <h1>Session Error</h1>
+  <p>Email parameter is required. Please return to the application and try again.</p>
+</body></html>
+    `);
   }
 
-  // Start browser on first page request (after mobile flag is set)
-  if (!browserStarted && !browserStarting) {
-    browserStarted = true;
-    console.log("[streaming] Starting browser on first client request...");
-    startStreaming().catch((err) => {
-      console.error("[streaming] Failed to start streaming:", err);
+  const normalizedEmail = email.toLowerCase().trim();
+  const isMobile = req.query.mobile === "1";
+
+  console.log(
+    `[streaming] [${normalizedEmail}] Viewer page requested (mobile: ${isMobile})`,
+  );
+
+  // Get or create session for this user
+  const session = getOrCreateSession(normalizedEmail, isMobile);
+
+  // Start browser on first page request for this user (if not already started)
+  if (!session.browserStarted && !session.browserStarting) {
+    session.browserStarted = true;
+    console.log(
+      `[streaming] [${normalizedEmail}] Starting browser on first client request...`,
+    );
+    startUserSession(normalizedEmail).catch((err) => {
+      console.error(
+        `[streaming] [${normalizedEmail}] Failed to start streaming:`,
+        err,
+      );
     });
   }
 
+  // Generate viewer HTML with email embedded for Socket.IO handshake
   res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -264,7 +355,12 @@ app.get("/", (req, res) => {
   <canvas id="canvas" class="hidden"></canvas>
 
   <script>
-    const socket = io();
+    // Get email from URL for session isolation
+    const urlParams = new URLSearchParams(window.location.search);
+    const userEmail = urlParams.get('email');
+
+    // Connect to Socket.IO with email in handshake query
+    const socket = io({ query: { email: userEmail } });
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d', { alpha: false });
     const statusContainer = document.getElementById('status-container');
@@ -477,36 +573,42 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     port: PORT,
-    extractionComplete,
-    email: EXTRACTION_EMAIL,
+    activeSessions: userSessions.size,
+    sessions: Array.from(userSessions.keys()).map((email) => ({
+      email,
+      extractionComplete: userSessions.get(email)?.extractionComplete || false,
+      socketCount: userSessions.get(email)?.socketIds.size || 0,
+    })),
   });
 });
 
 /**
- * Extraction result endpoint
+ * Extraction result endpoint - per-user session aware
  */
 app.get("/extraction-result/:email", (req, res) => {
   const { email } = req.params;
+  const normalizedEmail = email.toLowerCase().trim();
+  const session = userSessions.get(normalizedEmail);
 
-  // Check if extraction is complete
-  if (extractionComplete) {
+  console.log(`[streaming] [${normalizedEmail}] Extraction result requested`);
+
+  // Check if extraction is complete for this user
+  if (session?.extractionComplete) {
     // Check if cookie file exists
-    const outputFile = COOKIE_OUTPUT_FILE;
+    const outputFile =
+      COOKIE_OUTPUT_FILE ||
+      path.join(outputDir, `canvas-cookies-${normalizedEmail}.json`);
 
     if (fs.existsSync(outputFile)) {
       try {
         const cookieData = JSON.parse(fs.readFileSync(outputFile, "utf8"));
 
-        console.log("[streaming] Extraction result fetched by frontend");
+        console.log(
+          `[streaming] [${normalizedEmail}] Extraction result fetched by frontend`,
+        );
 
-        // Result was fetched - exit sooner (2 seconds to allow response to complete)
-        if (exitTimeout) {
-          clearTimeout(exitTimeout);
-          exitTimeout = setTimeout(() => {
-            console.log("[streaming] Exiting after result fetch");
-            process.exit(0);
-          }, 2000);
-        }
+        // Result was fetched - schedule faster cleanup (2 seconds)
+        scheduleSessionCleanup(normalizedEmail, 2000);
 
         return res.json({
           success: true,
@@ -517,13 +619,21 @@ app.get("/extraction-result/:email", (req, res) => {
             cookieData.metadata?.extractedAt || new Date().toISOString(),
         });
       } catch (err) {
-        console.error("[streaming] Error reading cookie file:", err);
+        console.error(
+          `[streaming] [${normalizedEmail}] Error reading cookie file:`,
+          err,
+        );
       }
     }
   }
 
-  // If browser is starting, active, or has started, return pending status
-  if (browserStarting || browserStarted || (page && !extractionComplete)) {
+  // If browser is starting, active, or has started for this user, return pending status
+  if (
+    session &&
+    (session.browserStarting ||
+      session.browserStarted ||
+      (session.page && !session.extractionComplete))
+  ) {
     return res.json({
       success: false,
       pending: true,
@@ -532,7 +642,7 @@ app.get("/extraction-result/:email", (req, res) => {
     });
   }
 
-  // No active session
+  // No active session for this user
   return res.json({
     success: false,
     error: "No authentication session found",
@@ -541,188 +651,352 @@ app.get("/extraction-result/:email", (req, res) => {
 });
 
 /**
- * Restart browser to ensure fresh session (fixes "Stale Request" errors)
+ * Restart browser for a specific user's session (fixes "Stale Request" errors)
+ * @param {string} email - User email
  */
-async function restartBrowser() {
-  console.log("[streaming] Restarting browser for fresh session...");
+async function restartUserBrowser(email) {
+  const session = userSessions.get(email);
+  if (!session) return;
+
+  console.log(`[streaming] [${email}] Restarting browser for fresh session...`);
 
   // Close existing browser if any
-  if (browserContext) {
+  if (session.browserContext) {
     try {
-      await browserContext.close();
-      console.log("[streaming] Previous browser closed");
+      await session.browserContext.close();
+      console.log(`[streaming] [${email}] Previous browser closed`);
     } catch (err) {
-      console.error("[streaming] Error closing browser:", err.message);
+      console.error(
+        `[streaming] [${email}] Error closing browser:`,
+        err.message,
+      );
     }
   }
 
-  browserContext = null;
-  page = null;
-  extractionComplete = false;
+  session.browserContext = null;
+  session.page = null;
+  session.cdpSession = null;
+  session.extractionComplete = false;
+  session.browserStarting = false;
+  session.browserStarted = true;
 
-  // Restart streaming
-  await startStreaming();
+  // Restart streaming for this user
+  await startUserSession(email);
 }
 
 /**
- * Socket.IO connection handler
+ * Schedule session cleanup after user disconnects or extraction completes
+ * @param {string} email - User email
+ * @param {number} delayMs - Delay before cleanup (default: 5 seconds)
  */
-io.on("connection", (socket) => {
-  console.log("[streaming] Client connected:", socket.id);
+function scheduleSessionCleanup(email, delayMs = 5000) {
+  const session = userSessions.get(email);
+  if (!session) return;
 
-  // Only restart browser if it's not currently starting up
-  // This prevents killing the browser during initial navigation
-  if (page && !extractionComplete && !browserStarting) {
-    console.log(
-      "[streaming] Browser already in use and ready, restarting for fresh session...",
-    );
-    restartBrowser().catch((err) => {
-      console.error("[streaming] Failed to restart browser:", err);
-      socket.emit("error", "Failed to initialize browser");
-    });
-  } else if (browserStarting) {
-    console.log("[streaming] Browser is starting up, skipping restart");
-  } else if (!page && !browserStarting && !browserStarted) {
-    // No browser running at all - start one (handles direct Socket.IO connections from Vercel viewer)
-    console.log(
-      "[streaming] No browser running, starting fresh browser for new connection...",
-    );
-    browserStarted = true;
-    startStreaming().catch((err) => {
-      console.error("[streaming] Failed to start streaming:", err);
-      socket.emit("error", "Failed to initialize browser");
-    });
+  // Clear any existing timeout
+  if (session.exitTimeout) {
+    clearTimeout(session.exitTimeout);
   }
 
+  session.exitTimeout = setTimeout(() => {
+    cleanupUserSession(email);
+  }, delayMs);
+
+  console.log(
+    `[streaming] [${email}] Scheduled session cleanup in ${delayMs}ms`,
+  );
+}
+
+/**
+ * Clean up a user's session and release resources
+ * @param {string} email - User email
+ */
+async function cleanupUserSession(email) {
+  const session = userSessions.get(email);
+  if (!session) return;
+
+  console.log(`[streaming] [${email}] Cleaning up session...`);
+
+  // Close browser context
+  if (session.browserContext) {
+    try {
+      await session.browserContext.close();
+      console.log(`[streaming] [${email}] Browser closed`);
+    } catch (err) {
+      console.error(
+        `[streaming] [${email}] Error closing browser:`,
+        err.message,
+      );
+    }
+  }
+
+  // Clean up socket mappings
+  for (const socketId of session.socketIds) {
+    socketToEmail.delete(socketId);
+  }
+
+  // Remove session
+  userSessions.delete(email);
+  console.log(
+    `[streaming] [${email}] Session cleaned up. Active sessions: ${userSessions.size}`,
+  );
+}
+
+/**
+ * Socket.IO connection handler - per-user session isolation
+ */
+io.on("connection", (socket) => {
+  const email = socket.handshake.query.email;
+
+  // Email is required for session isolation
+  if (!email) {
+    console.log(
+      `[streaming] Socket ${socket.id} connected without email - disconnecting`,
+    );
+    socket.emit("error", "Email parameter required for session");
+    socket.disconnect(true);
+    return;
+  }
+
+  const normalizedEmail = email.toLowerCase().trim();
+  console.log(
+    `[streaming] [${normalizedEmail}] Client connected: ${socket.id}`,
+  );
+
+  // Join user-specific room for isolated event emission
+  socket.join(`user:${normalizedEmail}`);
+  socketToEmail.set(socket.id, normalizedEmail);
+
+  // Get or create session for this user
+  let session = userSessions.get(normalizedEmail);
+  if (!session) {
+    session = getOrCreateSession(normalizedEmail);
+  }
+  session.socketIds.add(socket.id);
+  session.lastActivity = Date.now();
+
+  // Cancel any pending cleanup since user reconnected
+  if (session.exitTimeout) {
+    clearTimeout(session.exitTimeout);
+    session.exitTimeout = null;
+    console.log(
+      `[streaming] [${normalizedEmail}] Cancelled pending cleanup - user reconnected`,
+    );
+  }
+
+  // Start browser for THIS user if not started and not in progress
+  if (!session.browserStarted && !session.browserStarting) {
+    session.browserStarted = true;
+    console.log(
+      `[streaming] [${normalizedEmail}] Starting browser for new socket connection...`,
+    );
+    startUserSession(normalizedEmail).catch((err) => {
+      console.error(
+        `[streaming] [${normalizedEmail}] Failed to start streaming:`,
+        err,
+      );
+      emitToUser(normalizedEmail, "error", "Failed to initialize browser");
+    });
+  } else if (session.browserStarting) {
+    console.log(
+      `[streaming] [${normalizedEmail}] Browser is starting up, socket will receive frames when ready`,
+    );
+  }
+
+  // Input handlers scoped to user's session
   socket.on("mouse-move", async (data) => {
-    if (page) {
-      await page.mouse.move(data.x, data.y).catch((err) => {
-        console.error("[streaming] Mouse move error:", err.message);
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page) {
+      s.lastActivity = Date.now();
+      await s.page.mouse.move(data.x, data.y).catch((err) => {
+        console.error(
+          `[streaming] [${normalizedEmail}] Mouse move error:`,
+          err.message,
+        );
       });
     }
   });
 
   socket.on("mouse-down", async (data) => {
-    if (page) {
-      await page.mouse
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page) {
+      s.lastActivity = Date.now();
+      await s.page.mouse
         .down({
           button: data.button === "right" ? "right" : "left",
         })
         .catch((err) => {
-          console.error("[streaming] Mouse down error:", err.message);
+          console.error(
+            `[streaming] [${normalizedEmail}] Mouse down error:`,
+            err.message,
+          );
         });
     }
   });
 
   socket.on("mouse-up", async (data) => {
-    if (page) {
-      await page.mouse
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page) {
+      s.lastActivity = Date.now();
+      await s.page.mouse
         .up({
           button: data.button === "right" ? "right" : "left",
         })
         .catch((err) => {
-          console.error("[streaming] Mouse up error:", err.message);
+          console.error(
+            `[streaming] [${normalizedEmail}] Mouse up error:`,
+            err.message,
+          );
         });
     }
   });
 
   socket.on("mouse-click", async (data) => {
-    if (page) {
-      await page.mouse
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page) {
+      s.lastActivity = Date.now();
+      await s.page.mouse
         .click(data.x, data.y, {
           button: data.button === "right" ? "right" : "left",
         })
         .catch((err) => {
-          console.error("[streaming] Mouse click error:", err.message);
+          console.error(
+            `[streaming] [${normalizedEmail}] Mouse click error:`,
+            err.message,
+          );
         });
     }
   });
 
   socket.on("key-down", async (data) => {
-    if (page) {
-      await page.keyboard.down(data.key).catch((err) => {
-        console.error("[streaming] Key down error:", err.message);
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page) {
+      s.lastActivity = Date.now();
+      await s.page.keyboard.down(data.key).catch((err) => {
+        console.error(
+          `[streaming] [${normalizedEmail}] Key down error:`,
+          err.message,
+        );
       });
     }
   });
 
   socket.on("key-up", async (data) => {
-    if (page) {
-      await page.keyboard.up(data.key).catch((err) => {
-        console.error("[streaming] Key up error:", err.message);
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page) {
+      s.lastActivity = Date.now();
+      await s.page.keyboard.up(data.key).catch((err) => {
+        console.error(
+          `[streaming] [${normalizedEmail}] Key up error:`,
+          err.message,
+        );
       });
     }
   });
 
   socket.on("type-text", async (data) => {
-    if (page && data.text) {
-      await page.keyboard.type(data.text).catch((err) => {
-        console.error("[streaming] Type text error:", err.message);
+    const s = userSessions.get(normalizedEmail);
+    if (s?.page && data.text) {
+      s.lastActivity = Date.now();
+      await s.page.keyboard.type(data.text).catch((err) => {
+        console.error(
+          `[streaming] [${normalizedEmail}] Type text error:`,
+          err.message,
+        );
       });
     }
   });
 
   socket.on("disconnect", () => {
-    console.log("[streaming] Client disconnected:", socket.id);
+    console.log(
+      `[streaming] [${normalizedEmail}] Client disconnected: ${socket.id}`,
+    );
+
+    // Remove socket from session
+    const s = userSessions.get(normalizedEmail);
+    if (s) {
+      s.socketIds.delete(socket.id);
+
+      // If no more sockets for this user, schedule cleanup
+      if (s.socketIds.size === 0) {
+        console.log(
+          `[streaming] [${normalizedEmail}] No more active sockets, scheduling cleanup`,
+        );
+        // Give more time if extraction is in progress
+        const cleanupDelay = s.extractionComplete ? 5000 : 30000;
+        scheduleSessionCleanup(normalizedEmail, cleanupDelay);
+      }
+    }
+
+    socketToEmail.delete(socket.id);
   });
 });
 
 /**
- * Extract cookies from browser context
+ * Extract cookies from a user's browser context
+ * @param {string} email - User email
+ * @returns {Object} Cookie data with username and cookies
  */
-async function extractCookies() {
-  if (!browserContext) {
-    throw new Error("Browser context not initialized");
+async function extractUserCookies(email) {
+  const session = userSessions.get(email);
+  if (!session?.browserContext) {
+    throw new Error("Browser context not initialized for user: " + email);
   }
 
-  const cookies = await browserContext.cookies();
+  const cookies = await session.browserContext.cookies();
 
   // Get username from page if possible
   let username = null;
   try {
-    if (page) {
+    if (session.page) {
       // Wait briefly for the page to fully render (reduced from 2000ms)
-      await page.waitForTimeout(500);
+      await session.page.waitForTimeout(500);
 
       console.log(
-        "[streaming] Attempting to extract username from Canvas page...",
+        `[streaming] [${email}] Attempting to extract username from Canvas page...`,
       );
 
       // Method 1: Try to extract from user settings/profile page
       try {
         // Navigate to profile/settings to get the actual username
-        const currentUrl = page.url();
-        console.log("[streaming] Current URL before navigation:", currentUrl);
+        const currentUrl = session.page.url();
+        console.log(
+          `[streaming] [${email}] Current URL before navigation:`,
+          currentUrl,
+        );
 
         // Try to get user ID from any Canvas page and construct settings URL
-        const userId = await page.evaluate(() => {
+        const userId = await session.page.evaluate(() => {
           // Check for ENV.current_user_id in Canvas
           return window.ENV?.current_user_id || null;
         });
 
         if (userId) {
-          console.log("[streaming] Found user ID:", userId);
-          await page.goto(`https://canvas.colorado.edu/profile/settings`, {
-            waitUntil: "networkidle",
-            timeout: 10000,
-          });
-          await page.waitForTimeout(1000);
+          console.log(`[streaming] [${email}] Found user ID:`, userId);
+          await session.page.goto(
+            `https://canvas.colorado.edu/profile/settings`,
+            {
+              waitUntil: "networkidle",
+              timeout: 10000,
+            },
+          );
+          await session.page.waitForTimeout(1000);
 
           // Try to find login/username field
-          const loginInput = await page.$(
+          const loginInput = await session.page.$(
             'input[name="user[short_name]"], input[name="user[name]"], #user_short_name',
           );
           if (loginInput) {
             username = await loginInput.evaluate((el) => el.value);
             console.log(
-              "[streaming] Extracted username from profile settings:",
+              `[streaming] [${email}] Extracted username from profile settings:`,
               username,
             );
           }
         }
       } catch (navErr) {
         console.log(
-          "[streaming] Could not navigate to settings:",
+          `[streaming] [${email}] Could not navigate to settings:`,
           navErr.message,
         );
       }
@@ -730,55 +1004,62 @@ async function extractCookies() {
       // Method 2: Try to extract from page content/title
       if (!username) {
         try {
-          const pageTitle = await page.title();
-          console.log("[streaming] Page title:", pageTitle);
+          const pageTitle = await session.page.title();
+          console.log(`[streaming] [${email}] Page title:`, pageTitle);
 
           // Sometimes Canvas includes username in title
           const titleMatch = pageTitle.match(/([a-z]{4}\d{4})/i);
           if (titleMatch) {
             username = titleMatch[1];
             console.log(
-              "[streaming] Extracted username from page title:",
+              `[streaming] [${email}] Extracted username from page title:`,
               username,
             );
           }
         } catch (titleErr) {
-          console.log("[streaming] Could not extract from title");
+          console.log(`[streaming] [${email}] Could not extract from title`);
         }
       }
 
       // Method 3: Extract from URL if user navigated to their profile
       if (!username) {
         try {
-          const url = page.url();
+          const url = session.page.url();
           const urlMatch = url.match(/\/users\/\d+/);
           if (urlMatch) {
             // Try to get username from profile page
-            await page.waitForSelector("body", { timeout: 2000 });
-            const profileText = await page.textContent("body");
+            await session.page.waitForSelector("body", { timeout: 2000 });
+            const profileText = await session.page.textContent("body");
             const usernameMatch = profileText.match(/([a-z]{4}\d{4})/i);
             if (usernameMatch) {
               username = usernameMatch[1];
               console.log(
-                "[streaming] Extracted username from profile:",
+                `[streaming] [${email}] Extracted username from profile:`,
                 username,
               );
             }
           }
         } catch (urlErr) {
-          console.log("[streaming] Could not extract from URL");
+          console.log(`[streaming] [${email}] Could not extract from URL`);
         }
       }
 
       if (!username) {
         console.log(
-          "[streaming] Could not extract username - will need manual verification",
+          `[streaming] [${email}] Could not extract username - will need manual verification`,
         );
       }
     }
   } catch (err) {
-    console.warn("[streaming] Error extracting username:", err.message);
+    console.warn(
+      `[streaming] [${email}] Error extracting username:`,
+      err.message,
+    );
   }
+
+  // Determine output file for this user
+  const outputFile =
+    COOKIE_OUTPUT_FILE || path.join(outputDir, `canvas-cookies-${email}.json`);
 
   // Save cookies to file
   const cookieData = {
@@ -787,129 +1068,167 @@ async function extractCookies() {
     metadata: {
       extractedAt: new Date().toISOString(),
       url: CANVAS_URL,
-      email: EXTRACTION_EMAIL,
+      email: email,
     },
   };
 
-  fs.writeFileSync(COOKIE_OUTPUT_FILE, JSON.stringify(cookieData, null, 2));
-  console.log("[streaming] ✅ Cookies saved to:", COOKIE_OUTPUT_FILE);
-  console.log("[streaming]    Username:", username || "not extracted");
-  console.log("[streaming]    Cookie count:", cookies.length);
+  fs.writeFileSync(outputFile, JSON.stringify(cookieData, null, 2));
+  console.log(`[streaming] [${email}] ✅ Cookies saved to:`, outputFile);
+  console.log(
+    `[streaming] [${email}]    Username:`,
+    username || "not extracted",
+  );
+  console.log(`[streaming] [${email}]    Cookie count:`, cookies.length);
 
   return cookieData;
 }
 
 /**
- * Monitor page for login completion
+ * Monitor page for login completion for a specific user
+ * @param {string} email - User email
  */
-async function monitorLoginCompletion() {
-  if (!page) return;
+async function monitorUserLoginCompletion(email) {
+  const session = userSessions.get(email);
+  if (!session?.page) return;
 
-  console.log("[streaming] Monitoring for login completion...");
+  console.log(`[streaming] [${email}] Monitoring for login completion...`);
 
   // Listen for URL changes
-  page.on("framenavigated", async (frame) => {
-    if (frame !== page.mainFrame()) return;
+  session.page.on("framenavigated", async (frame) => {
+    const s = userSessions.get(email);
+    if (!s?.page || frame !== s.page.mainFrame()) return;
 
-    const url = page.url();
-    console.log("[streaming] Page navigated to:", url);
+    const url = s.page.url();
+    console.log(`[streaming] [${email}] Page navigated to:`, url);
 
     // Check if we're on Canvas (not fedauth)
     if (url.includes("canvas.colorado.edu") && !url.includes("fedauth")) {
-      console.log("[streaming] ✅ Login complete! User reached Canvas");
-      console.log("[streaming]    Current URL:", url);
+      console.log(
+        `[streaming] [${email}] ✅ Login complete! User reached Canvas`,
+      );
+      console.log(`[streaming] [${email}]    Current URL:`, url);
 
-      // Emit login detected status
-      emitStatus(STATUS_STAGES.LOGIN_DETECTED, "Login successful!");
+      // Emit login detected status to THIS USER ONLY
+      emitUserStatus(email, STATUS_STAGES.LOGIN_DETECTED, "Login successful!");
 
-      // FIRST: Stop screencast to prevent any more frames being sent
-      console.log("[streaming] Stopping screencast...");
+      // FIRST: Stop screencast to prevent any more frames being sent to THIS USER
+      console.log(`[streaming] [${email}] Stopping screencast...`);
       try {
-        const cdpSession = await page.context().newCDPSession(page);
-        await cdpSession.send("Page.stopScreencast");
-        console.log("[streaming] Screencast stopped");
+        if (s.cdpSession) {
+          await s.cdpSession.send("Page.stopScreencast");
+          console.log(`[streaming] [${email}] Screencast stopped`);
+        }
       } catch (err) {
-        console.log("[streaming] Could not stop screencast:", err.message);
+        console.log(
+          `[streaming] [${email}] Could not stop screencast:`,
+          err.message,
+        );
       }
 
-      // THEN: Tell frontend to close popup (after screencast is stopped)
-      console.log("[streaming] Sending close-popup signal...");
-      io.emit("close-popup");
+      // THEN: Tell THIS USER's frontend to close popup (after screencast is stopped)
+      console.log(`[streaming] [${email}] Sending close-popup signal...`);
+      emitToUser(email, "close-popup");
 
       // Wait for popup to close before navigating to profile page
-      await page.waitForTimeout(300);
+      await s.page.waitForTimeout(300);
 
       // Extract cookies HEADLESSLY (user won't see profile page navigation)
       try {
         console.log(
-          "[streaming] Extracting cookies and username headlessly...",
+          `[streaming] [${email}] Extracting cookies and username headlessly...`,
         );
-        const cookieData = await extractCookies();
+        const cookieData = await extractUserCookies(email);
 
-        console.log("[streaming] ✅ Cookie extraction completed");
+        console.log(`[streaming] [${email}] ✅ Cookie extraction completed`);
         console.log(
-          "[streaming]    Username:",
+          `[streaming] [${email}]    Username:`,
           cookieData.username || "not extracted",
         );
-        console.log("[streaming]    Cookies:", cookieData.cookies.length);
+        console.log(
+          `[streaming] [${email}]    Cookies:`,
+          cookieData.cookies.length,
+        );
 
-        // Emit completion status
-        emitStatus(STATUS_STAGES.COMPLETE, "Authentication complete!");
+        // Emit completion status to THIS USER ONLY
+        emitUserStatus(
+          email,
+          STATUS_STAGES.COMPLETE,
+          "Authentication complete!",
+        );
 
-        // Notify clients
-        io.emit("extraction-complete", {
+        // Notify THIS USER's clients
+        emitToUser(email, "extraction-complete", {
           success: true,
           username: cookieData.username,
           cookieCount: cookieData.cookies.length,
         });
 
-        console.log("[streaming] ✅ Notified clients of extraction completion");
-        extractionComplete = true;
+        console.log(
+          `[streaming] [${email}] ✅ Notified client of extraction completion`,
+        );
+        s.extractionComplete = true;
 
-        // Close browser to free resources (but keep server running for HTTP polling)
-        console.log("[streaming] Closing browser...");
-        if (browserContext) {
-          await browserContext.close();
-          browserContext = null;
-          page = null;
+        // Close browser to free resources (but keep session for HTTP polling)
+        console.log(`[streaming] [${email}] Closing browser...`);
+        if (s.browserContext) {
+          await s.browserContext.close();
+          s.browserContext = null;
+          s.page = null;
+          s.cdpSession = null;
         }
 
-        // Keep server alive for 30 seconds to allow frontend to fetch extraction result via HTTP
-        // The frontend polls /extraction-result/:email and needs the server to respond
+        // Schedule session cleanup after 30 seconds to allow frontend to fetch extraction result via HTTP
         console.log(
-          "[streaming] Server will exit in 30 seconds (waiting for result fetch)...",
+          `[streaming] [${email}] Session will be cleaned up in 30 seconds (waiting for result fetch)...`,
         );
-        exitTimeout = setTimeout(() => {
-          console.log("[streaming] Exiting after timeout");
-          process.exit(0);
-        }, 30000);
+        scheduleSessionCleanup(email, 30000);
       } catch (err) {
-        console.error("[streaming] Error extracting cookies:", err);
-        emitStatus(STATUS_STAGES.ERROR, "Failed to save credentials", {
-          suggestion: "Please try logging in again.",
-        });
-        io.emit("error", err.message);
+        console.error(`[streaming] [${email}] Error extracting cookies:`, err);
+        emitUserStatus(
+          email,
+          STATUS_STAGES.ERROR,
+          "Failed to save credentials",
+          {
+            suggestion: "Please try logging in again.",
+          },
+        );
+        emitToUser(email, "error", err.message);
       }
     }
   });
 }
 
 /**
- * Start streaming session
+ * Start streaming session for a specific user
+ * @param {string} email - User email
  */
-async function startStreaming() {
+async function startUserSession(email) {
+  const session = userSessions.get(email);
+  if (!session) {
+    console.error(
+      `[streaming] [${email}] No session found, cannot start browser`,
+    );
+    return;
+  }
+
   try {
     // Set flag to prevent restart during startup
-    browserStarting = true;
+    session.browserStarting = true;
 
-    console.log("[streaming] Starting browser...");
-    console.log("[streaming]    Port:", PORT);
-    console.log("[streaming]    Canvas URL:", CANVAS_URL);
-    console.log("[streaming]    Extraction email:", EXTRACTION_EMAIL);
-    console.log("[streaming]    Output file:", COOKIE_OUTPUT_FILE);
+    console.log(`[streaming] [${email}] Starting browser...`);
+    console.log(`[streaming] [${email}]    Port:`, PORT);
+    console.log(`[streaming] [${email}]    Canvas URL:`, CANVAS_URL);
+    console.log(
+      `[streaming] [${email}]    Mobile client:`,
+      session.isMobileClient,
+    );
 
-    // Emit browser launching status
-    emitStatus(STATUS_STAGES.BROWSER_LAUNCHING, "Starting secure browser...");
+    // Emit browser launching status to THIS USER ONLY
+    emitUserStatus(
+      email,
+      STATUS_STAGES.BROWSER_LAUNCHING,
+      "Starting secure browser...",
+    );
 
     // Launch browser with Playwright's bundled Chromium
     const launchOptions = {
@@ -939,57 +1258,67 @@ async function startStreaming() {
       );
       browser = await Promise.race([launchPromise, timeoutPromise]);
     } catch (launchErr) {
-      emitStatus(STATUS_STAGES.ERROR, "Failed to start browser", {
+      emitUserStatus(email, STATUS_STAGES.ERROR, "Failed to start browser", {
         suggestion:
           "The browser may not be installed. Try running: npx playwright install chromium",
       });
       throw launchErr;
     }
 
-    emitStatus(STATUS_STAGES.BROWSER_READY, "Browser started successfully");
+    emitUserStatus(
+      email,
+      STATUS_STAGES.BROWSER_READY,
+      "Browser started successfully",
+    );
 
     // Create browser context - use mobile viewport if mobile client
-    const viewport = isMobileClient
+    const viewport = session.isMobileClient
       ? { width: 390, height: 844 } // iPhone 14 Pro dimensions
       : { width: 1280, height: 720 };
 
-    const userAgent = isMobileClient
+    const userAgent = session.isMobileClient
       ? "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
       : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
     console.log(
-      `[streaming] Using ${isMobileClient ? "mobile" : "desktop"} viewport: ${viewport.width}x${viewport.height}`,
+      `[streaming] [${email}] Using ${session.isMobileClient ? "mobile" : "desktop"} viewport: ${viewport.width}x${viewport.height}`,
     );
 
-    browserContext = await browser.newContext({
+    session.browserContext = await browser.newContext({
       viewport,
       userAgent,
       storageState: undefined,
       bypassCSP: false,
       ignoreHTTPSErrors: false,
-      isMobile: isMobileClient,
-      hasTouch: isMobileClient,
+      isMobile: session.isMobileClient,
+      hasTouch: session.isMobileClient,
     });
 
-    page = await browserContext.newPage();
+    session.page = await session.browserContext.newPage();
 
     // Enable CDP session for screencast
-    emitStatus(
+    emitUserStatus(
+      email,
       STATUS_STAGES.SCREENCAST_STARTING,
       "Preparing screen capture...",
     );
 
-    const cdpSession = await page.context().newCDPSession(page);
+    session.cdpSession = await session.page
+      .context()
+      .newCDPSession(session.page);
 
     // Start screencast with timeout - use mobile dimensions if mobile client
     try {
-      const screencastPromise = cdpSession.send("Page.startScreencast", {
-        format: "jpeg",
-        quality: isMobileClient ? 70 : 50, // Higher quality for mobile (smaller images)
-        maxWidth: viewport.width,
-        maxHeight: viewport.height,
-        everyNthFrame: 1,
-      });
+      const screencastPromise = session.cdpSession.send(
+        "Page.startScreencast",
+        {
+          format: "jpeg",
+          quality: session.isMobileClient ? 70 : 50, // Higher quality for mobile (smaller images)
+          maxWidth: viewport.width,
+          maxHeight: viewport.height,
+          everyNthFrame: 1,
+        },
+      );
       const timeoutPromise = new Promise((_, reject) =>
         setTimeout(
           () => reject(new Error("Screencast start timeout")),
@@ -998,56 +1327,76 @@ async function startStreaming() {
       );
       await Promise.race([screencastPromise, timeoutPromise]);
     } catch (screencastErr) {
-      emitStatus(STATUS_STAGES.ERROR, "Failed to start screen capture", {
-        suggestion:
-          "Please try again. If the problem persists, contact support.",
-      });
-      await browserContext?.close();
+      emitUserStatus(
+        email,
+        STATUS_STAGES.ERROR,
+        "Failed to start screen capture",
+        {
+          suggestion:
+            "Please try again. If the problem persists, contact support.",
+        },
+      );
+      await session.browserContext?.close();
       throw screencastErr;
     }
 
-    console.log("[streaming] ✅ Screencast started");
+    console.log(`[streaming] [${email}] ✅ Screencast started`);
 
-    // Listen for screencast frames
-    cdpSession.on("Page.screencastFrame", async (frame) => {
-      io.emit("frame", frame.data);
-      await cdpSession.send("Page.screencastFrameAck", {
-        sessionId: frame.sessionId,
-      });
+    // Listen for screencast frames - emit to THIS USER ONLY
+    session.cdpSession.on("Page.screencastFrame", async (frame) => {
+      // Only emit if session still exists and is not complete
+      const s = userSessions.get(email);
+      if (s && !s.extractionComplete) {
+        emitToUser(email, "frame", frame.data);
+      }
+      // Always ack the frame
+      try {
+        await session.cdpSession.send("Page.screencastFrameAck", {
+          sessionId: frame.sessionId,
+        });
+      } catch (ackErr) {
+        // Ignore ack errors (session might be closed)
+      }
     });
 
     // Navigate to Canvas login with timeout
-    emitStatus(STATUS_STAGES.NAVIGATING, "Loading Canvas login page...");
+    emitUserStatus(
+      email,
+      STATUS_STAGES.NAVIGATING,
+      "Loading Canvas login page...",
+    );
 
     try {
-      await page.goto(CANVAS_URL, {
+      await session.page.goto(CANVAS_URL, {
         waitUntil: "domcontentloaded",
         timeout: TIMEOUTS.NAVIGATION,
       });
     } catch (navErr) {
-      browserStarting = false; // Clear flag on error
-      emitStatus(STATUS_STAGES.ERROR, "Failed to load Canvas", {
+      session.browserStarting = false; // Clear flag on error
+      emitUserStatus(email, STATUS_STAGES.ERROR, "Failed to load Canvas", {
         suggestion: "Please check your network connection and try again.",
       });
-      await browserContext?.close();
+      await session.browserContext?.close();
       throw navErr;
     }
 
     // Browser is ready - clear the startup flag
-    browserStarting = false;
-    emitStatus(
+    session.browserStarting = false;
+    emitUserStatus(
+      email,
       STATUS_STAGES.READY_FOR_LOGIN,
       "Ready - please log in to Canvas",
     );
 
-    // Start monitoring for login completion
-    monitorLoginCompletion();
+    // Start monitoring for login completion for THIS USER
+    monitorUserLoginCompletion(email);
   } catch (err) {
-    browserStarting = false; // Clear flag on error
-    console.error("[streaming] Error starting browser:", err);
+    session.browserStarting = false; // Clear flag on error
+    console.error(`[streaming] [${email}] Error starting browser:`, err);
     // Only emit error if not already emitted
-    if (currentStage !== STATUS_STAGES.ERROR) {
-      emitStatus(
+    if (session.currentStage !== STATUS_STAGES.ERROR) {
+      emitUserStatus(
+        email,
         STATUS_STAGES.ERROR,
         err.message || "An unexpected error occurred",
         {
@@ -1055,31 +1404,68 @@ async function startStreaming() {
         },
       );
     }
-    process.exit(1);
+    // Don't exit process - other users might be using the server
+    // Just clean up this session
+    scheduleSessionCleanup(email, 5000);
   }
 }
 
 // Start the server
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`[streaming] 🚀 Streaming server started on port ${PORT}`);
-  console.log(`[streaming]    View at: http://localhost:${PORT}`);
+  console.log(
+    `[streaming]    View at: http://localhost:${PORT}?email=user@example.com`,
+  );
+  console.log(`[streaming]    Multi-user session isolation ENABLED`);
   console.log(`[streaming]    Browser will start when first client connects`);
-  // Browser startup is now triggered by first page request to detect mobile
 });
 
-// Cleanup on exit
-process.on("SIGINT", async () => {
-  console.log("\n[streaming] Shutting down...");
-  if (browserContext) {
-    await browserContext.close();
+// Periodic stale session cleanup (every 60 seconds)
+const STALE_SESSION_MAX_AGE = 10 * 60 * 1000; // 10 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [email, session] of userSessions) {
+    const sessionAge = now - session.lastActivity;
+    if (sessionAge > STALE_SESSION_MAX_AGE) {
+      console.log(
+        `[streaming] [${email}] Session stale (${Math.round(sessionAge / 60000)}min inactive), cleaning up`,
+      );
+      cleanupUserSession(email);
+    }
   }
+}, 60000);
+
+// Cleanup all sessions on exit
+async function cleanupAllSessions() {
+  console.log(
+    `[streaming] Cleaning up ${userSessions.size} active sessions...`,
+  );
+  const cleanupPromises = [];
+  for (const [email, session] of userSessions) {
+    if (session.browserContext) {
+      cleanupPromises.push(
+        session.browserContext.close().catch((err) => {
+          console.error(
+            `[streaming] [${email}] Error closing browser:`,
+            err.message,
+          );
+        }),
+      );
+    }
+  }
+  await Promise.all(cleanupPromises);
+  userSessions.clear();
+  socketToEmail.clear();
+}
+
+process.on("SIGINT", async () => {
+  console.log("\n[streaming] Shutting down (SIGINT)...");
+  await cleanupAllSessions();
   process.exit(0);
 });
 
 process.on("SIGTERM", async () => {
-  console.log("\n[streaming] Shutting down...");
-  if (browserContext) {
-    await browserContext.close();
-  }
+  console.log("\n[streaming] Shutting down (SIGTERM)...");
+  await cleanupAllSessions();
   process.exit(0);
 });

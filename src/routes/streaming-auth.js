@@ -154,9 +154,11 @@ router.post("/start", async (req, res) => {
         console.log(
           `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
         );
+        // Append email to URL for session isolation
+        const urlWithEmail = `${assignment.tunnelUrl}?email=${encodeURIComponent(normalizedEmail)}`;
         return res.json({
           success: true,
-          url: assignment.tunnelUrl,
+          url: urlWithEmail,
           streamingServerUrl: assignment.tunnelUrl,
           instanceId: assignment.instanceId,
           requestId: assignment.requestId,
@@ -192,9 +194,11 @@ router.post("/start", async (req, res) => {
       console.log(
         "[streaming-auth] Production mode: using static streaming server (fallback)",
       );
+      // Append email to URL for session isolation
+      const urlWithEmail = `${process.env.STREAMING_SERVER_URL}?email=${encodeURIComponent(normalizedEmail)}`;
       return res.json({
         success: true,
-        url: process.env.STREAMING_SERVER_URL,
+        url: urlWithEmail,
         streamingServerUrl: process.env.STREAMING_SERVER_URL,
         message: "Using external streaming server",
       });
@@ -207,9 +211,10 @@ router.post("/start", async (req, res) => {
         process.env.BACKEND_URL ||
         `http://localhost:${process.env.PORT || 3000}`;
 
+      // Append email to URL for session isolation
       return res.json({
         success: true,
-        url: `${baseUrl}/api/streaming-auth/viewer`,
+        url: `${baseUrl}/api/streaming-auth/viewer?email=${encodeURIComponent(normalizedEmail)}`,
         streamingServerUrl: baseUrl,
         message: "Streaming server already running",
       });
@@ -369,10 +374,13 @@ router.post("/start", async (req, res) => {
     const isProd =
       process.env.VERCEL_ENV === "production" ||
       process.env.NODE_ENV === "production";
-    const streamingUrl =
+    const streamingBaseUrl =
       isProd && process.env.STREAMING_SERVER_URL
         ? process.env.STREAMING_SERVER_URL
         : `${baseUrl}/api/streaming-auth/viewer`;
+
+    // Append email to URL for session isolation
+    const streamingUrl = `${streamingBaseUrl}?email=${encodeURIComponent(normalizedEmail)}`;
 
     res.json({
       success: true,
@@ -397,8 +405,9 @@ router.post("/start", async (req, res) => {
  * Proxies HTTP requests to the internal streaming server
  */
 router.get("/viewer", (req, res) => {
-  // Rewrite the path to root for the streaming server
-  req.url = "/";
+  // Rewrite the path to root for the streaming server, preserving query params (including email)
+  const queryString = req.url.includes("?") ? req.url.split("?")[1] : "";
+  req.url = queryString ? `/?${queryString}` : "/";
   streamingProxy.web(req, res, (error) => {
     console.error("[streaming-auth] Proxy error:", error);
     if (!res.headersSent) {
