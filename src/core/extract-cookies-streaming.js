@@ -67,6 +67,42 @@ if (!fs.existsSync(outputDir)) {
 }
 
 // ============================================================================
+// SECURITY HELPERS
+// ============================================================================
+
+// Maximum concurrent sessions to prevent resource exhaustion
+const MAX_CONCURRENT_SESSIONS = 50;
+
+// Email validation regex (basic format check)
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * Validate email format
+ * @param {string} email - Email to validate
+ * @returns {boolean} True if valid email format
+ */
+function isValidEmail(email) {
+  return email && typeof email === "string" && EMAIL_REGEX.test(email);
+}
+
+/**
+ * Sanitize email for use in file paths (prevent path traversal)
+ * @param {string} email - Email to sanitize
+ * @returns {string} Sanitized email safe for file paths
+ */
+function sanitizeEmailForPath(email) {
+  return email.toLowerCase().replace(/[^a-z0-9@.-]/g, "-");
+}
+
+/**
+ * Generate a secure session token for Socket.IO authentication
+ * @returns {string} Random session token
+ */
+function generateSessionToken() {
+  return require("crypto").randomBytes(32).toString("hex");
+}
+
+// ============================================================================
 // PER-USER SESSION MANAGEMENT
 // ============================================================================
 
@@ -76,6 +112,7 @@ if (!fs.existsSync(outputDir)) {
  */
 const userSessions = new Map(); // email -> SessionState
 const socketToEmail = new Map(); // socketId -> email
+const sessionTokens = new Map(); // token -> email (for Socket.IO auth)
 
 /**
  * Create a new session state object for a user
@@ -84,8 +121,12 @@ const socketToEmail = new Map(); // socketId -> email
  * @returns {Object} Session state object
  */
 function createSession(email, isMobile = false) {
+  const token = generateSessionToken();
+  sessionTokens.set(token, email);
+
   return {
     email,
+    token, // Session token for Socket.IO authentication
     socketIds: new Set(), // All socket IDs for this user
     browserContext: null,
     page: null,
@@ -105,12 +146,21 @@ function createSession(email, isMobile = false) {
  * Get or create a session for a user
  * @param {string} email - User email
  * @param {boolean} isMobile - Whether client is mobile
- * @returns {Object} Session state object
+ * @returns {Object|null} Session state object, or null if max sessions reached
  */
 function getOrCreateSession(email, isMobile = false) {
   if (!userSessions.has(email)) {
+    // Check max concurrent sessions limit
+    if (userSessions.size >= MAX_CONCURRENT_SESSIONS) {
+      console.warn(
+        `[streaming] Max sessions (${MAX_CONCURRENT_SESSIONS}) reached, rejecting new session for ${email}`,
+      );
+      return null;
+    }
     userSessions.set(email, createSession(email, isMobile));
-    console.log(`[streaming] Created new session for ${email}`);
+    console.log(
+      `[streaming] Created new session for ${email} (active: ${userSessions.size}/${MAX_CONCURRENT_SESSIONS})`,
+    );
   }
   const session = userSessions.get(email);
   session.lastActivity = Date.now();
@@ -218,6 +268,19 @@ app.get("/", (req, res) => {
     `);
   }
 
+  // Validate email format to prevent injection attacks
+  if (!isValidEmail(email)) {
+    console.warn(`[streaming] Invalid email format rejected: ${email}`);
+    return res.status(400).send(`
+<!DOCTYPE html>
+<html><head><title>Error</title></head>
+<body style="font-family: sans-serif; padding: 40px; text-align: center;">
+  <h1>Invalid Email</h1>
+  <p>Please provide a valid email address.</p>
+</body></html>
+    `);
+  }
+
   const normalizedEmail = email.toLowerCase().trim();
   const isMobile = req.query.mobile === "1";
 
@@ -227,6 +290,21 @@ app.get("/", (req, res) => {
 
   // Get or create session for this user
   const session = getOrCreateSession(normalizedEmail, isMobile);
+
+  // Check if session creation failed (max sessions reached)
+  if (!session) {
+    console.warn(
+      `[streaming] [${normalizedEmail}] Session creation failed - server at capacity`,
+    );
+    return res.status(503).send(`
+<!DOCTYPE html>
+<html><head><title>Server Busy</title></head>
+<body style="font-family: sans-serif; padding: 40px; text-align: center;">
+  <h1>Server Busy</h1>
+  <p>The authentication server is at capacity. Please try again in a few minutes.</p>
+</body></html>
+    `);
+  }
 
   // Start browser on first page request for this user (if not already started)
   if (!session.browserStarted && !session.browserStarting) {
@@ -384,12 +462,12 @@ app.get("/", (req, res) => {
   <canvas id="canvas" class="hidden"></canvas>
 
   <script>
-    // Get email from URL for session isolation
-    const urlParams = new URLSearchParams(window.location.search);
-    const userEmail = urlParams.get('email');
+    // Session token injected by server for Socket.IO authentication
+    const sessionToken = '${session.token}';
+    const userEmail = '${normalizedEmail}';
 
-    // Connect to Socket.IO with email in handshake query
-    const socket = io({ query: { email: userEmail } });
+    // Connect to Socket.IO with email AND token for secure session binding
+    const socket = io({ query: { email: userEmail, token: sessionToken } });
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d', { alpha: false });
     const statusContainer = document.getElementById('status-container');
@@ -646,17 +724,25 @@ app.get("/health", (req, res) => {
  */
 app.get("/extraction-result/:email", (req, res) => {
   const { email } = req.params;
+
+  // Validate email format
+  if (!isValidEmail(email)) {
+    console.warn(`[streaming] Invalid email in extraction-result: ${email}`);
+    return res.status(400).json({ success: false, error: "Invalid email" });
+  }
+
   const normalizedEmail = email.toLowerCase().trim();
+  const sanitizedEmail = sanitizeEmailForPath(normalizedEmail);
   const session = userSessions.get(normalizedEmail);
 
   console.log(`[streaming] [${normalizedEmail}] Extraction result requested`);
 
   // Check if extraction is complete for this user
   if (session?.extractionComplete) {
-    // Check if cookie file exists
+    // Check if cookie file exists (use sanitized email for path safety)
     const outputFile =
       COOKIE_OUTPUT_FILE ||
-      path.join(outputDir, `canvas-cookies-${normalizedEmail}.json`);
+      path.join(outputDir, `canvas-cookies-${sanitizedEmail}.json`);
 
     if (fs.existsSync(outputFile)) {
       try {
@@ -794,6 +880,11 @@ async function cleanupUserSession(email) {
     socketToEmail.delete(socketId);
   }
 
+  // Clean up session token
+  if (session.token) {
+    sessionTokens.delete(session.token);
+  }
+
   // Remove session
   userSessions.delete(email);
   console.log(
@@ -802,10 +893,11 @@ async function cleanupUserSession(email) {
 }
 
 /**
- * Socket.IO connection handler - per-user session isolation
+ * Socket.IO connection handler - per-user session isolation with token verification
  */
 io.on("connection", (socket) => {
   const email = socket.handshake.query.email;
+  const token = socket.handshake.query.token;
 
   // Email is required for session isolation
   if (!email) {
@@ -817,7 +909,28 @@ io.on("connection", (socket) => {
     return;
   }
 
+  // Token is required for session authentication
+  if (!token) {
+    console.log(
+      `[streaming] Socket ${socket.id} connected without token - disconnecting`,
+    );
+    socket.emit("error", "Session token required");
+    socket.disconnect(true);
+    return;
+  }
+
   const normalizedEmail = email.toLowerCase().trim();
+
+  // Verify token belongs to this email (prevents session hijacking)
+  const tokenEmail = sessionTokens.get(token);
+  if (tokenEmail !== normalizedEmail) {
+    console.warn(
+      `[streaming] Socket ${socket.id} token mismatch: expected ${tokenEmail}, got ${normalizedEmail}`,
+    );
+    socket.emit("error", "Invalid session token");
+    socket.disconnect(true);
+    return;
+  }
   console.log(
     `[streaming] [${normalizedEmail}] Client connected: ${socket.id}`,
   );
@@ -1157,9 +1270,11 @@ async function extractUserCookies(email) {
     );
   }
 
-  // Determine output file for this user
+  // Determine output file for this user (sanitize email for path safety)
+  const sanitizedEmail = sanitizeEmailForPath(email);
   const outputFile =
-    COOKIE_OUTPUT_FILE || path.join(outputDir, `canvas-cookies-${email}.json`);
+    COOKIE_OUTPUT_FILE ||
+    path.join(outputDir, `canvas-cookies-${sanitizedEmail}.json`);
 
   // Save cookies to file
   const cookieData = {
@@ -1565,6 +1680,7 @@ async function cleanupAllSessions() {
   await Promise.all(cleanupPromises);
   userSessions.clear();
   socketToEmail.clear();
+  sessionTokens.clear();
 }
 
 process.on("SIGINT", async () => {
