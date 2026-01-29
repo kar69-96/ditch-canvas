@@ -170,6 +170,35 @@ const TIMEOUTS = {
 };
 
 /**
+ * Check if a key is a special/modifier key (not simple text input)
+ * @param {string} key - The key to check
+ * @returns {boolean} True if the key is a special key
+ */
+function isSpecialKey(key) {
+  return (
+    [
+      "Control",
+      "Alt",
+      "Meta",
+      "Shift",
+      "Enter",
+      "Tab",
+      "Escape",
+      "Backspace",
+      "Delete",
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "Home",
+      "End",
+      "PageUp",
+      "PageDown",
+    ].includes(key) || key.startsWith("F")
+  );
+}
+
+/**
  * Serve the streaming viewer HTML page (minimal UI, fullscreen)
  * Requires email query parameter for session isolation
  */
@@ -544,15 +573,45 @@ app.get("/", (req, res) => {
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
+    // Keyboard input batching for reduced latency
+    const BATCH_INTERVAL_MS = 16; // One frame at 60fps
+    const MAX_BATCH_SIZE = 10;
+    const IMMEDIATE_FLUSH_KEYS = new Set(['Enter', 'Tab', 'Escape', 'Backspace', 'Delete']);
+
+    let keyEventQueue = [];
+    let batchTimer = null;
+
+    function queueKeyEvent(type, key, code) {
+      keyEventQueue.push({ type, key, code, ts: performance.now() });
+
+      // Flush immediately for action keys or when queue is full
+      if (IMMEDIATE_FLUSH_KEYS.has(key) || keyEventQueue.length >= MAX_BATCH_SIZE) {
+        flushKeyQueue();
+      } else if (!batchTimer) {
+        batchTimer = setTimeout(flushKeyQueue, BATCH_INTERVAL_MS);
+      }
+    }
+
+    function flushKeyQueue() {
+      if (batchTimer) {
+        clearTimeout(batchTimer);
+        batchTimer = null;
+      }
+      if (keyEventQueue.length === 0) return;
+
+      socket.emit('key-batch', { events: keyEventQueue });
+      keyEventQueue = [];
+    }
+
     document.addEventListener('keydown', (e) => {
       if (!isConnected || !canvasReady) return;
-      socket.emit('key-down', { key: e.key, code: e.code });
+      queueKeyEvent('down', e.key, e.code);
       if (e.key !== 'F5' && e.key !== 'F12') e.preventDefault();
     });
 
     document.addEventListener('keyup', (e) => {
       if (!isConnected || !canvasReady) return;
-      socket.emit('key-up', { key: e.key, code: e.code });
+      queueKeyEvent('up', e.key, e.code);
     });
 
     document.addEventListener('input', (e) => {
@@ -907,6 +966,47 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Batched keyboard input handler for reduced latency
+  socket.on("key-batch", async (data) => {
+    const s = userSessions.get(normalizedEmail);
+    if (!s?.page || !data.events?.length) return;
+
+    s.lastActivity = Date.now();
+
+    try {
+      // Sort by timestamp for correct ordering
+      const events = data.events.sort((a, b) => a.ts - b.ts);
+
+      // Check if all events are simple text (optimization path)
+      const isTextOnly = events.every(
+        (e) => e.key.length === 1 && !isSpecialKey(e.key),
+      );
+
+      if (isTextOnly) {
+        // Extract text from down events and type all at once
+        const text = events
+          .filter((e) => e.type === "down")
+          .map((e) => e.key)
+          .join("");
+        if (text) await s.page.keyboard.type(text, { delay: 0 });
+      } else {
+        // Process events individually
+        for (const event of events) {
+          if (event.type === "down") {
+            await s.page.keyboard.down(event.key);
+          } else {
+            await s.page.keyboard.up(event.key);
+          }
+        }
+      }
+    } catch (err) {
+      console.error(
+        `[streaming] [${normalizedEmail}] Key batch error:`,
+        err.message,
+      );
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log(
       `[streaming] [${normalizedEmail}] Client disconnected: ${socket.id}`,
@@ -1093,6 +1193,9 @@ async function monitorUserLoginCompletion(email) {
 
   console.log(`[streaming] [${email}] Monitoring for login completion...`);
 
+  // Flag to prevent multiple extraction attempts
+  let extractionStarted = false;
+
   // Listen for URL changes
   session.page.on("framenavigated", async (frame) => {
     const s = userSessions.get(email);
@@ -1101,8 +1204,14 @@ async function monitorUserLoginCompletion(email) {
     const url = s.page.url();
     console.log(`[streaming] [${email}] Page navigated to:`, url);
 
-    // Check if we're on Canvas (not fedauth)
-    if (url.includes("canvas.colorado.edu") && !url.includes("fedauth")) {
+    // Check if we're on Canvas (not fedauth) and extraction hasn't started
+    if (
+      url.includes("canvas.colorado.edu") &&
+      !url.includes("fedauth") &&
+      !extractionStarted
+    ) {
+      // Set flag immediately to prevent re-entry
+      extractionStarted = true;
       console.log(
         `[streaming] [${email}] ✅ Login complete! User reached Canvas`,
       );

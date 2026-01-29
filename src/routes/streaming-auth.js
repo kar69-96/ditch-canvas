@@ -34,7 +34,15 @@ const streamingProxy = httpProxy.createProxyServer({
   target: getStreamingTarget(),
   ws: true, // Enable WebSocket proxying
   changeOrigin: true,
-  ignorePath: true, // Ignore the incoming path and use target path
+});
+
+// Handle proxy request to preserve query string
+streamingProxy.on("proxyReq", (proxyReq, req) => {
+  // The req.url has already been rewritten in the viewer handler
+  // Just ensure it's set correctly on the proxy request
+  if (req.url) {
+    proxyReq.path = req.url;
+  }
 });
 
 // Store active streaming processes
@@ -491,12 +499,50 @@ router.post("/stop", async (req, res) => {
     const process = activeStreamingProcesses.get(normalizedEmail);
 
     if (process && !process.killed) {
-      process.kill();
-      activeStreamingProcesses.delete(normalizedEmail);
-      extractionContext.delete(normalizedEmail); // Clean up context
+      // Give extraction time to complete before killing (up to 10 seconds)
+      const maxWaitMs = 10000;
+      const checkInterval = 500;
+      let waited = 0;
+
+      const waitForExtraction = async () => {
+        while (waited < maxWaitMs) {
+          // Check if extraction results are available
+          if (extractionResults.has(normalizedEmail)) {
+            console.log(
+              `[streaming-auth] Extraction complete for ${normalizedEmail}, stopping server`,
+            );
+            break;
+          }
+          // Also check if cookie file exists
+          const cookieFile = getCookieFilename(normalizedEmail);
+          if (fs.existsSync(cookieFile)) {
+            console.log(
+              `[streaming-auth] Cookie file found for ${normalizedEmail}, stopping server`,
+            );
+            checkAndStoreExtractionResults(normalizedEmail);
+            break;
+          }
+          await new Promise((resolve) => setTimeout(resolve, checkInterval));
+          waited += checkInterval;
+        }
+
+        if (waited >= maxWaitMs) {
+          console.log(
+            `[streaming-auth] Timeout waiting for extraction, force stopping for ${normalizedEmail}`,
+          );
+        }
+
+        process.kill();
+        activeStreamingProcesses.delete(normalizedEmail);
+        extractionContext.delete(normalizedEmail);
+      };
+
+      // Start waiting in background and respond immediately
+      waitForExtraction();
+
       res.json({
         success: true,
-        message: "Streaming server stopped",
+        message: "Streaming server stopping",
       });
     } else {
       extractionContext.delete(normalizedEmail); // Clean up context even if process not found
