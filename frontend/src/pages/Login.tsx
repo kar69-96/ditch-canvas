@@ -16,7 +16,6 @@ import {
   verifyLogin,
   stopStreamingAuth,
   startBackgroundUpdate,
-  getUpdateStatus,
   saveCookiesToSupabase,
 } from "@/services/api/auth";
 import { checkDeviceTrust, trustDevice } from "@/services/api/deviceTrust";
@@ -25,7 +24,7 @@ import { sessionStorage } from "@/storage/session";
 import { userDatabase } from "@/services/database/userDatabase";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { toast } from "@/hooks/use-toast";
+import { useBackgroundUpdate } from "@/hooks/useBackgroundUpdate";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -36,47 +35,15 @@ export default function Login() {
   const checkedUserRef = useRef<any>(null); // Use ref to avoid stale closure in setInterval
   const navigate = useNavigate();
 
+  // Hook for monitoring background updates and invalidating cache when complete
+  const { startMonitoring } = useBackgroundUpdate({
+    enabled: false, // Don't auto-start, we'll call startMonitoring manually
+    showToast: true,
+  });
+
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._-]+@colorado\.edu$/i;
     return emailRegex.test(email);
-  };
-
-  // Poll for update status and show toast when complete
-  const monitorUpdateStatus = async (userEmail: string) => {
-    const maxAttempts = 60; // 60 * 5s = 5 minutes max
-    let attempts = 0;
-
-    const checkStatus = async () => {
-      attempts++;
-      try {
-        const status = await getUpdateStatus(userEmail);
-
-        if (status.status === "completed") {
-          toast({
-            title: "Sync Complete",
-            description: "Your Canvas data has been updated successfully.",
-          });
-          return;
-        } else if (status.status === "failed") {
-          toast({
-            title: "Sync Failed",
-            description:
-              status.error ||
-              "Failed to sync Canvas data. Please try again later.",
-            variant: "destructive",
-          });
-          return;
-        } else if (status.hasActiveUpdate && attempts < maxAttempts) {
-          // Still running, check again in 5 seconds
-          setTimeout(checkStatus, 5000);
-        }
-      } catch (err) {
-        console.warn("[Login] Error checking update status:", err);
-      }
-    };
-
-    // Start checking after 5 seconds
-    setTimeout(checkStatus, 5000);
   };
 
   const calculateSimilarity = (str1: string, str2: string): number => {
@@ -206,7 +173,7 @@ export default function Login() {
                   .then((result) => {
                     console.log("[Login] Background update started:", result);
                     if (result.success && !result.skipped) {
-                      monitorUpdateStatus(email);
+                      startMonitoring();
                     }
                   })
                   .catch((err) => {
@@ -396,7 +363,19 @@ export default function Login() {
 
               // Use stored user from email check (avoids RLS issues with anon key)
               setStatus("Loading user data...");
-              const user = checkedUserRef.current;
+              let user = checkedUserRef.current;
+
+              // Fallback: If user ref is null, try fetching again
+              if (!user) {
+                console.log(
+                  "[Login] User ref is null, fetching user data again...",
+                );
+                const emailCheck = await checkEmailExists(email);
+                if (emailCheck.exists && emailCheck.user) {
+                  user = emailCheck.user;
+                  checkedUserRef.current = user;
+                }
+              }
 
               if (!user) {
                 clearInterval(checkInterval);
@@ -451,7 +430,7 @@ export default function Login() {
                 .then((result) => {
                   console.log("[Login] Background update started:", result);
                   if (result.success && !result.skipped) {
-                    monitorUpdateStatus(email);
+                    startMonitoring();
                   }
                 })
                 .catch((err) => {
@@ -505,6 +484,11 @@ export default function Login() {
               return;
             }
 
+            console.log(
+              "[Login] Popup closed, extraction result:",
+              extractionResult,
+            );
+
             if (extractionResult.success) {
               // Check if cookies are invalid (requires re-auth)
               if (extractionResult.requiresReauth) {
@@ -551,7 +535,24 @@ export default function Login() {
 
               // Use stored user from email check (avoids RLS issues with anon key)
               setStatus("Loading user data...");
-              const user = checkedUserRef.current;
+              let user = checkedUserRef.current;
+
+              // Fallback: If user ref is null, try fetching again
+              if (!user) {
+                console.log(
+                  "[Login] User ref is null, fetching user data again...",
+                );
+                const emailCheck = await checkEmailExists(email);
+                if (emailCheck.exists && emailCheck.user) {
+                  user = emailCheck.user;
+                  checkedUserRef.current = user;
+                }
+              }
+
+              console.log(
+                "[Login] User data for session:",
+                user ? user.id : "null",
+              );
 
               if (user) {
                 // Create session (user data fetched from Supabase on demand)
@@ -588,7 +589,7 @@ export default function Login() {
                   .then((result) => {
                     console.log("[Login] Background update started:", result);
                     if (result.success && !result.skipped) {
-                      monitorUpdateStatus(email);
+                      startMonitoring();
                     }
                   })
                   .catch((err) => {

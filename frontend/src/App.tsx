@@ -157,16 +157,9 @@ const AppContent = () => {
               </RouteGuard>
             }
           />
+          {/* Tabus waitlist page */}
           <Route
             path="/assistant"
-            element={
-              <RouteGuard>
-                <Assistant />
-              </RouteGuard>
-            }
-          />
-          <Route
-            path="/assistant/tabus"
             element={
               <RouteGuard>
                 <Tabus />
@@ -178,6 +171,15 @@ const AppContent = () => {
             element={
               <RouteGuard>
                 <ComingSoon />
+              </RouteGuard>
+            }
+          />
+          {/* Learn features - available at direct URLs */}
+          <Route
+            path="/assistant/learn"
+            element={
+              <RouteGuard>
+                <Assistant />
               </RouteGuard>
             }
           />

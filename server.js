@@ -132,24 +132,30 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-const server = app.listen(PORT, HOST, () => {
-  console.log(`Server listening on http://${HOST}:${PORT}`);
-});
+// Only start the server if running directly (not when imported as module)
+if (require.main === module) {
+  const server = app.listen(PORT, HOST, () => {
+    console.log(`Server listening on http://${HOST}:${PORT}`);
+  });
 
-// Handle WebSocket upgrades for streaming auth proxy
-server.on("upgrade", (req, socket, head) => {
-  // Proxy WebSocket upgrades for Socket.IO and streaming-auth
-  if (req.url.startsWith("/socket.io/")) {
-    socketIoProxy.ws(req, socket, head, (error) => {
-      console.error("[server] Socket.IO WS proxy error:", error);
-      socket.end();
-    });
-  } else if (req.url.startsWith("/api/streaming-auth/viewer")) {
-    viewerProxy.ws(req, socket, head, (error) => {
-      console.error("[server] Viewer WS proxy error:", error);
-      socket.end();
-    });
-  } else {
-    socket.destroy();
-  }
-});
+  // Handle WebSocket upgrades for streaming auth proxy
+  server.on("upgrade", (req, socket, head) => {
+    // Proxy WebSocket upgrades for Socket.IO and streaming-auth
+    if (req.url.startsWith("/socket.io/")) {
+      socketIoProxy.ws(req, socket, head, (error) => {
+        console.error("[server] Socket.IO WS proxy error:", error);
+        socket.end();
+      });
+    } else if (req.url.startsWith("/api/streaming-auth/viewer")) {
+      viewerProxy.ws(req, socket, head, (error) => {
+        console.error("[server] Viewer WS proxy error:", error);
+        socket.end();
+      });
+    } else {
+      socket.destroy();
+    }
+  });
+}
+
+// Export app for Vercel serverless functions
+module.exports = app;
