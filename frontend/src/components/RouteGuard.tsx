@@ -38,8 +38,8 @@ export const RouteGuard = ({
               "[RouteGuard] LOCALHOST BYPASS - Setting up test user session",
             );
             // Set up test user session for local development
-            const testUserId = "df3895e6-121e-4516-b8e7-dd57400c3a30";
-            const testEmail = "tata6021@colorado.edu";
+            const testUserId = "6d7822df-6929-4bd5-a852-98e8f4dac2c6";
+            const testEmail = "cosh4562@colorado.edu";
             await sessionStorage.setSession(testUserId, 7, testEmail);
             console.log(
               "[RouteGuard] LOCALHOST BYPASS - Test session set for:",
