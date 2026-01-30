@@ -644,12 +644,9 @@ export default function Login() {
       // Provide user-friendly error messages based on error type
       let userMessage = err.message || "An error occurred during login";
 
-      if (
-        err.message?.includes("503") ||
-        err.message?.includes("unavailable")
-      ) {
+      if (err.message?.includes("503")) {
         userMessage =
-          "Server at capacity. Please wait 30 seconds and try again.";
+          "Authentication server temporarily unavailable. Please try again.";
       } else if (err.message?.includes("403")) {
         userMessage =
           "Connection failed. The server may have restarted. Please try again.";

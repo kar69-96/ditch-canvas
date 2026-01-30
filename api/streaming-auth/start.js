@@ -8,7 +8,7 @@ const http = require("http");
  * @param {number} timeoutMs - Timeout in milliseconds (default: 5000)
  * @returns {Promise<{healthy: boolean, activeSessions?: number, error?: string}>}
  */
-function checkStreamingHealth(tunnelUrl, timeoutMs = 5000) {
+function checkStreamingHealth(tunnelUrl, timeoutMs = 10000) {
   return new Promise((resolve) => {
     try {
       const url = new URL("/health", tunnelUrl);
