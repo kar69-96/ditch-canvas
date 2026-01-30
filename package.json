@@ -8,6 +8,7 @@
     "dev:local": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" --names \"backend,frontend\" --prefix-colors \"blue,green\"",
     "dev:backend": "NODE_ENV=development node -r dotenv/config server.js dotenv_config_path=.env.development",
     "dev:frontend": "cd frontend && npm run dev",
+    "dev:as": "cd frontend && npm run dev:as --",
     "dev:streaming": "NODE_ENV=development node -r dotenv/config src/core/extract-cookies-streaming.js dotenv_config_path=.env.development",
     "dev:server": "NODE_ENV=development nodemon -r dotenv/config server.js dotenv_config_path=.env.development",
     "dev:all": "concurrently \"npm run dev:server\" \"cd frontend && npm run dev\" --names \"backend,frontend\" --prefix-colors \"blue,green\"",
