@@ -640,7 +640,34 @@ export default function Login() {
         stack: err.stack,
         name: err.name,
       });
-      setError(err.message || "An error occurred during login");
+
+      // Provide user-friendly error messages based on error type
+      let userMessage = err.message || "An error occurred during login";
+
+      if (
+        err.message?.includes("503") ||
+        err.message?.includes("unavailable")
+      ) {
+        userMessage =
+          "Server at capacity. Please wait 30 seconds and try again.";
+      } else if (err.message?.includes("403")) {
+        userMessage =
+          "Connection failed. The server may have restarted. Please try again.";
+      } else if (
+        err.message?.includes("timeout") ||
+        err.message?.includes("Timeout")
+      ) {
+        userMessage =
+          "Connection timed out. Check your internet and try again.";
+      } else if (
+        err.message?.includes("Failed to fetch") ||
+        err.message?.includes("NetworkError")
+      ) {
+        userMessage =
+          "Network error. Please check your connection and try again.";
+      }
+
+      setError(userMessage);
       setLoading(false);
       if (popupWindow && !popupWindow.closed) {
         popupWindow.close();

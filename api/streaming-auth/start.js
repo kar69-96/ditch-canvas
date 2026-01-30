@@ -2,6 +2,50 @@
 const https = require("https");
 const http = require("http");
 
+/**
+ * Check streaming server health before returning URL to frontend
+ * @param {string} tunnelUrl - URL to the streaming server
+ * @param {number} timeoutMs - Timeout in milliseconds (default: 5000)
+ * @returns {Promise<{healthy: boolean, activeSessions?: number, error?: string}>}
+ */
+function checkStreamingHealth(tunnelUrl, timeoutMs = 5000) {
+  return new Promise((resolve) => {
+    try {
+      const url = new URL("/health", tunnelUrl);
+      const httpModule = url.protocol === "https:" ? https : http;
+
+      const req = httpModule.request(url, { timeout: timeoutMs }, (res) => {
+        if (res.statusCode === 200) {
+          let body = "";
+          res.on("data", (chunk) => (body += chunk));
+          res.on("end", () => {
+            try {
+              const data = JSON.parse(body);
+              resolve({
+                healthy: data.status === "ok",
+                activeSessions: data.activeSessions,
+              });
+            } catch {
+              resolve({ healthy: false, error: "Invalid health response" });
+            }
+          });
+        } else {
+          resolve({ healthy: false, error: `HTTP ${res.statusCode}` });
+        }
+      });
+
+      req.on("error", (err) => resolve({ healthy: false, error: err.message }));
+      req.on("timeout", () => {
+        req.destroy();
+        resolve({ healthy: false, error: "Health check timeout" });
+      });
+      req.end();
+    } catch (err) {
+      resolve({ healthy: false, error: err.message });
+    }
+  });
+}
+
 // EC2 Manager configuration
 const EC2_MANAGER_ENABLED = process.env.EC2_MANAGER_ENABLED === "true";
 const EC2_MANAGER_URL =
@@ -133,8 +177,9 @@ module.exports = async (req, res) => {
       }
     }
 
-    // Fallback: Use static STREAMING_SERVER_URL
-    const streamingUrl = process.env.STREAMING_SERVER_URL;
+    // Fallback: Use DEDICATED_TUNNEL_URL or STREAMING_SERVER_URL
+    const streamingUrl =
+      process.env.DEDICATED_TUNNEL_URL || process.env.STREAMING_SERVER_URL;
 
     if (!streamingUrl) {
       return res.status(500).json({
@@ -143,7 +188,32 @@ module.exports = async (req, res) => {
       });
     }
 
-    console.log("[streaming-auth] Using static streaming server URL");
+    console.log(
+      "[streaming-auth] Using static streaming server URL:",
+      streamingUrl,
+    );
+
+    // Health check before returning URL
+    try {
+      const healthCheck = await checkStreamingHealth(streamingUrl);
+      if (!healthCheck.healthy) {
+        console.error(
+          `[streaming-auth] Streaming server health check failed: ${healthCheck.error}`,
+        );
+        return res.status(503).json({
+          success: false,
+          error: "Authentication server is currently unavailable",
+          details: healthCheck.error,
+          retryAfterSeconds: 10,
+        });
+      }
+      console.log(
+        `[streaming-auth] Streaming server healthy (${healthCheck.activeSessions || 0} active sessions)`,
+      );
+    } catch (healthErr) {
+      console.error("[streaming-auth] Health check error:", healthErr.message);
+      // Continue anyway - health check is best-effort
+    }
 
     // Append email to URL for session isolation
     const urlWithEmail = `${streamingUrl}?email=${encodeURIComponent(normalizedEmail)}`;

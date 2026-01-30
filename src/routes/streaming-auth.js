@@ -3,6 +3,7 @@ const { spawn } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 const http = require("http");
+const https = require("https");
 const httpProxy = require("http-proxy");
 const { createClient } = require("@supabase/supabase-js");
 const { getSupabaseConfig } = require("../core/config");
@@ -16,8 +17,56 @@ const ec2Manager = require("../services/ec2-manager/client");
 
 const router = express.Router();
 
+/**
+ * Check streaming server health before returning URL to frontend
+ * @param {string} tunnelUrl - URL to the streaming server
+ * @param {number} timeoutMs - Timeout in milliseconds (default: 5000)
+ * @returns {Promise<{healthy: boolean, activeSessions?: number, error?: string}>}
+ */
+async function checkStreamingHealth(tunnelUrl, timeoutMs = 5000) {
+  return new Promise((resolve) => {
+    try {
+      const url = new URL("/health", tunnelUrl);
+      const httpModule = url.protocol === "https:" ? https : http;
+
+      const req = httpModule.request(url, { timeout: timeoutMs }, (res) => {
+        if (res.statusCode === 200) {
+          let body = "";
+          res.on("data", (chunk) => (body += chunk));
+          res.on("end", () => {
+            try {
+              const data = JSON.parse(body);
+              resolve({
+                healthy: data.status === "ok",
+                activeSessions: data.activeSessions,
+              });
+            } catch {
+              resolve({ healthy: false, error: "Invalid health response" });
+            }
+          });
+        } else {
+          resolve({ healthy: false, error: `HTTP ${res.statusCode}` });
+        }
+      });
+
+      req.on("error", (err) => resolve({ healthy: false, error: err.message }));
+      req.on("timeout", () => {
+        req.destroy();
+        resolve({ healthy: false, error: "Health check timeout" });
+      });
+      req.end();
+    } catch (err) {
+      resolve({ healthy: false, error: err.message });
+    }
+  });
+}
+
 // Determine streaming server target based on environment
 const getStreamingTarget = () => {
+  // Prefer dedicated tunnel URL (stable, configured in Cloudflare)
+  if (process.env.DEDICATED_TUNNEL_URL) {
+    return process.env.DEDICATED_TUNNEL_URL;
+  }
   // In production (Vercel), use external streaming server if configured
   const isProduction =
     process.env.VERCEL_ENV === "production" ||
@@ -195,19 +244,39 @@ router.post("/start", async (req, res) => {
       );
     }
 
-    // Fallback: Use static STREAMING_SERVER_URL (legacy mode)
-    if (isProduction && process.env.STREAMING_SERVER_URL) {
+    // Fallback: Use static STREAMING_SERVER_URL or DEDICATED_TUNNEL_URL (legacy mode)
+    const staticStreamingUrl =
+      process.env.DEDICATED_TUNNEL_URL || process.env.STREAMING_SERVER_URL;
+    if (isProduction && staticStreamingUrl) {
       // Production: return external streaming server URL directly
       // Also return streamingServerUrl for the frontend to poll extraction results
       console.log(
         "[streaming-auth] Production mode: using static streaming server (fallback)",
       );
+
+      // Health check before returning URL to prevent 403/connection errors
+      const healthCheck = await checkStreamingHealth(staticStreamingUrl);
+      if (!healthCheck.healthy) {
+        console.error(
+          `[streaming-auth] Streaming server health check failed: ${healthCheck.error}`,
+        );
+        return res.status(503).json({
+          success: false,
+          error: "Authentication server is currently unavailable",
+          details: healthCheck.error,
+          retryAfterSeconds: 10,
+        });
+      }
+      console.log(
+        `[streaming-auth] Streaming server healthy (${healthCheck.activeSessions || 0} active sessions)`,
+      );
+
       // Append email to URL for session isolation, and forceReauth if requested
-      const urlWithEmail = `${process.env.STREAMING_SERVER_URL}?email=${encodeURIComponent(normalizedEmail)}${forceReauth ? "&forceReauth=1" : ""}`;
+      const urlWithEmail = `${staticStreamingUrl}?email=${encodeURIComponent(normalizedEmail)}${forceReauth ? "&forceReauth=1" : ""}`;
       return res.json({
         success: true,
         url: urlWithEmail,
-        streamingServerUrl: process.env.STREAMING_SERVER_URL,
+        streamingServerUrl: staticStreamingUrl,
         message: "Using external streaming server",
       });
     }

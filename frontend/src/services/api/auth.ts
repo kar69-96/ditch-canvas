@@ -99,10 +99,12 @@ export async function getExtractionResult(
   email: string,
   streamingServerUrl?: string,
 ) {
-  // For EC2 streaming servers (trycloudflare.com), use direct endpoint
+  // For EC2 streaming servers (trycloudflare.com or login.ditchcanvas.com), use direct endpoint
   // For local development, use the full API path
   const isEC2 =
-    streamingServerUrl && streamingServerUrl.includes("trycloudflare.com");
+    streamingServerUrl &&
+    (streamingServerUrl.includes("trycloudflare.com") ||
+      streamingServerUrl.includes("login.ditchcanvas.com"));
   const url = isEC2
     ? `${streamingServerUrl}/extraction-result/${encodeURIComponent(email)}`
     : `${API_BASE}/api/streaming-auth/extraction-result/${encodeURIComponent(email)}`;

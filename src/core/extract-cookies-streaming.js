@@ -314,10 +314,42 @@ app.get("/", (req, res) => {
     );
     return res.status(503).send(`
 <!DOCTYPE html>
-<html><head><title>Server Busy</title></head>
-<body style="font-family: sans-serif; padding: 40px; text-align: center;">
-  <h1>Server Busy</h1>
-  <p>The authentication server is at capacity. Please try again in a few minutes.</p>
+<html><head><title>High Demand</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 40px; text-align: center; background: #f8f9fa; }
+  .container { max-width: 400px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  h1 { color: #333; margin-bottom: 16px; }
+  p { color: #666; margin-bottom: 12px; line-height: 1.5; }
+  .capacity { font-size: 14px; color: #888; margin-bottom: 20px; }
+  .retry-btn { display: inline-block; padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; text-decoration: none; }
+  .retry-btn:hover { background: #5a67d8; }
+  .countdown { font-size: 14px; color: #888; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>High Demand</h1>
+    <p>The authentication server is at capacity.</p>
+    <p class="capacity">(${userSessions.size}/${MAX_CONCURRENT_SESSIONS} users currently active)</p>
+    <button class="retry-btn" onclick="retryWithCountdown(this)">Retry in 3 seconds</button>
+    <p class="countdown" id="countdown"></p>
+  </div>
+  <script>
+    function retryWithCountdown(btn) {
+      btn.disabled = true;
+      btn.textContent = 'Retrying...';
+      let seconds = 3;
+      const countdownEl = document.getElementById('countdown');
+      const interval = setInterval(() => {
+        seconds--;
+        countdownEl.textContent = seconds > 0 ? 'Retrying in ' + seconds + '...' : '';
+        if (seconds <= 0) {
+          clearInterval(interval);
+          location.reload();
+        }
+      }, 1000);
+    }
+  </script>
 </body></html>
     `);
   }
@@ -491,9 +523,10 @@ app.get("/", (req, res) => {
     const socket = io({
       query: { email: userEmail, token: sessionToken },
       reconnection: true,
-      reconnectionAttempts: 3,
+      reconnectionAttempts: 5,
       reconnectionDelay: 1000,
-      timeout: 10000
+      reconnectionDelayMax: 10000,
+      timeout: 25000
     });
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d', { alpha: false });
@@ -511,12 +544,19 @@ app.get("/", (req, res) => {
     let connectionTimeout = null;
     let loginDetected = false; // Flag to stop processing frames after login
 
-    // Connection timeout - 10 seconds
+    // Connection timeout - 25 seconds (extended for browser launch time)
     connectionTimeout = setTimeout(() => {
       if (!isConnected) {
-        showError('Connection Timeout', 'Could not connect to the authentication server.', 'Please close this window and try again.');
+        showError('Connection Timeout', 'The server is taking longer than expected.', 'Please close this window and try again.');
       }
-    }, 10000);
+    }, 25000);
+
+    // Intermediate status update at 5 seconds
+    setTimeout(() => {
+      if (!isConnected) {
+        statusText.textContent = 'Starting browser... (this may take a moment)';
+      }
+    }, 5000);
 
     socket.on('connect', () => {
       console.log('Connected to streaming server');
@@ -526,11 +566,29 @@ app.get("/", (req, res) => {
       statusText.textContent = 'Connected, starting browser...';
     });
 
+    // Retry logic with exponential backoff
+    let connectionAttempts = 0;
+    const MAX_ATTEMPTS = 3;
+    const RETRY_DELAYS = [2000, 5000, 10000];
+
     socket.on('connect_error', (err) => {
       console.error('Socket.IO connection error:', err.message);
       clearTimeout(connectionTimeout);
       isConnected = false;
-      showError('Connection Failed', err.message || 'Could not connect to server.', 'Please close this window and try again.');
+
+      if (connectionAttempts < MAX_ATTEMPTS) {
+        const delay = RETRY_DELAYS[connectionAttempts] || 10000;
+        connectionAttempts++;
+        statusText.textContent = 'Reconnecting... (attempt ' + connectionAttempts + '/' + MAX_ATTEMPTS + ')';
+        console.log('Retrying connection in ' + delay + 'ms (attempt ' + connectionAttempts + ')');
+        setTimeout(() => {
+          if (!isConnected && !loginDetected) {
+            socket.connect();
+          }
+        }, delay);
+      } else {
+        showError('Connection Failed', 'Unable to connect after multiple attempts.', 'Please close this window and try again.');
+      }
     });
 
     socket.on('disconnect', (reason) => {
