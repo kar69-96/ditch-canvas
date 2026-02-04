@@ -979,13 +979,75 @@ app.get("/", (req, res) => {
 
   // Check capacity for new sessions
   if (!sessions.has(sessionId) && !hasCapacity()) {
-    return res.status(503).json({
-      error: "Instance at capacity",
-      activeSessions: sessions.size,
-      maxSessions: MAX_SESSIONS,
-      message:
-        "This instance is at capacity. Please wait or try another instance.",
-    });
+    return res.status(503).send(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Please Try Again</title>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+          }
+          .container {
+            background: white;
+            border-radius: 16px;
+            padding: 48px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+          }
+          .icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+          }
+          h1 {
+            color: #1a1a2e;
+            font-size: 24px;
+            margin-bottom: 16px;
+          }
+          p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+          }
+          .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+          .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="icon">⏳</div>
+          <h1>We're a bit busy</h1>
+          <p>Our authentication service is currently handling other requests. Please close this window and try again in a moment.</p>
+          <button class="btn" onclick="window.close()">Close Window</button>
+        </div>
+      </body>
+      </html>
+    `);
   }
 
   // If session doesn't exist, create it when Socket.IO connects
