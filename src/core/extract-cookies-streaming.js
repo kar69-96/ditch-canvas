@@ -216,7 +216,7 @@ function emitUserStatus(email, stage, message, details = {}) {
 const TIMEOUTS = {
   BROWSER_LAUNCH: 15000, // 15 seconds
   SCREENCAST: 5000, // 5 seconds
-  NAVIGATION: 30000, // 30 seconds
+  NAVIGATION: 60000, // 60 seconds (increased for slow fedauth responses)
 };
 
 /**
