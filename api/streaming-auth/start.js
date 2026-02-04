@@ -1,50 +1,7 @@
 // Vercel serverless function for starting streaming auth
 const https = require("https");
 const http = require("http");
-
-/**
- * Check streaming server health before returning URL to frontend
- * @param {string} tunnelUrl - URL to the streaming server
- * @param {number} timeoutMs - Timeout in milliseconds (default: 5000)
- * @returns {Promise<{healthy: boolean, activeSessions?: number, error?: string}>}
- */
-function checkStreamingHealth(tunnelUrl, timeoutMs = 10000) {
-  return new Promise((resolve) => {
-    try {
-      const url = new URL("/health", tunnelUrl);
-      const httpModule = url.protocol === "https:" ? https : http;
-
-      const req = httpModule.request(url, { timeout: timeoutMs }, (res) => {
-        if (res.statusCode === 200) {
-          let body = "";
-          res.on("data", (chunk) => (body += chunk));
-          res.on("end", () => {
-            try {
-              const data = JSON.parse(body);
-              resolve({
-                healthy: data.status === "ok",
-                activeSessions: data.activeSessions,
-              });
-            } catch {
-              resolve({ healthy: false, error: "Invalid health response" });
-            }
-          });
-        } else {
-          resolve({ healthy: false, error: `HTTP ${res.statusCode}` });
-        }
-      });
-
-      req.on("error", (err) => resolve({ healthy: false, error: err.message }));
-      req.on("timeout", () => {
-        req.destroy();
-        resolve({ healthy: false, error: "Health check timeout" });
-      });
-      req.end();
-    } catch (err) {
-      resolve({ healthy: false, error: err.message });
-    }
-  });
-}
+const crypto = require("crypto");
 
 // EC2 Manager configuration
 const EC2_MANAGER_ENABLED = process.env.EC2_MANAGER_ENABLED === "true";
@@ -137,14 +94,13 @@ module.exports = async (req, res) => {
         if (assignment.success && assignment.tunnelUrl) {
           // Successfully assigned to an instance
           console.log(
-            `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
+            `[streaming-auth] Assigned to instance ${assignment.instanceId} with sessionId ${assignment.sessionId}`,
           );
-          // Append email to URL for session isolation
-          const urlWithEmail = `${assignment.tunnelUrl}?email=${encodeURIComponent(normalizedEmail)}`;
           return res.json({
             success: true,
-            url: urlWithEmail,
-            streamingServerUrl: assignment.tunnelUrl,
+            url: assignment.tunnelUrl,
+            streamingServerUrl: assignment.tunnelUrl.split("?")[0], // Base URL without sessionId for result polling
+            sessionId: assignment.sessionId,
             instanceId: assignment.instanceId,
             requestId: assignment.requestId,
             message: "Assigned to streaming instance",
@@ -154,12 +110,13 @@ module.exports = async (req, res) => {
         if (assignment.queued) {
           // Request was queued - return queue position
           console.log(
-            `[streaming-auth] Request queued at position ${assignment.position}`,
+            `[streaming-auth] Request queued at position ${assignment.position} with sessionId ${assignment.sessionId}`,
           );
           return res.status(202).json({
             success: true,
             queued: true,
             requestId: assignment.requestId,
+            sessionId: assignment.sessionId,
             position: assignment.position,
             estimatedWaitSeconds: assignment.estimatedWaitSeconds,
             message: `Your request is queued at position ${assignment.position}. An instance is being prepared.`,
@@ -177,9 +134,8 @@ module.exports = async (req, res) => {
       }
     }
 
-    // Fallback: Use DEDICATED_TUNNEL_URL or STREAMING_SERVER_URL
-    const streamingUrl =
-      process.env.DEDICATED_TUNNEL_URL || process.env.STREAMING_SERVER_URL;
+    // Fallback: Use static STREAMING_SERVER_URL
+    const streamingUrl = process.env.STREAMING_SERVER_URL;
 
     if (!streamingUrl) {
       return res.status(500).json({
@@ -188,41 +144,20 @@ module.exports = async (req, res) => {
       });
     }
 
+    // Generate sessionId for static fallback
+    const sessionId = crypto.randomUUID();
+    const urlWithSession = `${streamingUrl}?sessionId=${sessionId}`;
+
     console.log(
-      "[streaming-auth] Using static streaming server URL:",
-      streamingUrl,
+      `[streaming-auth] Using static streaming server URL with sessionId: ${sessionId}`,
     );
 
-    // Health check before returning URL
-    try {
-      const healthCheck = await checkStreamingHealth(streamingUrl);
-      if (!healthCheck.healthy) {
-        console.error(
-          `[streaming-auth] Streaming server health check failed: ${healthCheck.error}`,
-        );
-        return res.status(503).json({
-          success: false,
-          error: "Authentication server is currently unavailable",
-          details: healthCheck.error,
-          retryAfterSeconds: 10,
-        });
-      }
-      console.log(
-        `[streaming-auth] Streaming server healthy (${healthCheck.activeSessions || 0} active sessions)`,
-      );
-    } catch (healthErr) {
-      console.error("[streaming-auth] Health check error:", healthErr.message);
-      // Continue anyway - health check is best-effort
-    }
-
-    // Append email to URL for session isolation
-    const urlWithEmail = `${streamingUrl}?email=${encodeURIComponent(normalizedEmail)}`;
-
-    // Return the tunnel URL directly (not proxied through Vercel)
+    // Return the tunnel URL with sessionId
     return res.json({
       success: true,
-      url: urlWithEmail,
+      url: urlWithSession,
       streamingServerUrl: streamingUrl,
+      sessionId: sessionId,
       message: "Streaming server ready",
     });
   } catch (error) {

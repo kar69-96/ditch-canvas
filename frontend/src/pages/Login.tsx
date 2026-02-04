@@ -254,6 +254,15 @@ export default function Login() {
         );
       }
 
+      // Store sessionId for extraction result polling
+      const sessionId = startResult.sessionId;
+      if (sessionId) {
+        console.log(
+          "[Login] Using sessionId for extraction polling:",
+          sessionId,
+        );
+      }
+
       // Monitor the popup and extraction
       let extractionCompleted = false;
       const checkInterval = setInterval(async () => {
@@ -263,6 +272,7 @@ export default function Login() {
             const extractionResult = await getExtractionResult(
               email,
               startResult.streamingServerUrl,
+              sessionId,
             );
 
             // Skip if still pending (extraction in progress)
@@ -464,6 +474,7 @@ export default function Login() {
               extractionResult = await getExtractionResult(
                 email,
                 startResult.streamingServerUrl,
+                sessionId,
               );
 
               // If not pending, we have a result (success or error)
