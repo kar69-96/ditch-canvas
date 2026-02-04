@@ -1041,8 +1041,8 @@ app.get("/", (req, res) => {
       <body>
         <div class="container">
           <div class="icon">⏳</div>
-          <h1>We're a bit busy</h1>
-          <p>Our authentication service is currently handling other requests. Please close this window and try again in a moment.</p>
+          <h1>Please try again shortly</h1>
+          <p>Our authentication service is currently busy. Please close this window and try again in a few moments.</p>
           <button class="btn" onclick="window.close()">Close Window</button>
         </div>
       </body>
