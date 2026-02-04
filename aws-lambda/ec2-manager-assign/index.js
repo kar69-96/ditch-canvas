@@ -5,6 +5,7 @@
  * Called by /api/streaming-auth/start via API Gateway.
  */
 
+const crypto = require("crypto");
 const config = require("./shared/config");
 const stateStore = require("./shared/state-store");
 const ec2Ops = require("./shared/ec2-ops");
@@ -27,19 +28,25 @@ exports.handler = async (event) => {
 
     console.log(`Processing auth request for: ${email} (${context})`);
 
+    // Generate a unique session ID for this auth request
+    const sessionId = crypto.randomUUID();
+
     // Create request record
     const request = await stateStore.enqueueRequest(email, context);
-    console.log(`Created request: ${request.id}`);
+    console.log(`Created request: ${request.id} with sessionId: ${sessionId}`);
 
     // Try to assign to an instance
     const assignment = await assignToInstance(request);
 
     if (assignment.success) {
       console.log(`Assigned to instance: ${assignment.instanceId}`);
+      // Append sessionId to tunnel URL
+      const tunnelUrlWithSession = `${assignment.tunnelUrl}?sessionId=${sessionId}`;
       return response(200, {
         success: true,
         requestId: request.id,
-        tunnelUrl: assignment.tunnelUrl,
+        sessionId: sessionId,
+        tunnelUrl: tunnelUrlWithSession,
         instanceId: assignment.instanceId,
       });
     }
@@ -53,6 +60,7 @@ exports.handler = async (event) => {
       success: true,
       queued: true,
       requestId: request.id,
+      sessionId: sessionId,
       position,
       estimatedWaitSeconds: estimatedWait,
       message: `Your request is queued at position ${position}. Estimated wait: ${estimatedWait} seconds.`,

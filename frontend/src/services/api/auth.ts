@@ -98,14 +98,26 @@ export async function stopStreamingAuth(email: string) {
 export async function getExtractionResult(
   email: string,
   streamingServerUrl?: string,
+  sessionId?: string,
 ) {
-  // For EC2 streaming servers (trycloudflare.com), use direct endpoint
-  // For local development, use the full API path
+  // For EC2 streaming servers with sessionId, use session-based endpoint
+  // For legacy/fallback, use email-based endpoint
   const isEC2 =
-    streamingServerUrl && streamingServerUrl.includes("trycloudflare.com");
-  const url = isEC2
-    ? `${streamingServerUrl}/extraction-result/${encodeURIComponent(email)}`
-    : `${API_BASE}/api/streaming-auth/extraction-result/${encodeURIComponent(email)}`;
+    streamingServerUrl &&
+    (streamingServerUrl.includes("trycloudflare.com") ||
+      streamingServerUrl.includes("login.ditchcanvas.com"));
+
+  let url: string;
+  if (isEC2 && sessionId) {
+    // New multi-session endpoint - uses sessionId
+    url = `${streamingServerUrl}/extraction-result/${encodeURIComponent(sessionId)}`;
+  } else if (isEC2) {
+    // Legacy email-based endpoint for backwards compatibility
+    url = `${streamingServerUrl}/extraction-result-legacy/${encodeURIComponent(email)}`;
+  } else {
+    // Local development - use API path with email
+    url = `${API_BASE}/api/streaming-auth/extraction-result/${encodeURIComponent(email)}`;
+  }
 
   const res = await fetch(url);
   return handleResponse(res);
@@ -192,6 +204,7 @@ export interface StreamingAuthResult {
   success: boolean;
   url?: string;
   streamingServerUrl?: string;
+  sessionId?: string;
   instanceId?: string;
   requestId?: string;
   message?: string;
@@ -211,6 +224,7 @@ export interface QueueStatusResult {
     | "failed"
     | "timeout";
   tunnelUrl?: string;
+  sessionId?: string;
   instanceId?: string;
   position?: number;
   estimatedWaitSeconds?: number;

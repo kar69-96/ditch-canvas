@@ -1,6 +1,7 @@
 // Vercel serverless function for starting streaming auth
 const https = require("https");
 const http = require("http");
+const crypto = require("crypto");
 
 // EC2 Manager configuration
 const EC2_MANAGER_ENABLED = process.env.EC2_MANAGER_ENABLED === "true";
@@ -93,12 +94,13 @@ module.exports = async (req, res) => {
         if (assignment.success && assignment.tunnelUrl) {
           // Successfully assigned to an instance
           console.log(
-            `[streaming-auth] Assigned to instance ${assignment.instanceId}`,
+            `[streaming-auth] Assigned to instance ${assignment.instanceId} with sessionId ${assignment.sessionId}`,
           );
           return res.json({
             success: true,
             url: assignment.tunnelUrl,
-            streamingServerUrl: assignment.tunnelUrl,
+            streamingServerUrl: assignment.tunnelUrl.split("?")[0], // Base URL without sessionId for result polling
+            sessionId: assignment.sessionId,
             instanceId: assignment.instanceId,
             requestId: assignment.requestId,
             message: "Assigned to streaming instance",
@@ -108,12 +110,13 @@ module.exports = async (req, res) => {
         if (assignment.queued) {
           // Request was queued - return queue position
           console.log(
-            `[streaming-auth] Request queued at position ${assignment.position}`,
+            `[streaming-auth] Request queued at position ${assignment.position} with sessionId ${assignment.sessionId}`,
           );
           return res.status(202).json({
             success: true,
             queued: true,
             requestId: assignment.requestId,
+            sessionId: assignment.sessionId,
             position: assignment.position,
             estimatedWaitSeconds: assignment.estimatedWaitSeconds,
             message: `Your request is queued at position ${assignment.position}. An instance is being prepared.`,
@@ -141,13 +144,20 @@ module.exports = async (req, res) => {
       });
     }
 
-    console.log("[streaming-auth] Using static streaming server URL");
+    // Generate sessionId for static fallback
+    const sessionId = crypto.randomUUID();
+    const urlWithSession = `${streamingUrl}?sessionId=${sessionId}`;
 
-    // Return the tunnel URL directly (not proxied through Vercel)
+    console.log(
+      `[streaming-auth] Using static streaming server URL with sessionId: ${sessionId}`,
+    );
+
+    // Return the tunnel URL with sessionId
     return res.json({
       success: true,
-      url: streamingUrl,
+      url: urlWithSession,
       streamingServerUrl: streamingUrl,
+      sessionId: sessionId,
       message: "Streaming server ready",
     });
   } catch (error) {
