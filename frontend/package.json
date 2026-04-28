@@ -21,7 +21,7 @@
     "supabase:upload-data": "node supabase/upload-extraction-data.js",
     "supabase:push": "supabase db push",
     "supabase:status": "supabase status",
-    "supabase:link": "supabase link --project-ref hwmoglxyhkecxanxdzfm",
+    "supabase:link": "node supabase-link.cjs",
     "supabase:setup": "./setup-supabase.sh"
   },
   "dependencies": {

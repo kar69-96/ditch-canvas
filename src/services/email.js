@@ -1,15 +1,10 @@
 const emailjs = require("@emailjs/nodejs");
 
-// EmailJS Configuration (same service as frontend FeedbackModal)
-const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID || "service_dkmp47u";
-const EMAILJS_PUBLIC_KEY =
-  process.env.EMAILJS_PUBLIC_KEY || "r--Euid6DyW5VaDvN";
-const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY; // Required for server-side
-
-// Template for admin notifications - create this in EmailJS dashboard
-// Template variables: {{user_name}}, {{user_email}}, {{school}}, {{invite_code}}
-const EMAILJS_ADMIN_TEMPLATE_ID =
-  process.env.EMAILJS_ADMIN_TEMPLATE_ID || "template_admin_signup";
+// EmailJS: configure via env only (see deployment docs)
+const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY;
+const EMAILJS_ADMIN_TEMPLATE_ID = process.env.EMAILJS_ADMIN_TEMPLATE_ID;
 
 /**
  * Send admin notification when a new user signs up and is pending extraction
@@ -25,9 +20,14 @@ async function sendAdminNotification({
   school,
   inviteCode,
 }) {
-  if (!EMAILJS_PRIVATE_KEY) {
+  if (
+    !EMAILJS_PRIVATE_KEY ||
+    !EMAILJS_SERVICE_ID ||
+    !EMAILJS_PUBLIC_KEY ||
+    !EMAILJS_ADMIN_TEMPLATE_ID
+  ) {
     console.log(
-      "[email] EMAILJS_PRIVATE_KEY not configured - skipping admin notification",
+      "[email] EmailJS not fully configured - skipping admin notification",
     );
     return { success: false, reason: "not_configured" };
   }

@@ -5,6 +5,19 @@
 
 set -e
 
+# Load SUPABASE_PROJECT_REF from .env.local if present
+_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+_ROOT_DIR="$(cd "$_SCRIPT_DIR/.." && pwd)"
+for _ENV_FILE in "$_SCRIPT_DIR/.env.local" "$_ROOT_DIR/.env.local"; do
+    if [ -f "$_ENV_FILE" ]; then
+        set -a
+        # shellcheck disable=SC1090
+        source "$_ENV_FILE"
+        set +a
+        break
+    fi
+done
+
 echo "🚀 Supabase CLI Setup"
 echo "===================="
 echo ""
@@ -30,8 +43,13 @@ fi
 
 echo ""
 echo "🔗 Linking to project..."
-echo "   Project Ref: hwmoglxyhkecxanxdzfm"
-supabase link --project-ref hwmoglxyhkecxanxdzfm || {
+if [ -z "$SUPABASE_PROJECT_REF" ]; then
+    echo "❌ SUPABASE_PROJECT_REF is not set."
+    echo "   Export it or add it to .env.local (Supabase → Project Settings → General → Reference ID)."
+    exit 1
+fi
+echo "   Project Ref: $SUPABASE_PROJECT_REF"
+supabase link --project-ref "$SUPABASE_PROJECT_REF" || {
     echo "⚠️  Project may already be linked"
 }
 
