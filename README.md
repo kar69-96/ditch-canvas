@@ -1,4 +1,4 @@
-# YAY_FINAL - Canvas LMS Data Extraction & Management System
+# Canvas LMS Data Extraction & Management System
 
 🎓 **Advanced Canvas LMS data extraction with Browserbase automation and modern React frontend**
 
@@ -7,7 +7,7 @@ A production-ready full-stack system that extracts Canvas assignments, courses, 
 ## 🏗️ Project Structure
 
 ```
-YAY_FINAL/
+app/
 ├── backend/          # Canvas data extraction engine
 ├── frontend/         # React dashboard application
 ├── docs/            # Documentation
@@ -132,8 +132,6 @@ Setup instructions are in the [canvas-extraction](../canvas-extraction) reposito
 MIT License
 
 ---
-
-**Made for students who want to take control of their Canvas data** 🎓
 
 
 
