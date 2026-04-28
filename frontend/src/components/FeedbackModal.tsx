@@ -24,12 +24,8 @@ import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-// EmailJS Configuration
+// EmailJS: set VITE_EMAILJS_* in env (never commit real keys)
 // Template variables: {{from_name}}, {{from_email}}, {{message}}, {{image_data}}, {{favorite_features}}
-// Configure destination email in EmailJS template settings (not in code)
-const EMAILJS_SERVICE_ID = "service_dkmp47u";
-const EMAILJS_TEMPLATE_ID = "template_wkqzx49";
-const EMAILJS_PUBLIC_KEY = "r--Euid6DyW5VaDvN";
 
 const FEATURES = [
   { id: "dashboard", label: "Dashboard Overview" },
@@ -186,6 +182,20 @@ export default function FeedbackModal({
   const handleSubmitAll = async () => {
     if (!feedbackData) return;
 
+    const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey) {
+      toast({
+        title: "Feedback unavailable",
+        description:
+          "Email feedback is not configured for this deployment (missing VITE_EMAILJS_* env).",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSending(true);
 
     try {
@@ -201,10 +211,10 @@ export default function FeedbackModal({
       };
 
       await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
+        emailjsServiceId,
+        emailjsTemplateId,
         finalParams,
-        EMAILJS_PUBLIC_KEY,
+        emailjsPublicKey,
       );
 
       toast({
@@ -234,6 +244,20 @@ export default function FeedbackModal({
   const handleSkipFeatures = async () => {
     if (!feedbackData) return;
 
+    const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey) {
+      toast({
+        title: "Feedback unavailable",
+        description:
+          "Email feedback is not configured for this deployment (missing VITE_EMAILJS_* env).",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSending(true);
 
     try {
@@ -243,10 +267,10 @@ export default function FeedbackModal({
       };
 
       await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
+        emailjsServiceId,
+        emailjsTemplateId,
         finalParams,
-        EMAILJS_PUBLIC_KEY,
+        emailjsPublicKey,
       );
 
       toast({

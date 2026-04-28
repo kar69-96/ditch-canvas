@@ -14,6 +14,11 @@
 *.p12
 *.pfx
 
+# Local auth/session exports (OAuth cookies, etc.)
+data/auth/
+*.p12
+*.pfx
+
 # Logs
 logs
 *.log
@@ -75,6 +80,10 @@ puppeteer_canvas_data_mapping_*/
 
 # Supabase
 .supabase
+frontend/supabase/.temp/
+
+# Local MCP / IDE config (may include project identifiers)
+.mcp.json
 
 # Other
 mcp-servers/
