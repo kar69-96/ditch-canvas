@@ -80,6 +80,9 @@ puppeteer_canvas_data_mapping_*/
 mcp-servers/
 puppeteer_canvas_data/
 
+# Local AI assistant config (personal)
+.claude/CLAUDE.md
+
 
 
 
